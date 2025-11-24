@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { ChevronLeft, ChevronRight, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import DiscipleSlide from "@/components/DiscipleSlide";
@@ -10,6 +10,10 @@ import { presentations } from "@/data/presentations";
 const Presentation = () => {
   const { presentationId } = useParams();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  
+  // Get initial slide from query params
+  const initialSlide = parseInt(searchParams.get('slide') || '0');
   
   // Find the presentation
   const presentation = presentations.find(p => p.id === presentationId);
@@ -21,11 +25,11 @@ const Presentation = () => {
     }
   }, [presentation, navigate]);
 
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(initialSlide);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [direction, setDirection] = useState<'next' | 'prev'>('next');
   const [isAnimating, setIsAnimating] = useState(false);
-  const [showIntro, setShowIntro] = useState(true);
+  const [showIntro, setShowIntro] = useState(initialSlide === 0);
   
   if (!presentation) return null;
 
@@ -112,7 +116,7 @@ const Presentation = () => {
     if (document.fullscreenElement) {
       document.exitFullscreen();
     }
-    navigate("/");
+    navigate(`/presentation/${presentationId}`);
   };
 
   return (
@@ -132,7 +136,7 @@ const Presentation = () => {
             className="rounded-full shadow-card hover:shadow-premium transition-smooth font-sans gap-2"
           >
             <ArrowLeft className="h-4 w-4" />
-            <span className="hidden sm:inline">К списку презентаций</span>
+            <span className="hidden sm:inline">К слайдам</span>
           </Button>
         </div>
         
