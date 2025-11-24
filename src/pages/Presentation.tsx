@@ -3,16 +3,18 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { ChevronLeft, ChevronRight, X, Grid3x3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import DiscipleSlide from "@/components/DiscipleSlide";
+import IntroSlide from "@/components/IntroSlide";
 import { disciples } from "@/data/disciples";
 
 const Presentation = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const initialSlide = parseInt(searchParams.get("slide") || "0");
+  const initialSlide = parseInt(searchParams.get("slide") || "-1"); // -1 for intro slide
   const [currentSlide, setCurrentSlide] = useState(initialSlide);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [direction, setDirection] = useState<'next' | 'prev'>('next');
   const [isAnimating, setIsAnimating] = useState(false);
+  const [showIntro, setShowIntro] = useState(initialSlide === -1);
 
   // Fullscreen management
   useEffect(() => {
@@ -59,8 +61,17 @@ const Presentation = () => {
     return () => window.removeEventListener("keydown", handleKeyPress);
   }, [currentSlide]);
 
+  const startPresentation = () => {
+    setShowIntro(false);
+    setCurrentSlide(0);
+  };
+
   const nextSlide = () => {
     if (isAnimating) return;
+    if (showIntro) {
+      startPresentation();
+      return;
+    }
     setDirection('next');
     setIsAnimating(true);
     setTimeout(() => {
@@ -70,7 +81,12 @@ const Presentation = () => {
   };
 
   const prevSlide = () => {
-    if (isAnimating) return;
+    if (isAnimating || showIntro) return;
+    if (currentSlide === 0) {
+      setShowIntro(true);
+      setCurrentSlide(-1);
+      return;
+    }
     setDirection('prev');
     setIsAnimating(true);
     setTimeout(() => {
@@ -118,54 +134,64 @@ const Presentation = () => {
           </Button>
         </div>
         
-        <div className="pointer-events-auto px-4 py-2 bg-secondary/80 backdrop-blur-sm rounded-full font-sans font-medium text-sm">
-          {currentSlide + 1} / {disciples.length}
-        </div>
+        {!showIntro && (
+          <div className="pointer-events-auto px-4 py-2 bg-secondary/80 backdrop-blur-sm rounded-full font-sans font-medium text-sm">
+            {currentSlide + 1} / {disciples.length}
+          </div>
+        )}
       </div>
 
       {/* Arrow Controls */}
-      <div className="absolute bottom-6 left-6 right-6 z-50 flex justify-between pointer-events-none">
-        <Button
-          variant="secondary"
-          size="icon"
-          onClick={(e) => {
-            e.stopPropagation();
-            prevSlide();
-          }}
-          disabled={currentSlide === 0}
-          className="rounded-full shadow-card hover:shadow-premium transition-smooth pointer-events-auto"
-        >
-          <ChevronLeft className="h-5 w-5" />
-        </Button>
-        
-        <Button
-          variant="secondary"
-          size="icon"
-          onClick={(e) => {
-            e.stopPropagation();
-            nextSlide();
-          }}
-          disabled={currentSlide === disciples.length - 1}
-          className="rounded-full shadow-card hover:shadow-premium transition-smooth pointer-events-auto"
-        >
-          <ChevronRight className="h-5 w-5" />
-        </Button>
-      </div>
+      {!showIntro && (
+        <div className="absolute bottom-6 left-6 right-6 z-50 flex justify-between pointer-events-none">
+          <Button
+            variant="secondary"
+            size="icon"
+            onClick={(e) => {
+              e.stopPropagation();
+              prevSlide();
+            }}
+            disabled={currentSlide === 0}
+            className="rounded-full shadow-card hover:shadow-premium transition-smooth pointer-events-auto"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </Button>
+          
+          <Button
+            variant="secondary"
+            size="icon"
+            onClick={(e) => {
+              e.stopPropagation();
+              nextSlide();
+            }}
+            disabled={currentSlide === disciples.length - 1}
+            className="rounded-full shadow-card hover:shadow-premium transition-smooth pointer-events-auto"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </Button>
+        </div>
+      )}
 
       {/* Slide Content */}
-      <DiscipleSlide 
-        disciple={disciples[currentSlide]} 
-        direction={direction}
-        key={currentSlide}
-      />
+      {showIntro ? (
+        <IntroSlide onStart={startPresentation} />
+      ) : (
+        <DiscipleSlide 
+          disciple={disciples[currentSlide]} 
+          direction={direction}
+          key={currentSlide}
+        />
+      )}
 
       {/* Progress Indicator */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-muted">
-        <div 
-          className="h-full gradient-gold transition-all duration-300"
-          style={{ width: `${((currentSlide + 1) / disciples.length) * 100}%` }}
-        />
-      </div>
+      {!showIntro && (
+        <div className="absolute bottom-0 left-0 right-0 h-1 bg-muted">
+          <div 
+            className="h-full gradient-gold transition-all duration-300"
+            style={{ width: `${((currentSlide + 1) / disciples.length) * 100}%` }}
+          />
+        </div>
+      )}
     </div>
   );
 };

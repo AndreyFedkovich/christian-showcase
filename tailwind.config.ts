@@ -108,6 +108,22 @@ export default {
             transform: "translateX(0)",
           },
         },
+        "slide-in-from-top": {
+          "0%": {
+            transform: "translateY(-30px)",
+          },
+          "100%": {
+            transform: "translateY(0)",
+          },
+        },
+        "scale-in": {
+          "0%": {
+            transform: "scaleX(0)",
+          },
+          "100%": {
+            transform: "scaleX(1)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
