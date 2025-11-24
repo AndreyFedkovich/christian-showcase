@@ -1,20 +1,33 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { ChevronLeft, ChevronRight, X, Grid3x3 } from "lucide-react";
+import { useNavigate, useParams } from "react-router-dom";
+import { ChevronLeft, ChevronRight, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import DiscipleSlide from "@/components/DiscipleSlide";
 import IntroSlide from "@/components/IntroSlide";
 import { disciples } from "@/data/disciples";
+import { presentations } from "@/data/presentations";
 
 const Presentation = () => {
-  const [searchParams] = useSearchParams();
+  const { presentationId } = useParams();
   const navigate = useNavigate();
-  const initialSlide = parseInt(searchParams.get("slide") || "-1"); // -1 for intro slide
-  const [currentSlide, setCurrentSlide] = useState(initialSlide);
+  
+  // Find the presentation
+  const presentation = presentations.find(p => p.id === presentationId);
+  
+  // If presentation not found, redirect to home
+  useEffect(() => {
+    if (!presentation) {
+      navigate("/");
+    }
+  }, [presentation, navigate]);
+
+  const [currentSlide, setCurrentSlide] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [direction, setDirection] = useState<'next' | 'prev'>('next');
   const [isAnimating, setIsAnimating] = useState(false);
-  const [showIntro, setShowIntro] = useState(initialSlide === -1);
+  const [showIntro, setShowIntro] = useState(true);
+  
+  if (!presentation) return null;
 
   // Fullscreen management
   useEffect(() => {
@@ -109,36 +122,30 @@ const Presentation = () => {
     >
       {/* Navigation Controls */}
       <div className="absolute top-6 left-6 right-6 z-50 flex justify-between items-center pointer-events-none">
-        <div className="flex gap-2 pointer-events-auto">
+        <div className="flex gap-3 pointer-events-auto">
           <Button
             variant="secondary"
-            size="icon"
             onClick={(e) => {
               e.stopPropagation();
               exitPresentation();
             }}
-            className="rounded-full shadow-card hover:shadow-premium transition-smooth"
+            className="rounded-full shadow-card hover:shadow-premium transition-smooth font-sans gap-2"
           >
-            <Grid3x3 className="h-4 w-4" />
-          </Button>
-          <Button
-            variant="secondary"
-            size="icon"
-            onClick={(e) => {
-              e.stopPropagation();
-              exitPresentation();
-            }}
-            className="rounded-full shadow-card hover:shadow-premium transition-smooth"
-          >
-            <X className="h-4 w-4" />
+            <ArrowLeft className="h-4 w-4" />
+            <span className="hidden sm:inline">К списку презентаций</span>
           </Button>
         </div>
         
-        {!showIntro && (
-          <div className="pointer-events-auto px-4 py-2 bg-secondary/80 backdrop-blur-sm rounded-full font-sans font-medium text-sm">
-            {currentSlide + 1} / {disciples.length}
+        <div className="flex items-center gap-3 pointer-events-auto">
+          {!showIntro && (
+            <div className="px-4 py-2 bg-secondary/80 backdrop-blur-sm rounded-full font-sans font-medium text-sm">
+              {currentSlide + 1} / {disciples.length}
+            </div>
+          )}
+          <div className="px-4 py-2 bg-secondary/80 backdrop-blur-sm rounded-full font-sans text-sm hidden md:block">
+            {presentation.title}
           </div>
-        )}
+        </div>
       </div>
 
       {/* Arrow Controls */}
@@ -174,7 +181,12 @@ const Presentation = () => {
 
       {/* Slide Content */}
       {showIntro ? (
-        <IntroSlide onStart={startPresentation} />
+        <IntroSlide 
+          onStart={startPresentation}
+          title={presentation.title}
+          subtitle="Интерактивная презентация"
+          description={presentation.description}
+        />
       ) : (
         <DiscipleSlide 
           disciple={disciples[currentSlide]} 

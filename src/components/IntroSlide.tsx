@@ -3,29 +3,33 @@ import { ChevronRight } from "lucide-react";
 
 interface IntroSlideProps {
   onStart: () => void;
+  title: string;
+  subtitle?: string;
+  description: string;
 }
 
-const IntroSlide = ({ onStart }: IntroSlideProps) => {
+const IntroSlide = ({ onStart, title, subtitle, description }: IntroSlideProps) => {
   return (
     <div className="h-full w-full flex items-center justify-center p-8 animate-[fade-in_1s_ease-out]">
       <div className="max-w-4xl w-full text-center space-y-8">
         {/* Main Title with staggered animation */}
         <div className="space-y-4">
-          <h1 className="text-6xl md:text-8xl font-bold text-foreground animate-[fade-in_1s_ease-out,slide-in-from-top_1s_ease-out]">
-            Двенадцать Апостолов
+          <h1 className="text-5xl md:text-8xl font-bold text-foreground animate-[fade-in_1s_ease-out,slide-in-from-top_1s_ease-out]">
+            {title}
           </h1>
           <div className="h-1 w-32 mx-auto gradient-gold rounded-full animate-[scale-in_0.8s_ease-out_0.5s_both]" />
         </div>
 
         {/* Subtitle */}
-        <p className="text-2xl md:text-3xl text-accent font-semibold italic animate-[fade-in_1s_ease-out_0.3s_both]">
-          Ученики Иисуса Христа
-        </p>
+        {subtitle && (
+          <p className="text-2xl md:text-3xl text-accent font-semibold italic animate-[fade-in_1s_ease-out_0.3s_both]">
+            {subtitle}
+          </p>
+        )}
 
         {/* Description */}
         <p className="text-lg md:text-xl text-foreground/80 leading-relaxed max-w-2xl mx-auto font-sans animate-[fade-in_1s_ease-out_0.6s_both]">
-          Познакомьтесь с двенадцатью учениками, которые следовали за Христом, 
-          изменили мир своей верой и оставили неизгладимый след в истории человечества.
+          {description}
         </p>
 
         {/* Decorative element */}
