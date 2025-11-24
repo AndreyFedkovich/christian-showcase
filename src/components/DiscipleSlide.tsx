@@ -2,11 +2,16 @@ import { Disciple } from "@/data/disciples";
 
 interface DiscipleSlideProps {
   disciple: Disciple;
+  direction?: 'next' | 'prev';
 }
 
-const DiscipleSlide = ({ disciple }: DiscipleSlideProps) => {
+const DiscipleSlide = ({ disciple, direction = 'next' }: DiscipleSlideProps) => {
+  const slideAnimation = direction === 'next' 
+    ? 'animate-[fade-in_0.5s_ease-out,slide-in-from-right_0.5s_ease-out]' 
+    : 'animate-[fade-in_0.5s_ease-out,slide-in-from-left_0.5s_ease-out]';
+
   return (
-    <div className="h-full w-full flex items-center justify-center p-8 md:p-16">
+    <div className={`h-full w-full flex items-center justify-center p-8 md:p-16 ${slideAnimation}`}>
       <div className="max-w-7xl w-full grid md:grid-cols-2 gap-8 md:gap-16 items-center">
         {/* Image Section */}
         <div className="relative group">

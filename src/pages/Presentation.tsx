@@ -11,6 +11,8 @@ const Presentation = () => {
   const initialSlide = parseInt(searchParams.get("slide") || "0");
   const [currentSlide, setCurrentSlide] = useState(initialSlide);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [direction, setDirection] = useState<'next' | 'prev'>('next');
+  const [isAnimating, setIsAnimating] = useState(false);
 
   // Fullscreen management
   useEffect(() => {
@@ -58,11 +60,23 @@ const Presentation = () => {
   }, [currentSlide]);
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % disciples.length);
+    if (isAnimating) return;
+    setDirection('next');
+    setIsAnimating(true);
+    setTimeout(() => {
+      setCurrentSlide((prev) => (prev + 1) % disciples.length);
+      setIsAnimating(false);
+    }, 300);
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + disciples.length) % disciples.length);
+    if (isAnimating) return;
+    setDirection('prev');
+    setIsAnimating(true);
+    setTimeout(() => {
+      setCurrentSlide((prev) => (prev - 1 + disciples.length) % disciples.length);
+      setIsAnimating(false);
+    }, 300);
   };
 
   const exitPresentation = () => {
@@ -139,7 +153,11 @@ const Presentation = () => {
       </div>
 
       {/* Slide Content */}
-      <DiscipleSlide disciple={disciples[currentSlide]} />
+      <DiscipleSlide 
+        disciple={disciples[currentSlide]} 
+        direction={direction}
+        key={currentSlide}
+      />
 
       {/* Progress Indicator */}
       <div className="absolute bottom-0 left-0 right-0 h-1 bg-muted">
