@@ -67,7 +67,7 @@ const PresentationDetails = () => {
 
       {/* Slides Grid */}
       <main className="max-w-7xl mx-auto px-6 pb-20">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-[15px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-[30px]">
           {slides.map((slide, index) => (
             <DiscipleCard 
               key={slide.id} 

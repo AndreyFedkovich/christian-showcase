@@ -28,7 +28,7 @@ const Index = () => {
 
       {/* Presentations List */}
       <main className="max-w-6xl mx-auto px-6 pb-20">
-        <div className="space-y-6 mt-[15px]">
+        <div className="space-y-6 mt-[30px]">
           {presentations.map((presentation) => (
             <PresentationCard 
               key={presentation.id} 
