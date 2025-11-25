@@ -54,8 +54,8 @@ const ScriptureSlide = ({ slide, direction }: ScriptureSlideProps) => {
           </div>
           
           {/* Verses */}
-          <ScrollArea className="h-[65vh] pr-4">
-            <div className="bg-card/40 backdrop-blur-sm border-2 border-accent/30 rounded-2xl p-8 md:p-12 shadow-premium relative">
+          <div className="bg-card/40 backdrop-blur-sm border-2 border-accent/30 rounded-2xl p-8 md:p-12 shadow-premium h-[65vh] flex flex-col">
+            <ScrollArea className="h-full pr-2">
               <div className="space-y-6">
                 {slide.verses.map((verse, index) => (
                   <div 
@@ -77,8 +77,8 @@ const ScriptureSlide = ({ slide, direction }: ScriptureSlideProps) => {
                   </div>
                 ))}
               </div>
-            </div>
-          </ScrollArea>
+            </ScrollArea>
+          </div>
 
           {/* Bottom Quote Mark */}
           <div className="absolute top-1/2 -translate-y-1/2 -right-12 text-8xl text-accent/20 font-serif leading-none">
