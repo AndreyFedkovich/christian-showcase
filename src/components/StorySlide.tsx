@@ -44,8 +44,7 @@ const StorySlide = ({ slide, direction = 'next' }: StorySlideProps) => {
 
               {/* Content */}
               <div className="relative">
-                <div className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-primary via-primary/50 to-transparent rounded-full" />
-                <p className="text-lg md:text-xl text-muted-foreground leading-relaxed pl-8 font-sans">
+                <p className="text-lg md:text-xl text-muted-foreground leading-relaxed font-sans">
                   {slide.content}
                 </p>
               </div>
