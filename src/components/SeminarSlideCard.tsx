@@ -1,6 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { JosephSlide } from "@/data/joseph-story";
-import { BookOpen, HelpCircle, Lightbulb } from "lucide-react";
+import { BookOpen, HelpCircle, Lightbulb, Book } from "lucide-react";
 import storyDefault from "@/assets/story-default.jpg";
 import reflectionDefault from "@/assets/reflection-default.jpg";
 import conclusionDefault from "@/assets/conclusion-default.jpg";
@@ -19,6 +19,8 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
         return <HelpCircle className="w-5 h-5" />;
       case 'conclusion':
         return <Lightbulb className="w-5 h-5" />;
+      case 'scripture':
+        return <Book className="w-5 h-5" />;
     }
   };
 
@@ -30,6 +32,8 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
         return 'Задумайтесь';
       case 'conclusion':
         return 'Вывод';
+      case 'scripture':
+        return 'Писание';
     }
   };
 
@@ -37,6 +41,7 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
     if (slide.type === 'story') return slide.title;
     if (slide.type === 'reflection') return slide.subtitle || 'Вопрос для размышления';
     if (slide.type === 'conclusion') return slide.title;
+    if (slide.type === 'scripture') return slide.reference;
   };
 
   const getSlideImage = () => {
@@ -51,6 +56,9 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
     }
     if (slide.type === 'conclusion') {
       return conclusionDefault;
+    }
+    if (slide.type === 'scripture') {
+      return storyDefault;
     }
   };
 

@@ -5,7 +5,7 @@ import josephForgiveness from "@/assets/joseph-forgiveness.jpg";
 
 export interface Slide {
   id: number;
-  type: 'story' | 'reflection' | 'conclusion';
+  type: 'story' | 'reflection' | 'conclusion' | 'scripture';
 }
 
 export interface StorySlide extends Slide {
@@ -33,11 +33,42 @@ export interface ConclusionSlide extends Slide {
   };
 }
 
-export type JosephSlide = StorySlide | ReflectionSlide | ConclusionSlide;
+export interface ScriptureSlide extends Slide {
+  type: 'scripture';
+  reference: string;
+  book: string;
+  chapter: number;
+  verses: {
+    number: number;
+    text: string;
+  }[];
+}
+
+export type JosephSlide = StorySlide | ReflectionSlide | ConclusionSlide | ScriptureSlide;
 
 export const josephStory: JosephSlide[] = [
   {
     id: 1,
+    type: 'scripture',
+    reference: 'Бытие 37:1-11',
+    book: 'Бытие',
+    chapter: 37,
+    verses: [
+      { number: 1, text: 'Иаков жил в земле странствования отца своего [Исаака], в земле Ханаанской.' },
+      { number: 2, text: 'Вот житие Иакова. Иосиф, семнадцати лет, пас скот вместе с братьями своими, будучи отроком, с сыновьями Валлы и с сыновьями Зелфы, жён отца своего. И доводил Иосиф худые о них слухи до отца их.' },
+      { number: 3, text: 'Израиль любил Иосифа более всех сыновей своих, потому что он был сын старости его, — и сделал ему разноцветную одежду.' },
+      { number: 4, text: 'И увидели братья его, что отец их любит его более всех братьев его; и возненавидели его и не могли говорить с ним дружелюбно.' },
+      { number: 5, text: 'И видел Иосиф сон, и рассказал братьям своим: и они возненавидели его ещё более.' },
+      { number: 6, text: 'Он сказал им: выслушайте сон, который я видел:' },
+      { number: 7, text: 'вот, мы вяжем снопы посреди поля; и вот, мой сноп встал и стал прямо; и вот, ваши снопы стали кругом и поклонились моему снопу.' },
+      { number: 8, text: 'И сказали ему братья его: неужели ты будешь царствовать над нами? неужели будешь владеть нами? И возненавидели его ещё более за сны его и за слова его.' },
+      { number: 9, text: 'И видел он ещё другой сон и рассказал его братьям своим, говоря: вот, я видел ещё сон: вот, солнце и луна и одиннадцать звёзд поклоняются мне.' },
+      { number: 10, text: 'И он рассказал отцу своему и братьям своим; и побранил его отец его и сказал ему: что это за сон, который ты видел? неужели я и твоя мать, и твои братья придём поклониться тебе до земли?' },
+      { number: 11, text: 'Братья его досадовали на него, а отец его заметил это слово.' }
+    ]
+  },
+  {
+    id: 2,
     type: 'story',
     title: 'Любимый сын',
     chapter: 'Глава 1',
@@ -48,13 +79,13 @@ export const josephStory: JosephSlide[] = [
     quote: "Бытие 1: 11"
   },
   {
-    id: 2,
+    id: 3,
     type: 'reflection',
     question: 'Почему Бог позволяет несправедливости происходить с теми, кого Он любит?',
     subtitle: 'Размышление о допущении зла'
   },
   {
-    id: 3,
+    id: 4,
     type: 'story',
     title: 'Предательство братьев',
     chapter: 'Глава 2',
@@ -64,13 +95,13 @@ export const josephStory: JosephSlide[] = [
     ]
   },
   {
-    id: 4,
+    id: 5,
     type: 'reflection',
     question: 'Как Бог может использовать злые намерения людей для выполнения Своих благих планов?',
     subtitle: 'Божья суверенность над злом'
   },
   {
-    id: 5,
+    id: 6,
     type: 'story',
     title: 'Рабство и темница',
     chapter: 'Глава 3',
@@ -80,13 +111,13 @@ export const josephStory: JosephSlide[] = [
     ]
   },
   {
-    id: 6,
+    id: 7,
     type: 'reflection',
     question: 'Верите ли вы, что Бог с вами даже в самых тяжёлых обстоятельствах?',
     subtitle: 'Присутствие Бога в испытаниях'
   },
   {
-    id: 7,
+    id: 8,
     type: 'story',
     title: 'Возвышение',
     chapter: 'Глава 4',
@@ -96,7 +127,7 @@ export const josephStory: JosephSlide[] = [
     ]
   },
   {
-    id: 8,
+    id: 9,
     type: 'story',
     title: 'Прощение и примирение',
     chapter: 'Глава 5',
@@ -106,7 +137,7 @@ export const josephStory: JosephSlide[] = [
     ]
   },
   {
-    id: 9,
+    id: 10,
     type: 'conclusion',
     title: 'Божий план непоколебим',
     points: [
