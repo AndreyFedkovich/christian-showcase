@@ -19,7 +19,7 @@ const StorySlide = ({ slide, direction = 'next' }: StorySlideProps) => {
             {/* Image Section */}
             <div className="relative group">
               <div className="absolute -inset-1 bg-gradient-to-r from-primary via-accent to-primary opacity-30 blur-2xl group-hover:opacity-50 transition-smooth rounded-2xl" />
-              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-premium">
+              <div className="relative aspect-[3/4] overflow-hidden rounded-2xl shadow-premium">
                 <img 
                   src={slide.image} 
                   alt={slide.title}
