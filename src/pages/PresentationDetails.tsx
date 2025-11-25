@@ -2,7 +2,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Play, ArrowLeft } from "lucide-react";
 import DiscipleCard from "@/components/DiscipleCard";
+import SeminarSlideCard from "@/components/SeminarSlideCard";
 import { disciples } from "@/data/disciples";
+import { josephStory } from "@/data/joseph-story";
 import { presentations } from "@/data/presentations";
 import { useEffect } from "react";
 
@@ -21,8 +23,8 @@ const PresentationDetails = () => {
 
   if (!presentation) return null;
 
-  // Load slides based on presentation ID
-  let slides = disciples; // For now, only 12-disciples presentation exists
+  // Load slides based on presentation type
+  const slides = presentation.type === 'disciples' ? disciples : josephStory;
   
   const handleSlideClick = (slideIndex: number) => {
     navigate(`/presentation/${presentationId}/view?slide=${slideIndex}`);
@@ -68,13 +70,23 @@ const PresentationDetails = () => {
       {/* Slides Grid */}
       <main className="max-w-7xl mx-auto px-6 pb-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-[30px]">
-          {slides.map((slide, index) => (
-            <DiscipleCard 
-              key={slide.id} 
-              disciple={slide}
-              onClick={() => handleSlideClick(index)}
-            />
-          ))}
+          {presentation.type === 'disciples' ? (
+            disciples.map((slide, index) => (
+              <DiscipleCard 
+                key={slide.id} 
+                disciple={slide}
+                onClick={() => handleSlideClick(index)}
+              />
+            ))
+          ) : (
+            josephStory.map((slide, index) => (
+              <SeminarSlideCard 
+                key={slide.id} 
+                slide={slide}
+                onClick={() => handleSlideClick(index)}
+              />
+            ))
+          )}
         </div>
       </main>
 
