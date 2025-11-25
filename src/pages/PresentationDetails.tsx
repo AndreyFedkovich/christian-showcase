@@ -80,7 +80,7 @@ const PresentationDetails = () => {
 
       {/* Footer */}
       <footer className="py-8 text-center text-muted-foreground font-sans text-sm">
-        <p>Интерактивная презентация • 2024</p>
+        <p>Интерактивная презентация • 2025</p>
       </footer>
     </div>
   );
