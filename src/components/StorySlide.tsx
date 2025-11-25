@@ -93,6 +93,13 @@ const StorySlide = ({ slide, direction = 'next' }: StorySlideProps) => {
           ))}
         </div>
 
+        {/* Quote */}
+        {slide.quote && (
+            <blockquote className="border-l-4 border-accent pl-6 py-2 italic text-lg text-muted-foreground">
+              "{slide.quote}"
+            </blockquote>
+        )}
+
         {/* Decorative element */}
         <div className="flex items-center gap-2 opacity-30">
           <div className="h-px flex-1 bg-gradient-to-r from-transparent via-primary to-transparent" />

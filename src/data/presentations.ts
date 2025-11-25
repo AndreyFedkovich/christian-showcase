@@ -24,7 +24,7 @@ export const presentations: Presentation[] = [
   {
     id: "joseph-story",
     title: "Бог превращает зло в добро",
-    description: "Божий план спасения никогда не может быть сорван.",
+    description: "Божий план спасения никогда не может быть сорван",
     thumbnail: josephImg,
     slideCount: 9,
     duration: "20-25 минут",
