@@ -1,3 +1,8 @@
+import josephBetrayal from "@/assets/joseph-betrayal.jpg";
+import josephPrison from "@/assets/joseph-prison.jpg";
+import josephRuler from "@/assets/joseph-ruler.jpg";
+import josephForgiveness from "@/assets/joseph-forgiveness.jpg";
+
 export interface Slide {
   id: number;
   type: 'story' | 'reflection' | 'conclusion';
@@ -48,7 +53,7 @@ export const josephStory: JosephSlide[] = [
     type: 'story',
     title: 'Предательство братьев',
     chapter: 'Глава 2',
-    image: '/placeholder.svg',
+    image: josephBetrayal,
     content: 'Братья решили убить Иосифа, но Рувим предложил бросить его в ров. Позже они продали его мадианитянам за 20 сребренников. Братья обманули отца, показав ему окровавленную одежду Иосифа, и Иаков думал, что сын мёртв.'
   },
   {
@@ -62,7 +67,7 @@ export const josephStory: JosephSlide[] = [
     type: 'story',
     title: 'Рабство и темница',
     chapter: 'Глава 3',
-    image: '/placeholder.svg',
+    image: josephPrison,
     content: 'В Египте Иосиф стал рабом в доме Потифара. Бог был с ним, и всё удавалось в его руках. Но жена Потифара оклеветала его, и Иосиф попал в темницу. Даже там Господь был с ним, и начальник темницы доверил ему всех узников.'
   },
   {
@@ -76,7 +81,7 @@ export const josephStory: JosephSlide[] = [
     type: 'story',
     title: 'Возвышение',
     chapter: 'Глава 4',
-    image: '/placeholder.svg',
+    image: josephRuler,
     content: 'Иосиф истолковал сны фараона и был поставлен правителем над всем Египтом. Во время голода братья пришли в Египет за хлебом и поклонились Иосифу, не узнав его. Сбылись сны юности, но теперь Иосиф видел в этом Божий план спасения.'
   },
   {
@@ -84,7 +89,7 @@ export const josephStory: JosephSlide[] = [
     type: 'story',
     title: 'Прощение и примирение',
     chapter: 'Глава 5',
-    image: '/placeholder.svg',
+    image: josephForgiveness,
     content: 'Иосиф открылся братьям со словами: "Не печальтесь и не жалейте, что продали меня сюда, потому что Бог послал меня перед вами для сохранения жизни". Он простил их и спас всю семью от голода. Зло братьев Бог обратил в добро.'
   },
   {
