@@ -26,7 +26,7 @@ export const presentations: Presentation[] = [
     title: "Бог превращает зло в добро",
     description: "Божий план спасения никогда не может быть сорван",
     thumbnail: josephImg,
-    slideCount: 9,
+    slideCount: 10,
     duration: "20-25 минут",
     type: 'seminar'
   }
