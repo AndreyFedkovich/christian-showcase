@@ -68,13 +68,13 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
         />
         
         {/* Slide Number */}
-        <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-accent/20 backdrop-blur-sm flex items-center justify-center z-20">
+        <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-accent/90 backdrop-blur-sm flex items-center justify-center z-20">
           <span className="text-lg font-bold text-accent-foreground">{slide.id}</span>
         </div>
 
         {/* Content */}
         <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
-          <div className="inline-block px-3 py-1 bg-accent/20 backdrop-blur-sm rounded-full mb-3">
+          <div className="inline-block px-3 py-1 bg-accent/90 backdrop-blur-sm rounded-full mb-3">
             <div className="flex items-center gap-2">
               <div className="text-accent-foreground">
                 {getIcon()}
