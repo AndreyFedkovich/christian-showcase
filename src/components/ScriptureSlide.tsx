@@ -49,12 +49,12 @@ const ScriptureSlide = ({ slide, direction }: ScriptureSlideProps) => {
         {/* Verses Container */}
         <div className="relative">
           {/* Top Quote Mark */}
-          <div className="absolute -top-8 -left-4 text-8xl text-accent/20 font-serif leading-none">
+          <div className="absolute top-1/2 -translate-y-1/2 -left-12 text-8xl text-accent/20 font-serif leading-none">
             «
           </div>
           
           {/* Verses */}
-          <ScrollArea className="h-[50vh] pr-4">
+          <ScrollArea className="h-[65vh] pr-4">
             <div className="bg-card/40 backdrop-blur-sm border-2 border-accent/30 rounded-2xl p-8 md:p-12 shadow-premium relative">
               <div className="space-y-6">
                 {slide.verses.map((verse, index) => (
@@ -81,7 +81,7 @@ const ScriptureSlide = ({ slide, direction }: ScriptureSlideProps) => {
           </ScrollArea>
 
           {/* Bottom Quote Mark */}
-          <div className="absolute -bottom-8 -right-4 text-8xl text-accent/20 font-serif leading-none">
+          <div className="absolute top-1/2 -translate-y-1/2 -right-12 text-8xl text-accent/20 font-serif leading-none">
             »
           </div>
         </div>
