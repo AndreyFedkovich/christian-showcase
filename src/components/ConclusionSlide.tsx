@@ -46,8 +46,9 @@ const ConclusionSlide = ({ slide, direction = 'next' }: ConclusionSlideProps) =>
         {/* Verse */}
         {slide.verse && (
           <div className="relative mt-12 p-8 bg-gradient-to-br from-primary/10 to-accent/10 backdrop-blur-sm rounded-lg border border-primary/20">
-            <div className="absolute -top-4 left-8 text-6xl text-primary/30 font-serif">"</div>
-            <blockquote className="text-xl md:text-2xl text-foreground italic leading-relaxed mb-4 pl-8">
+            <div className="absolute -top-4 left-8 text-6xl text-primary/30 font-serif">«</div>
+            <div className="absolute -bottom-4 right-8 text-6xl text-primary/30 font-serif">»</div>
+            <blockquote className="text-xl md:text-2xl text-foreground italic leading-relaxed mb-4 px-8">
               {slide.verse.text}
             </blockquote>
             <cite className="text-sm text-muted-foreground font-sans uppercase tracking-wider not-italic pl-8">
