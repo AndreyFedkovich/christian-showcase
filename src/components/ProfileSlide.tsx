@@ -5,7 +5,7 @@ interface DiscipleSlideProps {
   direction?: 'next' | 'prev';
 }
 
-const DiscipleSlide = ({ disciple, direction = 'next' }: DiscipleSlideProps) => {
+const ProfileSlide = ({ disciple, direction = 'next' }: DiscipleSlideProps) => {
   const slideAnimation = direction === 'next' 
     ? 'animate-[fade-in_0.5s_ease-out,slide-in-from-right_0.5s_ease-out]' 
     : 'animate-[fade-in_0.5s_ease-out,slide-in-from-left_0.5s_ease-out]';
@@ -77,4 +77,4 @@ const DiscipleSlide = ({ disciple, direction = 'next' }: DiscipleSlideProps) => 
   );
 };
 
-export default DiscipleSlide;
+export default ProfileSlide;

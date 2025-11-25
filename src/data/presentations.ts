@@ -1,5 +1,5 @@
 import peterImg from "@/assets/peter.jpg";
-import josephImg from "@/assets/joseph-thumbnail.jpg";
+import josephImg from "@/assets/joseph-thumbnail.png";
 
 export interface Presentation {
   id: string;
@@ -24,7 +24,7 @@ export const presentations: Presentation[] = [
   {
     id: "joseph-story",
     title: "Бог превращает зло в добро",
-    description: "Божий план спасения никогда не может быть сорван. История Иосифа и его братьев",
+    description: "Божий план спасения никогда не может быть сорван.",
     thumbnail: josephImg,
     slideCount: 9,
     duration: "20-25 минут",

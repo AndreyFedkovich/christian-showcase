@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { ChevronLeft, ChevronRight, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import DiscipleSlide from "@/components/DiscipleSlide";
+import ProfileSlide from "@/components/ProfileSlide";
 import StorySlide from "@/components/StorySlide";
 import ReflectionSlide from "@/components/ReflectionSlide";
 import ConclusionSlide from "@/components/ConclusionSlide";
@@ -200,7 +200,7 @@ const Presentation = () => {
           description={presentation.description}
         />
       ) : presentation.type === 'disciples' ? (
-        <DiscipleSlide 
+        <ProfileSlide
           disciple={disciples[currentSlide]} 
           direction={direction}
           key={currentSlide}

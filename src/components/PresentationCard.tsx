@@ -17,7 +17,7 @@ const PresentationCard = ({ presentation, onClick }: PresentationCardProps) => {
       <div className="flex flex-col md:flex-row gap-6">
         {/* Thumbnail */}
         <div className="md:w-1/3 aspect-[3/4] relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/60 via-accent/40 to-primary/80 z-10 opacity-70 group-hover:opacity-80 transition-smooth" />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/60 via-accent/40 to-primary/80 z-10 opacity-30 group-hover:opacity-40 transition-smooth" />
           <img 
             src={presentation.thumbnail} 
             alt={presentation.title}

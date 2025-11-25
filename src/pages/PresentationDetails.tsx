@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Play, ArrowLeft } from "lucide-react";
-import DiscipleCard from "@/components/DiscipleCard";
+import ProfileCard from "@/components/ProfileCard";
 import SeminarSlideCard from "@/components/SeminarSlideCard";
 import { disciples } from "@/data/disciples";
 import { josephStory } from "@/data/joseph-story";
@@ -72,7 +72,7 @@ const PresentationDetails = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-[30px]">
           {presentation.type === 'disciples' ? (
             disciples.map((slide, index) => (
-              <DiscipleCard 
+              <ProfileCard
                 key={slide.id} 
                 disciple={slide}
                 onClick={() => handleSlideClick(index)}

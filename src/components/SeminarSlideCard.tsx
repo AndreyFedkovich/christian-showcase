@@ -60,7 +60,7 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
       onClick={onClick}
     >
       <div className="aspect-[3/4] relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent z-10 opacity-80 group-hover:opacity-90 transition-smooth" />
+        <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent z-10 opacity-30 group-hover:opacity-40 transition-smooth" />
         <img 
           src={getSlideImage()} 
           alt={getTitle()}

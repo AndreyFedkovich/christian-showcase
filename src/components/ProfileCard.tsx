@@ -6,7 +6,7 @@ interface DiscipleCardProps {
   onClick: () => void;
 }
 
-const DiscipleCard = ({ disciple, onClick }: DiscipleCardProps) => {
+const ProfileCard = ({ disciple, onClick }: DiscipleCardProps) => {
   return (
     <Card 
       className="group relative overflow-hidden cursor-pointer transition-smooth hover:-translate-y-2 shadow-card hover:shadow-premium"
@@ -37,4 +37,4 @@ const DiscipleCard = ({ disciple, onClick }: DiscipleCardProps) => {
   );
 };
 
-export default DiscipleCard;
+export default ProfileCard;
