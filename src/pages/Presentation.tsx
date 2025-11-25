@@ -3,8 +3,12 @@ import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { ChevronLeft, ChevronRight, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import DiscipleSlide from "@/components/DiscipleSlide";
+import StorySlide from "@/components/StorySlide";
+import ReflectionSlide from "@/components/ReflectionSlide";
+import ConclusionSlide from "@/components/ConclusionSlide";
 import IntroSlide from "@/components/IntroSlide";
 import { disciples } from "@/data/disciples";
+import { josephStory } from "@/data/joseph-story";
 import { presentations } from "@/data/presentations";
 
 const Presentation = () => {
@@ -32,6 +36,10 @@ const Presentation = () => {
   const [showIntro, setShowIntro] = useState(initialSlide === 0);
   
   if (!presentation) return null;
+
+  // Load slides based on presentation type
+  const slides = presentation.type === 'disciples' ? disciples : josephStory;
+  const totalSlides = slides.length;
 
   // Fullscreen management
   useEffect(() => {
@@ -92,7 +100,7 @@ const Presentation = () => {
     setDirection('next');
     setIsAnimating(true);
     setTimeout(() => {
-      setCurrentSlide((prev) => (prev + 1) % disciples.length);
+      setCurrentSlide((prev) => (prev + 1) % totalSlides);
       setIsAnimating(false);
     }, 300);
   };
@@ -107,7 +115,7 @@ const Presentation = () => {
     setDirection('prev');
     setIsAnimating(true);
     setTimeout(() => {
-      setCurrentSlide((prev) => (prev - 1 + disciples.length) % disciples.length);
+      setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
       setIsAnimating(false);
     }, 300);
   };
@@ -143,7 +151,7 @@ const Presentation = () => {
         <div className="flex items-center gap-3 pointer-events-auto">
           {!showIntro && (
             <div className="px-4 py-2 bg-secondary/80 backdrop-blur-sm rounded-full font-sans font-medium text-sm">
-              {currentSlide + 1} / {disciples.length}
+              {currentSlide + 1} / {totalSlides}
             </div>
           )}
           <div className="px-4 py-2 bg-secondary/80 backdrop-blur-sm rounded-full font-sans text-sm hidden md:block">
@@ -175,7 +183,7 @@ const Presentation = () => {
               e.stopPropagation();
               nextSlide();
             }}
-            disabled={currentSlide === disciples.length - 1}
+            disabled={currentSlide === totalSlides - 1}
             className="rounded-full shadow-card hover:shadow-premium transition-smooth pointer-events-auto"
           >
             <ChevronRight className="h-5 w-5" />
@@ -191,12 +199,36 @@ const Presentation = () => {
           subtitle="Интерактивная презентация"
           description={presentation.description}
         />
-      ) : (
+      ) : presentation.type === 'disciples' ? (
         <DiscipleSlide 
           disciple={disciples[currentSlide]} 
           direction={direction}
           key={currentSlide}
         />
+      ) : (
+        <>
+          {josephStory[currentSlide].type === 'story' && (
+            <StorySlide 
+              slide={josephStory[currentSlide] as any}
+              direction={direction}
+              key={currentSlide}
+            />
+          )}
+          {josephStory[currentSlide].type === 'reflection' && (
+            <ReflectionSlide 
+              slide={josephStory[currentSlide] as any}
+              direction={direction}
+              key={currentSlide}
+            />
+          )}
+          {josephStory[currentSlide].type === 'conclusion' && (
+            <ConclusionSlide 
+              slide={josephStory[currentSlide] as any}
+              direction={direction}
+              key={currentSlide}
+            />
+          )}
+        </>
       )}
 
       {/* Progress Indicator */}
@@ -204,7 +236,7 @@ const Presentation = () => {
         <div className="absolute bottom-0 left-0 right-0 h-1 bg-muted">
           <div 
             className="h-full gradient-gold transition-all duration-300"
-            style={{ width: `${((currentSlide + 1) / disciples.length) * 100}%` }}
+            style={{ width: `${((currentSlide + 1) / totalSlides) * 100}%` }}
           />
         </div>
       )}
