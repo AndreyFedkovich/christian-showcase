@@ -1,6 +1,9 @@
 import { Card } from "@/components/ui/card";
 import { JosephSlide } from "@/data/joseph-story";
 import { BookOpen, HelpCircle, Lightbulb } from "lucide-react";
+import storyDefault from "@/assets/story-default.jpg";
+import reflectionDefault from "@/assets/reflection-default.jpg";
+import conclusionDefault from "@/assets/conclusion-default.jpg";
 
 interface SeminarSlideCardProps {
   slide: JosephSlide;
@@ -11,11 +14,11 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
   const getIcon = () => {
     switch (slide.type) {
       case 'story':
-        return <BookOpen className="w-6 h-6" />;
+        return <BookOpen className="w-5 h-5" />;
       case 'reflection':
-        return <HelpCircle className="w-6 h-6" />;
+        return <HelpCircle className="w-5 h-5" />;
       case 'conclusion':
-        return <Lightbulb className="w-6 h-6" />;
+        return <Lightbulb className="w-5 h-5" />;
     }
   };
 
@@ -36,32 +39,52 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
     if (slide.type === 'conclusion') return slide.title;
   };
 
+  const getSlideImage = () => {
+    if (slide.type === 'story' && slide.image) {
+      return slide.image;
+    }
+    if (slide.type === 'story') {
+      return storyDefault;
+    }
+    if (slide.type === 'reflection') {
+      return reflectionDefault;
+    }
+    if (slide.type === 'conclusion') {
+      return conclusionDefault;
+    }
+  };
+
   return (
     <Card 
       className="group relative overflow-hidden cursor-pointer transition-smooth hover:-translate-y-2 shadow-card hover:shadow-premium"
       onClick={onClick}
     >
-      <div className="aspect-[4/3] relative overflow-hidden gradient-warm p-8 flex flex-col justify-between">
-        {/* Type Badge */}
-        <div className="inline-block px-4 py-2 bg-primary/20 backdrop-blur-sm rounded-full self-start">
-          <div className="flex items-center gap-2">
-            <div className="text-primary">
-              {getIcon()}
-            </div>
-            <span className="text-sm font-sans font-medium text-primary uppercase tracking-wider">
-              {getTypeName()}
-            </span>
-          </div>
-        </div>
-
+      <div className="aspect-[3/4] relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent z-10 opacity-80 group-hover:opacity-90 transition-smooth" />
+        <img 
+          src={getSlideImage()} 
+          alt={getTitle()}
+          className="w-full h-full object-cover transition-smooth group-hover:scale-110"
+        />
+        
         {/* Slide Number */}
-        <div className="absolute top-8 right-8 w-12 h-12 rounded-full bg-accent/20 backdrop-blur-sm flex items-center justify-center">
+        <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-accent/20 backdrop-blur-sm flex items-center justify-center z-20">
           <span className="text-lg font-bold text-accent-foreground">{slide.id}</span>
         </div>
 
-        {/* Title */}
-        <div>
-          <h3 className="text-2xl font-bold text-foreground group-hover:text-primary transition-smooth">
+        {/* Content */}
+        <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
+          <div className="inline-block px-3 py-1 bg-accent/20 backdrop-blur-sm rounded-full mb-3">
+            <div className="flex items-center gap-2">
+              <div className="text-accent-foreground">
+                {getIcon()}
+              </div>
+              <span className="text-xs font-sans font-medium text-accent-foreground uppercase tracking-wider">
+                {getTypeName()}
+              </span>
+            </div>
+          </div>
+          <h3 className="text-2xl font-bold text-primary-foreground group-hover:text-primary-foreground transition-smooth">
             {getTitle()}
           </h3>
         </div>
