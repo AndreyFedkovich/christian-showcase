@@ -20,8 +20,8 @@ const DiscipleCard = ({ disciple, onClick }: DiscipleCardProps) => {
           className="w-full h-full object-cover transition-smooth group-hover:scale-110"
         />
         <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
-          <div className="inline-block px-3 py-1 bg-accent/20 backdrop-blur-sm rounded-full mb-3">
-            <span className="text-xs font-sans font-medium text-accent-foreground uppercase tracking-wider">
+          <div className="inline-block px-3 py-1 bg-accent/80 backdrop-blur-sm rounded-full mb-3">
+            <span className="text-xs font-sans font-medium text-[#FFF5E6] uppercase tracking-wider">
               Апостол {disciple.id}
             </span>
           </div>
