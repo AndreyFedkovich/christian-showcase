@@ -60,16 +60,13 @@ const PresentationDetails = () => {
             className="gradient-gold hover:opacity-90 text-lg px-8 py-6 rounded-full shadow-premium transition-smooth hover:scale-105 font-sans font-semibold mt-6"
           >
             <Play className="mr-2 h-6 w-6" />
-            Начать презентацию с начала
+            Начать презентацию
           </Button>
         </div>
       </header>
 
       {/* Slides Grid */}
       <main className="max-w-7xl mx-auto px-6 pb-20">
-        <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-8 text-center">
-          Выберите слайд
-        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {slides.map((slide, index) => (
             <DiscipleCard 

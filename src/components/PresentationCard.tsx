@@ -56,7 +56,7 @@ const PresentationCard = ({ presentation, onClick }: PresentationCardProps) => {
               className="gradient-gold hover:opacity-90 text-base px-6 py-3 rounded-full shadow-premium transition-smooth hover:scale-105 font-sans font-semibold"
             >
               <Play className="mr-2 h-5 w-5" />
-              Начать презентацию
+              Открыть презентацию
             </Button>
           </div>
         </div>

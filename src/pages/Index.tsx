@@ -21,16 +21,13 @@ const Index = () => {
             Интерактивные Презентации
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground font-sans max-w-2xl mx-auto">
-            Образовательные истории, которые вдохновляют и просвещают
+            Христианские истории, которые влияют на жизнь
           </p>
         </div>
       </header>
 
       {/* Presentations List */}
       <main className="max-w-6xl mx-auto px-6 pb-20">
-        <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-8 text-center">
-          Доступные презентации
-        </h2>
         <div className="space-y-6">
           {presentations.map((presentation) => (
             <PresentationCard 
@@ -44,7 +41,7 @@ const Index = () => {
 
       {/* Footer */}
       <footer className="py-8 text-center text-muted-foreground font-sans text-sm">
-        <p>Интерактивная презентация • 2024</p>
+        <p>Интерактивная презентация • 2025</p>
       </footer>
     </div>
   );
