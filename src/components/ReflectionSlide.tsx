@@ -46,10 +46,9 @@ const ReflectionSlide = ({ slide, direction = 'next' }: ReflectionSlideProps) =>
           {slide.question}
         </h2>
 
-        {/* Decorative quotes */}
-        <div className="flex justify-center gap-8 text-white/30">
-          <span className="text-6xl font-serif">"</span>
-          <span className="text-6xl font-serif">"</span>
+        {/* Decorative line */}
+        <div className="flex justify-center">
+          <div className="w-32 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent"></div>
         </div>
       </div>
     </div>
