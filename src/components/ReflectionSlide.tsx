@@ -15,9 +15,9 @@ const ReflectionSlide = ({ slide, direction = 'next' }: ReflectionSlideProps) =>
       <div className="max-w-3xl w-full text-center space-y-12">
         {/* Icon */}
         <div className="flex justify-center">
-          <div className="w-24 h-24 rounded-full bg-accent/20 backdrop-blur-sm flex items-center justify-center">
+          <div className="w-24 h-24 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
             <svg 
-              className="w-12 h-12 text-accent" 
+              className="w-12 h-12 text-white" 
               fill="none" 
               stroke="currentColor" 
               viewBox="0 0 24 24"
@@ -34,20 +34,20 @@ const ReflectionSlide = ({ slide, direction = 'next' }: ReflectionSlideProps) =>
 
         {/* Subtitle */}
         {slide.subtitle && (
-          <div className="inline-block px-6 py-2 bg-accent/10 backdrop-blur-sm rounded-full">
-            <span className="text-sm font-sans font-medium text-accent-foreground uppercase tracking-wider">
+          <div className="inline-block px-6 py-2 bg-white/10 backdrop-blur-sm rounded-full">
+            <span className="text-sm font-sans font-medium text-white uppercase tracking-wider">
               {slide.subtitle}
             </span>
           </div>
         )}
 
         {/* Question */}
-        <h2 className="text-4xl md:text-5xl font-bold text-foreground leading-tight px-4">
+        <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight px-4">
           {slide.question}
         </h2>
 
         {/* Decorative quotes */}
-        <div className="flex justify-center gap-8 text-primary/20">
+        <div className="flex justify-center gap-8 text-white/30">
           <span className="text-6xl font-serif">"</span>
           <span className="text-6xl font-serif">"</span>
         </div>
