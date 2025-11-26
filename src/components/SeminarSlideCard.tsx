@@ -22,6 +22,8 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
         return <Lightbulb className="w-5 h-5" />;
       case 'scripture':
         return <Book className="w-5 h-5" />;
+      case 'scripture-dark':
+        return <Book className="w-5 h-5" />;
     }
   };
 
@@ -35,6 +37,8 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
         return 'Вывод';
       case 'scripture':
         return 'Писание';
+      case 'scripture-dark':
+        return 'Писание';
     }
   };
 
@@ -43,6 +47,7 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
     if (slide.type === 'reflection') return slide.subtitle || 'Вопрос для размышления';
     if (slide.type === 'conclusion') return slide.title;
     if (slide.type === 'scripture') return slide.reference;
+    if (slide.type === 'scripture-dark') return slide.reference;
   };
 
   const getSlideImage = () => {
@@ -59,6 +64,9 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
       return conclusionDefault;
     }
     if (slide.type === 'scripture') {
+      return scriptureDefault;
+    }
+    if (slide.type === 'scripture-dark') {
       return scriptureDefault;
     }
   };

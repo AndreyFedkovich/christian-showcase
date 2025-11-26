@@ -7,6 +7,7 @@ import StorySlide from "@/components/StorySlide";
 import ReflectionSlide from "@/components/ReflectionSlide";
 import ConclusionSlide from "@/components/ConclusionSlide";
 import ScriptureSlide from "@/components/ScriptureSlide";
+import ScriptureDarkSlide from "@/components/ScriptureDarkSlide";
 import IntroSlide from "@/components/IntroSlide";
 import { disciples } from "@/data/disciples";
 import { josephStory } from "@/data/joseph-story";
@@ -208,13 +209,20 @@ const Presentation = () => {
         />
       ) : (
         <>
-          {josephStory[currentSlide].type === 'scripture' && (
-            <ScriptureSlide 
-              slide={josephStory[currentSlide] as any}
-              direction={direction}
-              key={currentSlide}
-            />
-          )}
+              {josephStory[currentSlide].type === 'scripture' && (
+                <ScriptureSlide 
+                  slide={josephStory[currentSlide] as any}
+                  direction={direction}
+                  key={currentSlide}
+                />
+              )}
+              {josephStory[currentSlide].type === 'scripture-dark' && (
+                <ScriptureDarkSlide 
+                  slide={josephStory[currentSlide] as any}
+                  direction={direction}
+                  key={currentSlide}
+                />
+              )}
           {josephStory[currentSlide].type === 'story' && (
             <StorySlide 
               slide={josephStory[currentSlide] as any}
