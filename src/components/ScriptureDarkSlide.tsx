@@ -34,19 +34,19 @@ const ScriptureDarkSlide = ({ slide, direction }: ScriptureDarkSlideProps) => {
         <div className="mb-8 md:mb-12 flex items-center justify-center gap-3 md:gap-4">
           {/* SVG Quote Mark - Left */}
           <svg 
-            viewBox="0 0 40 40" 
-            className="w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 text-accent fill-current"
+            viewBox="0 0 30 50" 
+            className="w-8 h-12 md:w-10 md:h-14 lg:w-12 lg:h-16 text-accent fill-current"
           >
-            <circle cx="20" cy="24" r="14" />
-            <path d="M20 10 Q28 10 28 20" strokeWidth="8" stroke="currentColor" fill="none" strokeLinecap="round" />
+            <ellipse cx="15" cy="15" rx="13" ry="13" />
+            <path d="M15 28 Q22 35 18 50 Q12 50 10 40 Q8 32 15 28" />
           </svg>
           {/* SVG Quote Mark - Right */}
           <svg 
-            viewBox="0 0 40 40" 
-            className="w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 text-accent fill-current"
+            viewBox="0 0 30 50" 
+            className="w-8 h-12 md:w-10 md:h-14 lg:w-12 lg:h-16 text-accent fill-current"
           >
-            <circle cx="20" cy="24" r="14" />
-            <path d="M20 10 Q28 10 28 20" strokeWidth="8" stroke="currentColor" fill="none" strokeLinecap="round" />
+            <ellipse cx="15" cy="15" rx="13" ry="13" />
+            <path d="M15 28 Q22 35 18 50 Q12 50 10 40 Q8 32 15 28" />
           </svg>
         </div>
 
