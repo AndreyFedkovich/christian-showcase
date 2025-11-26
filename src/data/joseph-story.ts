@@ -50,7 +50,7 @@ export const josephStory: JosephSlide[] = [
   {
     id: 1,
     type: 'scripture',
-    reference: 'Бытие 37:1-11',
+    reference: 'Бытие 37:1-5',
     book: 'Бытие',
     chapter: 37,
     verses: [
@@ -59,6 +59,15 @@ export const josephStory: JosephSlide[] = [
       { number: 3, text: 'Израиль любил Иосифа более всех сыновей своих, потому что он был сын старости его, — и сделал ему разноцветную одежду.' },
       { number: 4, text: 'И увидели братья его, что отец их любит его более всех братьев его; и возненавидели его и не могли говорить с ним дружелюбно.' },
       { number: 5, text: 'И видел Иосиф сон, и рассказал братьям своим: и они возненавидели его ещё более.' },
+    ]
+  },
+  {
+    id: 2,
+    type: 'scripture',
+    reference: 'Бытие 37:6-11',
+    book: 'Бытие',
+    chapter: 37,
+    verses: [
       { number: 6, text: 'Он сказал им: выслушайте сон, который я видел:' },
       { number: 7, text: 'вот, мы вяжем снопы посреди поля; и вот, мой сноп встал и стал прямо; и вот, ваши снопы стали кругом и поклонились моему снопу.' },
       { number: 8, text: 'И сказали ему братья его: неужели ты будешь царствовать над нами? неужели будешь владеть нами? И возненавидели его ещё более за сны его и за слова его.' },
@@ -68,7 +77,7 @@ export const josephStory: JosephSlide[] = [
     ]
   },
   {
-    id: 2,
+    id: 3,
     type: 'story',
     title: 'Любимый сын',
     chapter: 'Глава 1',
@@ -79,13 +88,13 @@ export const josephStory: JosephSlide[] = [
     quote: "Бытие 1: 11"
   },
   {
-    id: 3,
+    id: 4,
     type: 'reflection',
     question: 'Почему Бог позволяет несправедливости происходить с теми, кого Он любит?',
     subtitle: 'Размышление о допущении зла'
   },
   {
-    id: 4,
+    id: 5,
     type: 'story',
     title: 'Предательство братьев',
     chapter: 'Глава 2',
@@ -95,13 +104,13 @@ export const josephStory: JosephSlide[] = [
     ]
   },
   {
-    id: 5,
+    id: 6,
     type: 'reflection',
     question: 'Как Бог может использовать злые намерения людей для выполнения Своих благих планов?',
     subtitle: 'Божья суверенность над злом'
   },
   {
-    id: 6,
+    id: 7,
     type: 'story',
     title: 'Рабство и темница',
     chapter: 'Глава 3',
@@ -111,13 +120,13 @@ export const josephStory: JosephSlide[] = [
     ]
   },
   {
-    id: 7,
+    id: 8,
     type: 'reflection',
     question: 'Верите ли вы, что Бог с вами даже в самых тяжёлых обстоятельствах?',
     subtitle: 'Присутствие Бога в испытаниях'
   },
   {
-    id: 8,
+    id: 9,
     type: 'story',
     title: 'Возвышение',
     chapter: 'Глава 4',
@@ -127,7 +136,7 @@ export const josephStory: JosephSlide[] = [
     ]
   },
   {
-    id: 9,
+    id: 10,
     type: 'story',
     title: 'Прощение и примирение',
     chapter: 'Глава 5',
@@ -137,7 +146,7 @@ export const josephStory: JosephSlide[] = [
     ]
   },
   {
-    id: 10,
+    id: 11,
     type: 'conclusion',
     title: 'Божий план непоколебим',
     points: [
