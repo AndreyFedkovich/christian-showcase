@@ -32,7 +32,7 @@ const ScriptureDarkSlide = ({ slide, direction }: ScriptureDarkSlideProps) => {
       <div className="relative z-10 w-full max-w-5xl px-8 md:px-16 flex flex-col items-center justify-center h-full py-16">
         {/* Decorative quotes at top */}
         <div className="mb-8 md:mb-12">
-          <span className="text-6xl md:text-7xl lg:text-8xl text-accent font-serif leading-none">❝❝</span>
+          <span className="text-7xl md:text-8xl lg:text-9xl text-accent font-serif leading-none tracking-[0.2em]">❝</span>
         </div>
 
         {/* Verses container */}
@@ -47,22 +47,24 @@ const ScriptureDarkSlide = ({ slide, direction }: ScriptureDarkSlideProps) => {
               className="animate-fade-in"
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              <sup className="text-sm md:text-base text-accent/70 mr-1 font-semibold">{verse.number}</sup>
+              {slide.verses.length > 1 && (
+                <sup className="text-base md:text-lg text-accent/70 mr-1 font-semibold">{verse.number}</sup>
+              )}
               {verse.text}
             </p>
           ))}
         </div>
 
         {/* Decorative divider */}
-        <div className="flex items-center justify-center gap-3 mb-6">
-          <div className="h-px w-12 bg-accent/40" />
+        <div className="flex items-center justify-center gap-4 mb-6">
+          <div className="h-px w-20 md:w-24 bg-accent/40" />
           <div className="w-2 h-2 rounded-full bg-accent" />
-          <div className="h-px w-12 bg-accent/40" />
+          <div className="h-px w-20 md:w-24 bg-accent/40" />
         </div>
 
         {/* Reference at bottom */}
         <div className={cn(
-          "text-accent uppercase tracking-[0.3em] text-sm md:text-base font-semibold",
+          "text-accent uppercase tracking-[0.3em] text-base md:text-lg lg:text-xl font-semibold",
           direction === 'next' ? 'animate-fade-in' : 'animate-fade-in-reverse'
         )}
         style={{ animationDelay: '400ms' }}
