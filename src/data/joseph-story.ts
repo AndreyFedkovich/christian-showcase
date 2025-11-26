@@ -5,7 +5,7 @@ import josephForgiveness from "@/assets/joseph-forgiveness.jpg";
 
 export interface Slide {
   id: number;
-  type: 'story' | 'reflection' | 'conclusion' | 'scripture';
+  type: 'story' | 'reflection' | 'conclusion' | 'scripture' | 'scripture-dark';
 }
 
 export interface StorySlide extends Slide {
@@ -44,12 +44,23 @@ export interface ScriptureSlide extends Slide {
   }[];
 }
 
-export type JosephSlide = StorySlide | ReflectionSlide | ConclusionSlide | ScriptureSlide;
+export interface ScriptureDarkSlide extends Slide {
+  type: 'scripture-dark';
+  reference: string;
+  book: string;
+  chapter: number;
+  verses: {
+    number: number;
+    text: string;
+  }[];
+}
+
+export type JosephSlide = StorySlide | ReflectionSlide | ConclusionSlide | ScriptureSlide | ScriptureDarkSlide;
 
 export const josephStory: JosephSlide[] = [
   {
     id: 1,
-    type: 'scripture',
+    type: 'scripture-dark',
     reference: 'Бытие 37:1-5',
     book: 'Бытие',
     chapter: 37,
@@ -63,7 +74,7 @@ export const josephStory: JosephSlide[] = [
   },
   {
     id: 2,
-    type: 'scripture',
+    type: 'scripture-dark',
     reference: 'Бытие 37:6-11',
     book: 'Бытие',
     chapter: 37,
