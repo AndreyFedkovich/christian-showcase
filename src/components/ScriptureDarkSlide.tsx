@@ -31,9 +31,23 @@ const ScriptureDarkSlide = ({ slide, direction }: ScriptureDarkSlideProps) => {
       {/* Main content container */}
       <div className="relative z-10 w-full max-w-5xl px-8 md:px-16 flex flex-col items-center justify-center h-full py-16">
         {/* Decorative quotes at top */}
-        <div className="mb-8 md:mb-12 flex items-center justify-center gap-2 md:gap-3">
-          <span className="text-7xl md:text-8xl lg:text-9xl text-accent font-serif leading-none">❛</span>
-          <span className="text-7xl md:text-8xl lg:text-9xl text-accent font-serif leading-none">❛</span>
+        <div className="mb-8 md:mb-12 flex items-center justify-center gap-3 md:gap-4">
+          {/* SVG Quote Mark - Left */}
+          <svg 
+            viewBox="0 0 40 40" 
+            className="w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 text-accent fill-current"
+          >
+            <circle cx="20" cy="24" r="14" />
+            <path d="M20 10 Q28 10 28 20" strokeWidth="8" stroke="currentColor" fill="none" strokeLinecap="round" />
+          </svg>
+          {/* SVG Quote Mark - Right */}
+          <svg 
+            viewBox="0 0 40 40" 
+            className="w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 text-accent fill-current"
+          >
+            <circle cx="20" cy="24" r="14" />
+            <path d="M20 10 Q28 10 28 20" strokeWidth="8" stroke="currentColor" fill="none" strokeLinecap="round" />
+          </svg>
         </div>
 
         {/* Verses container */}
