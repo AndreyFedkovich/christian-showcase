@@ -1,5 +1,7 @@
 import peterImg from "@/assets/peter.jpg";
 import josephImg from "@/assets/joseph-thumbnail.png";
+import { josephStory } from '@/data/joseph-story';
+import { disciples } from '@/data/disciples';
 
 export interface Presentation {
   id: string;
@@ -17,7 +19,7 @@ export const presentations: Presentation[] = [
     title: "12 Учеников Христа",
     description: "Погрузитесь в увлекательные истории людей, изменивших ход человеческой истории",
     thumbnail: peterImg,
-    slideCount: 12,
+    slideCount: disciples.length,
     duration: "15-20 минут",
     type: 'disciples'
   },
@@ -26,7 +28,7 @@ export const presentations: Presentation[] = [
     title: "Бог превращает зло в добро",
     description: "Божий план спасения никогда не может быть сорван",
     thumbnail: josephImg,
-    slideCount: 10,
+    slideCount: josephStory.length,
     duration: "20-25 минут",
     type: 'seminar'
   }

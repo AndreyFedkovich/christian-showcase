@@ -81,6 +81,12 @@ const StorySlide = ({ slide, direction = 'next' }: StorySlideProps) => {
           {slide.title}
         </h2>
 
+        { slide.subtitle &&
+            <p className="text-2xl text-accent font-semibold italic">
+              { slide.subtitle }
+            </p>
+        }
+
         {/* Story */}
         <div className="relative space-y-4 max-h-[50vh] overflow-y-auto pr-4 custom-scrollbar">
           {slide.story.map((paragraph, index) => (

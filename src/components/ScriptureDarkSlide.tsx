@@ -13,7 +13,7 @@ const ScriptureDarkSlide = ({ slide, direction }: ScriptureDarkSlideProps) => {
     const versesCount = slide.verses.length;
     
     if (totalChars < 200 && versesCount <= 2) {
-      return 'text-2xl md:text-3xl lg:text-4xl leading-relaxed';
+      return 'text-2xl md:text-3xl lg:text-5xl lg:leading-[4rem] leading-relaxed';
     } else if (totalChars < 400 && versesCount <= 4) {
       return 'text-xl md:text-2xl lg:text-3xl leading-relaxed';
     } else if (totalChars < 700) {
@@ -31,9 +31,8 @@ const ScriptureDarkSlide = ({ slide, direction }: ScriptureDarkSlideProps) => {
       {/* Main content container */}
       <div className="relative z-10 w-full max-w-5xl px-8 md:px-16 flex flex-col items-center justify-center h-full py-16">
         {/* Decorative quotes at top */}
-        <div className="mb-8 md:mb-12 flex items-center justify-center gap-2 md:gap-3">
-          <span className="text-7xl md:text-8xl lg:text-9xl text-accent font-serif leading-none">❛</span>
-          <span className="text-7xl md:text-8xl lg:text-9xl text-accent font-serif leading-none">❛</span>
+        <div className="flex items-center justify-center h-[180px]">
+          <span className="text-[9rem] md:text-[12rem] lg:text-[16rem] text-accent font-serif leading-none">“</span>
         </div>
 
         {/* Verses container */}
@@ -65,7 +64,7 @@ const ScriptureDarkSlide = ({ slide, direction }: ScriptureDarkSlideProps) => {
 
         {/* Reference at bottom */}
         <div className={cn(
-          "text-accent uppercase tracking-[0.3em] text-base md:text-lg lg:text-xl font-semibold",
+          "text-accent uppercase tracking-[0.3em] text-lg md:text-xl lg:text-2xl font-semibold",
           direction === 'next' ? 'animate-fade-in' : 'animate-fade-in-reverse'
         )}
         style={{ animationDelay: '400ms' }}

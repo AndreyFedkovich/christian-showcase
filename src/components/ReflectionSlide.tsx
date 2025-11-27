@@ -42,7 +42,7 @@ const ReflectionSlide = ({ slide, direction = 'next' }: ReflectionSlideProps) =>
         )}
 
         {/* Question */}
-        <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight px-4">
+        <h2 className="text-4xl md:text-5xl font-bold text-white md:leading-[4rem] leading-[4rem] px-4">
           {slide.question}
         </h2>
 
