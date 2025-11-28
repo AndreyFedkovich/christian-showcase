@@ -110,7 +110,7 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
     );
   }
 
-  // Scripture slides - Burgundy-Gold/Royal design for all
+  // Scripture slides - Premium Orange design for all
   if (slide.type === 'scripture' || slide.type === 'scripture-dark') {
     return (
       <Card 
@@ -118,35 +118,35 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
         onClick={onClick}
       >
         <div className="aspect-[3/4] relative overflow-hidden">
-          {/* Burgundy-dark gradient */}
-          <div className="absolute inset-0 bg-gradient-to-br from-red-950 via-rose-900 to-amber-950" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-red-950/30 to-amber-900/20 z-10" />
+          {/* Premium orange gradient */}
+          <div className="absolute inset-0 bg-gradient-to-br from-amber-600 via-orange-500 to-yellow-500" />
+          <div className="absolute inset-0 bg-gradient-to-t from-amber-900/80 via-orange-800/40 to-transparent z-10" />
           
-          {/* Slide number badge - golden */}
-          <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-amber-600/80 backdrop-blur-sm flex items-center justify-center z-20">
-            <span className="text-lg font-bold text-white">{slide.id}</span>
+          {/* Slide number badge - white/transparent */}
+          <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/30 backdrop-blur-sm flex items-center justify-center z-20">
+            <span className="text-lg font-bold text-amber-900">{slide.id}</span>
           </div>
 
-          {/* Golden quotation marks - centered */}
+          {/* White quotation marks - centered */}
           <div className="absolute inset-0 flex items-center justify-center z-20">
             <div className="flex items-center justify-center h-[180px]">
-              <span className="text-[6rem] md:text-[10rem] lg:text-[10rem] text-amber-500 font-serif leading-none">“</span>
+              <span className="text-[6rem] md:text-[10rem] lg:text-[10rem] text-white/80 font-serif leading-none">"</span>
             </div>
           </div>
 
           {/* Type badge and title - bottom */}
           <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
-            <div className="inline-block px-3 py-1 bg-amber-600/30 backdrop-blur-sm rounded-full mb-3">
+            <div className="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full mb-3">
               <div className="flex items-center gap-2">
-                <div className="text-amber-400">
+                <div className="text-white">
                   {getIcon()}
                 </div>
-                <span className="text-xs font-sans font-medium text-amber-400 uppercase tracking-wider">
+                <span className="text-xs font-sans font-medium text-white uppercase tracking-wider">
                   {getTypeName()}
                 </span>
               </div>
             </div>
-            <h3 className="text-xl font-bold text-amber-300">
+            <h3 className="text-xl font-bold text-white">
               {getTitle()}
             </h3>
           </div>
