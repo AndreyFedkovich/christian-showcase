@@ -71,43 +71,164 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
     }
   };
 
-  return (
-    <Card 
-      className="group relative overflow-hidden cursor-pointer transition-smooth hover:-translate-y-2 shadow-card hover:shadow-premium"
-      onClick={onClick}
-    >
-      <div className="aspect-[3/4] relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent z-10 opacity-30 group-hover:opacity-40 transition-smooth" />
-        <img 
-          src={getSlideImage()} 
-          alt={getTitle()}
-          className="w-full h-full object-cover transition-smooth group-hover:scale-110"
-        />
-        
-        {/* Slide Number */}
-        <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-accent/80 backdrop-blur-sm flex items-center justify-center z-20">
-          <span className="text-lg font-bold text-[#FFF5E6]">{slide.id}</span>
-        </div>
-
-        {/* Content */}
-        <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
-          <div className="inline-block px-3 py-1 bg-accent/80 backdrop-blur-sm rounded-full mb-3">
-            <div className="flex items-center gap-2">
-              <div className="text-[#FFF5E6]">
-                {getIcon()}
-              </div>
-              <span className="text-xs font-sans font-medium text-[#FFF5E6] uppercase tracking-wider">
-                {getTypeName()}
-              </span>
-            </div>
+  // Story slides - keep current design
+  if (slide.type === 'story') {
+    return (
+      <Card 
+        className="group relative overflow-hidden cursor-pointer transition-smooth hover:-translate-y-2 shadow-card hover:shadow-premium"
+        onClick={onClick}
+      >
+        <div className="aspect-[3/4] relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent z-10 opacity-30 group-hover:opacity-40 transition-smooth" />
+          <img 
+            src={getSlideImage()} 
+            alt={getTitle()}
+            className="w-full h-full object-cover transition-smooth group-hover:scale-110"
+          />
+          
+          <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-accent/80 backdrop-blur-sm flex items-center justify-center z-20">
+            <span className="text-lg font-bold text-[#FFF5E6]">{slide.id}</span>
           </div>
-          <h3 className="text-2xl font-bold text-primary-foreground group-hover:text-primary-foreground transition-smooth">
-            {getTitle()}
-          </h3>
+
+          <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
+            <div className="inline-block px-3 py-1 bg-accent/80 backdrop-blur-sm rounded-full mb-3">
+              <div className="flex items-center gap-2">
+                <div className="text-[#FFF5E6]">
+                  {getIcon()}
+                </div>
+                <span className="text-xs font-sans font-medium text-[#FFF5E6] uppercase tracking-wider">
+                  {getTypeName()}
+                </span>
+              </div>
+            </div>
+            <h3 className="text-2xl font-bold text-primary-foreground group-hover:text-primary-foreground transition-smooth">
+              {getTitle()}
+            </h3>
+          </div>
         </div>
-      </div>
-    </Card>
-  );
+      </Card>
+    );
+  }
+
+  // Scripture slides - dark minimalist with golden quotes
+  if (slide.type === 'scripture' || slide.type === 'scripture-dark') {
+    return (
+      <Card 
+        className="group relative overflow-hidden cursor-pointer transition-smooth hover:-translate-y-2 shadow-card hover:shadow-premium"
+        onClick={onClick}
+      >
+        <div className="aspect-[3/4] relative overflow-hidden bg-black">
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black to-black z-10" />
+          
+          <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-accent/80 backdrop-blur-sm flex items-center justify-center z-20">
+            <span className="text-lg font-bold text-[#FFF5E6]">{slide.id}</span>
+          </div>
+
+          <div className="absolute inset-0 flex flex-col items-center justify-center p-6 z-20">
+            <div className="flex items-center justify-center gap-2 mb-6">
+              <span className="text-6xl text-accent font-serif leading-none">❛</span>
+              <span className="text-6xl text-accent font-serif leading-none">❛</span>
+            </div>
+            
+            <div className="inline-block px-3 py-1 bg-accent/20 backdrop-blur-sm rounded-full mb-4">
+              <div className="flex items-center gap-2">
+                <div className="text-accent">
+                  {getIcon()}
+                </div>
+                <span className="text-xs font-sans font-medium text-accent uppercase tracking-wider">
+                  {getTypeName()}
+                </span>
+              </div>
+            </div>
+            
+            <h3 className="text-xl font-bold text-accent text-center">
+              {getTitle()}
+            </h3>
+          </div>
+        </div>
+      </Card>
+    );
+  }
+
+  // Reflection slides - purple gradient with large question mark
+  if (slide.type === 'reflection') {
+    return (
+      <Card 
+        className="group relative overflow-hidden cursor-pointer transition-smooth hover:-translate-y-2 shadow-card hover:shadow-premium"
+        onClick={onClick}
+      >
+        <div className="aspect-[3/4] relative overflow-hidden bg-gradient-to-br from-purple-600 via-purple-700 to-purple-900">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent z-10" />
+          
+          <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-purple-500/80 backdrop-blur-sm flex items-center justify-center z-20">
+            <span className="text-lg font-bold text-white">{slide.id}</span>
+          </div>
+
+          <div className="absolute inset-0 flex flex-col items-center justify-center p-6 z-20">
+            <div className="text-8xl text-white/20 font-bold mb-6 group-hover:text-white/30 transition-smooth">
+              ?
+            </div>
+            
+            <div className="inline-block px-3 py-1 bg-purple-500/80 backdrop-blur-sm rounded-full mb-4">
+              <div className="flex items-center gap-2">
+                <div className="text-white">
+                  {getIcon()}
+                </div>
+                <span className="text-xs font-sans font-medium text-white uppercase tracking-wider">
+                  {getTypeName()}
+                </span>
+              </div>
+            </div>
+            
+            <h3 className="text-xl font-bold text-white text-center">
+              {getTitle()}
+            </h3>
+          </div>
+        </div>
+      </Card>
+    );
+  }
+
+  // Conclusion slides - light green style with lightbulb
+  if (slide.type === 'conclusion') {
+    return (
+      <Card 
+        className="group relative overflow-hidden cursor-pointer transition-smooth hover:-translate-y-2 shadow-card hover:shadow-premium"
+        onClick={onClick}
+      >
+        <div className="aspect-[3/4] relative overflow-hidden bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50">
+          <div className="absolute inset-0 bg-gradient-to-t from-emerald-100/50 via-transparent to-transparent z-10" />
+          
+          <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-emerald-500/80 backdrop-blur-sm flex items-center justify-center z-20">
+            <span className="text-lg font-bold text-white">{slide.id}</span>
+          </div>
+
+          <div className="absolute inset-0 flex flex-col items-center justify-center p-6 z-20">
+            <div className="w-20 h-20 rounded-full bg-emerald-500/20 flex items-center justify-center mb-6 group-hover:bg-emerald-500/30 transition-smooth">
+              <Lightbulb className="w-10 h-10 text-emerald-600" />
+            </div>
+            
+            <div className="inline-block px-3 py-1 bg-emerald-500/80 backdrop-blur-sm rounded-full mb-4">
+              <div className="flex items-center gap-2">
+                <div className="text-white">
+                  {getIcon()}
+                </div>
+                <span className="text-xs font-sans font-medium text-white uppercase tracking-wider">
+                  {getTypeName()}
+                </span>
+              </div>
+            </div>
+            
+            <h3 className="text-xl font-bold text-emerald-800 text-center">
+              {getTitle()}
+            </h3>
+          </div>
+        </div>
+      </Card>
+    );
+  }
+
+  return null;
 };
 
 export default SeminarSlideCard;
