@@ -204,23 +204,23 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
         className="group relative overflow-hidden cursor-pointer transition-smooth hover:-translate-y-2 shadow-card hover:shadow-premium"
         onClick={onClick}
       >
-        <div className="aspect-[3/4] relative overflow-hidden bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50">
-          <div className="absolute inset-0 bg-gradient-to-t from-emerald-100/50 via-transparent to-transparent z-10" />
+        <div className="aspect-[3/4] relative overflow-hidden bg-gradient-to-br from-stone-800 via-stone-700 to-amber-900/80">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent z-10" />
           
-          <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-emerald-500/80 backdrop-blur-sm flex items-center justify-center z-20">
+          <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-accent/80 backdrop-blur-sm flex items-center justify-center z-20">
             <span className="text-lg font-bold text-white">{slide.id}</span>
           </div>
 
           {/* Lightbulb icon - in center/slightly above */}
           <div className="absolute inset-0 flex items-center justify-center z-20">
-            <div className="w-20 h-20 rounded-full bg-emerald-500/20 flex items-center justify-center -mt-16 group-hover:bg-emerald-500/30 transition-smooth">
-              <Lightbulb className="w-10 h-10 text-emerald-600" />
+            <div className="w-20 h-20 rounded-full bg-amber-500/20 flex items-center justify-center -mt-16 group-hover:bg-amber-500/30 transition-smooth">
+              <Lightbulb className="w-10 h-10 text-amber-300" />
             </div>
           </div>
 
           {/* Badge and title - at bottom */}
           <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
-            <div className="inline-block px-3 py-1 bg-emerald-500/80 backdrop-blur-sm rounded-full mb-3">
+            <div className="inline-block px-3 py-1 bg-accent/80 backdrop-blur-sm rounded-full mb-3">
               <div className="flex items-center gap-2">
                 <div className="text-white">
                   {getIcon()}
@@ -230,7 +230,7 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
                 </span>
               </div>
             </div>
-            <h3 className="text-xl font-bold text-emerald-800">
+            <h3 className="text-xl font-bold text-white">
               {getTitle()}
             </h3>
           </div>
