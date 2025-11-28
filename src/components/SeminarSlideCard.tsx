@@ -118,25 +118,25 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
         onClick={onClick}
       >
         <div className="aspect-[3/4] relative overflow-hidden">
-          {/* Vintage parchment background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-amber-100 via-amber-50 to-orange-100" />
-          <div className="absolute inset-0 bg-gradient-to-t from-amber-200/50 via-transparent to-transparent z-10" />
+          {/* Dark gradient background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-stone-900 to-slate-800" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent z-10" />
           
-          {/* Slide number badge - dark brown on light background */}
-          <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-amber-700/80 backdrop-blur-sm flex items-center justify-center z-20">
+          {/* Slide number badge - golden accent on dark background */}
+          <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-accent/80 backdrop-blur-sm flex items-center justify-center z-20">
             <span className="text-lg font-bold text-white">{slide.id}</span>
           </div>
 
-          {/* Dark brown quotation marks - centered */}
+          {/* Golden quotation marks - centered */}
           <div className="absolute inset-0 flex items-center justify-center z-20">
             <div className="flex items-center justify-center h-[180px]">
-              <span className="text-[6rem] md:text-[10rem] lg:text-[10rem] text-amber-900 font-serif leading-none">"</span>
+              <span className="text-[6rem] md:text-[10rem] lg:text-[10rem] text-accent font-serif leading-none">"</span>
             </div>
           </div>
 
           {/* Type badge and title - bottom */}
           <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
-            <div className="inline-block px-3 py-1 bg-amber-700/80 backdrop-blur-sm rounded-full mb-3">
+            <div className="inline-block px-3 py-1 bg-accent/80 backdrop-blur-sm rounded-full mb-3">
               <div className="flex items-center gap-2">
                 <div className="text-white">
                   {getIcon()}
@@ -146,7 +146,7 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
                 </span>
               </div>
             </div>
-            <h3 className="text-xl font-bold text-amber-900">
+            <h3 className="text-xl font-bold text-white">
               {getTitle()}
             </h3>
           </div>
