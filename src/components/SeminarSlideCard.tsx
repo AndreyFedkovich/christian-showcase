@@ -130,7 +130,7 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
           {/* Golden quotation marks - centered */}
           <div className="absolute inset-0 flex items-center justify-center z-20">
             <div className="flex items-center justify-center h-[180px]">
-              <span className="text-[6rem] md:text-[10rem] lg:text-[10rem] text-accent font-serif leading-none">"</span>
+              <span className="text-[6rem] md:text-[10rem] lg:text-[10rem] text-accent font-serif leading-none opacity-85 group-hover:opacity-90">“</span>
             </div>
           </div>
 
@@ -171,7 +171,7 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
 
           {/* Large question mark - in center/slightly above */}
           <div className="absolute inset-0 flex items-center justify-center z-20">
-            <div className="text-8xl text-white/20 font-bold -mt-16 group-hover:text-white/30 transition-smooth">
+            <div className="text-8xl text-white/40 font-bold -mt-16 group-hover:text-white/50 transition-smooth">
               ?
             </div>
           </div>
