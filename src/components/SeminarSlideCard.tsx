@@ -124,13 +124,17 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
             <span className="text-lg font-bold text-[#FFF5E6]">{slide.id}</span>
           </div>
 
-          <div className="absolute inset-0 flex flex-col items-center justify-center p-6 z-20">
-            <div className="flex items-center justify-center gap-2 mb-6">
+          {/* Decorative quotes - positioned in upper/central area */}
+          <div className="absolute inset-0 flex items-center justify-center z-20">
+            <div className="flex items-center justify-center gap-2 -mt-16">
               <span className="text-6xl text-accent font-serif leading-none">❛</span>
               <span className="text-6xl text-accent font-serif leading-none">❛</span>
             </div>
-            
-            <div className="inline-block px-3 py-1 bg-accent/20 backdrop-blur-sm rounded-full mb-4">
+          </div>
+
+          {/* Badge and title - at bottom like Story slides */}
+          <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
+            <div className="inline-block px-3 py-1 bg-accent/20 backdrop-blur-sm rounded-full mb-3">
               <div className="flex items-center gap-2">
                 <div className="text-accent">
                   {getIcon()}
@@ -140,8 +144,7 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
                 </span>
               </div>
             </div>
-            
-            <h3 className="text-xl font-bold text-accent text-center">
+            <h3 className="text-xl font-bold text-accent">
               {getTitle()}
             </h3>
           </div>
@@ -164,12 +167,16 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
             <span className="text-lg font-bold text-white">{slide.id}</span>
           </div>
 
-          <div className="absolute inset-0 flex flex-col items-center justify-center p-6 z-20">
-            <div className="text-8xl text-white/20 font-bold mb-6 group-hover:text-white/30 transition-smooth">
+          {/* Large question mark - in center/slightly above */}
+          <div className="absolute inset-0 flex items-center justify-center z-20">
+            <div className="text-8xl text-white/20 font-bold -mt-16 group-hover:text-white/30 transition-smooth">
               ?
             </div>
-            
-            <div className="inline-block px-3 py-1 bg-purple-500/80 backdrop-blur-sm rounded-full mb-4">
+          </div>
+
+          {/* Badge and title - at bottom */}
+          <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
+            <div className="inline-block px-3 py-1 bg-purple-500/80 backdrop-blur-sm rounded-full mb-3">
               <div className="flex items-center gap-2">
                 <div className="text-white">
                   {getIcon()}
@@ -179,8 +186,7 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
                 </span>
               </div>
             </div>
-            
-            <h3 className="text-xl font-bold text-white text-center">
+            <h3 className="text-xl font-bold text-white">
               {getTitle()}
             </h3>
           </div>
@@ -203,12 +209,16 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
             <span className="text-lg font-bold text-white">{slide.id}</span>
           </div>
 
-          <div className="absolute inset-0 flex flex-col items-center justify-center p-6 z-20">
-            <div className="w-20 h-20 rounded-full bg-emerald-500/20 flex items-center justify-center mb-6 group-hover:bg-emerald-500/30 transition-smooth">
+          {/* Lightbulb icon - in center/slightly above */}
+          <div className="absolute inset-0 flex items-center justify-center z-20">
+            <div className="w-20 h-20 rounded-full bg-emerald-500/20 flex items-center justify-center -mt-16 group-hover:bg-emerald-500/30 transition-smooth">
               <Lightbulb className="w-10 h-10 text-emerald-600" />
             </div>
-            
-            <div className="inline-block px-3 py-1 bg-emerald-500/80 backdrop-blur-sm rounded-full mb-4">
+          </div>
+
+          {/* Badge and title - at bottom */}
+          <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
+            <div className="inline-block px-3 py-1 bg-emerald-500/80 backdrop-blur-sm rounded-full mb-3">
               <div className="flex items-center gap-2">
                 <div className="text-white">
                   {getIcon()}
@@ -218,8 +228,7 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
                 </span>
               </div>
             </div>
-            
-            <h3 className="text-xl font-bold text-emerald-800 text-center">
+            <h3 className="text-xl font-bold text-emerald-800">
               {getTitle()}
             </h3>
           </div>
