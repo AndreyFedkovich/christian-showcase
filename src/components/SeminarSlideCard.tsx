@@ -130,7 +130,7 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
           {/* Golden quotation marks - centered */}
           <div className="absolute inset-0 flex items-center justify-center z-20">
             <div className="flex items-center justify-center h-[180px]">
-              <span className="text-[6rem] md:text-[10rem] lg:text-[10rem] text-amber-500 font-serif leading-none">"</span>
+              <span className="text-[6rem] md:text-[10rem] lg:text-[10rem] text-amber-500 font-serif leading-none">“</span>
             </div>
           </div>
 
