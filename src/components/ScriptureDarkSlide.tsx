@@ -26,7 +26,7 @@ const ScriptureDarkSlide = ({ slide, direction }: ScriptureDarkSlideProps) => {
   return (
     <div className="absolute inset-0 bg-black flex items-center justify-center overflow-hidden">
       {/* Subtle gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-primary/5" />
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-800 to-stone-700" />
       
       {/* Main content container */}
       <div className="relative z-10 w-full max-w-5xl px-8 md:px-16 flex flex-col items-center justify-center h-full py-16">
