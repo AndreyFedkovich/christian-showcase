@@ -118,9 +118,9 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
         onClick={onClick}
       >
         <div className="aspect-[3/4] relative overflow-hidden">
-          {/* Premium orange gradient */}
-          <div className="absolute inset-0 bg-gradient-to-br from-amber-600 via-orange-500 to-yellow-500" />
-          <div className="absolute inset-0 bg-gradient-to-t from-amber-900/80 via-orange-800/40 to-transparent z-10" />
+          {/* Premium gold gradient - matches button */}
+          <div className="absolute inset-0 gradient-gold" />
+          <div className="absolute inset-0 bg-gradient-to-t from-amber-800/70 via-amber-700/30 to-transparent z-10" />
           
           {/* Slide number badge - white/transparent */}
           <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/30 backdrop-blur-sm flex items-center justify-center z-20">
