@@ -111,7 +111,91 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
   }
 
   // Scripture slides - dark minimalist with golden quotes
+  // Scripture slides - different backgrounds based on slide ID
   if (slide.type === 'scripture' || slide.type === 'scripture-dark') {
+    // Variant 2: Deep Indigo/Sapphire for first scripture slide
+    if (slide.id === 1) {
+      return (
+        <Card 
+          className="group relative overflow-hidden cursor-pointer transition-smooth hover:-translate-y-2 shadow-card hover:shadow-premium"
+          onClick={onClick}
+        >
+          <div className="aspect-[3/4] relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-indigo-900 via-blue-950 to-slate-950" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-blue-900/30 z-10" />
+            
+            <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-amber-500/80 backdrop-blur-sm flex items-center justify-center z-20">
+              <span className="text-lg font-bold text-white">{slide.id}</span>
+            </div>
+
+            <div className="absolute inset-0 flex items-center justify-center z-20">
+              <div className="flex items-center justify-center h-[180px]">
+                <span className="text-[6rem] md:text-[10rem] lg:text-[10rem] text-amber-400 font-serif leading-none">"</span>
+              </div>
+            </div>
+
+            <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
+              <div className="inline-block px-3 py-1 bg-amber-500/30 backdrop-blur-sm rounded-full mb-3">
+                <div className="flex items-center gap-2">
+                  <div className="text-amber-300">
+                    {getIcon()}
+                  </div>
+                  <span className="text-xs font-sans font-medium text-amber-300 uppercase tracking-wider">
+                    {getTypeName()}
+                  </span>
+                </div>
+              </div>
+              <h3 className="text-xl font-bold text-amber-200">
+                {getTitle()}
+              </h3>
+            </div>
+          </div>
+        </Card>
+      );
+    }
+
+    // Variant 3: Burgundy-Gold/Royal for second scripture slide
+    if (slide.id === 2) {
+      return (
+        <Card 
+          className="group relative overflow-hidden cursor-pointer transition-smooth hover:-translate-y-2 shadow-card hover:shadow-premium"
+          onClick={onClick}
+        >
+          <div className="aspect-[3/4] relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-red-950 via-rose-900 to-amber-950" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-red-950/30 to-amber-900/20 z-10" />
+            
+            <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-amber-600/80 backdrop-blur-sm flex items-center justify-center z-20">
+              <span className="text-lg font-bold text-white">{slide.id}</span>
+            </div>
+
+            <div className="absolute inset-0 flex items-center justify-center z-20">
+              <div className="flex items-center justify-center h-[180px]">
+                <span className="text-[6rem] md:text-[10rem] lg:text-[10rem] text-amber-500 font-serif leading-none">"</span>
+              </div>
+            </div>
+
+            <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
+              <div className="inline-block px-3 py-1 bg-amber-600/30 backdrop-blur-sm rounded-full mb-3">
+                <div className="flex items-center gap-2">
+                  <div className="text-amber-400">
+                    {getIcon()}
+                  </div>
+                  <span className="text-xs font-sans font-medium text-amber-400 uppercase tracking-wider">
+                    {getTypeName()}
+                  </span>
+                </div>
+              </div>
+              <h3 className="text-xl font-bold text-amber-300">
+                {getTitle()}
+              </h3>
+            </div>
+          </div>
+        </Card>
+      );
+    }
+
+    // Default black minimalist design for other scripture slides
     return (
       <Card 
         className="group relative overflow-hidden cursor-pointer transition-smooth hover:-translate-y-2 shadow-card hover:shadow-premium"
@@ -124,14 +208,12 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
             <span className="text-lg font-bold text-[#FFF5E6]">{slide.id}</span>
           </div>
 
-          {/* Decorative quotes - positioned in upper/central area */}
           <div className="absolute inset-0 flex items-center justify-center z-20">
             <div className="flex items-center justify-center h-[180px]">
-              <span className="text-[6rem] md:text-[10rem] lg:text-[10rem] text-accent font-serif leading-none">“</span>
+              <span className="text-[6rem] md:text-[10rem] lg:text-[10rem] text-accent font-serif leading-none">"</span>
             </div>
           </div>
 
-          {/* Badge and title - at bottom like Story slides */}
           <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
             <div className="inline-block px-3 py-1 bg-accent/20 backdrop-blur-sm rounded-full mb-3">
               <div className="flex items-center gap-2">
