@@ -126,9 +126,8 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
 
           {/* Decorative quotes - positioned in upper/central area */}
           <div className="absolute inset-0 flex items-center justify-center z-20">
-            <div className="flex items-center justify-center gap-2 -mt-16">
-              <span className="text-6xl text-accent font-serif leading-none">❛</span>
-              <span className="text-6xl text-accent font-serif leading-none">❛</span>
+            <div className="flex items-center justify-center h-[180px]">
+              <span className="text-[6rem] md:text-[10rem] lg:text-[10rem] text-accent font-serif leading-none">“</span>
             </div>
           </div>
 
