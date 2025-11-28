@@ -119,7 +119,7 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
       >
         <div className="aspect-[3/4] relative overflow-hidden">
           {/* Dark gradient background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-stone-900 to-slate-800" />
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-800 to-stone-700" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent z-10" />
           
           {/* Slide number badge - golden accent on dark background */}
