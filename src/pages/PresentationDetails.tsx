@@ -87,7 +87,13 @@ const PresentationDetails = () => {
             ))
           ) : presentation.type === 'hermeneutics' ? (
             epistlesStructure.slice(1).map((slide, index) => (
-              slide.type === 'conclusion' ? (
+              slide.type === 'introduction' ? (
+                <SeminarSlideCard 
+                  key={slide.id} 
+                  slide={slide as any}
+                  onClick={() => handleSlideClick(index + 1)}
+                />
+              ) : slide.type === 'conclusion' ? (
                 <SeminarSlideCard 
                   key={slide.id} 
                   slide={slide as any}
