@@ -42,7 +42,26 @@ export interface ConclusionSlide extends Slide {
   };
 }
 
-export const epistlesStructure: (IntroHermeneuticsSlide | HermeneuticsSlide | ConclusionSlide)[] = [
+export interface PracticalExampleSlide extends Slide {
+  type: 'practical-example';
+  title: string;
+  scenario: string;
+  knowContent: {
+    title: string;
+    points: string[];
+    source?: string;
+  };
+  doContent: {
+    title: string;
+    points: string[];
+  };
+  verse?: {
+    text: string;
+    reference: string;
+  };
+}
+
+export const epistlesStructure: (IntroHermeneuticsSlide | HermeneuticsSlide | PracticalExampleSlide | ConclusionSlide)[] = [
   {
     id: 0,
     type: 'intro-hermeneutics',
@@ -431,6 +450,87 @@ export const epistlesStructure: (IntroHermeneuticsSlide | HermeneuticsSlide | Co
   },
   {
     id: 16,
+    type: 'practical-example',
+    title: 'Прощение в отношениях',
+    scenario: 'Кто-то обидел вас или предал ваше доверие',
+    knowContent: {
+      title: 'ЗНАТЬ',
+      points: [
+        'Бог простил вас во Христе, несмотря на все ваши грехи',
+        'Христос умер за грешников, когда мы были ещё врагами Богу',
+        'Мы прощены не за наши заслуги, но по благодати'
+      ],
+      source: 'Ефесянам 4:32; Римлянам 5:8'
+    },
+    doContent: {
+      title: 'ДЕЛАТЬ',
+      points: [
+        'Прощать других, как Христос простил вас',
+        'Не держать обиду и не мстить',
+        'Молиться за обидчика и желать ему добра'
+      ]
+    },
+    verse: {
+      text: 'Будьте друг ко другу добры, сострадательны, прощайте друг друга, как и Бог во Христе простил вас',
+      reference: 'Ефесянам 4:32'
+    }
+  },
+  {
+    id: 17,
+    type: 'practical-example',
+    title: 'Борьба с тревогой',
+    scenario: 'Вы переживаете о будущем, работе, здоровье или финансах',
+    knowContent: {
+      title: 'ЗНАТЬ',
+      points: [
+        'Бог заботится о вас и знает все ваши нужды',
+        'Бог даёт мир, который превосходит всякое понимание',
+        'Ничто не отлучит вас от любви Божией во Христе Иисусе'
+      ],
+      source: '1 Петра 5:7; Филиппийцам 4:6-7; Римлянам 8:38-39'
+    },
+    doContent: {
+      title: 'ДЕЛАТЬ',
+      points: [
+        'Возложить все заботы на Бога в молитве',
+        'Благодарить Бога за то, что уже имеете',
+        'Сосредоточиться на Божьих обетованиях, а не на обстоятельствах'
+      ]
+    },
+    verse: {
+      text: 'Все заботы ваши возложите на Него, ибо Он печется о вас',
+      reference: '1 Петра 5:7'
+    }
+  },
+  {
+    id: 18,
+    type: 'practical-example',
+    title: 'Служение другим',
+    scenario: 'Вы устали, перегружены, хочется думать только о себе',
+    knowContent: {
+      title: 'ЗНАТЬ',
+      points: [
+        'Христос не пришёл, чтобы Ему служили, но чтобы послужить',
+        'Христос смирил Себя, приняв образ раба',
+        'Любовь Христа побуждает нас жить не для себя'
+      ],
+      source: 'Марка 10:45; Филиппийцам 2:5-8; 2 Коринфянам 5:14-15'
+    },
+    doContent: {
+      title: 'ДЕЛАТЬ',
+      points: [
+        'Искать возможности служить другим',
+        'Ставить нужды других выше своих собственных',
+        'Делать добро без ожидания награды или признания'
+      ]
+    },
+    verse: {
+      text: 'Ничего не делайте по любопрению или по тщеславию, но по смиренномудрию почитайте один другого высшим себя',
+      reference: 'Филиппийцам 2:3'
+    }
+  },
+  {
+    id: 19,
     type: 'conclusion',
     title: 'Знать и Делать',
     points: [
