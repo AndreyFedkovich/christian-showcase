@@ -4,6 +4,7 @@ import { Play, ArrowLeft } from "lucide-react";
 import ProfileCard from "@/components/ProfileCard";
 import SeminarSlideCard from "@/components/SeminarSlideCard";
 import HermeneuticsSlideCard from "@/components/HermeneuticsSlideCard";
+import PracticalExampleSlideCard from "@/components/PracticalExampleSlideCard";
 import { disciples } from "@/data/disciples";
 import { josephStory } from "@/data/joseph-story";
 import { epistlesStructure } from "@/data/epistles-structure";
@@ -88,6 +89,12 @@ const PresentationDetails = () => {
             epistlesStructure.slice(1).map((slide, index) => (
               slide.type === 'conclusion' ? (
                 <SeminarSlideCard 
+                  key={slide.id} 
+                  slide={slide as any}
+                  onClick={() => handleSlideClick(index + 1)}
+                />
+              ) : slide.type === 'practical-example' ? (
+                <PracticalExampleSlideCard 
                   key={slide.id} 
                   slide={slide as any}
                   onClick={() => handleSlideClick(index + 1)}

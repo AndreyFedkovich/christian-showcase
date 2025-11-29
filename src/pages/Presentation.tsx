@@ -11,6 +11,7 @@ import ScriptureDarkSlide from "@/components/ScriptureDarkSlide";
 import IntroSlide from "@/components/IntroSlide";
 import HermeneuticsSlide from "@/components/HermeneuticsSlide";
 import IntroHermeneuticsSlide from "@/components/IntroHermeneuticsSlide";
+import PracticalExampleSlide from "@/components/PracticalExampleSlide";
 import { disciples } from "@/data/disciples";
 import { josephStory } from "@/data/joseph-story";
 import { epistlesStructure } from "@/data/epistles-structure";
@@ -232,6 +233,13 @@ const Presentation = () => {
         <>
           {epistlesStructure[currentSlide].type === 'hermeneutics' && (
             <HermeneuticsSlide 
+              slide={epistlesStructure[currentSlide] as any}
+              direction={direction}
+              key={currentSlide}
+            />
+          )}
+          {epistlesStructure[currentSlide].type === 'practical-example' && (
+            <PracticalExampleSlide 
               slide={epistlesStructure[currentSlide] as any}
               direction={direction}
               key={currentSlide}
