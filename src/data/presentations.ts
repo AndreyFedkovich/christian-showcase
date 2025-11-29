@@ -39,8 +39,8 @@ export const presentations: Presentation[] = [
     title: "Знать и Делать",
     description: "Структура посланий Нового Завета: доктрина и практическое применение",
     thumbnail: knowDoImg,
-    slideCount: epistlesStructure.length,
-    duration: "25-30 минут",
+    slideCount: epistlesStructure.length - 1,
+    duration: "30-35 минут",
     type: 'hermeneutics'
   }
 ];

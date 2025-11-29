@@ -61,7 +61,15 @@ export interface PracticalExampleSlide extends Slide {
   };
 }
 
-export const epistlesStructure: (IntroHermeneuticsSlide | HermeneuticsSlide | PracticalExampleSlide | ConclusionSlide)[] = [
+export interface IntroductionSlide extends Slide {
+  type: 'introduction';
+  title: string;
+  subtitle?: string;
+  content: string[];
+  image: string;
+}
+
+export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | HermeneuticsSlide | PracticalExampleSlide | ConclusionSlide)[] = [
   {
     id: 0,
     type: 'intro-hermeneutics',
@@ -72,6 +80,18 @@ export const epistlesStructure: (IntroHermeneuticsSlide | HermeneuticsSlide | Pr
   },
   {
     id: 1,
+    type: 'introduction',
+    title: 'Принцип "Знать и Делать"',
+    subtitle: 'Как устроены послания Нового Завета',
+    content: [
+      'Послания апостолов имеют особую структуру: сначала излагается богословская основа — кто есть Бог, что Он сделал для нас во Христе, какое положение мы занимаем благодаря искуплению.',
+      'Только после этого апостолы переходят к практическим наставлениям — как жить в ответ на эту великую истину, какие поступки соответствуют нашему новому статусу во Христе.',
+      'Этот принцип "сначала знать — потом делать" пронизывает все послания и является ключом к правильному пониманию христианской жизни.'
+    ],
+    image: '/src/assets/know-do-thumbnail.jpeg'
+  },
+  {
+    id: 2,
     type: 'hermeneutics',
     bookName: 'Римлянам',
     bookNameEn: 'Romans',
@@ -99,7 +119,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | HermeneuticsSlide | Pr
     }
   },
   {
-    id: 2,
+    id: 3,
     type: 'hermeneutics',
     bookName: '1 Коринфянам',
     bookNameEn: '1 Corinthians',
@@ -123,7 +143,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | HermeneuticsSlide | Pr
     }
   },
   {
-    id: 3,
+    id: 4,
     type: 'hermeneutics',
     bookName: '2 Коринфянам',
     bookNameEn: '2 Corinthians',
@@ -147,7 +167,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | HermeneuticsSlide | Pr
     }
   },
   {
-    id: 4,
+    id: 5,
     type: 'hermeneutics',
     bookName: 'Галатам',
     bookNameEn: 'Galatians',
@@ -175,7 +195,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | HermeneuticsSlide | Pr
     }
   },
   {
-    id: 5,
+    id: 6,
     type: 'hermeneutics',
     bookName: 'Ефесянам',
     bookNameEn: 'Ephesians',
@@ -203,7 +223,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | HermeneuticsSlide | Pr
     }
   },
   {
-    id: 6,
+    id: 7,
     type: 'hermeneutics',
     bookName: 'Филиппийцам',
     bookNameEn: 'Philippians',
@@ -231,7 +251,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | HermeneuticsSlide | Pr
     }
   },
   {
-    id: 7,
+    id: 8,
     type: 'hermeneutics',
     bookName: 'Колоссянам',
     bookNameEn: 'Colossians',
@@ -255,7 +275,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | HermeneuticsSlide | Pr
     }
   },
   {
-    id: 8,
+    id: 9,
     type: 'hermeneutics',
     bookName: '1 Фессалоникийцам',
     bookNameEn: '1 Thessalonians',
@@ -279,7 +299,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | HermeneuticsSlide | Pr
     }
   },
   {
-    id: 9,
+    id: 10,
     type: 'hermeneutics',
     bookName: '2 Фессалоникийцам',
     bookNameEn: '2 Thessalonians',
@@ -302,7 +322,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | HermeneuticsSlide | Pr
     }
   },
   {
-    id: 10,
+    id: 11,
     type: 'hermeneutics',
     bookName: '1 Тимофею',
     bookNameEn: '1 Timothy',
@@ -326,7 +346,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | HermeneuticsSlide | Pr
     }
   },
   {
-    id: 11,
+    id: 12,
     type: 'hermeneutics',
     bookName: '2 Тимофею',
     bookNameEn: '2 Timothy',
@@ -350,7 +370,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | HermeneuticsSlide | Pr
     }
   },
   {
-    id: 12,
+    id: 13,
     type: 'hermeneutics',
     bookName: 'Титу',
     bookNameEn: 'Titus',
@@ -373,7 +393,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | HermeneuticsSlide | Pr
     }
   },
   {
-    id: 13,
+    id: 14,
     type: 'hermeneutics',
     bookName: 'Евреям',
     bookNameEn: 'Hebrews',
@@ -402,7 +422,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | HermeneuticsSlide | Pr
     }
   },
   {
-    id: 14,
+    id: 15,
     type: 'hermeneutics',
     bookName: '1 Петра',
     bookNameEn: '1 Peter',
@@ -426,7 +446,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | HermeneuticsSlide | Pr
     }
   },
   {
-    id: 15,
+    id: 16,
     type: 'hermeneutics',
     bookName: '2 Петра',
     bookNameEn: '2 Peter',
@@ -449,7 +469,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | HermeneuticsSlide | Pr
     }
   },
   {
-    id: 16,
+    id: 17,
     type: 'practical-example',
     title: 'Прощение в отношениях',
     scenario: 'Кто-то обидел вас или предал ваше доверие',
@@ -476,7 +496,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | HermeneuticsSlide | Pr
     }
   },
   {
-    id: 17,
+    id: 18,
     type: 'practical-example',
     title: 'Борьба с тревогой',
     scenario: 'Вы переживаете о будущем, работе, здоровье или финансах',
@@ -503,7 +523,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | HermeneuticsSlide | Pr
     }
   },
   {
-    id: 18,
+    id: 19,
     type: 'practical-example',
     title: 'Служение другим',
     scenario: 'Вы устали, перегружены, хочется думать только о себе',
@@ -530,7 +550,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | HermeneuticsSlide | Pr
     }
   },
   {
-    id: 19,
+    id: 20,
     type: 'conclusion',
     title: 'Знать и Делать',
     points: [
