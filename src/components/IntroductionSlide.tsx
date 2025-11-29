@@ -11,7 +11,7 @@ const IntroductionSlide = ({ slide, direction }: IntroductionSlideProps) => {
       <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
         {/* Левая часть - текст (3 колонки из 5) */}
         <div className="lg:col-span-3 space-y-6 animate-in slide-in-from-left-8 duration-700">
-          <div className="space-y-2">
+          <div className="space-y-6">
             <h1 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight">
               {slide.title}
             </h1>

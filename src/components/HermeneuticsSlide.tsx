@@ -32,7 +32,7 @@ const HermeneuticsSlide = ({ slide, direction }: HermeneuticsSlideProps) => {
             {slide.knowSection.percentage}%
           </div>
           <div 
-            className="bg-gradient-to-r from-red-600 to-red-700 flex items-center justify-center text-white font-bold text-lg transition-all"
+            className="bg-gradient-to-r from-amber-400 to-amber-500 flex items-center justify-center text-white font-bold text-lg transition-all"
             style={{ width: `${slide.doSection.percentage}%` }}
           >
             {slide.doSection.percentage}%
@@ -64,19 +64,19 @@ const HermeneuticsSlide = ({ slide, direction }: HermeneuticsSlideProps) => {
           </div>
 
           {/* DO Section */}
-          <div className="bg-gradient-to-br from-red-50 to-red-100 dark:from-red-950 dark:to-red-900 rounded-3xl p-8 shadow-card">
+          <div className="bg-gradient-to-br from-amber-50 to-amber-100 dark:from-amber-950 dark:to-amber-900 rounded-3xl p-8 shadow-card">
             <div className="space-y-4">
-              <div className="inline-block px-4 py-2 bg-red-600 text-white rounded-full font-bold text-sm uppercase tracking-wider">
+              <div className="inline-block px-4 py-2 bg-amber-600 text-white rounded-full font-bold text-sm uppercase tracking-wider">
                 Делать
               </div>
-              <h2 className="text-3xl font-bold text-red-900 dark:text-red-100">
+              <h2 className="text-3xl font-bold text-amber-900 dark:text-amber-100">
                 {slide.doSection.chapters}
               </h2>
               <ul className="space-y-3">
                 {slide.doSection.themes.map((theme, idx) => (
                   <li key={idx} className="flex items-start gap-3">
-                    <span className="w-2 h-2 bg-red-600 rounded-full mt-2 flex-shrink-0" />
-                    <span className="text-lg text-red-800 dark:text-red-200 font-sans">
+                    <span className="w-2 h-2 bg-amber-500 rounded-full mt-2 flex-shrink-0" />
+                    <span className="text-lg text-amber-800 dark:text-amber-200 font-sans">
                       {theme}
                     </span>
                   </li>

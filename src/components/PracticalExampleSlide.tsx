@@ -64,14 +64,14 @@ const PracticalExampleSlide = ({ slide, direction = 'next' }: PracticalExampleSl
             </div>
           </div>
 
-          {/* DO Section - Red */}
-          <div className="bg-gradient-to-br from-red-50 to-red-100 dark:from-red-950 dark:to-red-900 rounded-3xl p-8 shadow-card border border-red-200 dark:border-red-800">
+          {/* DO Section - Amber */}
+          <div className="bg-gradient-to-br from-amber-50 to-amber-100 dark:from-amber-950 dark:to-amber-900 rounded-3xl p-8 shadow-card border border-amber-200 dark:border-red-800">
             <div className="space-y-6">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-red-600 flex items-center justify-center">
+                <div className="w-12 h-12 rounded-full bg-amber-600 flex items-center justify-center">
                   <CheckCircle2 className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-red-900 dark:text-red-100 uppercase tracking-wider">
+                <h3 className="text-2xl font-bold text-amber-900 dark:text-amber-100 uppercase tracking-wider">
                   {slide.doContent.title}
                 </h3>
               </div>
@@ -79,8 +79,8 @@ const PracticalExampleSlide = ({ slide, direction = 'next' }: PracticalExampleSl
               <ul className="space-y-4">
                 {slide.doContent.points.map((point, idx) => (
                   <li key={idx} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-                    <span className="text-base text-red-800 dark:text-red-200 font-sans leading-relaxed">
+                    <CheckCircle2 className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+                    <span className="text-base text-amber-800 dark:text-amber-200 font-sans leading-relaxed">
                       {point}
                     </span>
                   </li>
