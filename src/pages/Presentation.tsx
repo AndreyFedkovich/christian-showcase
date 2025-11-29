@@ -97,7 +97,8 @@ const Presentation = () => {
 
   const startPresentation = () => {
     setShowIntro(false);
-    setCurrentSlide(0);
+    // For hermeneutics presentations, skip the intro slide at index 0
+    setCurrentSlide(presentation?.type === 'hermeneutics' ? 1 : 0);
   };
 
   const nextSlide = () => {
@@ -116,7 +117,8 @@ const Presentation = () => {
 
   const prevSlide = () => {
     if (isAnimating || showIntro) return;
-    if (currentSlide === 0) {
+    const firstSlideIndex = presentation?.type === 'hermeneutics' ? 1 : 0;
+    if (currentSlide === firstSlideIndex) {
       setShowIntro(true);
       setCurrentSlide(-1);
       return;
@@ -160,7 +162,7 @@ const Presentation = () => {
         <div className="flex items-center gap-3 pointer-events-auto">
           {!showIntro && (
             <div className="px-4 py-2 bg-secondary/80 backdrop-blur-sm rounded-full font-sans font-medium text-sm">
-              {currentSlide + 1} / {totalSlides}
+              {presentation.type === 'hermeneutics' ? currentSlide : currentSlide + 1} / {presentation.type === 'hermeneutics' ? totalSlides - 1 : totalSlides}
             </div>
           )}
           <div className="px-4 py-2 bg-secondary/80 backdrop-blur-sm rounded-full font-sans text-sm hidden md:block">
@@ -179,7 +181,7 @@ const Presentation = () => {
               e.stopPropagation();
               prevSlide();
             }}
-            disabled={currentSlide === 0}
+            disabled={currentSlide === (presentation.type === 'hermeneutics' ? 1 : 0)}
             className="rounded-full shadow-card hover:shadow-premium transition-smooth pointer-events-auto"
           >
             <ChevronLeft className="h-5 w-5" />
@@ -272,7 +274,11 @@ const Presentation = () => {
         <div className="absolute bottom-0 left-0 right-0 h-1 bg-muted">
           <div 
             className="h-full gradient-gold transition-all duration-300"
-            style={{ width: `${((currentSlide + 1) / totalSlides) * 100}%` }}
+            style={{ 
+              width: presentation.type === 'hermeneutics' 
+                ? `${(currentSlide / (totalSlides - 1)) * 100}%` 
+                : `${((currentSlide + 1) / totalSlides) * 100}%` 
+            }}
           />
         </div>
       )}
