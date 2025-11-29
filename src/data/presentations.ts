@@ -40,7 +40,7 @@ export const presentations: Presentation[] = [
     description: "Структура посланий Нового Завета: доктрина и практическое применение",
     thumbnail: knowDoImg,
     slideCount: epistlesStructure.length,
-    duration: "20-25 минут",
+    duration: "25-30 минут",
     type: 'hermeneutics'
   }
 ];
