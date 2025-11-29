@@ -5,9 +5,10 @@ import ProfileCard from "@/components/ProfileCard";
 import SeminarSlideCard from "@/components/SeminarSlideCard";
 import HermeneuticsSlideCard from "@/components/HermeneuticsSlideCard";
 import PracticalExampleSlideCard from "@/components/PracticalExampleSlideCard";
+import IntroductionSlideCard from "@/components/IntroductionSlideCard";
 import { disciples } from "@/data/disciples";
 import { josephStory } from "@/data/joseph-story";
-import { epistlesStructure } from "@/data/epistles-structure";
+import { epistlesStructure, IntroductionSlide as IntroductionSlideType } from "@/data/epistles-structure";
 import { presentations } from "@/data/presentations";
 import { useEffect } from "react";
 
@@ -88,9 +89,9 @@ const PresentationDetails = () => {
           ) : presentation.type === 'hermeneutics' ? (
             epistlesStructure.slice(1).map((slide, index) => (
               slide.type === 'introduction' ? (
-                <SeminarSlideCard 
+                <IntroductionSlideCard 
                   key={slide.id} 
-                  slide={slide as any}
+                  slide={slide as IntroductionSlideType}
                   onClick={() => handleSlideClick(index + 1)}
                 />
               ) : slide.type === 'conclusion' ? (
