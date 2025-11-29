@@ -1,0 +1,422 @@
+export interface Slide {
+  id: number;
+  type: string;
+}
+
+export interface HermeneuticsSlide extends Slide {
+  type: 'hermeneutics';
+  bookName: string;
+  bookNameEn: string;
+  knowSection: {
+    chapters: string;
+    percentage: number;
+    themes: string[];
+  };
+  doSection: {
+    chapters: string;
+    percentage: number;
+    themes: string[];
+  };
+  keyVerse?: {
+    text: string;
+    reference: string;
+  };
+  image?: string;
+}
+
+export interface IntroHermeneuticsSlide extends Slide {
+  type: 'intro-hermeneutics';
+  title: string;
+  subtitle: string;
+  description: string;
+  image: string;
+}
+
+export const epistlesStructure: (IntroHermeneuticsSlide | HermeneuticsSlide)[] = [
+  {
+    id: 0,
+    type: 'intro-hermeneutics',
+    title: 'Знать и Делать',
+    subtitle: 'Структура посланий Нового Завета',
+    description: 'Первая половина посланий Павла, Иоанна, Петра говорит: вот что Бог сделал во Христе, вот как Он спас тебя. Вторая половина посланий — вот что ты должен делать в ответ.',
+    image: '/src/assets/know-do-thumbnail.jpeg'
+  },
+  {
+    id: 1,
+    type: 'hermeneutics',
+    bookName: 'Римлянам',
+    bookNameEn: 'Romans',
+    knowSection: {
+      chapters: 'Гл. 1-11',
+      percentage: 69,
+      themes: [
+        'Оправдание по вере',
+        'Освящение через Христа',
+        'Избрание Израиля'
+      ]
+    },
+    doSection: {
+      chapters: 'Гл. 12-16',
+      percentage: 31,
+      themes: [
+        'Жизнь в теле Христа',
+        'Отношение к властям',
+        'Взаимоотношения в церкви'
+      ]
+    },
+    keyVerse: {
+      text: 'Итак умоляю вас, братия, милосердием Божиим, представьте тела ваши в жертву живую, святую, благоугодную Богу',
+      reference: 'Римлянам 12:1'
+    }
+  },
+  {
+    id: 2,
+    type: 'hermeneutics',
+    bookName: '1 Коринфянам',
+    bookNameEn: '1 Corinthians',
+    knowSection: {
+      chapters: 'Гл. 1',
+      percentage: 6,
+      themes: [
+        'Единство во Христе',
+        'Мудрость Божья'
+      ]
+    },
+    doSection: {
+      chapters: 'Гл. 2-16',
+      percentage: 94,
+      themes: [
+        'Решение проблем церкви',
+        'Духовные дары',
+        'Любовь и порядок',
+        'Воскресение'
+      ]
+    }
+  },
+  {
+    id: 3,
+    type: 'hermeneutics',
+    bookName: '2 Коринфянам',
+    bookNameEn: '2 Corinthians',
+    knowSection: {
+      chapters: 'Гл. 1-7',
+      percentage: 54,
+      themes: [
+        'Утешение в скорбях',
+        'Новый завет',
+        'Служение примирения'
+      ]
+    },
+    doSection: {
+      chapters: 'Гл. 8-13',
+      percentage: 46,
+      themes: [
+        'Щедрость в даянии',
+        'Духовная война',
+        'Защита апостольства'
+      ]
+    }
+  },
+  {
+    id: 4,
+    type: 'hermeneutics',
+    bookName: 'Галатам',
+    bookNameEn: 'Galatians',
+    knowSection: {
+      chapters: 'Гл. 1-4',
+      percentage: 67,
+      themes: [
+        'Евангелие благодати',
+        'Оправдание верой',
+        'Свобода во Христе'
+      ]
+    },
+    doSection: {
+      chapters: 'Гл. 5-6',
+      percentage: 33,
+      themes: [
+        'Хождение в Духе',
+        'Плод Духа',
+        'Практика свободы'
+      ]
+    },
+    keyVerse: {
+      text: 'К свободе призваны вы, братия, только бы свобода ваша не была поводом к угождению плоти',
+      reference: 'Галатам 5:13'
+    }
+  },
+  {
+    id: 5,
+    type: 'hermeneutics',
+    bookName: 'Ефесянам',
+    bookNameEn: 'Ephesians',
+    knowSection: {
+      chapters: 'Гл. 1-3',
+      percentage: 50,
+      themes: [
+        'Благословения во Христе',
+        'Спасение по благодати',
+        'Тайна Христа'
+      ]
+    },
+    doSection: {
+      chapters: 'Гл. 4-6',
+      percentage: 50,
+      themes: [
+        'Единство церкви',
+        'Новая жизнь',
+        'Духовная броня'
+      ]
+    },
+    keyVerse: {
+      text: 'Итак подражайте Богу, как чада возлюбленные, и живите в любви',
+      reference: 'Ефесянам 5:1-2'
+    }
+  },
+  {
+    id: 6,
+    type: 'hermeneutics',
+    bookName: 'Филиппийцам',
+    bookNameEn: 'Philippians',
+    knowSection: {
+      chapters: 'Гл. 1-2',
+      percentage: 50,
+      themes: [
+        'Радость во Христе',
+        'Смирение Христа',
+        'Пример служения'
+      ]
+    },
+    doSection: {
+      chapters: 'Гл. 3-4',
+      percentage: 50,
+      themes: [
+        'Стремление к цели',
+        'Радость и мир',
+        'Благодарность'
+      ]
+    },
+    keyVerse: {
+      text: 'Радуйтесь всегда в Господе; и еще говорю: радуйтесь!',
+      reference: 'Филиппийцам 4:4'
+    }
+  },
+  {
+    id: 7,
+    type: 'hermeneutics',
+    bookName: 'Колоссянам',
+    bookNameEn: 'Colossians',
+    knowSection: {
+      chapters: 'Гл. 1-2',
+      percentage: 50,
+      themes: [
+        'Превосходство Христа',
+        'Полнота в Нем',
+        'Тайна Евангелия'
+      ]
+    },
+    doSection: {
+      chapters: 'Гл. 3-4',
+      percentage: 50,
+      themes: [
+        'Новая жизнь',
+        'Отношения в семье',
+        'Мудрость в общении'
+      ]
+    }
+  },
+  {
+    id: 8,
+    type: 'hermeneutics',
+    bookName: '1 Фессалоникийцам',
+    bookNameEn: '1 Thessalonians',
+    knowSection: {
+      chapters: 'Гл. 1-3',
+      percentage: 60,
+      themes: [
+        'Пример веры',
+        'Служение Павла',
+        'Утешение верующих'
+      ]
+    },
+    doSection: {
+      chapters: 'Гл. 4-5',
+      percentage: 40,
+      themes: [
+        'Святость жизни',
+        'Пришествие Христа',
+        'Жизнь в свете'
+      ]
+    }
+  },
+  {
+    id: 9,
+    type: 'hermeneutics',
+    bookName: '2 Фессалоникийцам',
+    bookNameEn: '2 Thessalonians',
+    knowSection: {
+      chapters: 'Гл. 1-2',
+      percentage: 67,
+      themes: [
+        'Воздаяние Божье',
+        'День Господень',
+        'Человек греха'
+      ]
+    },
+    doSection: {
+      chapters: 'Гл. 3',
+      percentage: 33,
+      themes: [
+        'Молитва и труд',
+        'Дисциплина в церкви'
+      ]
+    }
+  },
+  {
+    id: 10,
+    type: 'hermeneutics',
+    bookName: '1 Тимофею',
+    bookNameEn: '1 Timothy',
+    knowSection: {
+      chapters: 'Гл. 1',
+      percentage: 17,
+      themes: [
+        'Истинное учение',
+        'Благодать Христа'
+      ]
+    },
+    doSection: {
+      chapters: 'Гл. 2-6',
+      percentage: 83,
+      themes: [
+        'Молитва и поклонение',
+        'Служители церкви',
+        'Наставления пастору',
+        'Богатство и благочестие'
+      ]
+    }
+  },
+  {
+    id: 11,
+    type: 'hermeneutics',
+    bookName: '2 Тимофею',
+    bookNameEn: '2 Timothy',
+    knowSection: {
+      chapters: 'Гл. 1-2',
+      percentage: 50,
+      themes: [
+        'Дар Божий',
+        'Верность Христу',
+        'Образец здравого учения'
+      ]
+    },
+    doSection: {
+      chapters: 'Гл. 3-4',
+      percentage: 50,
+      themes: [
+        'Трудные времена',
+        'Проповедь Слова',
+        'Венец правды'
+      ]
+    }
+  },
+  {
+    id: 12,
+    type: 'hermeneutics',
+    bookName: 'Титу',
+    bookNameEn: 'Titus',
+    knowSection: {
+      chapters: 'Гл. 1',
+      percentage: 33,
+      themes: [
+        'Назначение пресвитеров',
+        'Здравое учение'
+      ]
+    },
+    doSection: {
+      chapters: 'Гл. 2-3',
+      percentage: 67,
+      themes: [
+        'Наставления разным группам',
+        'Добрые дела',
+        'Благочестивая жизнь'
+      ]
+    }
+  },
+  {
+    id: 13,
+    type: 'hermeneutics',
+    bookName: 'Евреям',
+    bookNameEn: 'Hebrews',
+    knowSection: {
+      chapters: 'Гл. 1-10',
+      percentage: 77,
+      themes: [
+        'Превосходство Христа',
+        'Новое священство',
+        'Новый завет',
+        'Совершенная жертва'
+      ]
+    },
+    doSection: {
+      chapters: 'Гл. 11-13',
+      percentage: 23,
+      themes: [
+        'Примеры веры',
+        'Устремление к цели',
+        'Практика христианской жизни'
+      ]
+    },
+    keyVerse: {
+      text: 'Вера же есть осуществление ожидаемого и уверенность в невидимом',
+      reference: 'Евреям 11:1'
+    }
+  },
+  {
+    id: 14,
+    type: 'hermeneutics',
+    bookName: '1 Петра',
+    bookNameEn: '1 Peter',
+    knowSection: {
+      chapters: 'Гл. 1-2',
+      percentage: 40,
+      themes: [
+        'Живая надежда',
+        'Святой народ',
+        'Избранные Богом'
+      ]
+    },
+    doSection: {
+      chapters: 'Гл. 3-5',
+      percentage: 60,
+      themes: [
+        'Отношения в семье',
+        'Страдания за Христа',
+        'Служение и смирение'
+      ]
+    }
+  },
+  {
+    id: 15,
+    type: 'hermeneutics',
+    bookName: '2 Петра',
+    bookNameEn: '2 Peter',
+    knowSection: {
+      chapters: 'Гл. 1',
+      percentage: 33,
+      themes: [
+        'Божественная сила',
+        'Надежное пророчество'
+      ]
+    },
+    doSection: {
+      chapters: 'Гл. 2-3',
+      percentage: 67,
+      themes: [
+        'Лжеучители',
+        'День Господень',
+        'Святая жизнь'
+      ]
+    }
+  }
+];
