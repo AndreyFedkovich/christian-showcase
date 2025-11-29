@@ -229,11 +229,22 @@ const Presentation = () => {
           key={currentSlide}
         />
       ) : presentation.type === 'hermeneutics' ? (
-        <HermeneuticsSlide 
-          slide={epistlesStructure[currentSlide] as any}
-          direction={direction}
-          key={currentSlide}
-        />
+        <>
+          {epistlesStructure[currentSlide].type === 'hermeneutics' && (
+            <HermeneuticsSlide 
+              slide={epistlesStructure[currentSlide] as any}
+              direction={direction}
+              key={currentSlide}
+            />
+          )}
+          {epistlesStructure[currentSlide].type === 'conclusion' && (
+            <ConclusionSlide 
+              slide={epistlesStructure[currentSlide] as any}
+              direction={direction}
+              key={currentSlide}
+            />
+          )}
+        </>
       ) : (
         <>
           {josephStory[currentSlide].type === 'scripture' && (

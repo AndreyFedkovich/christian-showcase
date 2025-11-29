@@ -32,7 +32,17 @@ export interface IntroHermeneuticsSlide extends Slide {
   image: string;
 }
 
-export const epistlesStructure: (IntroHermeneuticsSlide | HermeneuticsSlide)[] = [
+export interface ConclusionSlide extends Slide {
+  type: 'conclusion';
+  title: string;
+  points: string[];
+  verse?: {
+    text: string;
+    reference: string;
+  };
+}
+
+export const epistlesStructure: (IntroHermeneuticsSlide | HermeneuticsSlide | ConclusionSlide)[] = [
   {
     id: 0,
     type: 'intro-hermeneutics',
@@ -417,6 +427,21 @@ export const epistlesStructure: (IntroHermeneuticsSlide | HermeneuticsSlide)[] =
         'День Господень',
         'Святая жизнь'
       ]
+    }
+  },
+  {
+    id: 16,
+    type: 'conclusion',
+    title: 'Знать и Делать',
+    points: [
+      'Библейская вера — это не просто набор фактов, а живые отношения с Богом, которые преображают нашу жизнь',
+      'Послания учат нас сначала понять, ЧТО Бог сделал для нас во Христе (доктрина), а затем — КАК нам жить в ответ (практика)',
+      'Знание без действия мертво (Иак. 2:17). Действие без знания опасно и может увести в сторону',
+      'Баланс "знать и делать" — это ключ к зрелой христианской жизни: глубокое понимание истины ведёт к правильным поступкам'
+    ],
+    verse: {
+      text: 'Будьте же исполнители слова, а не слышатели только, обманывающие самих себя',
+      reference: 'Иакова 1:22'
     }
   }
 ];
