@@ -110,11 +110,16 @@ const Presentation = () => {
     setDirection('next');
     setIsAnimating(true);
     setTimeout(() => {
-      setCurrentSlide((prev) => (prev + 1) % totalSlides);
+      setCurrentSlide((prev) => {
+        if (presentation?.type === 'hermeneutics') {
+          const lastIndex = totalSlides - 1;
+          return prev >= lastIndex ? lastIndex : prev + 1;
+        }
+        return (prev + 1) % totalSlides;
+      });
       setIsAnimating(false);
     }, 300);
   };
-
   const prevSlide = () => {
     if (isAnimating || showIntro) return;
     const firstSlideIndex = presentation?.type === 'hermeneutics' ? 1 : 0;
