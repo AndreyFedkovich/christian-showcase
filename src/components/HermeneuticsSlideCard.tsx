@@ -14,8 +14,8 @@ const HermeneuticsSlideCard = ({ slide, onClick }: HermeneuticsSlideCardProps) =
       onClick={onClick}
     >
       <div className="aspect-[3/4] relative overflow-hidden">
-        {/* Gradient background from green to red */}
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-600 via-amber-500 to-red-600" />
+        {/* Dark premium gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-800 via-slate-700 to-slate-600" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent z-10" />
         
         {/* Slide number badge */}
@@ -38,7 +38,7 @@ const HermeneuticsSlideCard = ({ slide, onClick }: HermeneuticsSlideCardProps) =
               <span className="text-xs font-bold text-white">{slide.knowSection.percentage}%</span>
             </div>
             <div 
-              className="bg-red-600 flex items-center justify-center"
+              className="bg-amber-500 flex items-center justify-center"
               style={{ width: `${slide.doSection.percentage}%` }}
             >
               <span className="text-xs font-bold text-white">{slide.doSection.percentage}%</span>
