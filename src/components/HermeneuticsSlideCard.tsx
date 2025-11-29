@@ -28,22 +28,8 @@ const HermeneuticsSlideCard = ({ slide, onClick }: HermeneuticsSlideCardProps) =
           <div className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mb-6 group-hover:bg-white/30 transition-smooth">
             <BookMarked className="w-10 h-10 text-white" />
           </div>
-          
-          {/* Mini progress bar */}
-          <div className="w-full max-w-[200px] h-8 rounded-full overflow-hidden flex shadow-lg">
-            <div 
-              className="bg-emerald-500 flex items-center justify-center"
-              style={{ width: `${slide.knowSection.percentage}%` }}
-            >
-              <span className="text-xs font-bold text-white">{slide.knowSection.percentage}%</span>
-            </div>
-            <div 
-              className="bg-amber-500 flex items-center justify-center"
-              style={{ width: `${slide.doSection.percentage}%` }}
-            >
-              <span className="text-xs font-bold text-white">{slide.doSection.percentage}%</span>
-            </div>
-          </div>
+
+
         </div>
 
         {/* Book name - at bottom */}

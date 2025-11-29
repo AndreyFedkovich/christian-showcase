@@ -1,4 +1,4 @@
-import josephBetrayal from "@/assets/joseph-betrayal.jpg";
+import josephBetrayal from "@/assets/joseph-betrayal.png";
 import josephPrison from "@/assets/josephPrison.png";
 import josephRuler from "@/assets/joseph-ruler.jpg";
 import josephForgiveness from "@/assets/joseph-forgiveness.jpg";

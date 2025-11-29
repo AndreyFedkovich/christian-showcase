@@ -13,7 +13,7 @@ const IntroSlide = ({ onStart, title, subtitle, description }: IntroSlideProps) 
     <div className="h-full w-full flex items-center justify-center p-8 animate-[fade-in_1s_ease-out]">
       <div className="max-w-4xl w-full text-center space-y-8">
         {/* Main Title with staggered animation */}
-        <div className="space-y-4">
+        <div className="space-y-7">
           <h1 className="text-5xl md:text-8xl font-bold text-foreground animate-[fade-in_1s_ease-out,slide-in-from-top_1s_ease-out]">
             {title}
           </h1>

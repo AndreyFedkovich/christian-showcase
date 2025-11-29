@@ -22,7 +22,7 @@ const IntroductionSlide = ({ slide, direction }: IntroductionSlideProps) => {
             )}
           </div>
           
-          <div className="space-y-4">
+          <div className="space-y-7">
             {slide.content.map((paragraph, index) => (
               <p 
                 key={index} 

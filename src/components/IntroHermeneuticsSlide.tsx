@@ -11,7 +11,7 @@ const IntroHermeneuticsSlide = ({ slide, onStart }: IntroHermeneuticsSlideProps)
   return (
     <div className="w-full h-screen gradient-warm flex items-center justify-center p-8 animate-in fade-in duration-700">
       <div className="max-w-4xl text-center space-y-8">
-        <div className="space-y-4">
+        <div className="space-y-7">
           <h1 className="text-6xl md:text-7xl font-bold text-foreground tracking-tight animate-in slide-in-from-bottom-8 duration-700">
             {slide.title}
           </h1>

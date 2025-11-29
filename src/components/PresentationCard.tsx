@@ -27,7 +27,7 @@ const PresentationCard = ({ presentation, onClick }: PresentationCardProps) => {
 
         {/* Content */}
         <div className="flex-1 p-6 md:py-8 md:pr-8 flex flex-col justify-between">
-          <div className="space-y-4">
+          <div className="space-y-7">
             <h3 className="text-3xl md:text-4xl font-bold text-foreground group-hover:text-accent transition-smooth">
               {presentation.title}
             </h3>

@@ -15,11 +15,11 @@ const PracticalExampleSlideCard = ({ slide, onClick }: PracticalExampleSlideCard
     >
       <div className="aspect-[3/4] relative overflow-hidden">
         {/* Gradient background from green to red */}
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-600 via-amber-500 to-red-600" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-indigo-500 to-purple-600" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent z-10" />
         
         {/* Slide number badge */}
-        <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-accent/80 backdrop-blur-sm flex items-center justify-center z-20">
+        <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-purple-500/80 backdrop-blur-sm flex items-center justify-center z-20">
           <span className="text-lg font-bold text-white">{slide.id}</span>
         </div>
 
@@ -32,7 +32,7 @@ const PracticalExampleSlideCard = ({ slide, onClick }: PracticalExampleSlideCard
 
         {/* Title and badge - at bottom */}
         <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
-          <div className="inline-block px-3 py-1 bg-accent/80 backdrop-blur-sm rounded-full mb-3">
+          <div className="inline-block px-3 py-1 bg-purple-500/80 backdrop-blur-sm rounded-full mb-3">
             <div className="flex items-center gap-2">
               <Lightbulb className="w-4 h-4 text-white" />
               <span className="text-xs font-sans font-medium text-white uppercase tracking-wider">
