@@ -3,8 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Play, ArrowLeft } from "lucide-react";
 import ProfileCard from "@/components/ProfileCard";
 import SeminarSlideCard from "@/components/SeminarSlideCard";
+import HermeneuticsSlideCard from "@/components/HermeneuticsSlideCard";
 import { disciples } from "@/data/disciples";
 import { josephStory } from "@/data/joseph-story";
+import { epistlesStructure } from "@/data/epistles-structure";
 import { presentations } from "@/data/presentations";
 import { useEffect } from "react";
 
@@ -24,7 +26,11 @@ const PresentationDetails = () => {
   if (!presentation) return null;
 
   // Load slides based on presentation type
-  const slides = presentation.type === 'disciples' ? disciples : josephStory;
+  const slides = presentation.type === 'disciples' 
+    ? disciples 
+    : presentation.type === 'hermeneutics'
+    ? epistlesStructure
+    : josephStory;
   
   const handleSlideClick = (slideIndex: number) => {
     navigate(`/presentation/${presentationId}/view?slide=${slideIndex}`);
@@ -76,6 +82,14 @@ const PresentationDetails = () => {
                 key={slide.id} 
                 disciple={slide}
                 onClick={() => handleSlideClick(index)}
+              />
+            ))
+          ) : presentation.type === 'hermeneutics' ? (
+            epistlesStructure.slice(1).map((slide, index) => (
+              <HermeneuticsSlideCard 
+                key={slide.id} 
+                slide={slide as any}
+                onClick={() => handleSlideClick(index + 1)}
               />
             ))
           ) : (

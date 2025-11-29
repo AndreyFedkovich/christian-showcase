@@ -9,8 +9,11 @@ import ConclusionSlide from "@/components/ConclusionSlide";
 import ScriptureSlide from "@/components/ScriptureSlide";
 import ScriptureDarkSlide from "@/components/ScriptureDarkSlide";
 import IntroSlide from "@/components/IntroSlide";
+import HermeneuticsSlide from "@/components/HermeneuticsSlide";
+import IntroHermeneuticsSlide from "@/components/IntroHermeneuticsSlide";
 import { disciples } from "@/data/disciples";
 import { josephStory } from "@/data/joseph-story";
+import { epistlesStructure } from "@/data/epistles-structure";
 import { presentations } from "@/data/presentations";
 
 const Presentation = () => {
@@ -40,7 +43,11 @@ const Presentation = () => {
   if (!presentation) return null;
 
   // Load slides based on presentation type
-  const slides = presentation.type === 'disciples' ? disciples : josephStory;
+  const slides = presentation.type === 'disciples' 
+    ? disciples 
+    : presentation.type === 'hermeneutics'
+    ? epistlesStructure
+    : josephStory;
   const totalSlides = slides.length;
 
   // Fullscreen management
@@ -195,34 +202,47 @@ const Presentation = () => {
 
       {/* Slide Content */}
       {showIntro ? (
-        <IntroSlide 
-          onStart={startPresentation}
-          title={presentation.title}
-          subtitle="Интерактивная презентация"
-          description={presentation.description}
-        />
+        presentation.type === 'hermeneutics' && epistlesStructure[0].type === 'intro-hermeneutics' ? (
+          <IntroHermeneuticsSlide 
+            slide={epistlesStructure[0] as any}
+            onStart={startPresentation}
+          />
+        ) : (
+          <IntroSlide 
+            onStart={startPresentation}
+            title={presentation.title}
+            subtitle="Интерактивная презентация"
+            description={presentation.description}
+          />
+        )
       ) : presentation.type === 'disciples' ? (
         <ProfileSlide
           disciple={disciples[currentSlide]} 
           direction={direction}
           key={currentSlide}
         />
+      ) : presentation.type === 'hermeneutics' ? (
+        <HermeneuticsSlide 
+          slide={epistlesStructure[currentSlide] as any}
+          direction={direction}
+          key={currentSlide}
+        />
       ) : (
         <>
-              {josephStory[currentSlide].type === 'scripture' && (
-                <ScriptureSlide 
-                  slide={josephStory[currentSlide] as any}
-                  direction={direction}
-                  key={currentSlide}
-                />
-              )}
-              {josephStory[currentSlide].type === 'scripture-dark' && (
-                <ScriptureDarkSlide 
-                  slide={josephStory[currentSlide] as any}
-                  direction={direction}
-                  key={currentSlide}
-                />
-              )}
+          {josephStory[currentSlide].type === 'scripture' && (
+            <ScriptureSlide 
+              slide={josephStory[currentSlide] as any}
+              direction={direction}
+              key={currentSlide}
+            />
+          )}
+          {josephStory[currentSlide].type === 'scripture-dark' && (
+            <ScriptureDarkSlide 
+              slide={josephStory[currentSlide] as any}
+              direction={direction}
+              key={currentSlide}
+            />
+          )}
           {josephStory[currentSlide].type === 'story' && (
             <StorySlide 
               slide={josephStory[currentSlide] as any}
