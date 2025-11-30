@@ -76,7 +76,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
     title: 'Знать и Делать',
     subtitle: 'Структура посланий Нового Завета',
     description: 'Первая половина посланий Павла, Иоанна, Петра говорит: вот что Бог сделал во Христе, вот как Он спас тебя. Вторая половина посланий — вот что ты должен делать в ответ.',
-    image: '/src/assets/know-do-thumbnail.jpeg'
+    image: '/src/assets/know-do.png'
   },
   {
     id: 1,
@@ -88,7 +88,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
       'Только после этого апостолы переходят к практическим наставлениям — как жить в ответ на эту великую истину, какие поступки соответствуют нашему новому статусу во Христе.',
       'Этот принцип "сначала знать — потом делать" пронизывает все послания и является ключом к правильному пониманию христианской жизни.'
     ],
-    image: '/src/assets/know-do-thumbnail.jpeg'
+    image: '/src/assets/know-do.png'
   },
   {
     id: 2,
@@ -99,8 +99,11 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
       chapters: 'Гл. 1-11',
       percentage: 69,
       themes: [
-        'Оправдание по вере',
-        'Освящение через Христа',
+        'Оправдание по вере, а не делами',
+        'Дух усыновления, а не рабства и страха',
+        'Все содействует ко благу',
+        'Обещание прославления тела',
+        'Предустановление по избранию',
         'Избрание Израиля'
       ]
     },
@@ -108,9 +111,12 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
       chapters: 'Гл. 12-16',
       percentage: 31,
       themes: [
+        'Преобразовываться обновлением ума',
+        'Жить по духу, а не по плоти; убивать грех',
+        'Считать другого более достойным чести',
         'Жизнь в теле Христа',
         'Отношение к властям',
-        'Взаимоотношения в церкви'
+        'Взаимоотношения в церкви, отношение к немощным в вере'
       ]
     },
     keyVerse: {
@@ -124,22 +130,30 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
     bookName: '1 Коринфянам',
     bookNameEn: '1 Corinthians',
     knowSection: {
-      chapters: 'Гл. 1',
-      percentage: 6,
+      chapters: 'Гл. 1-4',
+      percentage: 25,
       themes: [
         'Единство во Христе',
-        'Мудрость Божья'
+        'Мудрость Божья - не много вас мудрых по плоти',
+        'Дух Божий, а не дух мира',
+        'Все что мы имеем - мы получили',
+        'Строительство из драгоценных камней'
       ]
     },
     doSection: {
-      chapters: 'Гл. 2-16',
-      percentage: 94,
+      chapters: 'Гл. 5-16',
+      percentage: 75,
       themes: [
         'Решение проблем церкви',
+        'Остановите похоть - убегайте от искушений, убегайте от идолослужения',
         'Духовные дары',
         'Любовь и порядок',
-        'Воскресение'
+        'Воскресение - преуспевать в деле Господа'
       ]
+    },
+    keyVerse: {
+      text: 'Но я скоро приду к вам, если угодно будет Господу, и испытаю не слова возгордившихся, а силу',
+      reference: '1-е Коринфянам 4:19'
     }
   },
   {
@@ -214,7 +228,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
       themes: [
         'Единство церкви',
         'Новая жизнь',
-        'Духовная броня'
+        'Духовное вооружение'
       ]
     },
     keyVerse: {

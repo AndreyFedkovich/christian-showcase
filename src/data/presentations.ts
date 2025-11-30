@@ -1,6 +1,6 @@
 import peterImg from "@/assets/peter.jpg";
 import josephImg from "@/assets/joseph-thumbnail.png";
-import knowDoImg from "@/assets/know-do-thumbnail.jpeg";
+import knowDoImg from "@/assets/know-do.png";
 import { josephStory } from '@/data/joseph-story';
 import { disciples } from '@/data/disciples';
 import { epistlesStructure } from '@/data/epistles-structure';
