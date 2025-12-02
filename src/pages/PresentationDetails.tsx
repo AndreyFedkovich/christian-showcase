@@ -1,13 +1,14 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Play, ArrowLeft } from "lucide-react";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import ProfileCard from "@/components/ProfileCard";
 import SeminarSlideCard from "@/components/SeminarSlideCard";
 import HermeneuticsSlideCard from "@/components/HermeneuticsSlideCard";
 import PracticalExampleSlideCard from "@/components/PracticalExampleSlideCard";
 import IntroductionSlideCard from "@/components/IntroductionSlideCard";
 import { disciples } from "@/data/disciples";
-import { josephStory } from "@/data/joseph-story";
+import { josephStory, seminarSections } from "@/data/joseph-story";
 import { epistlesStructure, IntroductionSlide as IntroductionSlideType } from "@/data/epistles-structure";
 import { presentations } from "@/data/presentations";
 import { useEffect } from "react";
@@ -40,6 +41,15 @@ const PresentationDetails = () => {
 
   const handleStartPresentation = () => {
     navigate(`/presentation/${presentationId}/view`);
+  };
+
+  // Calculate global index for seminar slides
+  const getGlobalIndex = (sectionIndex: number, slideIndex: number) => {
+    let globalIndex = 0;
+    for (let i = 0; i < sectionIndex; i++) {
+      globalIndex += seminarSections[i].slides.length;
+    }
+    return globalIndex + slideIndex;
   };
 
   return (
@@ -77,17 +87,19 @@ const PresentationDetails = () => {
 
       {/* Slides Grid */}
       <main className="max-w-7xl mx-auto px-6 pb-20">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-[30px]">
-          {presentation.type === 'disciples' ? (
-            disciples.map((slide, index) => (
+        {presentation.type === 'disciples' ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-[30px]">
+            {disciples.map((slide, index) => (
               <ProfileCard
                 key={slide.id} 
                 disciple={slide}
                 onClick={() => handleSlideClick(index)}
               />
-            ))
-          ) : presentation.type === 'hermeneutics' ? (
-            epistlesStructure.slice(1).map((slide, index) => (
+            ))}
+          </div>
+        ) : presentation.type === 'hermeneutics' ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-[30px]">
+            {epistlesStructure.slice(1).map((slide, index) => (
               slide.type === 'introduction' ? (
                 <IntroductionSlideCard 
                   key={slide.id} 
@@ -113,17 +125,37 @@ const PresentationDetails = () => {
                   onClick={() => handleSlideClick(index + 1)}
                 />
               )
-            ))
-          ) : (
-            josephStory.map((slide, index) => (
-              <SeminarSlideCard 
-                key={slide.id} 
-                slide={slide}
-                onClick={() => handleSlideClick(index)}
-              />
-            ))
-          )}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <Tabs defaultValue={seminarSections[0]?.id} className="w-full mt-[30px]">
+            <TabsList className="mb-6 flex-wrap h-auto gap-2 bg-muted/50 p-2">
+              {seminarSections.map(section => (
+                <TabsTrigger 
+                  key={section.id} 
+                  value={section.id}
+                  className="px-6 py-3 text-base font-medium"
+                >
+                  {section.name}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+            
+            {seminarSections.map((section, sectionIndex) => (
+              <TabsContent key={section.id} value={section.id}>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                  {section.slides.map((slide, slideIndex) => (
+                    <SeminarSlideCard 
+                      key={slide.id} 
+                      slide={slide}
+                      onClick={() => handleSlideClick(getGlobalIndex(sectionIndex, slideIndex))}
+                    />
+                  ))}
+                </div>
+              </TabsContent>
+            ))}
+          </Tabs>
+        )}
       </main>
 
       {/* Footer */}

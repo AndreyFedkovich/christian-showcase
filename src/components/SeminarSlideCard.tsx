@@ -20,8 +20,6 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
         return <HelpCircle className="w-5 h-5" />;
       case 'conclusion':
         return <Lightbulb className="w-5 h-5" />;
-      case 'scripture':
-        return <Book className="w-5 h-5" />;
       case 'scripture-dark':
         return <Book className="w-5 h-5" />;
     }
@@ -35,8 +33,6 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
         return 'Задумайтесь';
       case 'conclusion':
         return 'Вывод';
-      case 'scripture':
-        return 'Писание';
       case 'scripture-dark':
         return 'Писание';
     }
@@ -46,7 +42,6 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
     if (slide.type === 'story') return slide.title;
     if (slide.type === 'reflection') return slide.subtitle || 'Вопрос для размышления';
     if (slide.type === 'conclusion') return slide.title;
-    if (slide.type === 'scripture') return slide.reference;
     if (slide.type === 'scripture-dark') return slide.reference;
   };
 
@@ -62,9 +57,6 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
     }
     if (slide.type === 'conclusion') {
       return conclusionDefault;
-    }
-    if (slide.type === 'scripture') {
-      return scriptureDefault;
     }
     if (slide.type === 'scripture-dark') {
       return scriptureDefault;
@@ -110,8 +102,8 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
     );
   }
 
-  // Scripture slides - Premium Orange design for all
-  if (slide.type === 'scripture' || slide.type === 'scripture-dark') {
+  // Scripture slides - Premium Orange design
+  if (slide.type === 'scripture-dark') {
     return (
       <Card 
         className="group relative overflow-hidden cursor-pointer transition-smooth hover:-translate-y-2 shadow-card hover:shadow-premium"
