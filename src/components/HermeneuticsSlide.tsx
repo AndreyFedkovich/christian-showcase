@@ -12,7 +12,7 @@ const HermeneuticsSlide = ({ slide, direction }: HermeneuticsSlideProps) => {
         direction === 'next' ? 'slide-in-from-right-12' : 'slide-in-from-left-12'
       }`}
     >
-      <div className="max-w-5xl w-full space-y-8">
+      <div className="max-w-7xl w-full space-y-8">
         {/* Book Name */}
         <div className="text-center space-y-3">
           <h1 className="text-6xl md:text-7xl font-bold text-foreground tracking-tight">
@@ -53,8 +53,8 @@ const HermeneuticsSlide = ({ slide, direction }: HermeneuticsSlideProps) => {
               <ul className="space-y-3">
                 {slide.knowSection.themes.map((theme, idx) => (
                   <li key={idx} className="flex items-start gap-3">
-                    <span className="w-2 h-2 bg-emerald-600 rounded-full mt-2 flex-shrink-0" />
-                    <span className="text-lg text-emerald-800 dark:text-emerald-200 font-sans">
+                    <span className="w-2 h-2 bg-emerald-600 rounded-full mt-3 flex-shrink-0" />
+                    <span className="text-2xl text-emerald-800 dark:text-emerald-200 font-sans">
                       {theme}
                     </span>
                   </li>
@@ -75,8 +75,8 @@ const HermeneuticsSlide = ({ slide, direction }: HermeneuticsSlideProps) => {
               <ul className="space-y-3">
                 {slide.doSection.themes.map((theme, idx) => (
                   <li key={idx} className="flex items-start gap-3">
-                    <span className="w-2 h-2 bg-amber-500 rounded-full mt-2 flex-shrink-0" />
-                    <span className="text-lg text-amber-800 dark:text-amber-200 font-sans">
+                    <span className="w-2 h-2 bg-amber-500 rounded-full mt-3 flex-shrink-0" />
+                    <span className="text-2xl text-amber-800 dark:text-amber-200 font-sans">
                       {theme}
                     </span>
                   </li>
@@ -89,10 +89,10 @@ const HermeneuticsSlide = ({ slide, direction }: HermeneuticsSlideProps) => {
         {/* Key Verse (if exists) */}
         {slide.keyVerse && (
           <div className="mt-8 p-6 bg-secondary/50 rounded-2xl border-l-4 border-accent">
-            <p className="text-xl italic text-foreground font-serif leading-relaxed">
+            <p className="text-2xl italic text-foreground font-serif leading-relaxed">
               "{slide.keyVerse.text}"
             </p>
-            <p className="text-sm text-muted-foreground font-sans mt-3 font-semibold">
+            <p className="text-xl text-muted-foreground font-sans mt-3 font-semibold">
               — {slide.keyVerse.reference}
             </p>
           </div>

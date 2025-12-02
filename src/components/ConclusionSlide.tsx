@@ -36,7 +36,7 @@ const ConclusionSlide = ({ slide, direction = 'next' }: ConclusionSlideProps) =>
               <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center mt-1">
                 <Check className="w-5 h-5 text-primary" />
               </div>
-              <p className="text-lg text-foreground font-sans leading-relaxed flex-1">
+              <p className="text-2xl text-foreground font-sans leading-relaxed flex-1">
                 {point}
               </p>
             </div>

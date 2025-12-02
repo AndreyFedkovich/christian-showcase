@@ -1,6 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Play } from "lucide-react";
 import PresentationCard from "@/components/PresentationCard";
 import { presentations } from "@/data/presentations";
 
@@ -21,7 +19,7 @@ const Index = () => {
             Интерактивные Презентации
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground font-sans max-w-2xl mx-auto">
-            Христианские истории, которые влияют на жизнь
+            Христианские истории, которые меняют жизнь
           </p>
         </div>
       </header>

@@ -46,8 +46,8 @@ const PracticalExampleSlide = ({ slide, direction = 'next' }: PracticalExampleSl
               <ul className="space-y-4">
                 {slide.knowContent.points.map((point, idx) => (
                   <li key={idx} className="flex items-start gap-3">
-                    <span className="w-2 h-2 bg-emerald-600 rounded-full mt-2 flex-shrink-0" />
-                    <span className="text-base text-emerald-800 dark:text-emerald-200 font-sans leading-relaxed">
+                    <span className="w-2 h-2 bg-emerald-600 rounded-full mt-4 flex-shrink-0" />
+                    <span className="text-2xl text-emerald-800 dark:text-emerald-200 font-sans leading-relaxed">
                       {point}
                     </span>
                   </li>
@@ -56,7 +56,7 @@ const PracticalExampleSlide = ({ slide, direction = 'next' }: PracticalExampleSl
 
               {slide.knowContent.source && (
                 <div className="pt-4 border-t border-emerald-300 dark:border-emerald-700">
-                  <p className="text-sm text-emerald-700 dark:text-emerald-300 font-sans italic">
+                  <p className="text-lg text-emerald-700 dark:text-emerald-300 font-sans italic">
                     📖 {slide.knowContent.source}
                   </p>
                 </div>
@@ -79,8 +79,8 @@ const PracticalExampleSlide = ({ slide, direction = 'next' }: PracticalExampleSl
               <ul className="space-y-4">
                 {slide.doContent.points.map((point, idx) => (
                   <li key={idx} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
-                    <span className="text-base text-amber-800 dark:text-amber-200 font-sans leading-relaxed">
+                    <CheckCircle2 className="w-5 h-5 text-amber-600 flex-shrink-0 mt-2.5" />
+                    <span className="text-2xl text-amber-800 dark:text-amber-200 font-sans leading-relaxed">
                       {point}
                     </span>
                   </li>
@@ -96,7 +96,7 @@ const PracticalExampleSlide = ({ slide, direction = 'next' }: PracticalExampleSl
             <blockquote className="text-xl md:text-2xl text-foreground italic leading-relaxed mb-4">
               «{slide.verse.text}»
             </blockquote>
-            <cite className="text-sm text-muted-foreground font-sans uppercase tracking-wider not-italic">
+            <cite className="text-lg text-muted-foreground font-sans uppercase tracking-wider not-italic">
               — {slide.verse.reference}
             </cite>
           </div>
