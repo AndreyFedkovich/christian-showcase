@@ -61,7 +61,7 @@ export interface ScriptureDarkSlide extends Slide {
   }[];
 }
 
-export type JosephSlide = StorySlide | ReflectionSlide | ConclusionSlide | ScriptureSlide | ScriptureDarkSlide;
+export type JosephSlide = StorySlide | ReflectionSlide | ConclusionSlide | ScriptureDarkSlide;
 
 export const josephStory: JosephSlide[] = [
   {
@@ -125,7 +125,7 @@ export const josephStory: JosephSlide[] = [
     ]
   },
   {
-    id: 5,
+    id: 6,
     type: 'story',
     title: 'Торговый путь',
     chapter: 'Глава 2',
@@ -136,10 +136,10 @@ export const josephStory: JosephSlide[] = [
     ]
   },
   {
-    id: 6,
+    id: 7,
     type: 'story',
     title: 'Случайный человек',
-    chapter: 'Глава 2',
+    chapter: 'Глава 3',
     image: JosephAccidentalMan,
     story: [
       'Когда Иосиф прибыл в Сихем, так получилось, что его нашёл человек, блуждающим по полю.',
@@ -147,10 +147,10 @@ export const josephStory: JosephSlide[] = [
     ]
   },
   {
-    id: 6,
+    id: 8,
     type: 'story',
     title: 'Предательство братьев',
-    chapter: 'Глава 3',
+    chapter: 'Глава 4',
     image: JosephBrothersHatred,
     story: [
       'Когда Иосиф направлялся в Дофан, на нём как раз была его разноцветная одежда — она позволила братьям заметить его издали и разожгла их ненависть.',
@@ -158,10 +158,10 @@ export const josephStory: JosephSlide[] = [
     ]
   },
   {
-    id: 6,
+    id: 9,
     type: 'story',
     title: 'Караван',
-    chapter: 'Глава 3',
+    chapter: 'Глава 5',
     image: josephBetrayal,
     story: [
       'Если бы его не спасли, Иосиф умер бы от жажды. ',
@@ -170,7 +170,7 @@ export const josephStory: JosephSlide[] = [
     ]
   },
   {
-    id: 6,
+    id: 10,
     type: 'reflection',
     question: 'Разумеется, ни одно из этих многочисленных «совпадений» не произошло само собой. Сам Иосиф позже понял истину: Бог всё это устроил, чтобы спасти многих людей (50:20).',
     subtitle: 'Божья суверенность над злом'
@@ -191,7 +191,7 @@ export const josephStory: JosephSlide[] = [
     }
   },
   {
-    id: 5,
+    id: 12,
     type: 'scripture-dark',
     reference: 'Бытие 39:1-4',
     book: 'Бытие',
@@ -204,7 +204,7 @@ export const josephStory: JosephSlide[] = [
     ]
   },
   {
-    id: 5,
+    id: 13,
     type: 'scripture-dark',
     reference: 'Бытие 39:5-7',
     book: 'Бытие',
@@ -216,11 +216,11 @@ export const josephStory: JosephSlide[] = [
     ]
   },
   {
-    id: 3,
+    id: 14,
     type: 'story',
     title: 'В Египте',
     subtitle: 'Рабство и темница',
-    chapter: 'Глава 1',
+    chapter: 'Глава 6',
     story: [
       'В Египте Иосиф стал рабом в доме Потифара.',
       'После того как Иосиф был продан Потифару, трижды подряд говорится, что Господь был с ним и давал ему успех.',
@@ -228,10 +228,10 @@ export const josephStory: JosephSlide[] = [
     ]
   },
   {
-    id: 7,
+    id: 15,
     type: 'story',
     title: 'Клевета',
-    chapter: 'Глава 3',
+    chapter: 'Глава 7',
     image: JosephSlander,
     story: [
       'Когда она впервые подошла к Иосифу, он отказал, проявив целостность, основанную на вере в Бога. Когда она попыталась снова, он убежал, вместо того чтобы согрешить.',
@@ -239,10 +239,10 @@ export const josephStory: JosephSlide[] = [
     ]
   },
   {
-    id: 7,
+    id: 16,
     type: 'story',
     title: 'В тюрьме',
-    chapter: 'Глава 3',
+    chapter: 'Глава 8',
     image: josephPrison,
     story: [
       'Но снова Господь был с Иосифом, и слово «Господь» вновь повторяется трижды. В результате, ему опять доверили всё, включая двух узников: главного виночерпия и главного пекаря',
@@ -251,16 +251,16 @@ export const josephStory: JosephSlide[] = [
     ]
   },
   {
-    id: 8,
+    id: 17,
     type: 'reflection',
     question: 'Верите ли вы, что Бог с вами даже в самых тяжёлых обстоятельствах?',
     subtitle: 'Присутствие Бога в испытаниях'
   },
   {
-    id: 9,
+    id: 18,
     type: 'story',
     title: 'Возвышение',
-    chapter: 'Глава 4',
+    chapter: 'Глава 9',
     image: JosephPharaohDreams,
     story: [
       'По Божьему провидению Иосифу пришлось ждать ещё два года в темнице, потому что виночерпий забыл упомянуть о нём фараону.',
@@ -268,22 +268,22 @@ export const josephStory: JosephSlide[] = [
     ]
   },
   {
-    id: 8,
+    id: 19,
     type: 'reflection',
     question: 'Такое ожидание кажется бессмысленным с точки зрения человеческого понимания прогресса, но Бог заинтересован в формировании характера.',
     subtitle: 'Присутствие Бога в испытаниях'
   },
   {
-    id: 8,
+    id: 20,
     type: 'reflection',
     question: 'Хотя человек планирует свой путь, Бог — Тот, Кто дарует успех',
     subtitle: 'Присутствие Бога в испытаниях'
   },
   {
-    id: 9,
+    id: 21,
     type: 'story',
     title: 'Возвышение',
-    chapter: 'Глава 4',
+    chapter: 'Глава 10',
     image: josephRuler,
     story: [
       'Возвышение Иосифа произошло, когда фараону приснился сон, который никто из его мудрецов не смог истолковать. Иосифа позвали, и он истолковал сны.',
@@ -291,10 +291,10 @@ export const josephStory: JosephSlide[] = [
     ]
   },
   {
-    id: 9,
+    id: 22,
     type: 'story',
     title: 'Возвышение',
-    chapter: 'Глава 4',
+    chapter: 'Глава 11',
     image: josephRuler,
     story: [
       'Во время голода братья пришли в Египет за хлебом и поклонились Иосифу, не узнав его.',
@@ -302,10 +302,10 @@ export const josephStory: JosephSlide[] = [
     ]
   },
   {
-    id: 10,
+    id: 23,
     type: 'story',
     title: 'Прощение и примирение',
-    chapter: 'Глава 5',
+    chapter: 'Глава 12',
     image: josephForgiveness,
     story: [
       'Иосиф открылся братьям со словами: "Не печальтесь и не жалейте, что продали меня сюда, потому что Бог послал меня перед вами для сохранения жизни".',
@@ -313,7 +313,7 @@ export const josephStory: JosephSlide[] = [
     ]
   },
   {
-    id: 11,
+    id: 24,
     type: 'conclusion',
     title: 'Божий план непоколебим',
     points: [
@@ -328,7 +328,7 @@ export const josephStory: JosephSlide[] = [
     }
   },
   {
-    id: 12,
+    id: 25,
     type: 'scripture-dark',
     reference: 'Бытие 50:20',
     book: 'Бытие',

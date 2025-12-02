@@ -22,7 +22,8 @@ const Presentation = () => {
   const { presentationId } = useParams();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  
+  const [wakeLock, setWakeLock] = useState<WakeLockSentinel | null>(null);
+
   // Get initial slide from query params
   const initialSlide = parseInt(searchParams.get('slide') || '0');
   
@@ -52,6 +53,42 @@ const Presentation = () => {
     : josephStory;
   const totalSlides = slides.length;
 
+  // Wake Lock API to prevent screen from turning off
+  useEffect(() => {
+    const requestWakeLock = async () => {
+      try {
+        if ('wakeLock' in navigator) {
+          const lock = await navigator.wakeLock.request('screen');
+          setWakeLock(lock);
+          console.log('Wake Lock активирован');
+
+          lock.addEventListener('release', () => {
+            console.log('Wake Lock освобождён');
+            setWakeLock(null);
+          });
+        }
+      } catch (err) {
+        console.log('Wake Lock не удалось активировать:', err);
+      }
+    };
+
+    const handleVisibilityChange = async () => {
+      if (document.visibilityState === 'visible' && !wakeLock) {
+        await requestWakeLock();
+      }
+    };
+
+    void requestWakeLock();
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      if (wakeLock) {
+        void wakeLock.release();
+      }
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, [wakeLock]);
+
   // Fullscreen management
   useEffect(() => {
     const enterFullscreen = async () => {
@@ -63,7 +100,7 @@ const Presentation = () => {
       }
     };
 
-    enterFullscreen();
+    void enterFullscreen();
 
     const handleFullscreenChange = () => {
       setIsFullscreen(!!document.fullscreenElement);
