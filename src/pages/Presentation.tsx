@@ -300,13 +300,6 @@ const Presentation = () => {
         </>
       ) : (
         <>
-          {josephStory[currentSlide].type === 'scripture' && (
-            <ScriptureSlide 
-              slide={josephStory[currentSlide] as any}
-              direction={direction}
-              key={currentSlide}
-            />
-          )}
           {josephStory[currentSlide].type === 'scripture-dark' && (
             <ScriptureDarkSlide 
               slide={josephStory[currentSlide] as any}

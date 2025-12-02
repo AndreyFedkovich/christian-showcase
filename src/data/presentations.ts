@@ -31,7 +31,7 @@ export const presentations: Presentation[] = [
     description: "Божий план спасения никогда не может быть сорван",
     thumbnail: josephImg,
     slideCount: josephStory.length,
-    duration: "20-25 минут",
+    duration: "25-30 минут",
     type: 'seminar'
   },
   {
