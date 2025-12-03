@@ -8,10 +8,11 @@ import scriptureDefault from "@/assets/scripture-default.jpg";
 
 interface SeminarSlideCardProps {
   slide: SeminarSlide;
+  slideNumber: number;
   onClick: () => void;
 }
 
-const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
+const SeminarSlideCard = ({ slide, slideNumber, onClick }: SeminarSlideCardProps) => {
   const getIcon = () => {
     switch (slide.type) {
       case 'story':
@@ -79,7 +80,7 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
           />
           
           <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-accent/80 backdrop-blur-sm flex items-center justify-center z-20">
-            <span className="text-lg font-bold text-[#FFF5E6]">{slide.id}</span>
+            <span className="text-lg font-bold text-[#FFF5E6]">{slideNumber}</span>
           </div>
 
           <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
@@ -116,7 +117,7 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
           
           {/* Slide number badge - golden accent on dark background */}
           <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-accent/80 backdrop-blur-sm flex items-center justify-center z-20">
-            <span className="text-lg font-bold text-white">{slide.id}</span>
+            <span className="text-lg font-bold text-white">{slideNumber}</span>
           </div>
 
           {/* Golden quotation marks - centered */}
@@ -158,7 +159,7 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent z-10" />
           
           <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-purple-500/80 backdrop-blur-sm flex items-center justify-center z-20">
-            <span className="text-lg font-bold text-white">{slide.id}</span>
+            <span className="text-lg font-bold text-white">{slideNumber}</span>
           </div>
 
           {/* Large question mark - in center/slightly above */}
@@ -200,7 +201,7 @@ const SeminarSlideCard = ({ slide, onClick }: SeminarSlideCardProps) => {
           <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent z-10" />
           
           <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-accent/80 backdrop-blur-sm flex items-center justify-center z-20">
-            <span className="text-lg font-bold text-white">{slide.id}</span>
+            <span className="text-lg font-bold text-white">{slideNumber}</span>
           </div>
 
           {/* Lightbulb icon - in center/slightly above */}

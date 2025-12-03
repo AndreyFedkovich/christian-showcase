@@ -1,13 +1,22 @@
 import { Card } from "@/components/ui/card";
-import { IntroductionSlide } from "@/data/epistles-structure";
 import { FileText } from "lucide-react";
 
+// Flexible interface that works with both IntroductionSlide and SeminarIntroductionSlide
+interface IntroductionSlideData {
+  type: 'introduction';
+  title: string;
+  subtitle?: string;
+  content?: string[];
+  image?: string;
+}
+
 interface IntroductionSlideCardProps {
-  slide: IntroductionSlide;
+  slide: IntroductionSlideData;
+  slideNumber: number;
   onClick: () => void;
 }
 
-const IntroductionSlideCard = ({ slide, onClick }: IntroductionSlideCardProps) => {
+const IntroductionSlideCard = ({ slide, slideNumber, onClick }: IntroductionSlideCardProps) => {
   return (
     <Card 
       className="group relative overflow-hidden cursor-pointer transition-smooth hover:-translate-y-2 shadow-card hover:shadow-premium"
@@ -19,7 +28,7 @@ const IntroductionSlideCard = ({ slide, onClick }: IntroductionSlideCardProps) =
         
         {/* Slide number */}
         <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center z-20">
-          <span className="text-lg font-bold text-white">{slide.id}</span>
+          <span className="text-lg font-bold text-white">{slideNumber}</span>
         </div>
 
         {/* Decorative icon in center */}

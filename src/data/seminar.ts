@@ -7,11 +7,17 @@ import JosephAccidentalMan from "@/assets/josephAccidentialMan.png";
 import JosephBrothersHatred from "@/assets/josephBrothersHatred.png";
 import JosephSlander from "@/assets/josephSlander.png";
 import JosephPharaohDreams from "@/assets/josephPharaohDreams.png";
-import { IntroductionSlide } from '@/data/epistles-structure';
 
 export interface Slide {
-  id: number;
   type: 'story' | 'reflection' | 'conclusion' | 'scripture-dark' | 'introduction';
+}
+
+export interface SeminarIntroductionSlide extends Slide {
+  type: 'introduction';
+  title: string;
+  subtitle: string;
+  content: string[];
+  image: string;
 }
 
 export interface StorySlide extends Slide {
@@ -51,7 +57,7 @@ export interface ScriptureDarkSlide extends Slide {
   }[];
 }
 
-export type SeminarSlide = StorySlide | ReflectionSlide | ConclusionSlide | ScriptureDarkSlide | IntroductionSlide;
+export type SeminarSlide = StorySlide | ReflectionSlide | ConclusionSlide | ScriptureDarkSlide | SeminarIntroductionSlide;
 
 // Секция/вкладка презентации
 export interface SeminarSection {
@@ -63,7 +69,6 @@ export interface SeminarSection {
 // Слайды истории Иосифа
 export const josephSlides: SeminarSlide[] = [
   {
-    id: -2,
     type: 'introduction',
     title: 'Бог превращает зло в добро',
     subtitle: 'Божий план спасения никогда не может быть сорван',
@@ -73,7 +78,6 @@ export const josephSlides: SeminarSlide[] = [
     image: '/src/assets/joseph-thumbnail.png'
   },
   {
-    id: -1,
     type: 'introduction',
     title: 'История Иосифа',
     subtitle: 'Провидение в истории Иосифа',
@@ -83,7 +87,6 @@ export const josephSlides: SeminarSlide[] = [
     image: '/src/assets/story-default.jpg'
   },
   {
-    id: 1,
     type: 'scripture-dark',
     reference: 'Бытие 37:1-5',
     book: 'Бытие',
@@ -97,7 +100,6 @@ export const josephSlides: SeminarSlide[] = [
     ]
   },
   {
-    id: 2,
     type: 'scripture-dark',
     reference: 'Бытие 37:6-11',
     book: 'Бытие',
@@ -111,7 +113,6 @@ export const josephSlides: SeminarSlide[] = [
     ]
   },
   {
-    id: 3,
     type: 'story',
     title: 'Любимый сын',
     subtitle: 'Провидение в истории Иосифа',
@@ -122,13 +123,11 @@ export const josephSlides: SeminarSlide[] = [
     ]
   },
   {
-    id: 4,
     type: 'reflection',
     question: 'Почему Бог позволяет несправедливости происходить с теми, кого Он любит?',
     subtitle: 'Размышление о допущении зла'
   },
   {
-    id: 5,
     type: 'scripture-dark',
     reference: 'Бытие 37:12-17',
     book: 'Бытие',
@@ -143,7 +142,6 @@ export const josephSlides: SeminarSlide[] = [
     ]
   },
   {
-    id: 6,
     type: 'story',
     title: 'Торговый путь',
     chapter: 'Глава 2',
@@ -154,7 +152,6 @@ export const josephSlides: SeminarSlide[] = [
     ]
   },
   {
-    id: 7,
     type: 'story',
     title: 'Случайный человек',
     chapter: 'Глава 3',
@@ -165,7 +162,6 @@ export const josephSlides: SeminarSlide[] = [
     ]
   },
   {
-    id: 8,
     type: 'story',
     title: 'Предательство братьев',
     chapter: 'Глава 4',
@@ -176,7 +172,6 @@ export const josephSlides: SeminarSlide[] = [
     ]
   },
   {
-    id: 9,
     type: 'story',
     title: 'Караван',
     chapter: 'Глава 5',
@@ -188,13 +183,11 @@ export const josephSlides: SeminarSlide[] = [
     ]
   },
   {
-    id: 10,
     type: 'reflection',
     question: 'Разумеется, ни одно из этих многочисленных «совпадений» не произошло само собой. Сам Иосиф позже понял истину: Бог всё это устроил, чтобы спасти многих людей (50:20).',
     subtitle: 'Божья суверенность над злом'
   },
   {
-    id: 11,
     type: 'conclusion',
     title: 'Божье провидение',
     points: [
@@ -209,7 +202,6 @@ export const josephSlides: SeminarSlide[] = [
     }
   },
   {
-    id: 12,
     type: 'scripture-dark',
     reference: 'Бытие 39:1-4',
     book: 'Бытие',
@@ -222,7 +214,6 @@ export const josephSlides: SeminarSlide[] = [
     ]
   },
   {
-    id: 13,
     type: 'scripture-dark',
     reference: 'Бытие 39:5-7',
     book: 'Бытие',
@@ -234,7 +225,6 @@ export const josephSlides: SeminarSlide[] = [
     ]
   },
   {
-    id: 14,
     type: 'story',
     title: 'В Египте',
     subtitle: 'Рабство и темница',
@@ -246,7 +236,6 @@ export const josephSlides: SeminarSlide[] = [
     ]
   },
   {
-    id: 15,
     type: 'story',
     title: 'Клевета',
     chapter: 'Глава 7',
@@ -257,7 +246,6 @@ export const josephSlides: SeminarSlide[] = [
     ]
   },
   {
-    id: 16,
     type: 'story',
     title: 'В тюрьме',
     chapter: 'Глава 8',
@@ -269,13 +257,11 @@ export const josephSlides: SeminarSlide[] = [
     ]
   },
   {
-    id: 17,
     type: 'reflection',
     question: 'Верите ли вы, что Бог с вами даже в самых тяжёлых обстоятельствах?',
     subtitle: 'Присутствие Бога в испытаниях'
   },
   {
-    id: 18,
     type: 'story',
     title: 'Возвышение',
     chapter: 'Глава 9',
@@ -286,19 +272,16 @@ export const josephSlides: SeminarSlide[] = [
     ]
   },
   {
-    id: 19,
     type: 'reflection',
     question: 'Такое ожидание кажется бессмысленным с точки зрения человеческого понимания прогресса, но Бог заинтересован в формировании характера.',
     subtitle: 'Присутствие Бога в испытаниях'
   },
   {
-    id: 20,
     type: 'reflection',
     question: 'Хотя человек планирует свой путь, Бог — Тот, Кто дарует успех',
     subtitle: 'Присутствие Бога в испытаниях'
   },
   {
-    id: 21,
     type: 'story',
     title: 'Возвышение',
     chapter: 'Глава 10',
@@ -309,7 +292,6 @@ export const josephSlides: SeminarSlide[] = [
     ]
   },
   {
-    id: 22,
     type: 'story',
     title: 'Возвышение',
     chapter: 'Глава 11',
@@ -320,7 +302,6 @@ export const josephSlides: SeminarSlide[] = [
     ]
   },
   {
-    id: 23,
     type: 'story',
     title: 'Прощение и примирение',
     chapter: 'Глава 12',
@@ -331,7 +312,6 @@ export const josephSlides: SeminarSlide[] = [
     ]
   },
   {
-    id: 24,
     type: 'conclusion',
     title: 'Божий план непоколебим',
     points: [
@@ -346,7 +326,6 @@ export const josephSlides: SeminarSlide[] = [
     }
   },
   {
-    id: 25,
     type: 'scripture-dark',
     reference: 'Бытие 50:20',
     book: 'Бытие',
@@ -360,7 +339,6 @@ export const josephSlides: SeminarSlide[] = [
 // Слайды истории Самсона
 export const samsonSlides: SeminarSlide[] = [
   {
-    id: 0,
     type: 'introduction',
     title: 'История Самсона',
     subtitle: 'Бог дал грешному Самсону силу, чтобы избавить Израиль.',
@@ -372,7 +350,6 @@ export const samsonSlides: SeminarSlide[] = [
     image: '/src/assets/samson-story.png'
   },
   {
-    id: 1,
     type: 'scripture-dark',
     reference: 'Книга Судей 14:1-4',
     book: 'Книга Судей',
