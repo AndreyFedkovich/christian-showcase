@@ -8,7 +8,7 @@ import HermeneuticsSlideCard from "@/components/HermeneuticsSlideCard";
 import PracticalExampleSlideCard from "@/components/PracticalExampleSlideCard";
 import IntroductionSlideCard from "@/components/IntroductionSlideCard";
 import { disciples } from "@/data/disciples";
-import { seminar, seminarSections } from "@/data/seminar";
+import { seminar, seminarSections, SeminarIntroductionSlide } from "@/data/seminar";
 import { epistlesStructure, IntroductionSlide as IntroductionSlideType } from "@/data/epistles-structure";
 import { presentations } from "@/data/presentations";
 import { useEffect } from "react";
@@ -99,33 +99,36 @@ const PresentationDetails = () => {
           </div>
         ) : presentation.type === 'hermeneutics' ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-[30px]">
-            {epistlesStructure.slice(1).map((slide, index) => (
-              slide.type === 'introduction' ? (
+            {epistlesStructure.slice(1).map((slide, index) => {
+              const slideNumber = index + 2;
+              return slide.type === 'introduction' ? (
                 <IntroductionSlideCard 
-                  key={slide.id} 
+                  key={`hermeneutics-${index}`} 
                   slide={slide as IntroductionSlideType}
+                  slideNumber={slideNumber}
                   onClick={() => handleSlideClick(index + 1)}
                 />
               ) : slide.type === 'conclusion' ? (
                 <SeminarSlideCard 
-                  key={slide.id} 
+                  key={`hermeneutics-${index}`} 
                   slide={slide as any}
+                  slideNumber={slideNumber}
                   onClick={() => handleSlideClick(index + 1)}
                 />
               ) : slide.type === 'practical-example' ? (
                 <PracticalExampleSlideCard 
-                  key={slide.id} 
+                  key={`hermeneutics-${index}`} 
                   slide={slide as any}
                   onClick={() => handleSlideClick(index + 1)}
                 />
               ) : (
                 <HermeneuticsSlideCard 
-                  key={slide.id} 
+                  key={`hermeneutics-${index}`} 
                   slide={slide as any}
                   onClick={() => handleSlideClick(index + 1)}
                 />
-              )
-            ))}
+              );
+            })}
           </div>
         ) : (
           <Tabs defaultValue={seminarSections[0]?.id} className="w-full mt-[30px]">
@@ -144,19 +147,26 @@ const PresentationDetails = () => {
             {seminarSections.map((section, sectionIndex) => (
               <TabsContent key={section.id} value={section.id}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                  {section.slides.map((slide, slideIndex) => (
-                      slide.type === 'introduction' ?
-                          <IntroductionSlideCard
-                                  key={slide.id}
-                                  slide={slide as IntroductionSlideType}
-                                  onClick={() => handleSlideClick(getGlobalIndex(sectionIndex, slideIndex))}
-                          /> :
-                          <SeminarSlideCard
-                            key={slide.id}
-                            slide={slide}
-                            onClick={() => handleSlideClick(getGlobalIndex(sectionIndex, slideIndex))}
-                          />
-                  ))}
+                  {section.slides.map((slide, slideIndex) => {
+                    const globalIndex = getGlobalIndex(sectionIndex, slideIndex);
+                    const slideNumber = globalIndex + 1;
+                    
+                    return slide.type === 'introduction' ? (
+                      <IntroductionSlideCard
+                        key={`slide-${globalIndex}`}
+                        slide={slide as SeminarIntroductionSlide}
+                        slideNumber={slideNumber}
+                        onClick={() => handleSlideClick(globalIndex)}
+                      />
+                    ) : (
+                      <SeminarSlideCard
+                        key={`slide-${globalIndex}`}
+                        slide={slide}
+                        slideNumber={slideNumber}
+                        onClick={() => handleSlideClick(globalIndex)}
+                      />
+                    );
+                  })}
                 </div>
               </TabsContent>
             ))}

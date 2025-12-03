@@ -1,7 +1,14 @@
-import { IntroductionSlide as IntroductionSlideType } from "@/data/epistles-structure";
+// Flexible interface that works with both IntroductionSlide from epistles and SeminarIntroductionSlide
+interface IntroductionSlideData {
+  type: 'introduction';
+  title: string;
+  subtitle?: string;
+  content: string[];
+  image: string;
+}
 
 interface IntroductionSlideProps {
-  slide: IntroductionSlideType;
+  slide: IntroductionSlideData;
   direction: 'next' | 'prev';
 }
 
