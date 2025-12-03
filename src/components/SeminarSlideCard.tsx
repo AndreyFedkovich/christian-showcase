@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card";
-import { JosephSlide } from "@/data/joseph-story";
+import { SeminarSlide } from "@/data/seminar";
 import { BookOpen, HelpCircle, Lightbulb, Book } from "lucide-react";
 import storyDefault from "@/assets/story-default.jpg";
 import reflectionDefault from "@/assets/reflection-default.jpg";
@@ -7,7 +7,7 @@ import conclusionDefault from "@/assets/conclusion-default.jpg";
 import scriptureDefault from "@/assets/scripture-default.jpg";
 
 interface SeminarSlideCardProps {
-  slide: JosephSlide;
+  slide: SeminarSlide;
   onClick: () => void;
 }
 

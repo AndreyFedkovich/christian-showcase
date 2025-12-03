@@ -1,4 +1,4 @@
-import { ConclusionSlide as ConclusionSlideType } from "@/data/joseph-story";
+import { ConclusionSlide as ConclusionSlideType } from "@/data/seminar";
 import { Check } from "lucide-react";
 
 interface ConclusionSlideProps {

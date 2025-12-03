@@ -1,4 +1,4 @@
-import { ReflectionSlide as ReflectionSlideType } from "@/data/joseph-story";
+import { ReflectionSlide as ReflectionSlideType } from "@/data/seminar";
 
 interface ReflectionSlideProps {
   slide: ReflectionSlideType;

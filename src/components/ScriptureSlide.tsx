@@ -1,4 +1,4 @@
-import { ScriptureDarkSlide as ScriptureSlideType } from "@/data/joseph-story";
+import { ScriptureDarkSlide as ScriptureSlideType } from "@/data/seminar";
 import { Book } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 

@@ -1,7 +1,7 @@
 import peterImg from "@/assets/peter.jpg";
 import josephImg from "@/assets/joseph-thumbnail.png";
 import knowDoImg from "@/assets/know-do.png";
-import { josephStory } from '@/data/joseph-story';
+import { seminar } from '@/data/seminar';
 import { disciples } from '@/data/disciples';
 import { epistlesStructure } from '@/data/epistles-structure';
 
@@ -26,11 +26,11 @@ export const presentations: Presentation[] = [
     type: 'disciples'
   },
   {
-    id: "joseph-story",
+    id: "seminar",
     title: "Бог превращает зло в добро",
     description: "Божий план спасения никогда не может быть сорван",
     thumbnail: josephImg,
-    slideCount: josephStory.length,
+    slideCount: seminar.length,
     duration: "25-30 минут",
     type: 'seminar'
   },

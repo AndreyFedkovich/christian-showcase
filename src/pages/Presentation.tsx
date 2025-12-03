@@ -6,7 +6,6 @@ import ProfileSlide from "@/components/ProfileSlide";
 import StorySlide from "@/components/StorySlide";
 import ReflectionSlide from "@/components/ReflectionSlide";
 import ConclusionSlide from "@/components/ConclusionSlide";
-import ScriptureSlide from "@/components/ScriptureSlide";
 import ScriptureDarkSlide from "@/components/ScriptureDarkSlide";
 import IntroSlide from "@/components/IntroSlide";
 import HermeneuticsSlide from "@/components/HermeneuticsSlide";
@@ -14,7 +13,7 @@ import IntroHermeneuticsSlide from "@/components/IntroHermeneuticsSlide";
 import IntroductionSlide from "@/components/IntroductionSlide";
 import PracticalExampleSlide from "@/components/PracticalExampleSlide";
 import { disciples } from "@/data/disciples";
-import { josephStory } from "@/data/joseph-story";
+import { seminar } from "@/data/seminar";
 import { epistlesStructure } from "@/data/epistles-structure";
 import { presentations } from "@/data/presentations";
 
@@ -50,7 +49,7 @@ const Presentation = () => {
     ? disciples 
     : presentation.type === 'hermeneutics'
     ? epistlesStructure
-    : josephStory;
+    : seminar;
   const totalSlides = slides.length;
 
   // Wake Lock API to prevent screen from turning off
@@ -300,30 +299,30 @@ const Presentation = () => {
         </>
       ) : (
         <>
-          {josephStory[currentSlide].type === 'scripture-dark' && (
+          {seminar[currentSlide].type === 'scripture-dark' && (
             <ScriptureDarkSlide 
-              slide={josephStory[currentSlide] as any}
+              slide={seminar[currentSlide] as any}
               direction={direction}
               key={currentSlide}
             />
           )}
-          {josephStory[currentSlide].type === 'story' && (
+          {seminar[currentSlide].type === 'story' && (
             <StorySlide 
-              slide={josephStory[currentSlide] as any}
+              slide={seminar[currentSlide] as any}
               direction={direction}
               key={currentSlide}
             />
           )}
-          {josephStory[currentSlide].type === 'reflection' && (
+          {seminar[currentSlide].type === 'reflection' && (
             <ReflectionSlide 
-              slide={josephStory[currentSlide] as any}
+              slide={seminar[currentSlide] as any}
               direction={direction}
               key={currentSlide}
             />
           )}
-          {josephStory[currentSlide].type === 'conclusion' && (
+          {seminar[currentSlide].type === 'conclusion' && (
             <ConclusionSlide 
-              slide={josephStory[currentSlide] as any}
+              slide={seminar[currentSlide] as any}
               direction={direction}
               key={currentSlide}
             />

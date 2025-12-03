@@ -1,4 +1,4 @@
-import { ScriptureDarkSlide as ScriptureDarkSlideType } from "@/data/joseph-story";
+import { ScriptureDarkSlide as ScriptureDarkSlideType } from "@/data/seminar";
 import { cn } from "@/lib/utils";
 
 interface ScriptureDarkSlideProps {

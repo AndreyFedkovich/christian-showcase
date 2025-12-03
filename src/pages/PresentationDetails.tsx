@@ -8,7 +8,7 @@ import HermeneuticsSlideCard from "@/components/HermeneuticsSlideCard";
 import PracticalExampleSlideCard from "@/components/PracticalExampleSlideCard";
 import IntroductionSlideCard from "@/components/IntroductionSlideCard";
 import { disciples } from "@/data/disciples";
-import { josephStory, seminarSections } from "@/data/joseph-story";
+import { seminar, seminarSections } from "@/data/seminar";
 import { epistlesStructure, IntroductionSlide as IntroductionSlideType } from "@/data/epistles-structure";
 import { presentations } from "@/data/presentations";
 import { useEffect } from "react";
@@ -33,7 +33,7 @@ const PresentationDetails = () => {
     ? disciples 
     : presentation.type === 'hermeneutics'
     ? epistlesStructure
-    : josephStory;
+    : seminar;
   
   const handleSlideClick = (slideIndex: number) => {
     navigate(`/presentation/${presentationId}/view?slide=${slideIndex}`);

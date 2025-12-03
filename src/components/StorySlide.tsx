@@ -1,4 +1,4 @@
-import { StorySlide as StorySlideType } from "@/data/joseph-story";
+import { StorySlide as StorySlideType } from "@/data/seminar";
 
 interface StorySlideProps {
   slide: StorySlideType;
