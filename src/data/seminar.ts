@@ -7,10 +7,11 @@ import JosephAccidentalMan from "@/assets/josephAccidentialMan.png";
 import JosephBrothersHatred from "@/assets/josephBrothersHatred.png";
 import JosephSlander from "@/assets/josephSlander.png";
 import JosephPharaohDreams from "@/assets/josephPharaohDreams.png";
+import { IntroductionSlide } from '@/data/epistles-structure';
 
 export interface Slide {
   id: number;
-  type: 'story' | 'reflection' | 'conclusion' | 'scripture-dark';
+  type: 'story' | 'reflection' | 'conclusion' | 'scripture-dark' | 'introduction';
 }
 
 export interface StorySlide extends Slide {
@@ -50,7 +51,7 @@ export interface ScriptureDarkSlide extends Slide {
   }[];
 }
 
-export type SeminarSlide = StorySlide | ReflectionSlide | ConclusionSlide | ScriptureDarkSlide;
+export type SeminarSlide = StorySlide | ReflectionSlide | ConclusionSlide | ScriptureDarkSlide | IntroductionSlide;
 
 // Секция/вкладка презентации
 export interface SeminarSection {
@@ -61,6 +62,26 @@ export interface SeminarSection {
 
 // Слайды истории Иосифа
 export const josephSlides: SeminarSlide[] = [
+  {
+    id: -2,
+    type: 'introduction',
+    title: 'Бог превращает зло в добро',
+    subtitle: 'Божий план спасения никогда не может быть сорван',
+    content: [
+      'Это увлекательное и сложное повествование, показывающее, как Бог может действовать через несовершенных людей для достижения Своих целей.'
+    ],
+    image: '/src/assets/joseph-thumbnail.png'
+  },
+  {
+    id: -1,
+    type: 'introduction',
+    title: 'История Иосифа',
+    subtitle: 'Провидение в истории Иосифа',
+    content: [
+      'Это мощное напоминание о том, что человеческая слабость не обязательно препятствует Божьему плану, а, наоборот, подчёркивает Его суверенитет'
+    ],
+    image: '/src/assets/story-default.jpg'
+  },
   {
     id: 1,
     type: 'scripture-dark',
@@ -338,6 +359,18 @@ export const josephSlides: SeminarSlide[] = [
 
 // Слайды истории Самсона
 export const samsonSlides: SeminarSlide[] = [
+  {
+    id: 0,
+    type: 'introduction',
+    title: 'История Самсона',
+    subtitle: 'Бог дал грешному Самсону силу, чтобы избавить Израиль.',
+    content: [
+      'Послания апостолов имеют особую структуру: сначала излагается богословская основа — кто есть Бог, что Он сделал для нас во Христе, какое положение мы занимаем благодаря искуплению.',
+      'Только после этого апостолы переходят к практическим наставлениям — как жить в ответ на эту великую истину, какие поступки соответствуют нашему новому статусу во Христе.',
+      'Этот принцип "сначала знать — потом делать" пронизывает все послания и является ключом к правильному пониманию христианской жизни.'
+    ],
+    image: '/src/assets/samson-story.png'
+  },
   {
     id: 1,
     type: 'scripture-dark',

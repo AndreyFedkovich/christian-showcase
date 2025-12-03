@@ -145,11 +145,17 @@ const PresentationDetails = () => {
               <TabsContent key={section.id} value={section.id}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                   {section.slides.map((slide, slideIndex) => (
-                    <SeminarSlideCard 
-                      key={slide.id} 
-                      slide={slide}
-                      onClick={() => handleSlideClick(getGlobalIndex(sectionIndex, slideIndex))}
-                    />
+                      slide.type === 'introduction' ?
+                          <IntroductionSlideCard
+                                  key={slide.id}
+                                  slide={slide as IntroductionSlideType}
+                                  onClick={() => handleSlideClick(getGlobalIndex(sectionIndex, slideIndex))}
+                          /> :
+                          <SeminarSlideCard
+                            key={slide.id}
+                            slide={slide}
+                            onClick={() => handleSlideClick(getGlobalIndex(sectionIndex, slideIndex))}
+                          />
                   ))}
                 </div>
               </TabsContent>

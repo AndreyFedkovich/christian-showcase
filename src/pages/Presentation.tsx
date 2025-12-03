@@ -299,6 +299,13 @@ const Presentation = () => {
         </>
       ) : (
         <>
+          {seminar[currentSlide].type === 'introduction' && (
+              <IntroductionSlide
+                  slide={seminar[currentSlide] as any}
+                  direction={direction}
+                  key={currentSlide}
+              />
+          )}
           {seminar[currentSlide].type === 'scripture-dark' && (
             <ScriptureDarkSlide 
               slide={seminar[currentSlide] as any}
