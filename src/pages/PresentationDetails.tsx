@@ -89,10 +89,11 @@ const PresentationDetails = () => {
       <main className="max-w-7xl mx-auto px-6 pb-20">
         {presentation.type === 'disciples' ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-[30px]">
-            {disciples.map((slide, index) => (
+            {disciples.map((disciple, index) => (
               <ProfileCard
-                key={slide.id} 
-                disciple={slide}
+                key={`disciple-${index}`} 
+                disciple={disciple}
+                slideNumber={index + 1}
                 onClick={() => handleSlideClick(index)}
               />
             ))}
@@ -119,12 +120,14 @@ const PresentationDetails = () => {
                 <PracticalExampleSlideCard 
                   key={`hermeneutics-${index}`} 
                   slide={slide as any}
+                  slideNumber={slideNumber}
                   onClick={() => handleSlideClick(index + 1)}
                 />
               ) : (
                 <HermeneuticsSlideCard 
                   key={`hermeneutics-${index}`} 
                   slide={slide as any}
+                  slideNumber={slideNumber}
                   onClick={() => handleSlideClick(index + 1)}
                 />
               );

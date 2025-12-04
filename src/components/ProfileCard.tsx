@@ -3,10 +3,11 @@ import { Disciple } from "@/data/disciples";
 
 interface DiscipleCardProps {
   disciple: Disciple;
+  slideNumber: number;
   onClick: () => void;
 }
 
-const ProfileCard = ({ disciple, onClick }: DiscipleCardProps) => {
+const ProfileCard = ({ disciple, slideNumber, onClick }: DiscipleCardProps) => {
   return (
     <Card 
       className="group relative overflow-hidden cursor-pointer transition-smooth hover:-translate-y-2 shadow-card hover:shadow-premium"
@@ -22,7 +23,7 @@ const ProfileCard = ({ disciple, onClick }: DiscipleCardProps) => {
         <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
           <div className="inline-block px-3 py-1 bg-accent/80 backdrop-blur-sm rounded-full mb-3">
             <span className="text-xs font-sans font-medium text-[#FFF5E6] uppercase tracking-wider">
-              Апостол {disciple.id}
+              Апостол {slideNumber}
             </span>
           </div>
           <h3 className="text-2xl font-bold text-primary-foreground mb-2">

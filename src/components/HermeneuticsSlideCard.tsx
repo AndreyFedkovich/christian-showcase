@@ -4,10 +4,11 @@ import { BookMarked } from "lucide-react";
 
 interface HermeneuticsSlideCardProps {
   slide: HermeneuticsSlide;
+  slideNumber: number;
   onClick: () => void;
 }
 
-const HermeneuticsSlideCard = ({ slide, onClick }: HermeneuticsSlideCardProps) => {
+const HermeneuticsSlideCard = ({ slide, slideNumber, onClick }: HermeneuticsSlideCardProps) => {
   return (
     <Card 
       className="group relative overflow-hidden cursor-pointer transition-smooth hover:-translate-y-2 shadow-card hover:shadow-premium"
@@ -20,7 +21,7 @@ const HermeneuticsSlideCard = ({ slide, onClick }: HermeneuticsSlideCardProps) =
         
         {/* Slide number badge */}
         <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-accent/80 backdrop-blur-sm flex items-center justify-center z-20">
-          <span className="text-lg font-bold text-white">{slide.id}</span>
+          <span className="text-lg font-bold text-white">{slideNumber}</span>
         </div>
 
         {/* Book icon and progress visualization - centered */}
