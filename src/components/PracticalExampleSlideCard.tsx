@@ -4,10 +4,11 @@ import { Lightbulb } from "lucide-react";
 
 interface PracticalExampleSlideCardProps {
   slide: PracticalExampleSlide;
+  slideNumber: number;
   onClick: () => void;
 }
 
-const PracticalExampleSlideCard = ({ slide, onClick }: PracticalExampleSlideCardProps) => {
+const PracticalExampleSlideCard = ({ slide, slideNumber, onClick }: PracticalExampleSlideCardProps) => {
   return (
     <Card 
       className="group relative overflow-hidden cursor-pointer transition-smooth hover:-translate-y-2 shadow-card hover:shadow-premium"
@@ -20,7 +21,7 @@ const PracticalExampleSlideCard = ({ slide, onClick }: PracticalExampleSlideCard
         
         {/* Slide number badge */}
         <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-purple-500/80 backdrop-blur-sm flex items-center justify-center z-20">
-          <span className="text-lg font-bold text-white">{slide.id}</span>
+          <span className="text-lg font-bold text-white">{slideNumber}</span>
         </div>
 
         {/* Lightbulb icon - centered */}

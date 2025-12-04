@@ -263,6 +263,7 @@ const Presentation = () => {
       ) : presentation.type === 'disciples' ? (
         <ProfileSlide
           disciple={disciples[currentSlide]} 
+          slideNumber={currentSlide + 1}
           direction={direction}
           key={currentSlide}
         />

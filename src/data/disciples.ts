@@ -12,7 +12,6 @@ import simonImg from "@/assets/simon.jpg";
 import judasImg from "@/assets/judas.jpg";
 
 export interface Disciple {
-  id: number;
   name: string;
   subtitle: string;
   image: string;
@@ -23,7 +22,6 @@ export interface Disciple {
 
 export const disciples: Disciple[] = [
   {
-    id: 1,
     name: "Петр (Симон Петр)",
     subtitle: "Камень веры",
     image: peterImg,
@@ -37,7 +35,6 @@ export const disciples: Disciple[] = [
     quote: "Ты — Христос, Сын Бога Живаго"
   },
   {
-    id: 2,
     name: "Андрей",
     subtitle: "Первозванный",
     image: andrewImg,
@@ -51,7 +48,6 @@ export const disciples: Disciple[] = [
     quote: "Мы нашли Мессию!"
   },
   {
-    id: 3,
     name: "Иаков Зеведеев",
     subtitle: "Сын грома",
     image: jamesZebedeImg,
@@ -65,7 +61,6 @@ export const disciples: Disciple[] = [
     quote: "Можем ли пить чашу, которую Я пью?"
   },
   {
-    id: 4,
     name: "Иоанн",
     subtitle: "Возлюбленный ученик",
     image: johnImg,
@@ -79,7 +74,6 @@ export const disciples: Disciple[] = [
     quote: "Бог есть любовь"
   },
   {
-    id: 5,
     name: "Филипп",
     subtitle: "Искатель истины",
     image: philipImg,
@@ -93,7 +87,6 @@ export const disciples: Disciple[] = [
     quote: "Господи, покажи нам Отца"
   },
   {
-    id: 6,
     name: "Варфоломей (Нафанаил)",
     subtitle: "Истинный израильтянин",
     image: bartholomewImg,
@@ -107,7 +100,6 @@ export const disciples: Disciple[] = [
     quote: "Равви! Ты Сын Божий, Ты Царь Израилев"
   },
   {
-    id: 7,
     name: "Матфей (Левий)",
     subtitle: "От мытаря к евангелисту",
     image: matthewImg,
@@ -121,7 +113,6 @@ export const disciples: Disciple[] = [
     quote: "Я пришел призвать не праведников, но грешников к покаянию"
   },
   {
-    id: 8,
     name: "Фома",
     subtitle: "Неверующий, ставший исповедником",
     image: thomasImg,
@@ -135,7 +126,6 @@ export const disciples: Disciple[] = [
     quote: "Господь мой и Бог мой!"
   },
   {
-    id: 9,
     name: "Иаков Алфеев",
     subtitle: "Иаков младший",
     image: jamesAlphaeusImg,
@@ -149,7 +139,6 @@ export const disciples: Disciple[] = [
     quote: "Служение не всегда заметно, но всегда важно"
   },
   {
-    id: 10,
     name: "Фаддей (Иуда, сын Иакова)",
     subtitle: "Апостол сердечных вопросов",
     image: thaddeusImg,
@@ -163,7 +152,6 @@ export const disciples: Disciple[] = [
     quote: "Почему Ты явишь Себя нам, а не миру?"
   },
   {
-    id: 11,
     name: "Симон Зилот",
     subtitle: "От революционера к апостолу",
     image: simonImg,
@@ -177,7 +165,6 @@ export const disciples: Disciple[] = [
     quote: "Истинная революция начинается в сердце"
   },
   {
-    id: 12,
     name: "Иуда Искариот",
     subtitle: "Предатель и трагедия выбора",
     image: judasImg,

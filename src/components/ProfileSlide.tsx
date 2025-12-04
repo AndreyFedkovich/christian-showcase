@@ -2,10 +2,11 @@ import { Disciple } from "@/data/disciples";
 
 interface DiscipleSlideProps {
   disciple: Disciple;
+  slideNumber: number;
   direction?: 'next' | 'prev';
 }
 
-const ProfileSlide = ({ disciple, direction = 'next' }: DiscipleSlideProps) => {
+const ProfileSlide = ({ disciple, slideNumber, direction = 'next' }: DiscipleSlideProps) => {
   const slideAnimation = direction === 'next' 
     ? 'animate-[fade-in_0.5s_ease-out,slide-in-from-right_0.5s_ease-out]' 
     : 'animate-[fade-in_0.5s_ease-out,slide-in-from-left_0.5s_ease-out]';
@@ -24,7 +25,7 @@ const ProfileSlide = ({ disciple, direction = 'next' }: DiscipleSlideProps) => {
             />
             <div className="absolute top-6 right-6 bg-accent/90 backdrop-blur-sm px-4 py-2 rounded-full">
               <span className="text-sm font-sans font-bold text-accent-foreground">
-                #{disciple.id}
+                #{slideNumber}
               </span>
             </div>
           </div>
