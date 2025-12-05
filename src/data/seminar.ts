@@ -365,7 +365,7 @@ export const samsonSlides: SeminarSlide[] = [
     content: [
       'Это мощное напоминание о том, что человеческая слабость не обязательно препятствует Божьему плану, а, наоборот, подчёркивает Его суверенитет',
     ],
-    image: '/src/assets/samson-title.jpeg'
+    image: SamsonTitle
   },
   {
     type: 'scripture-dark',
@@ -466,7 +466,7 @@ export const ruthSlides: SeminarSlide[] = [
     content: [
       'В мрачные времена судей история Руфи сияет надеждой. Хотя одной главной героине - Ноемини казалось, что Бог настроен против неё, Он использовал её беды, мнимые случайности, и, благословил ее семью больше, чем они могли даже представить.',
     ],
-    image: '/src/assets/ruth-title.png'
+    image: RuthTitle
   },
   {
     type: 'scripture-dark',
