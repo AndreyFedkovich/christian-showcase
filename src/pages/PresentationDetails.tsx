@@ -19,6 +19,11 @@ const PresentationDetails = () => {
   
   const presentation = presentations.find(p => p.id === presentationId);
   
+  // Scroll to top on mount
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   // If presentation not found, redirect to home
   useEffect(() => {
     if (!presentation) {
