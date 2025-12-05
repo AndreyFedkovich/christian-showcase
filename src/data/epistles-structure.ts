@@ -1,3 +1,5 @@
+import KnowDoImage from "@/assets/know-do.png";
+
 export interface Slide {
   type: string;
 }
@@ -74,7 +76,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
     title: 'Знать и Делать',
     subtitle: 'Структура посланий Нового Завета',
     description: 'Первая половина посланий Павла, Иоанна, Петра говорит: вот что Бог сделал во Христе, вот как Он спас тебя. Вторая половина посланий — вот что ты должен делать в ответ.',
-    image: '/src/assets/know-do.png'
+    image: KnowDoImage
   },
   {
     type: 'introduction',
@@ -84,7 +86,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
       'Послания апостолов имеют особую структуру: сначала излагается кто есть Бог, что Он сделал для нас во Христе, какое положение мы занимаем благодаря искуплению.',
       'Только после этого апостолы переходят к практическим наставлениям — как жить в ответ на эту великую истину, какие поступки соответствуют нашему новому статусу во Христе.',
     ],
-    image: '/src/assets/know-do.png'
+    image: KnowDoImage
   },
   {
     type: 'introduction',
@@ -93,7 +95,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
     content: [
       'Этот принцип "сначала знать — потом делать" пронизывает все послания и является ключом к правильному пониманию христианской жизни.'
     ],
-    image: '/src/assets/know-do.png'
+    image: KnowDoImage
   },
   {
     type: 'hermeneutics',

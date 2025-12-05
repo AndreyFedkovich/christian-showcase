@@ -23,6 +23,8 @@ import RuthMarriage from "@/assets/ruth-marriage.jpeg";
 import RuthMarriage2 from "@/assets/ruth-marriage2.jpeg";
 import RuthBoazConclusion from "@/assets/ruth-boaz-conclusion.jpeg";
 import RuthNaomiConclusion from "@/assets/ruth-naomi-conclusion.jpeg";
+import JosephThumbnail from "@/assets/joseph-thumbnail.png";
+import StoryDefault from "@/assets/story-default.jpg";
 
 
 export interface Slide {
@@ -92,7 +94,7 @@ export const josephSlides: SeminarSlide[] = [
     content: [
       'Это увлекательное и сложное повествование, показывающее, как Бог может действовать через несовершенных людей для достижения Своих целей.'
     ],
-    image: '/src/assets/joseph-thumbnail.png'
+    image: JosephThumbnail
   },
   {
     type: 'introduction',
@@ -102,7 +104,7 @@ export const josephSlides: SeminarSlide[] = [
       'На первый взгляд эта история кажется рассказом о том, как всё идёт наперекосяк.',
       'Но Бог действовал, используя каждое событие, чтобы приготовить спасение Своему избранному народу.'
     ],
-    image: '/src/assets/story-default.jpg'
+    image: StoryDefault
   },
   {
     type: 'scripture-dark',
