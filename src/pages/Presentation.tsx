@@ -130,16 +130,18 @@ const Presentation = () => {
       startPresentation();
       return;
     }
+    
     setDirection('next');
+    setCurrentSlide((prev) => {
+      if (presentation?.type === 'hermeneutics') {
+        const lastIndex = totalSlides - 1;
+        return prev >= lastIndex ? lastIndex : prev + 1;
+      }
+      return (prev + 1) % totalSlides;
+    });
+    
     isAnimatingRef.current = true;
     setTimeout(() => {
-      setCurrentSlide((prev) => {
-        if (presentation?.type === 'hermeneutics') {
-          const lastIndex = totalSlides - 1;
-          return prev >= lastIndex ? lastIndex : prev + 1;
-        }
-        return (prev + 1) % totalSlides;
-      });
       isAnimatingRef.current = false;
     }, 300);
   }, [showIntro, startPresentation, presentation?.type, totalSlides]);
@@ -152,10 +154,12 @@ const Presentation = () => {
       setCurrentSlide(-1);
       return;
     }
+    
     setDirection('prev');
+    setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
+    
     isAnimatingRef.current = true;
     setTimeout(() => {
-      setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
       isAnimatingRef.current = false;
     }, 300);
   }, [showIntro, presentation?.type, currentSlide, totalSlides]);
