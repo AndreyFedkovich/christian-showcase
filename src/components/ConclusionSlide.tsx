@@ -49,7 +49,7 @@ const ConclusionSlide = ({ slide, direction = 'next' }: ConclusionSlideProps) =>
             <blockquote className="text-xl md:text-2xl text-foreground italic leading-relaxed mb-4">
               «{slide.verse.text}»
             </blockquote>
-            <cite className="text-sm text-muted-foreground font-sans uppercase tracking-wider not-italic">
+            <cite className="text-xl text-muted-foreground font-sans uppercase tracking-wider not-italic">
               — {slide.verse.reference}
             </cite>
           </div>

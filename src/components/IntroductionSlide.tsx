@@ -15,7 +15,7 @@ interface IntroductionSlideProps {
 const IntroductionSlide = ({ slide, direction }: IntroductionSlideProps) => {
   return (
     <div className="w-full h-screen gradient-warm flex items-center justify-center p-8 animate-in fade-in duration-700">
-      <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-7 gap-12 items-center">
+      <div className="max-w-[100rem] w-full grid grid-cols-1 lg:grid-cols-7 gap-12 items-center">
         {/* Левая часть - текст (3 колонки из 5) */}
         <div className="lg:col-span-3 space-y-9 animate-in slide-in-from-left-8 duration-700">
           <div className="space-y-9">
@@ -23,7 +23,7 @@ const IntroductionSlide = ({ slide, direction }: IntroductionSlideProps) => {
               {slide.title}
             </h1>
             {slide.subtitle && (
-              <p className="text-4xl text-accent font-sans font-semibold">
+              <p className="text-4xl text-accent font-sans font-semibold leading-[3rem]">
                 {slide.subtitle}
               </p>
             )}
@@ -33,7 +33,7 @@ const IntroductionSlide = ({ slide, direction }: IntroductionSlideProps) => {
             {slide.content.map((paragraph, index) => (
               <p 
                 key={index} 
-                className="text-2xl md:text-4xl text-muted-foreground font-sans leading-normal animate-in slide-in-from-left-8 duration-700"
+                className="text-2xl md:text-4xl text-muted-foreground font-sans md:leading-[2.7rem] animate-in slide-in-from-left-8 duration-700"
                 style={{ animationDelay: `${(index + 1) * 100}ms` }}
               >
                 {paragraph}

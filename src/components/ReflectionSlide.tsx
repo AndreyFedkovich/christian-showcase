@@ -35,7 +35,7 @@ const ReflectionSlide = ({ slide, direction = 'next' }: ReflectionSlideProps) =>
         {/* Subtitle */}
         {slide.subtitle && (
           <div className="inline-block px-6 py-2 bg-white/10 backdrop-blur-sm rounded-full">
-            <span className="text-sm font-sans font-medium text-white uppercase tracking-wider">
+            <span className="text-2xl font-sans font-medium text-white uppercase tracking-wider">
               {slide.subtitle}
             </span>
           </div>
@@ -48,7 +48,7 @@ const ReflectionSlide = ({ slide, direction = 'next' }: ReflectionSlideProps) =>
 
         {/* Decorative line */}
         <div className="flex justify-center">
-          <div className="w-32 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent"></div>
+          <div className="w-64 h-[2px] bg-gradient-to-r from-transparent via-white/40 to-transparent"></div>
         </div>
       </div>
     </div>
