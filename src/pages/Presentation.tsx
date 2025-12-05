@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { ChevronLeft, ChevronRight, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -39,8 +39,11 @@ const Presentation = () => {
   const [currentSlide, setCurrentSlide] = useState(initialSlide);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [direction, setDirection] = useState<'next' | 'prev'>('next');
-  const [isAnimating, setIsAnimating] = useState(false);
   const [showIntro, setShowIntro] = useState(initialSlide === 0);
+  
+  // Use refs for animation state and debounce
+  const isAnimatingRef = useRef(false);
+  const lastClickRef = useRef<number>(0);
   
   if (!presentation) return null;
 
@@ -115,6 +118,62 @@ const Presentation = () => {
     };
   }, []);
 
+  const startPresentation = useCallback(() => {
+    setShowIntro(false);
+    // For hermeneutics presentations, skip the intro slide at index 0
+    setCurrentSlide(presentation?.type === 'hermeneutics' ? 1 : 0);
+  }, [presentation?.type]);
+
+  const nextSlide = useCallback(() => {
+    if (isAnimatingRef.current) return;
+    if (showIntro) {
+      startPresentation();
+      return;
+    }
+    setDirection('next');
+    isAnimatingRef.current = true;
+    setTimeout(() => {
+      setCurrentSlide((prev) => {
+        if (presentation?.type === 'hermeneutics') {
+          const lastIndex = totalSlides - 1;
+          return prev >= lastIndex ? lastIndex : prev + 1;
+        }
+        return (prev + 1) % totalSlides;
+      });
+      isAnimatingRef.current = false;
+    }, 300);
+  }, [showIntro, startPresentation, presentation?.type, totalSlides]);
+
+  const prevSlide = useCallback(() => {
+    if (isAnimatingRef.current || showIntro) return;
+    const firstSlideIndex = presentation?.type === 'hermeneutics' ? 1 : 0;
+    if (currentSlide === firstSlideIndex) {
+      setShowIntro(true);
+      setCurrentSlide(-1);
+      return;
+    }
+    setDirection('prev');
+    isAnimatingRef.current = true;
+    setTimeout(() => {
+      setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
+      isAnimatingRef.current = false;
+    }, 300);
+  }, [showIntro, presentation?.type, currentSlide, totalSlides]);
+
+  const exitPresentation = useCallback(() => {
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+    }
+    navigate(`/presentation/${presentationId}`);
+  }, [navigate, presentationId]);
+
+  const handleContainerClick = useCallback(() => {
+    const now = Date.now();
+    if (now - lastClickRef.current < 350) return;
+    lastClickRef.current = now;
+    nextSlide();
+  }, [nextSlide]);
+
   // Keyboard navigation
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
@@ -131,60 +190,12 @@ const Presentation = () => {
 
     window.addEventListener("keydown", handleKeyPress);
     return () => window.removeEventListener("keydown", handleKeyPress);
-  }, [currentSlide]);
-
-  const startPresentation = () => {
-    setShowIntro(false);
-    // For hermeneutics presentations, skip the intro slide at index 0
-    setCurrentSlide(presentation?.type === 'hermeneutics' ? 1 : 0);
-  };
-
-  const nextSlide = () => {
-    if (isAnimating) return;
-    if (showIntro) {
-      startPresentation();
-      return;
-    }
-    setDirection('next');
-    setIsAnimating(true);
-    setTimeout(() => {
-      setCurrentSlide((prev) => {
-        if (presentation?.type === 'hermeneutics') {
-          const lastIndex = totalSlides - 1;
-          return prev >= lastIndex ? lastIndex : prev + 1;
-        }
-        return (prev + 1) % totalSlides;
-      });
-      setIsAnimating(false);
-    }, 300);
-  };
-  const prevSlide = () => {
-    if (isAnimating || showIntro) return;
-    const firstSlideIndex = presentation?.type === 'hermeneutics' ? 1 : 0;
-    if (currentSlide === firstSlideIndex) {
-      setShowIntro(true);
-      setCurrentSlide(-1);
-      return;
-    }
-    setDirection('prev');
-    setIsAnimating(true);
-    setTimeout(() => {
-      setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
-      setIsAnimating(false);
-    }, 300);
-  };
-
-  const exitPresentation = () => {
-    if (document.fullscreenElement) {
-      document.exitFullscreen();
-    }
-    navigate(`/presentation/${presentationId}`);
-  };
+  }, [nextSlide, prevSlide, exitPresentation]);
 
   return (
     <div 
       className="h-screen w-screen bg-background overflow-hidden"
-      onClick={nextSlide}
+      onClick={handleContainerClick}
     >
       {/* Navigation Controls */}
       <div className="absolute top-6 left-6 right-6 z-50 flex justify-between items-center pointer-events-none">
