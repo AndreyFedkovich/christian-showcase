@@ -51,10 +51,45 @@ const powerSourceConfig = {
   }
 };
 
+const doSectionConfig = {
+  promise: {
+    gradient: 'from-teal-50 to-teal-100 dark:from-teal-950 dark:to-teal-900',
+    badge: 'bg-teal-600',
+    title: 'text-teal-900 dark:text-teal-100',
+    text: 'text-teal-800 dark:text-teal-200',
+    bullet: 'bg-teal-500',
+    progressBar: 'from-teal-400 to-teal-500',
+  },
+  example: {
+    gradient: 'from-pink-50 to-pink-100 dark:from-pink-950 dark:to-pink-900',
+    badge: 'bg-pink-600',
+    title: 'text-pink-900 dark:text-pink-100',
+    text: 'text-pink-800 dark:text-pink-200',
+    bullet: 'bg-pink-500',
+    progressBar: 'from-pink-400 to-pink-500',
+  },
+  glory: {
+    gradient: 'from-orange-50 to-orange-100 dark:from-orange-950 dark:to-orange-900',
+    badge: 'bg-orange-600',
+    title: 'text-orange-900 dark:text-orange-100',
+    text: 'text-orange-800 dark:text-orange-200',
+    bullet: 'bg-orange-500',
+    progressBar: 'from-orange-400 to-orange-500',
+  },
+  default: {
+    gradient: 'from-amber-50 to-amber-100 dark:from-amber-950 dark:to-amber-900',
+    badge: 'bg-amber-600',
+    title: 'text-amber-900 dark:text-amber-100',
+    text: 'text-amber-800 dark:text-amber-200',
+    bullet: 'bg-amber-500',
+    progressBar: 'from-amber-400 to-amber-500',
+  }
+};
+
 const HermeneuticsSlide = ({ slide, direction }: HermeneuticsSlideProps) => {
-  const knowConfig = slide.knowSection.powerSourceType 
-    ? powerSourceConfig[slide.knowSection.powerSourceType] 
-    : powerSourceConfig.default;
+  const powerSourceType = slide.knowSection.powerSourceType || 'default';
+  const knowConfig = powerSourceConfig[powerSourceType];
+  const doConfig = doSectionConfig[powerSourceType];
 
   return (
     <div 
@@ -82,7 +117,7 @@ const HermeneuticsSlide = ({ slide, direction }: HermeneuticsSlideProps) => {
             {slide.knowSection.percentage}%
           </div>
           <div 
-            className="bg-gradient-to-r from-amber-400 to-amber-500 flex items-center justify-center text-white font-bold text-lg transition-all"
+            className={`bg-gradient-to-r ${doConfig.progressBar} flex items-center justify-center text-white font-bold text-lg transition-all`}
             style={{ width: `${slide.doSection.percentage}%` }}
           >
             {slide.doSection.percentage}%
@@ -127,19 +162,19 @@ const HermeneuticsSlide = ({ slide, direction }: HermeneuticsSlideProps) => {
           </div>
 
           {/* DO Section */}
-          <div className="bg-gradient-to-br from-amber-50 to-amber-100 dark:from-amber-950 dark:to-amber-900 rounded-3xl p-8 shadow-card">
+          <div className={`bg-gradient-to-br ${doConfig.gradient} rounded-3xl p-8 shadow-card`}>
             <div className="space-y-4">
-              <div className="inline-block px-4 py-2 bg-amber-600 text-white rounded-full font-bold text-sm uppercase tracking-wider">
+              <div className={`inline-block px-4 py-2 ${doConfig.badge} text-white rounded-full font-bold text-sm uppercase tracking-wider`}>
                 Делать
               </div>
-              <h2 className="text-3xl font-bold text-amber-900 dark:text-amber-100">
+              <h2 className={`text-3xl font-bold ${doConfig.title}`}>
                 {slide.doSection.chapters}
               </h2>
               <ul className="space-y-3">
                 {slide.doSection.themes.map((theme, idx) => (
                   <li key={idx} className="flex items-start gap-3">
-                    <span className="w-2 h-2 bg-amber-500 rounded-full mt-3 flex-shrink-0" />
-                    <span className="text-2xl text-amber-800 dark:text-amber-200 font-sans">
+                    <span className={`w-2 h-2 ${doConfig.bullet} rounded-full mt-3 flex-shrink-0`} />
+                    <span className={`text-2xl ${doConfig.text} font-sans`}>
                       {theme}
                     </span>
                   </li>
