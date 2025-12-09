@@ -76,14 +76,14 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
   {
     type: 'intro-hermeneutics',
     title: 'Знать и Делать',
-    subtitle: 'Структура посланий Нового Завета',
+    subtitle: 'Структура посланий НЗ',
     description: 'Первая половина посланий Павла, Иоанна, Петра говорит: вот что Бог сделал во Христе, вот как Он спас тебя. Вторая половина посланий — вот что ты должен делать в ответ.',
     image: KnowDoImage
   },
   {
     type: 'introduction',
     title: 'Принцип "Знать и Делать"',
-    subtitle: 'Как устроены послания Нового Завета',
+    subtitle: 'Как устроены послания НЗ',
     content: [
       'Послания апостолов имеют особую структуру: сначала излагается кто есть Бог, что Он сделал для нас во Христе, какое положение мы занимаем благодаря искуплению.',
       'Только после этого апостолы переходят к практическим наставлениям — как жить в ответ на эту великую истину, какие поступки соответствуют нашему новому статусу во Христе.',
@@ -92,8 +92,8 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
   },
   {
     type: 'introduction',
-    title: 'Принцип "Знать и Делать"',
-    subtitle: 'Как устроены послания Нового Завета',
+    title: 'Поступать достойно',
+    subtitle: 'Статус - Состояние',
     content: [
       'Этот принцип "сначала знать — потом делать" пронизывает все послания и является ключом к правильному пониманию христианской жизни.'
     ],
@@ -114,8 +114,8 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Предустановление по избранию',
         'Избрание Израиля'
       ],
-      powerSource: 'Обещания',
-      powerSourceType: 'glory'
+      powerSource: 'Пример',
+      powerSourceType: 'example'
     },
     doSection: {
       chapters: 'Гл. 12-16',
@@ -147,7 +147,9 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Дух Божий, а не дух мира',
         'Все что мы имеем - мы получили',
         'Строительство из драгоценных камней'
-      ]
+      ],
+      powerSource: 'Созерцание славы',
+      powerSourceType: 'glory'
     },
     doSection: {
       chapters: 'Гл. 5-16',
@@ -176,7 +178,9 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Утешение в скорбях',
         'Новый завет',
         'Служение примирения'
-      ]
+      ],
+      powerSource: 'Обещания',
+      powerSourceType: 'promise'
     },
     doSection: {
       chapters: 'Гл. 8-13',
@@ -186,6 +190,10 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Духовная война',
         'Защита апостольства'
       ]
+    },
+    keyVerse: {
+      text: 'Итак умоляю вас, братия, милосердием Божиим, представьте тела ваши в жертву живую, святую, благоугодную Богу',
+      reference: 'Римлянам 12:1'
     }
   },
   {
@@ -290,6 +298,10 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Отношения в семье',
         'Мудрость в общении'
       ]
+    },
+    keyVerse: {
+      text: 'Итак умоляю вас, братия, милосердием Божиим, представьте тела ваши в жертву живую, святую, благоугодную Богу',
+      reference: 'Римлянам 12:1'
     }
   },
   {
@@ -313,6 +325,10 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Пришествие Христа',
         'Жизнь в свете'
       ]
+    },
+    keyVerse: {
+      text: 'Итак умоляю вас, братия, милосердием Божиим, представьте тела ваши в жертву живую, святую, благоугодную Богу',
+      reference: 'Римлянам 12:1'
     }
   },
   {
@@ -335,6 +351,10 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Молитва и труд',
         'Дисциплина в церкви'
       ]
+    },
+    keyVerse: {
+      text: 'Итак умоляю вас, братия, милосердием Божиим, представьте тела ваши в жертву живую, святую, благоугодную Богу',
+      reference: 'Римлянам 12:1'
     }
   },
   {
@@ -358,6 +378,10 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Наставления пастору',
         'Богатство и благочестие'
       ]
+    },
+    keyVerse: {
+      text: 'Итак умоляю вас, братия, милосердием Божиим, представьте тела ваши в жертву живую, святую, благоугодную Богу',
+      reference: 'Римлянам 12:1'
     }
   },
   {
@@ -381,6 +405,10 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Проповедь Слова',
         'Венец правды'
       ]
+    },
+    keyVerse: {
+      text: 'Итак умоляю вас, братия, милосердием Божиим, представьте тела ваши в жертву живую, святую, благоугодную Богу',
+      reference: 'Римлянам 12:1'
     }
   },
   {
@@ -403,6 +431,10 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Добрые дела',
         'Благочестивая жизнь'
       ]
+    },
+    keyVerse: {
+      text: 'Итак умоляю вас, братия, милосердием Божиим, представьте тела ваши в жертву живую, святую, благоугодную Богу',
+      reference: 'Римлянам 12:1'
     }
   },
   {
@@ -454,6 +486,10 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Страдания за Христа',
         'Служение и смирение'
       ]
+    },
+    keyVerse: {
+      text: 'Итак умоляю вас, братия, милосердием Божиим, представьте тела ваши в жертву живую, святую, благоугодную Богу',
+      reference: 'Римлянам 12:1'
     }
   },
   {
@@ -476,6 +512,10 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'День Господень',
         'Святая жизнь'
       ]
+    },
+    keyVerse: {
+      text: 'Итак умоляю вас, братия, милосердием Божиим, представьте тела ваши в жертву живую, святую, благоугодную Богу',
+      reference: 'Римлянам 12:1'
     }
   },
   {
