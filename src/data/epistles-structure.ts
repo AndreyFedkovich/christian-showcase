@@ -12,6 +12,8 @@ export interface HermeneuticsSlide extends Slide {
     chapters: string;
     percentage: number;
     themes: string[];
+    powerSource?: string;
+    powerSourceType?: 'promise' | 'example' | 'glory';
   };
   doSection: {
     chapters: string;
@@ -111,7 +113,9 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Обещание прославления тела',
         'Предустановление по избранию',
         'Избрание Израиля'
-      ]
+      ],
+      powerSource: 'Обещания',
+      powerSourceType: 'promise'
     },
     doSection: {
       chapters: 'Гл. 12-16',

@@ -60,6 +60,14 @@ const HermeneuticsSlide = ({ slide, direction }: HermeneuticsSlideProps) => {
                   </li>
                 ))}
               </ul>
+
+              {slide.knowSection.powerSource && (
+                  <div className="pt-4 border-t border-emerald-300 dark:border-emerald-700">
+                    <p className="text-lg text-emerald-700 dark:text-emerald-300 font-sans italic">
+                      📖 {slide.knowSection.powerSource}
+                    </p>
+                  </div>
+              )}
             </div>
           </div>
 
