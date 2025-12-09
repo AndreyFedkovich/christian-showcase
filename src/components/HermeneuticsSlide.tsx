@@ -115,7 +115,7 @@ const HermeneuticsSlide = ({ slide, direction }: HermeneuticsSlideProps) => {
                 <div className={`pt-4 border-t ${knowConfig.border}`}>
                   <p className={`text-lg ${knowConfig.text} font-sans italic flex items-center gap-3`}>
                     {knowConfig.icon ? (
-                      <img src={knowConfig.icon} alt="" className="w-8 h-8 object-contain" />
+                      <img src={knowConfig.icon} alt="" className="w-16 h-16 object-contain" />
                     ) : (
                       <span>📖</span>
                     )}

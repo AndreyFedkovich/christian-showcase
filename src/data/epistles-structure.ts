@@ -115,7 +115,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Избрание Израиля'
       ],
       powerSource: 'Обещания',
-      powerSourceType: 'promise'
+      powerSourceType: 'glory'
     },
     doSection: {
       chapters: 'Гл. 12-16',
