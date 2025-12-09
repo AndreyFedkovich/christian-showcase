@@ -10,6 +10,7 @@ import IntroductionSlideCard from "@/components/IntroductionSlideCard";
 import { disciples } from "@/data/disciples";
 import { seminar, seminarSections, SeminarIntroductionSlide } from "@/data/seminar";
 import { epistlesStructure, IntroductionSlide as IntroductionSlideType } from "@/data/epistles-structure";
+import { salvation, salvationSections } from "@/data/salvation";
 import { presentations } from "@/data/presentations";
 import { useEffect } from "react";
 
@@ -38,7 +39,12 @@ const PresentationDetails = () => {
     ? disciples 
     : presentation.type === 'hermeneutics'
     ? epistlesStructure
+    : presentationId === 'salvation'
+    ? salvation
     : seminar;
+  
+  // Load sections for seminar-type presentations
+  const sections = presentationId === 'salvation' ? salvationSections : seminarSections;
   
   const handleSlideClick = (slideIndex: number) => {
     navigate(`/presentation/${presentationId}/view?slide=${slideIndex}`);
@@ -52,7 +58,7 @@ const PresentationDetails = () => {
   const getGlobalIndex = (sectionIndex: number, slideIndex: number) => {
     let globalIndex = 0;
     for (let i = 0; i < sectionIndex; i++) {
-      globalIndex += seminarSections[i].slides.length;
+      globalIndex += sections[i].slides.length;
     }
     return globalIndex + slideIndex;
   };
@@ -139,9 +145,9 @@ const PresentationDetails = () => {
             })}
           </div>
         ) : (
-          <Tabs defaultValue={seminarSections[0]?.id} className="w-full mt-[30px]">
+          <Tabs defaultValue={sections[0]?.id} className="w-full mt-[30px]">
             <TabsList className="mb-6 flex-wrap h-auto gap-2 bg-muted/50 p-2">
-              {seminarSections.map(section => (
+              {sections.map(section => (
                 <TabsTrigger 
                   key={section.id} 
                   value={section.id}
@@ -152,7 +158,7 @@ const PresentationDetails = () => {
               ))}
             </TabsList>
             
-            {seminarSections.map((section, sectionIndex) => (
+            {sections.map((section, sectionIndex) => (
               <TabsContent key={section.id} value={section.id}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                   {section.slides.map((slide, slideIndex) => {

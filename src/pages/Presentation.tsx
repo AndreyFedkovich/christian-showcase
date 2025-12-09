@@ -14,6 +14,7 @@ import IntroductionSlide from "@/components/IntroductionSlide";
 import PracticalExampleSlide from "@/components/PracticalExampleSlide";
 import { disciples } from "@/data/disciples";
 import { seminar } from "@/data/seminar";
+import { salvation } from "@/data/salvation";
 import { epistlesStructure } from "@/data/epistles-structure";
 import { presentations } from "@/data/presentations";
 
@@ -52,6 +53,8 @@ const Presentation = () => {
     ? disciples 
     : presentation.type === 'hermeneutics'
     ? epistlesStructure
+    : presentationId === 'salvation'
+    ? salvation
     : seminar;
   const totalSlides = slides.length;
 
