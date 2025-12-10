@@ -1,5 +1,6 @@
 import { DialogueQuestionSlide as DialogueQuestionSlideType } from "@/data/god-exists";
 import { User } from "lucide-react";
+import { useTypewriter } from "@/hooks/use-typewriter";
 
 interface DialogueQuestionSlideProps {
   slide: DialogueQuestionSlideType;
@@ -10,6 +11,12 @@ const DialogueQuestionSlide = ({ slide, direction = 'next' }: DialogueQuestionSl
   const animationClass = direction === 'next' 
     ? 'animate-slide-in-right' 
     : 'animate-slide-in-left';
+
+  const { displayedText, isComplete } = useTypewriter({
+    text: slide.question,
+    speed: 40,
+    delay: 300,
+  });
 
   return (
     <div className={`absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-8 ${animationClass}`}>
@@ -38,8 +45,8 @@ const DialogueQuestionSlide = ({ slide, direction = 'next' }: DialogueQuestionSl
                   before:content-['']
                   before:absolute before:-left-3 before:top-4
                   before:w-6 before:h-6
-                  before:bg-[#26395c]                /* фон такой же, как у пузыря */
-                  before:border-l before:border-b  /* рисуем только внешние стороны */
+                  before:bg-[#26395c]
+                  before:border-l before:border-b
                   before:border-blue-500/30
                   before:rotate-45
                   rounded-tl-none
@@ -52,16 +59,19 @@ const DialogueQuestionSlide = ({ slide, direction = 'next' }: DialogueQuestionSl
                   </span>
               </div>
 
-              {/* Question */}
+              {/* Question with typewriter effect */}
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
-                {slide.question}
+                {displayedText}
+                {!isComplete && (
+                  <span className="animate-blink text-blue-400 ml-1">|</span>
+                )}
               </h2>
             </div>
           </div>
         </div>
 
-        {/* Hint text */}
-        <div className="mt-12 text-center">
+        {/* Hint text - appears after typing complete */}
+        <div className={`mt-12 text-center transition-opacity duration-500 ${isComplete ? 'opacity-100' : 'opacity-0'}`}>
           <p className="text-3xl text-slate-400 italic">
             Вопрос задан искусственному интеллекту...
           </p>
