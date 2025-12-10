@@ -43,7 +43,7 @@ const ScriptureDarkSlide = ({ slide, direction }: ScriptureDarkSlideProps) => {
           {slide.verses.map((verse, index) => (
             <p 
               key={verse.number}
-              className="animate-fade-in"
+              className="opacity-0 animate-fade-in"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {slide.verses.length > 1 && (
@@ -63,7 +63,7 @@ const ScriptureDarkSlide = ({ slide, direction }: ScriptureDarkSlideProps) => {
 
         {/* Reference at bottom */}
         <div className={cn(
-          "text-accent uppercase tracking-[0.3em] text-lg md:text-xl lg:text-2xl font-semibold",
+          "text-accent uppercase tracking-[0.3em] text-lg md:text-xl lg:text-2xl font-semibold opacity-0",
           direction === 'next' ? 'animate-fade-in' : 'animate-fade-in-reverse'
         )}
         style={{ animationDelay: '400ms' }}
