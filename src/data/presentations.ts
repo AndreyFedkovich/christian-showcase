@@ -19,15 +19,6 @@ export interface Presentation {
 
 export const presentations: Presentation[] = [
   {
-    id: "12-disciples",
-    title: "12 Учеников Христа",
-    description: "Погрузитесь в увлекательные истории людей, изменивших ход человеческой истории",
-    thumbnail: peterImg,
-    slideCount: disciples.length,
-    duration: "15-20 минут",
-    type: 'disciples'
-  },
-  {
     id: "seminar",
     title: "Бог превращает зло в добро",
     description: "Божий план спасения никогда не может быть сорван",
@@ -37,15 +28,6 @@ export const presentations: Presentation[] = [
     type: 'seminar'
   },
   {
-    id: "epistles-structure",
-    title: "Знать и Делать",
-    description: "Структура посланий Нового Завета: доктрина и практическое применение",
-    thumbnail: knowDoImg,
-    slideCount: epistlesStructure.length - 1,
-    duration: "30-35 минут",
-    type: 'hermeneutics'
-  },
-  {
     id: "salvation",
     title: "Путь ко спасению",
     description: "От греха к спасению через Иисуса Христа",
@@ -53,5 +35,23 @@ export const presentations: Presentation[] = [
     slideCount: salvation.length,
     duration: "20-25 минут",
     type: 'seminar'
+  },
+  {
+    id: "epistles-structure",
+    title: "Знать и Делать",
+    description: "Структура посланий Нового Завета: доктрина и практическое применение",
+    thumbnail: knowDoImg,
+    slideCount: epistlesStructure.length,
+    duration: "30-35 минут",
+    type: 'hermeneutics'
+  },
+  {
+    id: "12-disciples",
+    title: "12 Учеников Христа",
+    description: "Погрузитесь в увлекательные истории людей, изменивших ход человеческой истории",
+    thumbnail: peterImg,
+    slideCount: disciples.length,
+    duration: "15-20 минут",
+    type: 'disciples'
   }
 ];
