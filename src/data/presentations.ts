@@ -2,10 +2,12 @@ import peterImg from "@/assets/peter.jpg";
 import josephImg from "@/assets/joseph-thumbnail.png";
 import knowDoImg from "@/assets/know-do.png";
 import salvationImg from "@/assets/salvation-thumbnail.png";
+import godExistsImg from "@/assets/god-exists-thumbnail.png";
 import { seminar } from '@/data/seminar';
 import { disciples } from '@/data/disciples';
 import { epistlesStructure } from '@/data/epistles-structure';
 import { salvation } from '@/data/salvation';
+import { godExists } from '@/data/god-exists';
 
 export interface Presentation {
   id: string;
@@ -14,10 +16,19 @@ export interface Presentation {
   thumbnail: string;
   slideCount: number;
   duration: string;
-  type: 'disciples' | 'seminar' | 'hermeneutics';
+  type: 'disciples' | 'seminar' | 'hermeneutics' | 'god-exists';
 }
 
 export const presentations: Presentation[] = [
+  {
+    id: "god-exists",
+    title: "Существует ли Бог?",
+    description: "Философский диалог с искусственным интеллектом о логичности существования Творца",
+    thumbnail: godExistsImg,
+    slideCount: godExists.length,
+    duration: "25-30 минут",
+    type: 'god-exists'
+  },
   {
     id: "seminar",
     title: "Бог превращает зло в добро",
