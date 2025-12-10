@@ -195,7 +195,7 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
       case 'scripture-dark':
         return (
           <div className="flex items-center justify-center h-[180px]">
-            <span className="text-[6rem] md:text-[10rem] lg:text-[10rem] text-accent font-serif leading-none opacity-85 group-hover:opacity-90">"</span>
+            <span className="text-[6rem] md:text-[10rem] lg:text-[10rem] text-accent font-serif leading-none opacity-85 group-hover:opacity-90">“</span>
           </div>
         );
       case 'hermeneutics':
