@@ -1,5 +1,6 @@
 import { DialogueAnswerSlide as DialogueAnswerSlideType } from "@/data/god-exists";
 import { Bot } from "lucide-react";
+import { useTypewriter } from "@/hooks/use-typewriter";
 
 interface DialogueAnswerSlideProps {
   slide: DialogueAnswerSlideType;
@@ -10,6 +11,12 @@ const DialogueAnswerSlide = ({ slide, direction = 'next' }: DialogueAnswerSlideP
   const animationClass = direction === 'next' 
     ? 'animate-slide-in-right' 
     : 'animate-slide-in-left';
+
+  const { displayedText: titleText, isComplete: titleComplete } = useTypewriter({
+    text: slide.title,
+    speed: 25,
+    delay: 300,
+  });
 
   // Variant with image
   if (slide.image) {
@@ -31,17 +38,21 @@ const DialogueAnswerSlide = ({ slide, direction = 'next' }: DialogueAnswerSlideP
                 </div>
               </div>
 
-              {/* Title */}
+              {/* Title with typewriter */}
               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 leading-tight">
-                {slide.title}
+                {titleText}
+                {!titleComplete && (
+                  <span className="animate-blink text-emerald-500 ml-1">|</span>
+                )}
               </h2>
 
-              {/* Content */}
-              <div className="space-y-4">
+              {/* Content - appears after title completes */}
+              <div className={`space-y-4 transition-opacity duration-500 ${titleComplete ? 'opacity-100' : 'opacity-0'}`}>
                 {slide.content.map((paragraph, index) => (
                   <p
                     key={index}
-                    className="text-xl md:text-2xl text-slate-700 leading-relaxed font-sans"
+                    className="text-xl md:text-2xl text-slate-700 leading-relaxed font-sans animate-fade-in"
+                    style={{ animationDelay: `${index * 200}ms` }}
                   >
                     {paragraph}
                   </p>
@@ -50,7 +61,7 @@ const DialogueAnswerSlide = ({ slide, direction = 'next' }: DialogueAnswerSlideP
             </div>
 
             {/* Image Section */}
-            <div className="relative group">
+            <div className={`relative group transition-opacity duration-700 ${titleComplete ? 'opacity-100' : 'opacity-0'}`}>
               <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-500 opacity-30 blur-2xl group-hover:opacity-50 transition-smooth rounded-2xl" />
               <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-premium">
                 <img 
@@ -86,17 +97,21 @@ const DialogueAnswerSlide = ({ slide, direction = 'next' }: DialogueAnswerSlideP
               </span>
             </div>
 
-            {/* Title */}
+            {/* Title with typewriter */}
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 leading-tight mb-8">
-              {slide.title}
+              {titleText}
+              {!titleComplete && (
+                <span className="animate-blink text-emerald-500 ml-1">|</span>
+              )}
             </h2>
 
-            {/* Content */}
-            <div className="space-y-6">
+            {/* Content - appears after title completes */}
+            <div className={`space-y-6 transition-opacity duration-500 ${titleComplete ? 'opacity-100' : 'opacity-0'}`}>
               {slide.content.map((paragraph, index) => (
                 <p
                   key={index}
-                  className="text-xl md:text-2xl text-slate-700 leading-relaxed font-sans"
+                  className="text-xl md:text-2xl text-slate-700 leading-relaxed font-sans animate-fade-in"
+                  style={{ animationDelay: `${index * 200}ms` }}
                 >
                   {paragraph}
                 </p>
@@ -106,7 +121,7 @@ const DialogueAnswerSlide = ({ slide, direction = 'next' }: DialogueAnswerSlideP
         </div>
 
         {/* Decorative element */}
-        <div className="mt-12 flex items-center gap-2 opacity-30">
+        <div className={`mt-12 flex items-center gap-2 transition-opacity duration-500 ${titleComplete ? 'opacity-30' : 'opacity-0'}`}>
           <div className="h-px flex-1 bg-gradient-to-r from-transparent via-emerald-500 to-transparent" />
         </div>
       </div>
