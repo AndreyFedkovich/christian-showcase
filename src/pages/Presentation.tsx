@@ -2,25 +2,16 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { ChevronLeft, ChevronRight, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import ProfileSlide from "@/components/ProfileSlide";
-import StorySlide from "@/components/StorySlide";
-import ReflectionSlide from "@/components/ReflectionSlide";
-import ConclusionSlide from "@/components/ConclusionSlide";
-import ScriptureDarkSlide from "@/components/ScriptureDarkSlide";
+import SlideRenderer from "@/components/SlideRenderer";
 import IntroSlide from "@/components/IntroSlide";
-import HermeneuticsSlide from "@/components/HermeneuticsSlide";
 import IntroHermeneuticsSlide from "@/components/IntroHermeneuticsSlide";
-import IntroductionSlide from "@/components/IntroductionSlide";
-import PracticalExampleSlide from "@/components/PracticalExampleSlide";
-import DialogueQuestionSlide from "@/components/DialogueQuestionSlide";
-import DialogueAnswerSlide from "@/components/DialogueAnswerSlide";
-import ArgumentSlide from "@/components/ArgumentSlide";
 import { disciples } from "@/data/disciples";
 import { seminar } from "@/data/seminar";
 import { salvation } from "@/data/salvation";
 import { epistlesStructure } from "@/data/epistles-structure";
 import { godExists } from "@/data/god-exists";
 import { presentations } from "@/data/presentations";
+import { UniversalSlide } from "@/types/slides";
 
 const Presentation = () => {
   const { presentationId } = useParams();
@@ -53,15 +44,15 @@ const Presentation = () => {
   if (!presentation) return null;
 
   // Load slides based on presentation type
-  const slides = presentation.type === 'disciples' 
+  const slides: UniversalSlide[] = presentation.type === 'disciples' 
     ? disciples 
     : presentation.type === 'hermeneutics'
-    ? epistlesStructure
+    ? epistlesStructure as UniversalSlide[]
     : presentation.type === 'god-exists'
-    ? godExists
+    ? godExists as UniversalSlide[]
     : presentationId === 'salvation'
-    ? salvation
-    : seminar;
+    ? salvation as UniversalSlide[]
+    : seminar as UniversalSlide[];
   const totalSlides = slides.length;
 
   // Wake Lock API to prevent screen from turning off
@@ -205,47 +196,6 @@ const Presentation = () => {
     return () => window.removeEventListener("keydown", handleKeyPress);
   }, [nextSlide, prevSlide, exitPresentation]);
 
-  // Render God Exists slides
-  const renderGodExistsSlide = () => {
-    const slide = godExists[currentSlide];
-    switch (slide.type) {
-      case 'introduction':
-        return <IntroductionSlide slide={slide as any} direction={direction} key={currentSlide} />;
-      case 'dialogue-question':
-        return <DialogueQuestionSlide slide={slide} direction={direction} key={currentSlide} />;
-      case 'dialogue-answer':
-        return <DialogueAnswerSlide slide={slide} direction={direction} key={currentSlide} />;
-      case 'argument':
-        return <ArgumentSlide slide={slide} direction={direction} key={currentSlide} />;
-      case 'reflection':
-        return <ReflectionSlide slide={slide as any} direction={direction} key={currentSlide} />;
-      case 'conclusion':
-        return <ConclusionSlide slide={slide as any} direction={direction} key={currentSlide} />;
-      default:
-        return null;
-    }
-  };
-
-  // Render seminar slides (for seminar and salvation)
-  const renderSeminarSlide = () => {
-    const slidesData = presentationId === 'salvation' ? salvation : seminar;
-    const slide = slidesData[currentSlide];
-    switch (slide.type) {
-      case 'introduction':
-        return <IntroductionSlide slide={slide as any} direction={direction} key={currentSlide} />;
-      case 'scripture-dark':
-        return <ScriptureDarkSlide slide={slide as any} direction={direction} key={currentSlide} />;
-      case 'story':
-        return <StorySlide slide={slide as any} direction={direction} key={currentSlide} />;
-      case 'reflection':
-        return <ReflectionSlide slide={slide as any} direction={direction} key={currentSlide} />;
-      case 'conclusion':
-        return <ConclusionSlide slide={slide as any} direction={direction} key={currentSlide} />;
-      default:
-        return null;
-    }
-  };
-
   return (
     <div 
       className="h-screen w-screen bg-background overflow-hidden"
@@ -325,48 +275,13 @@ const Presentation = () => {
             description={presentation.description}
           />
         )
-      ) : presentation.type === 'disciples' ? (
-        <ProfileSlide
-          disciple={disciples[currentSlide]} 
-          slideNumber={currentSlide + 1}
+      ) : (
+        <SlideRenderer
+          slide={slides[currentSlide]}
           direction={direction}
+          slideNumber={currentSlide + 1}
           key={currentSlide}
         />
-      ) : presentation.type === 'hermeneutics' ? (
-        <>
-          {epistlesStructure[currentSlide].type === 'introduction' && (
-            <IntroductionSlide 
-              slide={epistlesStructure[currentSlide] as any}
-              direction={direction}
-              key={currentSlide}
-            />
-          )}
-          {epistlesStructure[currentSlide].type === 'hermeneutics' && (
-            <HermeneuticsSlide 
-              slide={epistlesStructure[currentSlide] as any}
-              direction={direction}
-              key={currentSlide}
-            />
-          )}
-          {epistlesStructure[currentSlide].type === 'practical-example' && (
-            <PracticalExampleSlide 
-              slide={epistlesStructure[currentSlide] as any}
-              direction={direction}
-              key={currentSlide}
-            />
-          )}
-          {epistlesStructure[currentSlide].type === 'conclusion' && (
-            <ConclusionSlide 
-              slide={epistlesStructure[currentSlide] as any}
-              direction={direction}
-              key={currentSlide}
-            />
-          )}
-        </>
-      ) : presentation.type === 'god-exists' ? (
-        renderGodExistsSlide()
-      ) : (
-        renderSeminarSlide()
       )}
 
       {/* Progress Indicator */}

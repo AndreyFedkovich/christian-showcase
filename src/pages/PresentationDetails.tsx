@@ -2,19 +2,15 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Play, ArrowLeft } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import ProfileCard from "@/components/ProfileCard";
-import SeminarSlideCard from "@/components/SeminarSlideCard";
-import HermeneuticsSlideCard from "@/components/HermeneuticsSlideCard";
-import PracticalExampleSlideCard from "@/components/PracticalExampleSlideCard";
-import IntroductionSlideCard from "@/components/IntroductionSlideCard";
-import GodExistsSlideCard from "@/components/GodExistsSlideCard";
+import SlideCardRenderer from "@/components/SlideCardRenderer";
 import { disciples } from "@/data/disciples";
-import { seminar, seminarSections, SeminarIntroductionSlide } from "@/data/seminar";
-import { epistlesStructure, IntroductionSlide as IntroductionSlideType } from "@/data/epistles-structure";
+import { seminar, seminarSections } from "@/data/seminar";
+import { epistlesStructure } from "@/data/epistles-structure";
 import { salvation, salvationSections } from "@/data/salvation";
 import { godExists, godExistsSections } from "@/data/god-exists";
 import { presentations } from "@/data/presentations";
 import { useEffect } from "react";
+import { UniversalSlide } from "@/types/slides";
 
 const PresentationDetails = () => {
   const { presentationId } = useParams();
@@ -37,15 +33,15 @@ const PresentationDetails = () => {
   if (!presentation) return null;
 
   // Load slides based on presentation type
-  const slides = presentation.type === 'disciples' 
+  const slides: UniversalSlide[] = presentation.type === 'disciples' 
     ? disciples 
     : presentation.type === 'hermeneutics'
-    ? epistlesStructure
+    ? epistlesStructure as UniversalSlide[]
     : presentation.type === 'god-exists'
-    ? godExists
+    ? godExists as UniversalSlide[]
     : presentationId === 'salvation'
-    ? salvation
-    : seminar;
+    ? salvation as UniversalSlide[]
+    : seminar as UniversalSlide[];
   
   // Load sections for tabbed presentations
   const sections = presentation.type === 'god-exists'
@@ -109,9 +105,9 @@ const PresentationDetails = () => {
         {presentation.type === 'disciples' ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-[30px]">
             {disciples.map((disciple, index) => (
-              <ProfileCard
+              <SlideCardRenderer
                 key={`disciple-${index}`} 
-                disciple={disciple}
+                slide={disciple}
                 slideNumber={index + 1}
                 onClick={() => handleSlideClick(index)}
               />
@@ -119,38 +115,14 @@ const PresentationDetails = () => {
           </div>
         ) : presentation.type === 'hermeneutics' ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-[30px]">
-            {epistlesStructure.slice(1).map((slide, index) => {
-              const slideNumber = index + 2;
-              return slide.type === 'introduction' ? (
-                <IntroductionSlideCard 
-                  key={`hermeneutics-${index}`} 
-                  slide={slide as IntroductionSlideType}
-                  slideNumber={slideNumber}
-                  onClick={() => handleSlideClick(index + 1)}
-                />
-              ) : slide.type === 'conclusion' ? (
-                <SeminarSlideCard 
-                  key={`hermeneutics-${index}`} 
-                  slide={slide as any}
-                  slideNumber={slideNumber}
-                  onClick={() => handleSlideClick(index + 1)}
-                />
-              ) : slide.type === 'practical-example' ? (
-                <PracticalExampleSlideCard 
-                  key={`hermeneutics-${index}`} 
-                  slide={slide as any}
-                  slideNumber={slideNumber}
-                  onClick={() => handleSlideClick(index + 1)}
-                />
-              ) : (
-                <HermeneuticsSlideCard 
-                  key={`hermeneutics-${index}`} 
-                  slide={slide as any}
-                  slideNumber={slideNumber}
-                  onClick={() => handleSlideClick(index + 1)}
-                />
-              );
-            })}
+            {epistlesStructure.slice(1).map((slide, index) => (
+              <SlideCardRenderer 
+                key={`hermeneutics-${index}`} 
+                slide={slide as UniversalSlide}
+                slideNumber={index + 2}
+                onClick={() => handleSlideClick(index + 1)}
+              />
+            ))}
           </div>
         ) : presentation.type === 'god-exists' ? (
           <Tabs defaultValue={godExistsSections[0]?.id} className="w-full mt-[30px]">
@@ -174,9 +146,9 @@ const PresentationDetails = () => {
                     const slideNumber = globalIndex + 1;
                     
                     return (
-                      <GodExistsSlideCard
+                      <SlideCardRenderer
                         key={`slide-${globalIndex}`}
-                        slide={slide}
+                        slide={slide as UniversalSlide}
                         slideNumber={slideNumber}
                         onClick={() => handleSlideClick(globalIndex)}
                       />
@@ -207,17 +179,10 @@ const PresentationDetails = () => {
                     const globalIndex = getGlobalIndex(sectionIndex, slideIndex);
                     const slideNumber = globalIndex + 1;
                     
-                    return slide.type === 'introduction' ? (
-                      <IntroductionSlideCard
+                    return (
+                      <SlideCardRenderer
                         key={`slide-${globalIndex}`}
-                        slide={slide as SeminarIntroductionSlide}
-                        slideNumber={slideNumber}
-                        onClick={() => handleSlideClick(globalIndex)}
-                      />
-                    ) : (
-                      <SeminarSlideCard
-                        key={`slide-${globalIndex}`}
-                        slide={slide}
+                        slide={slide as UniversalSlide}
                         slideNumber={slideNumber}
                         onClick={() => handleSlideClick(globalIndex)}
                       />
