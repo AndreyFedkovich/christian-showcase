@@ -2,6 +2,7 @@ import godExistsThumbnail from "@/assets/god-exists-thumbnail.png";
 import aiDialogueIntro from "@/assets/ai-dialogue-intro.png";
 import universeComplexity from "@/assets/universe-complexity.png";
 import creatorLight from "@/assets/creator-light.png";
+import { ScriptureDarkSlide } from '@/data/seminar';
 
 // Interfaces for new slide types
 export interface DialogueQuestionSlide {
@@ -55,7 +56,8 @@ export type GodExistsSlide =
   | ArgumentSlide 
   | GodExistsIntroductionSlide
   | GodExistsConclusionSlide
-  | GodExistsReflectionSlide;
+  | GodExistsReflectionSlide
+  | ScriptureDarkSlide  ;
 
 export interface GodExistsSection {
   id: string;
@@ -267,12 +269,17 @@ export const conclusionSlides: GodExistsSlide[] = [
       'Законы природы не могут быть случайными — их точная настройка указывает на разумный замысел.',
       'Наша неспособность полностью понять Творца не опровергает Его существование — сверхъестественное по определению выходит за рамки естественного понимания.',
       'ИИ, основанный исключительно на логике и лишённый эмоций, признал: существование Творца — наиболее логичный вывод из имеющихся данных.'
-    ],
-    verse: {
-      text: 'Небеса проповедуют славу Божию, и о делах рук Его вещает твердь.',
-      reference: 'Псалом 18:2'
-    }
-  }
+    ]
+  },
+  {
+    type: 'scripture-dark',
+    reference: 'Псалом 18:2',
+    book: 'Псалтырь',
+    chapter: 18,
+    verses: [
+      { number: 2, text: 'Небеса проповедуют славу Божию, и о делах рук Его вещает твердь.' }
+    ]
+  },
 ];
 
 // Sections for tabs

@@ -1,14 +1,14 @@
 import { Card } from "@/components/ui/card";
 import { GodExistsSlide } from "@/data/god-exists";
-import { 
-  User, 
-  Bot, 
-  ThumbsUp, 
-  ThumbsDown, 
-  FileText, 
-  HelpCircle, 
-  Lightbulb 
-} from "lucide-react";
+import {
+  User,
+  Bot,
+  ThumbsUp,
+  ThumbsDown,
+  FileText,
+  HelpCircle,
+  Lightbulb,
+} from 'lucide-react';
 
 interface GodExistsSlideCardProps {
   slide: GodExistsSlide;
