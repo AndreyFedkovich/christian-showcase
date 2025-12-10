@@ -7,10 +7,12 @@ import SeminarSlideCard from "@/components/SeminarSlideCard";
 import HermeneuticsSlideCard from "@/components/HermeneuticsSlideCard";
 import PracticalExampleSlideCard from "@/components/PracticalExampleSlideCard";
 import IntroductionSlideCard from "@/components/IntroductionSlideCard";
+import GodExistsSlideCard from "@/components/GodExistsSlideCard";
 import { disciples } from "@/data/disciples";
 import { seminar, seminarSections, SeminarIntroductionSlide } from "@/data/seminar";
 import { epistlesStructure, IntroductionSlide as IntroductionSlideType } from "@/data/epistles-structure";
 import { salvation, salvationSections } from "@/data/salvation";
+import { godExists, godExistsSections } from "@/data/god-exists";
 import { presentations } from "@/data/presentations";
 import { useEffect } from "react";
 
@@ -39,12 +41,18 @@ const PresentationDetails = () => {
     ? disciples 
     : presentation.type === 'hermeneutics'
     ? epistlesStructure
+    : presentation.type === 'god-exists'
+    ? godExists
     : presentationId === 'salvation'
     ? salvation
     : seminar;
   
-  // Load sections for seminar-type presentations
-  const sections = presentationId === 'salvation' ? salvationSections : seminarSections;
+  // Load sections for tabbed presentations
+  const sections = presentation.type === 'god-exists'
+    ? godExistsSections
+    : presentationId === 'salvation' 
+    ? salvationSections 
+    : seminarSections;
   
   const handleSlideClick = (slideIndex: number) => {
     navigate(`/presentation/${presentationId}/view?slide=${slideIndex}`);
@@ -54,7 +62,7 @@ const PresentationDetails = () => {
     navigate(`/presentation/${presentationId}/view`);
   };
 
-  // Calculate global index for seminar slides
+  // Calculate global index for tabbed slides
   const getGlobalIndex = (sectionIndex: number, slideIndex: number) => {
     let globalIndex = 0;
     for (let i = 0; i < sectionIndex; i++) {
@@ -144,6 +152,40 @@ const PresentationDetails = () => {
               );
             })}
           </div>
+        ) : presentation.type === 'god-exists' ? (
+          <Tabs defaultValue={godExistsSections[0]?.id} className="w-full mt-[30px]">
+            <TabsList className="mb-6 flex-wrap h-auto gap-2 bg-muted/50 p-2">
+              {godExistsSections.map(section => (
+                <TabsTrigger 
+                  key={section.id} 
+                  value={section.id}
+                  className="px-6 py-3 text-base font-medium"
+                >
+                  {section.name}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+            
+            {godExistsSections.map((section, sectionIndex) => (
+              <TabsContent key={section.id} value={section.id}>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                  {section.slides.map((slide, slideIndex) => {
+                    const globalIndex = getGlobalIndex(sectionIndex, slideIndex);
+                    const slideNumber = globalIndex + 1;
+                    
+                    return (
+                      <GodExistsSlideCard
+                        key={`slide-${globalIndex}`}
+                        slide={slide}
+                        slideNumber={slideNumber}
+                        onClick={() => handleSlideClick(globalIndex)}
+                      />
+                    );
+                  })}
+                </div>
+              </TabsContent>
+            ))}
+          </Tabs>
         ) : (
           <Tabs defaultValue={sections[0]?.id} className="w-full mt-[30px]">
             <TabsList className="mb-6 flex-wrap h-auto gap-2 bg-muted/50 p-2">
