@@ -57,7 +57,7 @@ export type GodExistsSlide =
   | GodExistsIntroductionSlide
   | GodExistsConclusionSlide
   | GodExistsReflectionSlide
-  | ScriptureDarkSlide  ;
+  | ScriptureDarkSlide;
 
 export interface GodExistsSection {
   id: string;
