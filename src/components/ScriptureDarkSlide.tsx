@@ -38,8 +38,7 @@ const ScriptureDarkSlide = ({ slide, direction }: ScriptureDarkSlideProps) => {
         {/* Verses container */}
         <div className={cn(
           "text-white text-center max-w-4xl mb-12 md:mb-16 space-y-4",
-          getFontSize(),
-          direction === 'next' ? 'animate-fade-in' : 'animate-fade-in-reverse'
+          getFontSize()
         )}>
           {slide.verses.map((verse, index) => (
             <p 
