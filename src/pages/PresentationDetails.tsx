@@ -116,11 +116,11 @@ const PresentationDetails = () => {
         ) : presentation.type === 'hermeneutics' ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-[30px]">
             {epistlesStructure.slice(1).map((slide, index) => (
-              <SlideCardRenderer 
-                key={`hermeneutics-${index}`} 
-                slide={slide as UniversalSlide}
-                slideNumber={index + 2}
-                onClick={() => handleSlideClick(index + 1)}
+          <SlideCardRenderer 
+            key={`hermeneutics-${index}`} 
+            slide={slide as UniversalSlide}
+            slideNumber={index + 1}
+            onClick={() => handleSlideClick(index + 1)}
               />
             ))}
           </div>

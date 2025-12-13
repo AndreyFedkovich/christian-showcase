@@ -1,4 +1,5 @@
 import KnowDoImage from "@/assets/know-do.png";
+import StatusConditionImage from "@/assets/status-condition.png";
 
 export interface Slide {
   type: string;
@@ -97,7 +98,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
     content: [
       'Этот принцип "сначала знать — потом делать" пронизывает все послания и является ключом к правильному пониманию христианской жизни.'
     ],
-    image: KnowDoImage
+    image: StatusConditionImage
   },
   {
     type: 'hermeneutics',
