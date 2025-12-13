@@ -17,27 +17,30 @@ function SpinWheel<T>({
   className 
 }: SpinWheelProps<T>) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isSpinning, setIsSpinning] = useState(false);
+  const [visualSpinning, setVisualSpinning] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const onCompleteRef = useRef(onComplete);
   const hasCompletedRef = useRef(false);
+  const isSpinningRef = useRef(false);
 
   // Keep onComplete ref updated
   useEffect(() => {
     onCompleteRef.current = onComplete;
   }, [onComplete]);
 
-  // Reset completion flag when spinning becomes false
+  // Reset flags when spinning prop becomes false
   useEffect(() => {
     if (!spinning) {
       hasCompletedRef.current = false;
-      setIsSpinning(false);
+      isSpinningRef.current = false;
+      setVisualSpinning(false);
     }
   }, [spinning]);
 
   useEffect(() => {
-    if (spinning && !isSpinning && !hasCompletedRef.current) {
-      setIsSpinning(true);
+    if (spinning && !isSpinningRef.current && !hasCompletedRef.current) {
+      isSpinningRef.current = true;
+      setVisualSpinning(true);
       
       // Random target index
       const targetIndex = Math.floor(Math.random() * items.length);
@@ -65,7 +68,8 @@ function SpinWheel<T>({
         } else {
           // Stop at target
           setCurrentIndex(targetIndex);
-          setIsSpinning(false);
+          setVisualSpinning(false);
+          isSpinningRef.current = false;
           hasCompletedRef.current = true;
           onCompleteRef.current(items[targetIndex].value);
           return;
@@ -80,7 +84,7 @@ function SpinWheel<T>({
     return () => {
       if (intervalRef.current) clearTimeout(intervalRef.current);
     };
-  }, [spinning, items, duration, isSpinning]);
+  }, [spinning, items, duration]);
 
   const currentItem = items[currentIndex];
 
@@ -96,20 +100,20 @@ function SpinWheel<T>({
         "border-4 border-accent/50",
         "flex items-center justify-center",
         "shadow-[0_0_60px_rgba(139,92,246,0.3)]",
-        isSpinning && "animate-pulse"
+        visualSpinning && "animate-pulse"
       )}>
         {/* Glow effect */}
         <div className={cn(
           "absolute inset-0 rounded-full",
           "bg-gradient-to-br from-violet-500/10 to-purple-500/10",
-          isSpinning && "animate-spin-slow"
+          visualSpinning && "animate-spin-slow"
         )} />
         
         {/* Center content */}
         <div className={cn(
           "z-10 flex flex-col items-center gap-3 p-8 text-center",
           "transition-all duration-150",
-          isSpinning && "scale-105"
+          visualSpinning && "scale-105"
         )}>
           {currentItem?.icon && (
             <span className="text-5xl md:text-6xl">{currentItem.icon}</span>
