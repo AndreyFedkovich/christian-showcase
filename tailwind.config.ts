@@ -160,6 +160,7 @@ export default {
         "slide-in-left": "slide-in-left 0.3s ease-out",
         "fade-in": "fade-in 0.8s ease-out forwards",
         "blink": "blink 1s step-end infinite",
+        "spin-slow": "spin 3s linear infinite",
       },
     },
   },
