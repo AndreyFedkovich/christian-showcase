@@ -41,10 +41,10 @@ const ScriptureDarkSlide = ({ slide, direction }: ScriptureDarkSlideProps) => {
           getFontSize()
         )}>
           {slide.verses.map((verse, index) => (
-            <p 
+            <p
               key={verse.number}
               className="opacity-0 animate-fade-in"
-              style={{ animationDelay: `${index * 100}ms` }}
+              style={{ animationDelay: `${index * 200}ms` }}
             >
               {slide.verses.length > 1 && (
                 <sup className="text-base md:text-lg text-accent/70 mr-1 font-semibold">{verse.number}</sup>
@@ -55,7 +55,8 @@ const ScriptureDarkSlide = ({ slide, direction }: ScriptureDarkSlideProps) => {
         </div>
 
         {/* Decorative divider */}
-        <div className="flex items-center justify-center gap-4 mb-6">
+        <div className={cn("flex items-center justify-center gap-4 mb-6 opacity-0", direction === 'next' ? 'animate-fade-in' : 'animate-fade-in-reverse')}
+             style={{ animationDelay: slide.verses.length * 200 + 200 + 'ms' }}>
           <div className="h-px w-20 md:w-24 bg-accent/40" />
           <div className="w-2 h-2 rounded-full bg-accent" />
           <div className="h-px w-20 md:w-24 bg-accent/40" />
@@ -66,7 +67,7 @@ const ScriptureDarkSlide = ({ slide, direction }: ScriptureDarkSlideProps) => {
           "text-accent uppercase tracking-[0.3em] text-lg md:text-xl lg:text-2xl font-semibold opacity-0",
           direction === 'next' ? 'animate-fade-in' : 'animate-fade-in-reverse'
         )}
-        style={{ animationDelay: '400ms' }}
+        style={{ animationDelay: slide.verses.length * 200 + 600 + 'ms' }}
         >
           {slide.reference}
         </div>

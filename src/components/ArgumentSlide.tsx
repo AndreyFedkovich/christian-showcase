@@ -73,9 +73,11 @@ const ArgumentSlide = ({ slide, direction = 'next' }: ArgumentSlideProps) => {
               </div>
             </div>
           </div>
-          <p className="text-xl md:text-2xl text-white/90 leading-relaxed mt-2">
-            {slide.idea}
-          </p>
+          {(Array.isArray(slide.idea) ? slide.idea : [slide.idea]).map(idea => (
+              <p className="text-xl md:text-2xl text-white/90 leading-relaxed mt-2">
+                {idea}
+              </p>
+          ))}
         </div>
 
         {/* Summary Section */}

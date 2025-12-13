@@ -57,7 +57,7 @@ export const presentations: Presentation[] = [
     type: 'hermeneutics'
   },
   {
-    id: "12-disciples",
+    id: "disciples",
     title: "12 Учеников Христа",
     description: "Погрузитесь в увлекательные истории людей, изменивших ход человеческой истории",
     thumbnail: peterImg,
