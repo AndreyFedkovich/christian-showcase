@@ -19,10 +19,24 @@ function SpinWheel<T>({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isSpinning, setIsSpinning] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const onCompleteRef = useRef(onComplete);
+  const hasCompletedRef = useRef(false);
+
+  // Keep onComplete ref updated
+  useEffect(() => {
+    onCompleteRef.current = onComplete;
+  }, [onComplete]);
+
+  // Reset completion flag when spinning becomes false
+  useEffect(() => {
+    if (!spinning) {
+      hasCompletedRef.current = false;
+      setIsSpinning(false);
+    }
+  }, [spinning]);
 
   useEffect(() => {
-    if (spinning && !isSpinning) {
+    if (spinning && !isSpinning && !hasCompletedRef.current) {
       setIsSpinning(true);
       
       // Random target index
@@ -52,7 +66,8 @@ function SpinWheel<T>({
           // Stop at target
           setCurrentIndex(targetIndex);
           setIsSpinning(false);
-          onComplete(items[targetIndex].value);
+          hasCompletedRef.current = true;
+          onCompleteRef.current(items[targetIndex].value);
           return;
         }
 
@@ -64,9 +79,8 @@ function SpinWheel<T>({
 
     return () => {
       if (intervalRef.current) clearTimeout(intervalRef.current);
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
-  }, [spinning, items, duration, onComplete, isSpinning]);
+  }, [spinning, items, duration, isSpinning]);
 
   const currentItem = items[currentIndex];
 
