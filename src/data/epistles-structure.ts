@@ -3,6 +3,7 @@ import StatusConditionImage from "@/assets/status-condition.png";
 import IntroGloryPowerImage from "@/assets/intro-glory-power.png";
 import IntroExampleFollowImage from "@/assets/intro-example-follow.png";
 import IntroPromisesFaithImage from "@/assets/intro-promises-faith.png";
+import IntroPrinciplesSummaryImage from "@/assets/intro-principles-summary.png";
 
 export interface Slide {
   type: string;
@@ -129,7 +130,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
     content: [
       'Эти принципы пронизывают все послания и являются ключом к правильному пониманию христианской жизни.'
     ],
-    image: StatusConditionImage
+    image: IntroPrinciplesSummaryImage
   },
   {
     type: 'introduction',
