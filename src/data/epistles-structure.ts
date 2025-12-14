@@ -18,7 +18,7 @@ export interface HermeneuticsSlide extends Slide {
     percentage: number;
     themes: string[];
     powerSource?: string;
-    powerSourceType?: 'promise' | 'example' | 'glory';
+    powerSourceType?: 'promise' | 'example' | 'glory' | 'status';
   };
   doSection: {
     chapters: string;
@@ -101,7 +101,8 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
     subtitle: 'Знание своего статуса',
     content: [
       'Можно выделить несколько принципов знания и поступков.',
-      'Первый принцип "сначала понимать свой статус — затем приводить свою жизнь в соответствующее состояние"'
+      'Первый принцип "сначала понимать свой статус — затем приводить свою жизнь в соответствующее состояние"',
+      'Ключевые слова - поступать достойно, жить духом, преображаться обновлением ума'
     ],
     image: StatusConditionImage
   },
@@ -156,8 +157,8 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Предустановление по избранию',
         'Избрание Израиля'
       ],
-      powerSource: 'Пример',
-      powerSourceType: 'example'
+      powerSource: 'Поступать достойно',
+      powerSourceType: 'status'
     },
     doSection: {
       chapters: 'Гл. 12-16',
@@ -190,7 +191,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Все что мы имеем - мы получили',
         'Строительство из драгоценных камней'
       ],
-      powerSource: 'Созерцание славы',
+      powerSource: 'Созерцание славы Божией',
       powerSourceType: 'glory'
     },
     doSection: {
@@ -214,18 +215,18 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
     bookName: '2 Коринфянам',
     bookNameEn: '2 Corinthians',
     knowSection: {
-      chapters: 'Гл. 1-7',
+      chapters: 'Гл. 1-6',
       percentage: 54,
       themes: [
         'Утешение в скорбях',
         'Новый завет',
         'Служение примирения'
       ],
-      powerSource: 'Обещания',
+      powerSource: 'Обещания, пример',
       powerSourceType: 'promise'
     },
     doSection: {
-      chapters: 'Гл. 8-13',
+      chapters: 'Гл. 7-13',
       percentage: 46,
       themes: [
         'Щедрость в даянии',
@@ -234,8 +235,8 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
       ]
     },
     keyVerse: {
-      text: 'Итак умоляю вас, братия, милосердием Божиим, представьте тела ваши в жертву живую, святую, благоугодную Богу',
-      reference: 'Римлянам 12:1'
+      text: 'Итак, возлюбленные, имея такие обетования, очистим себя от всякой скверны плоти и духа, совершая святыню в страхе Божием.',
+      reference: '2 Коринфянам 7:1'
     }
   },
   {
@@ -249,7 +250,9 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Евангелие благодати',
         'Оправдание верой',
         'Свобода во Христе'
-      ]
+      ],
+      powerSource: 'Поступать достойно',
+      powerSourceType: 'status',
     },
     doSection: {
       chapters: 'Гл. 5-6',
@@ -276,7 +279,9 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Благословения во Христе',
         'Спасение по благодати',
         'Тайна Христа'
-      ]
+      ],
+      powerSource: 'Поступать достойно, обещания',
+      powerSourceType: 'status',
     },
     doSection: {
       chapters: 'Гл. 4-6',
@@ -288,8 +293,8 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
       ]
     },
     keyVerse: {
-      text: 'Итак подражайте Богу, как чада возлюбленные, и живите в любви',
-      reference: 'Ефесянам 5:1-2'
+      text: '1 Итак, я, узник в Господе, умоляю вас поступать достойно звания, в которое вы призваны, со всяким смиренномудрием и кротостью и долготерпением, снисходя друг ко другу любовью',
+      reference: 'Ефесянам 4:1-2'
     }
   },
   {
@@ -297,19 +302,19 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
     bookName: 'Филиппийцам',
     bookNameEn: 'Philippians',
     knowSection: {
-      chapters: 'Гл. 1-2',
-      percentage: 50,
+      chapters: 'Гл. 1',
+      percentage: 25,
       themes: [
         'Радость во Христе',
         'Смирение Христа',
         'Пример служения'
       ],
-      powerSource: 'Пример',
-      powerSourceType: 'example'
+      powerSource: 'Поступать достойно, пример',
+      powerSourceType: 'status'
     },
     doSection: {
-      chapters: 'Гл. 3-4',
-      percentage: 50,
+      chapters: 'Гл. 2-4',
+      percentage: 75,
       themes: [
         'Стремление к цели',
         'Радость и мир',
@@ -317,8 +322,8 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
       ]
     },
     keyVerse: {
-      text: 'Радуйтесь всегда в Господе; и еще говорю: радуйтесь!',
-      reference: 'Филиппийцам 4:4'
+      text: 'Только живите достойно благовествования Христова, чтобы мне, приду ли я и увижу вас, или не приду, слышать о вас, что вы стоите в одном духе, подвизаясь единодушно за веру Евангельскую',
+      reference: 'Филиппийцам 1:27'
     }
   },
   {
@@ -333,8 +338,8 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Полнота в Нем',
         'Тайна Евангелия'
       ],
-      powerSource: 'Слава',
-      powerSourceType: 'glory'
+      powerSource: 'Поступать достойно',
+      powerSourceType: 'status'
     },
     doSection: {
       chapters: 'Гл. 3-4',
@@ -346,8 +351,8 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
       ]
     },
     keyVerse: {
-      text: 'Итак умоляю вас, братия, милосердием Божиим, представьте тела ваши в жертву живую, святую, благоугодную Богу',
-      reference: 'Римлянам 12:1'
+      text: 'Итак, если вы воскресли со Христом, то ищите горнего, где Христос сидит одесную Бога; о горнем помышляйте, а не о земном.',
+      reference: 'Колосянам 3:1 - 2'
     }
   },
   {
@@ -496,7 +501,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Новый завет',
         'Совершенная жертва'
       ],
-      powerSource: 'Слава',
+      powerSource: 'Созерцать славу Божию',
       powerSourceType: 'glory'
     },
     doSection: {
@@ -509,8 +514,8 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
       ]
     },
     keyVerse: {
-      text: 'взирая на начальника и совершителя веры Иисуса, Который, вместо предлежавшей Ему радости, претерпел крест, пренебрегши посрамление, и воссел одесную престола Божия.',
-      reference: 'Евреям 12:1'
+      text: 'Взирая на начальника и совершителя веры Иисуса, Который, вместо предлежавшей Ему радости, претерпел крест, пренебрегши посрамление, и воссел одесную престола Божия.',
+      reference: 'Евреям 12:2'
     }
   },
   {

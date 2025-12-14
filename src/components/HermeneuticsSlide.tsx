@@ -39,6 +39,16 @@ const powerSourceConfig = {
     progressBar: 'from-yellow-400 to-yellow-500',
     icon: iconGlory,
   },
+  status: {
+    gradient: 'from-emerald-50 to-emerald-100 dark:from-emerald-950 dark:to-emerald-900',
+    badge: 'bg-emerald-600',
+    title: 'text-emerald-900 dark:text-emerald-100',
+    text: 'text-emerald-800 dark:text-emerald-200',
+    bullet: 'bg-emerald-600',
+    border: 'border-emerald-300 dark:border-emerald-700',
+    progressBar: 'from-emerald-500 to-emerald-600',
+    icon: iconGlory,
+  },
   default: {
     gradient: 'from-emerald-50 to-emerald-100 dark:from-emerald-950 dark:to-emerald-900',
     badge: 'bg-emerald-600',
@@ -75,6 +85,14 @@ const doSectionConfig = {
     text: 'text-orange-800 dark:text-orange-200',
     bullet: 'bg-orange-500',
     progressBar: 'from-orange-400 to-orange-500',
+  },
+  status: {
+    gradient: 'from-amber-50 to-amber-100 dark:from-amber-950 dark:to-amber-900',
+    badge: 'bg-amber-600',
+    title: 'text-amber-900 dark:text-amber-100',
+    text: 'text-amber-800 dark:text-amber-200',
+    bullet: 'bg-amber-500',
+    progressBar: 'from-amber-400 to-amber-500',
   },
   default: {
     gradient: 'from-amber-50 to-amber-100 dark:from-amber-950 dark:to-amber-900',
