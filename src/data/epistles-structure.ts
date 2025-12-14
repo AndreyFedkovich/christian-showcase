@@ -1,5 +1,6 @@
 import KnowDoImage from "@/assets/know-do.png";
 import StatusConditionImage from "@/assets/status-condition.png";
+import IntroGloryPowerImage from "@/assets/intro-glory-power.png";
 
 export interface Slide {
   type: string;
@@ -108,7 +109,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
     content: [
       'Другой принцип "созерцать славу Божию — затем находить в этом силу для своей жизни"'
     ],
-    image: StatusConditionImage
+    image: IntroGloryPowerImage
   },
   {
     type: 'introduction',
