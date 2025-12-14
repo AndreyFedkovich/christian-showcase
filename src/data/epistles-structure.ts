@@ -2,6 +2,7 @@ import KnowDoImage from "@/assets/know-do.png";
 import StatusConditionImage from "@/assets/status-condition.png";
 import IntroGloryPowerImage from "@/assets/intro-glory-power.png";
 import IntroExampleFollowImage from "@/assets/intro-example-follow.png";
+import IntroPromisesFaithImage from "@/assets/intro-promises-faith.png";
 
 export interface Slide {
   type: string;
@@ -137,7 +138,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
     content: [
       'Заключительный принцип "знать обещания — затем верой прилагать все усилия" также пронизывает все послания и является ключом к правильному пониманию христианской жизни.'
     ],
-    image: StatusConditionImage
+    image: IntroPromisesFaithImage
   },
   {
     type: 'hermeneutics',
