@@ -125,21 +125,21 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
   },
   {
     type: 'introduction',
-    title: 'Пример',
-    subtitle: 'Следование примеру',
+    title: 'Обещания',
+    subtitle: 'Жизнь верой',
+    content: [
+      'Заключительный принцип "знать обещания — затем верой прилагать все усилия"'
+    ],
+    image: IntroPromisesFaithImage
+  },
+  {
+    type: 'introduction',
+    title: 'Резюме',
+    subtitle: 'Подведем итог',
     content: [
       'Эти принципы пронизывают все послания и являются ключом к правильному пониманию христианской жизни.'
     ],
     image: IntroPrinciplesSummaryImage
-  },
-  {
-    type: 'introduction',
-    title: 'Обещания',
-    subtitle: 'Жизнь верой',
-    content: [
-      'Заключительный принцип "знать обещания — затем верой прилагать все усилия" также пронизывает все послания и является ключом к правильному пониманию христианской жизни.'
-    ],
-    image: IntroPromisesFaithImage
   },
   {
     type: 'hermeneutics',
@@ -303,7 +303,9 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Радость во Христе',
         'Смирение Христа',
         'Пример служения'
-      ]
+      ],
+      powerSource: 'Пример',
+      powerSourceType: 'example'
     },
     doSection: {
       chapters: 'Гл. 3-4',
@@ -330,7 +332,9 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Превосходство Христа',
         'Полнота в Нем',
         'Тайна Евангелия'
-      ]
+      ],
+      powerSource: 'Слава',
+      powerSourceType: 'glory'
     },
     doSection: {
       chapters: 'Гл. 3-4',
@@ -484,17 +488,19 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
     bookName: 'Евреям',
     bookNameEn: 'Hebrews',
     knowSection: {
-      chapters: 'Гл. 1-10',
+      chapters: 'Гл. 1-11',
       percentage: 77,
       themes: [
         'Превосходство Христа',
         'Новое священство',
         'Новый завет',
         'Совершенная жертва'
-      ]
+      ],
+      powerSource: 'Слава',
+      powerSourceType: 'glory'
     },
     doSection: {
-      chapters: 'Гл. 11-13',
+      chapters: 'Гл. 12-13',
       percentage: 23,
       themes: [
         'Примеры веры',
@@ -503,8 +509,8 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
       ]
     },
     keyVerse: {
-      text: 'Вера же есть осуществление ожидаемого и уверенность в невидимом',
-      reference: 'Евреям 11:1'
+      text: 'взирая на начальника и совершителя веры Иисуса, Который, вместо предлежавшей Ему радости, претерпел крест, пренебрегши посрамление, и воссел одесную престола Божия.',
+      reference: 'Евреям 12:1'
     }
   },
   {
