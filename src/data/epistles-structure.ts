@@ -1,6 +1,7 @@
 import KnowDoImage from "@/assets/know-do.png";
 import StatusConditionImage from "@/assets/status-condition.png";
 import IntroGloryPowerImage from "@/assets/intro-glory-power.png";
+import IntroExampleFollowImage from "@/assets/intro-example-follow.png";
 
 export interface Slide {
   type: string;
@@ -118,7 +119,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
     content: [
       'Еще один принцип "видеть пример — затем затем следовать этому примеру"'
     ],
-    image: StatusConditionImage
+    image: IntroExampleFollowImage
   },
   {
     type: 'introduction',
