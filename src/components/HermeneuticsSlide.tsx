@@ -2,6 +2,7 @@ import { HermeneuticsSlide as HermeneuticsSlideType } from "@/data/epistles-stru
 import iconPromise from "@/assets/icon-promise.png";
 import iconExample from "@/assets/icon-example.png";
 import iconGlory from "@/assets/icon-glory.png";
+import iconStatus from "@/assets/icon-status.png";
 
 interface HermeneuticsSlideProps {
   slide: HermeneuticsSlideType;
@@ -47,7 +48,7 @@ const powerSourceConfig = {
     bullet: 'bg-emerald-600',
     border: 'border-emerald-300 dark:border-emerald-700',
     progressBar: 'from-emerald-500 to-emerald-600',
-    icon: iconGlory,
+    icon: iconStatus,
   },
   default: {
     gradient: 'from-emerald-50 to-emerald-100 dark:from-emerald-950 dark:to-emerald-900',
