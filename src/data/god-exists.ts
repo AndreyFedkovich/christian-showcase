@@ -79,6 +79,15 @@ export const introSlides: GodExistsSlide[] = [
     image: aiDialogueIntro
   },
   {
+    type: 'scripture-dark',
+    reference: 'Римлянам 1:20',
+    book: 'Римлянам',
+    chapter: 1,
+    verses: [
+      { number: 20, text: 'От создания мира невидимые свойства Бога — Его вечная сила и Божественная природа — вполне могут быть поняты через рассматривание того, что Он сотворил. И значит, людям нет извинения...' }
+    ]
+  },
+  {
     type: 'dialogue-question',
     question: 'Существует ли Бог?'
   },
