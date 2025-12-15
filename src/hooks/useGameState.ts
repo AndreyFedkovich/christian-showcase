@@ -7,6 +7,7 @@ import {
   getRandomQuestion,
   getCategoriesForDifficulty
 } from '@/data/bible-questions';
+import { checkAnswerWithAI } from '@/lib/ai-service';
 
 export type GamePhase = 
   | 'team-setup'
@@ -198,48 +199,59 @@ export const useGameState = () => {
     });
   }, []);
 
-  const submitAnswer = useCallback((answer: string) => {
+  const submitAnswer = useCallback(async (answer: string) => {
     setState(prev => ({
       ...prev,
       timerActive: false,
       gamePhase: 'checking'
     }));
 
-    // Check answer
-    setState(prev => {
-      if (!prev.currentQuestion) return prev;
+    const currentQ = state.currentQuestion;
+    if (!currentQ) return;
 
-      const q = prev.currentQuestion;
-      let isCorrect = false;
+    let isCorrect = false;
 
-      if (q.type === 'exact') {
-        const normalizedAnswer = answer.toLowerCase().trim();
-        const normalizedCorrect = q.correctAnswer.toLowerCase().trim();
-        isCorrect = normalizedAnswer === normalizedCorrect;
-        
-        // Also check acceptable keywords
-        if (!isCorrect && q.acceptableKeywords) {
-          isCorrect = q.acceptableKeywords.some(
-            keyword => normalizedAnswer.includes(keyword.toLowerCase())
-          );
-        }
-      } else {
-        // For fuzzy questions, check keywords
-        if (q.acceptableKeywords) {
+    if (currentQ.type === 'exact') {
+      // Local check for exact answers
+      const normalizedAnswer = answer.toLowerCase().trim();
+      const normalizedCorrect = currentQ.correctAnswer.toLowerCase().trim();
+      isCorrect = normalizedAnswer === normalizedCorrect;
+      
+      // Also check acceptable keywords
+      if (!isCorrect && currentQ.acceptableKeywords) {
+        isCorrect = currentQ.acceptableKeywords.some(
+          keyword => normalizedAnswer.includes(keyword.toLowerCase())
+        );
+      }
+    } else {
+      // AI check for fuzzy answers
+      try {
+        const result = await checkAnswerWithAI({
+          question: currentQ.question,
+          correctAnswer: currentQ.correctAnswer,
+          userAnswer: answer,
+          acceptableKeywords: currentQ.acceptableKeywords
+        });
+        isCorrect = result.isCorrect;
+        console.log('AI check result:', result);
+      } catch (error) {
+        console.error('AI check error:', error);
+        // Fallback to local check
+        if (currentQ.acceptableKeywords) {
           const normalizedAnswer = answer.toLowerCase();
-          const matchedKeywords = q.acceptableKeywords.filter(
+          const matchedKeywords = currentQ.acceptableKeywords.filter(
             keyword => normalizedAnswer.includes(keyword.toLowerCase())
           );
-          isCorrect = matchedKeywords.length >= Math.min(2, q.acceptableKeywords.length);
+          isCorrect = matchedKeywords.length >= Math.min(2, currentQ.acceptableKeywords.length);
         }
       }
+    }
 
-      return {
-        ...prev,
-        gamePhase: isCorrect ? 'result-correct' : 'result-incorrect'
-      };
-    });
-  }, []);
+    setState(prev => ({
+      ...prev,
+      gamePhase: isCorrect ? 'result-correct' : 'result-incorrect'
+    }));
+  }, [state.currentQuestion]);
 
   const processResult = useCallback(() => {
     setState(prev => {
