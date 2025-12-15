@@ -24,10 +24,10 @@ const Index = () => {
         <div className="absolute inset-0 gradient-overlay opacity-5" />
         <div className="relative max-w-4xl mx-auto space-y-6">
           <h1 className="text-6xl md:text-7xl font-bold text-foreground tracking-tight">
-            Интерактивный Контент
+            Мастер Библии
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground font-sans max-w-2xl mx-auto">
-            Христианские истории и игры, которые меняют жизнь
+            Раскрытие христианских истин, которые меняют жизнь
           </p>
         </div>
       </header>
@@ -80,7 +80,7 @@ const Index = () => {
 
       {/* Footer */}
       <footer className="py-8 text-center text-muted-foreground font-sans text-sm">
-        <p>Интерактивная презентация • 2025</p>
+        <p>Мастер Библии • 2025</p>
       </footer>
     </div>
   );

@@ -191,8 +191,8 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Все что мы имеем - мы получили',
         'Строительство из драгоценных камней'
       ],
-      powerSource: 'Созерцание славы Божией',
-      powerSourceType: 'glory'
+      powerSource: 'Пример',
+      powerSourceType: 'example'
     },
     doSection: {
       chapters: 'Гл. 5-16',
@@ -206,8 +206,8 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
       ]
     },
     keyVerse: {
-      text: 'Но я скоро приду к вам, если угодно будет Господу, и испытаю не слова возгордившихся, а силу',
-      reference: '1-е Коринфянам 4:19'
+      text: 'Это применил я, братья, к себе и Аполлосу ради вас, чтобы вы научились на нашем примере правилу: «Ничего сверх того, что написано», — чтобы никто из вас не надмевался в пользу одного против другого.',
+      reference: '1-е Коринфянам 4:6'
     }
   },
   {
@@ -222,7 +222,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Новый завет',
         'Служение примирения'
       ],
-      powerSource: 'Обещания, пример',
+      powerSource: 'Обещания',
       powerSourceType: 'promise'
     },
     doSection: {
@@ -280,7 +280,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Спасение по благодати',
         'Тайна Христа'
       ],
-      powerSource: 'Поступать достойно, обещания',
+      powerSource: 'Поступать достойно',
       powerSourceType: 'status',
     },
     doSection: {
@@ -293,7 +293,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
       ]
     },
     keyVerse: {
-      text: '1 Итак, я, узник в Господе, умоляю вас поступать достойно звания, в которое вы призваны, со всяким смиренномудрием и кротостью и долготерпением, снисходя друг ко другу любовью',
+      text: 'Итак, я, узник в Господе, умоляю вас поступать достойно звания, в которое вы призваны, со всяким смиренномудрием и кротостью и долготерпением, снисходя друг ко другу любовью',
       reference: 'Ефесянам 4:1-2'
     }
   },
@@ -309,7 +309,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Смирение Христа',
         'Пример служения'
       ],
-      powerSource: 'Поступать достойно, пример',
+      powerSource: 'Поступать достойно',
       powerSourceType: 'status'
     },
     doSection: {
@@ -366,7 +366,9 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Пример веры',
         'Служение Павла',
         'Утешение верующих'
-      ]
+      ],
+      powerSource: 'Поступать достойно',
+      powerSourceType: 'status'
     },
     doSection: {
       chapters: 'Гл. 4-5',
@@ -378,8 +380,8 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
       ]
     },
     keyVerse: {
-      text: 'Итак умоляю вас, братия, милосердием Божиим, представьте тела ваши в жертву живую, святую, благоугодную Богу',
-      reference: 'Римлянам 12:1'
+      text: 'За сим, братия, просим и умоляем вас Христом Иисусом, чтобы вы, приняв от нас, как должно вам поступать и угождать Богу, более в том преуспевали',
+      reference: '1-е Фессалоникийцам 4:1'
     }
   },
   {
@@ -393,7 +395,9 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Воздаяние Божье',
         'День Господень',
         'Человек греха'
-      ]
+      ],
+      powerSource: 'Поступать достойно',
+      powerSourceType: 'status'
     },
     doSection: {
       chapters: 'Гл. 3',
@@ -404,8 +408,8 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
       ]
     },
     keyVerse: {
-      text: 'Итак умоляю вас, братия, милосердием Божиим, представьте тела ваши в жертву живую, святую, благоугодную Богу',
-      reference: 'Римлянам 12:1'
+      text: 'Для сего и молимся всегда за вас, чтобы Бог наш соделал вас достойными звания и совершил всякое благоволение благости и дело веры в силе',
+      reference: '2-е Фессалоникийцам 1:11'
     }
   },
   {
@@ -418,7 +422,9 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
       themes: [
         'Истинное учение',
         'Благодать Христа'
-      ]
+      ],
+      powerSource: 'Поступать достойно',
+      powerSourceType: 'status'
     },
     doSection: {
       chapters: 'Гл. 2-6',
@@ -431,8 +437,8 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
       ]
     },
     keyVerse: {
-      text: 'Итак умоляю вас, братия, милосердием Божиим, представьте тела ваши в жертву живую, святую, благоугодную Богу',
-      reference: 'Римлянам 12:1'
+      text: 'Итак, прежде всего прошу совершать молитвы, прошения, моления, благодарения за всех человеков, за царей и за всех начальствующих, дабы проводить нам жизнь тихую и безмятежную во всяком благочестии и чистоте',
+      reference: '1 Тимофею 2:1-2'
     }
   },
   {
@@ -440,16 +446,18 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
     bookName: '2 Тимофею',
     bookNameEn: '2 Timothy',
     knowSection: {
-      chapters: 'Гл. 1-2',
+      chapters: 'Гл. 1',
       percentage: 50,
       themes: [
         'Дар Божий',
         'Верность Христу',
         'Образец здравого учения'
-      ]
+      ],
+      powerSource: 'Поступать достойно',
+      powerSourceType: 'status'
     },
     doSection: {
-      chapters: 'Гл. 3-4',
+      chapters: 'Гл. 2-4',
       percentage: 50,
       themes: [
         'Трудные времена',
@@ -458,8 +466,8 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
       ]
     },
     keyVerse: {
-      text: 'Итак умоляю вас, братия, милосердием Божиим, представьте тела ваши в жертву живую, святую, благоугодную Богу',
-      reference: 'Римлянам 12:1'
+      text: 'Итак, укрепляйся, сын мой, в благодати Христом Иисусом, и что слышал от меня при многих свидетелях, то передай верным людям, которые были бы способны и других научить.',
+      reference: '2 Тимофею 2:1-2'
     }
   },
   {
@@ -472,7 +480,9 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
       themes: [
         'Назначение пресвитеров',
         'Здравое учение'
-      ]
+      ],
+      powerSource: 'Поступать достойно',
+      powerSourceType: 'status'
     },
     doSection: {
       chapters: 'Гл. 2-3',
@@ -484,8 +494,8 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
       ]
     },
     keyVerse: {
-      text: 'Итак умоляю вас, братия, милосердием Божиим, представьте тела ваши в жертву живую, святую, благоугодную Богу',
-      reference: 'Римлянам 12:1'
+      text: 'Ты же говори то, что сообразно с здравым учением',
+      reference: 'Титу 2:1'
     }
   },
   {
@@ -529,7 +539,9 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Живая надежда',
         'Святой народ',
         'Избранные Богом'
-      ]
+      ],
+      powerSourceType: 'status',
+      powerSource: 'Поступать достойно'
     },
     doSection: {
       chapters: 'Гл. 3-5',
@@ -541,8 +553,8 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
       ]
     },
     keyVerse: {
-      text: 'Итак умоляю вас, братия, милосердием Божиим, представьте тела ваши в жертву живую, святую, благоугодную Богу',
-      reference: 'Римлянам 12:1'
+      text: 'Но вы — род избранный, царственное священство, народ святой, люди, взятые в удел, дабы возвещать совершенства Призвавшего вас из тьмы в чудный Свой свет',
+      reference: '1 Петра 2:9'
     }
   },
   {
@@ -555,7 +567,9 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
       themes: [
         'Божественная сила',
         'Надежное пророчество'
-      ]
+      ],
+      powerSource: 'Обещания',
+      powerSourceType: 'promise'
     },
     doSection: {
       chapters: 'Гл. 2-3',
@@ -567,8 +581,8 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
       ]
     },
     keyVerse: {
-      text: 'Итак умоляю вас, братия, милосердием Божиим, представьте тела ваши в жертву живую, святую, благоугодную Богу',
-      reference: 'Римлянам 12:1'
+      text: 'Которыми дарованы нам великие и драгоценные обетования, дабы вы через них соделались причастниками Божеского естества, удалившись от господствующего в мире растления похотью',
+      reference: '2 Петра 1:4'
     }
   },
   {
