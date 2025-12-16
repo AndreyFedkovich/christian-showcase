@@ -43,7 +43,7 @@ serve(async (req) => {
     // 2. Инициализация клиента Gemini
     const genAI = new GoogleGenerativeAI(googleApiKey);
     const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-flash", // Используем актуальную модель
+      model: "gemini-3-pro-preview", // Используем актуальную модель
       // Включаем нативный JSON режим - модель гарантированно вернет JSON
       generationConfig: {
         responseMimeType: "application/json",
