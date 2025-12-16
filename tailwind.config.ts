@@ -152,6 +152,19 @@ export default {
             opacity: "0",
           },
         },
+        "trophy-in": {
+          "0%": {
+            transform: "scale(0)",
+            opacity: "0",
+          },
+          "50%": {
+            transform: "scale(1.3)",
+          },
+          "100%": {
+            transform: "scale(1)",
+            opacity: "1",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -161,6 +174,7 @@ export default {
         "fade-in": "fade-in 3s ease-out forwards",
         "blink": "blink 1s step-end infinite",
         "spin-slow": "spin 3s linear infinite",
+        "trophy-in": "trophy-in 0.5s ease-out forwards",
       },
     },
   },

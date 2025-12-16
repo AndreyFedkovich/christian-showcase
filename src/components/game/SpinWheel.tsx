@@ -74,11 +74,11 @@ function SpinWheel<T>({
   const center = 200;
 
   return (
-    <div className={cn("relative flex flex-col items-center justify-center py-10", className)}>
+    <div className={cn("relative flex flex-col items-center justify-center py-2", className)}>
       {/* Стрелка */}
-      <div className="absolute top-4 z-20" style={{ filter: 'drop-shadow(0 0 20px rgba(251, 191, 36, 0.8))' }}>
+      <div className="absolute top-0 z-20" style={{ filter: 'drop-shadow(0 0 15px rgba(251, 191, 36, 0.8))' }}>
         <div
-          className="w-0 h-0 border-l-[28px] border-r-[28px] border-t-[56px] border-l-transparent border-r-transparent"
+          className="w-0 h-0 border-l-[20px] border-r-[20px] border-t-[40px] border-l-transparent border-r-transparent"
           style={{
             borderTopColor: '#fbbf24',
             filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.3))'
@@ -87,7 +87,7 @@ function SpinWheel<T>({
       </div>
 
       {/* Внешний glow контейнер */}
-      <div className="relative w-[380px] h-[380px] md:w-[700px] md:h-[700px] rounded-full">
+      <div className="relative w-[300px] h-[300px] md:w-[480px] md:h-[480px] rounded-full">
         {/* Круглое свечение (без filter, чтобы не было квадрата) */}
         <div
           aria-hidden="true"
@@ -190,14 +190,14 @@ function SpinWheel<T>({
 
         {/* Центральная часть */}
         <div 
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 md:w-28 md:h-28 rounded-full z-10 flex items-center justify-center"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 md:w-20 md:h-20 rounded-full z-10 flex items-center justify-center"
           style={{
             background: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%)',
             boxShadow: '0 4px 20px rgba(251, 191, 36, 0.5), inset 0 2px 4px rgba(255,255,255,0.3)'
           }}
         >
           <div 
-            className="w-12 h-12 md:w-16 md:h-16 rounded-full"
+            className="w-10 h-10 md:w-12 md:h-12 rounded-full"
             style={{
               background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
               boxShadow: 'inset 0 2px 8px rgba(0,0,0,0.5)'
