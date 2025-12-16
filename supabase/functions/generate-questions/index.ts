@@ -46,7 +46,7 @@ serve(async (req) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'google/gemini-3-pro-preview',
+        model: 'gpt-4o',
         messages: [
           {
             role: 'system',
