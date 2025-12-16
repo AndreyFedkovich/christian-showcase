@@ -78,7 +78,7 @@ function SpinWheel<T>({
       {/* Стрелка */}
       <div className="absolute top-0 z-20" style={{ filter: 'drop-shadow(0 0 15px rgba(251, 191, 36, 0.8))' }}>
         <div
-          className="w-0 h-0 border-l-[20px] border-r-[20px] border-t-[40px] border-l-transparent border-r-transparent"
+          className="w-0 h-0 border-l-[2.5vmin] border-r-[2.5vmin] border-t-[5vmin] border-l-transparent border-r-transparent"
           style={{
             borderTopColor: '#fbbf24',
             filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.3))'
@@ -87,7 +87,7 @@ function SpinWheel<T>({
       </div>
 
       {/* Внешний glow контейнер */}
-      <div className="relative w-[300px] h-[300px] md:w-[480px] md:h-[480px] rounded-full">
+      <div className="relative w-[70vmin] h-[70vmin] max-w-[550px] max-h-[550px] rounded-full">
         {/* Круглое свечение (без filter, чтобы не было квадрата) */}
         <div
           aria-hidden="true"
@@ -165,17 +165,17 @@ function SpinWheel<T>({
                     style={{ transform: `rotate(${rotate}deg)` }}
                   >
                     <div
-                      className="flex flex-col items-center justify-start pt-10 md:pt-16 h-1/2 text-white font-bold"
+                      className="flex flex-col items-center justify-start pt-[12%] h-1/2 text-white font-bold"
                       style={{ transformOrigin: 'bottom center' }}
                     >
                       <span 
-                        className="text-3xl md:text-5xl mb-2"
+                        className="text-[7vmin] mb-[1vmin]"
                         style={{ textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}
                       >
                         {item.icon}
                       </span>
                       <span 
-                        className="text-sm md:text-xl uppercase tracking-wider text-center leading-tight w-[90px] md:w-[180px] break-words hyphens-auto"
+                        className="text-[2.5vmin] uppercase tracking-wider text-center leading-tight w-[80%] break-words hyphens-auto"
                         style={{ textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}
                       >
                         {item.label}
@@ -190,14 +190,14 @@ function SpinWheel<T>({
 
         {/* Центральная часть */}
         <div 
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 md:w-20 md:h-20 rounded-full z-10 flex items-center justify-center"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[10vmin] h-[10vmin] max-w-20 max-h-20 rounded-full z-10 flex items-center justify-center"
           style={{
             background: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%)',
             boxShadow: '0 4px 20px rgba(251, 191, 36, 0.5), inset 0 2px 4px rgba(255,255,255,0.3)'
           }}
         >
           <div 
-            className="w-10 h-10 md:w-12 md:h-12 rounded-full"
+            className="w-[6vmin] h-[6vmin] max-w-12 max-h-12 rounded-full"
             style={{
               background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
               boxShadow: 'inset 0 2px 8px rgba(0,0,0,0.5)'
