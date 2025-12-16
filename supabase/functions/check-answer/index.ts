@@ -1,5 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
-import { GoogleGenerativeAI } from "https://esm.sh/@google/generative-ai@0.24.1";
+import { GoogleGenAI } from "https://esm.sh/google-genai";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -23,18 +23,11 @@ serve(async (req) => {
 
     console.log('Checking answer:', { question, userAnswer, correctAnswer });
 
-    // 2. Инициализируем модель
-    const genAI = new GoogleGenerativeAI(googleApiKey);
-    const model = genAI.getGenerativeModel({
-      model: "gemini-3-pro-preview",
-      generationConfig: {
-        // Гарантируем JSON ответ
-        responseMimeType: "application/json",
-        // Низкая температура для "Судьи" (более предсказуемые ответы)
-        temperature: 0.3,
-      },
-      // Системная инструкция
-      systemInstruction: `Ты — судья библейской викторины на русском языке. Оцени ответ игрока.
+    // 1. Инициализация клиента
+    const client = new GoogleGenAI({ apiKey: googleApiKey });
+
+    // 2. Подготовка промптов
+    const systemInstruction = `Ты — судья библейской викторины на русском языке. Оцени ответ игрока.
 Ответ засчитывается как верный, если он передаёт суть правильного ответа, даже если формулировка немного другая.
 Будь снисходительным к опечаткам и синонимам.
 
@@ -42,20 +35,35 @@ serve(async (req) => {
 {
   "isCorrect": boolean,
   "feedback": "string (краткое объяснение на русском)"
-}`
-    });
+}`;
 
-    // 3. Формируем запрос
-    const prompt = `Вопрос: ${question}
+    const userPrompt = `Вопрос: ${question}
 Правильный ответ: ${correctAnswer}
 Ключевые понятия: ${acceptableKeywords?.join(', ') || 'нет'}
 Ответ игрока: ${userAnswer}`;
 
     // 4. Отправляем в Gemini
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const content = response.text();
+    const response = await client.models.generateContent({
+      model: 'gemini-3-pro-preview',
+      config: {
+        // Гарантируем JSON ответ
+        responseMimeType: 'application/json',
+        // Низкая температура для "Судьи" (более предсказуемые ответы)
+        temperature: 0.3,
+        systemInstruction: systemInstruction,
+      },
+      contents: [
+        {
+          role: 'user',
+          parts: [
+            { text: userPrompt }
+          ]
+        }
+      ]
+    });
 
+    // 4. Получение текста ответа
+    const content = response.text();
     console.log('AI response:', content);
 
     // 5. Парсим ответ

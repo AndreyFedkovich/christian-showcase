@@ -1,5 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
-import { GoogleGenerativeAI } from "https://esm.sh/@google/generative-ai@0.24.1";
+import { GoogleGenAI } from "https://esm.sh/google-genai";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -40,17 +40,11 @@ serve(async (req) => {
     const categoryLabel = categoryLabels[category] || category;
     const difficultyLabel = difficultyLabels[difficulty] || `Уровень ${difficulty}`;
 
-    // 2. Инициализация клиента Gemini
-    const genAI = new GoogleGenerativeAI(googleApiKey);
-    const model = genAI.getGenerativeModel({
-      model: "gemini-3-pro-preview", // Используем актуальную модель
-      // Включаем нативный JSON режим - модель гарантированно вернет JSON
-      generationConfig: {
-        responseMimeType: "application/json",
-        temperature: 0.8,
-      },
-      // Системный промпт переезжает сюда
-      systemInstruction: `Ты — эксперт по Библии. Генерируй вопросы для викторины на русском языке.
+    // 2. Инициализация клиента
+    const client = new GoogleGenAI({ apiKey: googleApiKey });
+
+    // Системный промпт
+    const systemInstruction = `Ты — эксперт по Библии. Генерируй вопросы для викторины на русском языке.
 
 Правила:
 - Вопросы должны быть точными и основанными на библейском тексте
@@ -73,17 +67,31 @@ serve(async (req) => {
       "reference": "Книга глава:стих"
     }
   ]
-}`
-    });
+}`;
 
     // 3. Формируем запрос пользователя
-    const prompt = `Сгенерируй ${count} вопросов для библейской викторины.
+    const userPrompt = `Сгенерируй ${count} вопросов для библейской викторины.
 Категория: ${categoryLabel}
 Сложность: ${difficultyLabel}`;
 
     // 4. Выполняем запрос
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
+    const response = await client.models.generateContent({
+      model: 'gemini-3-pro-preview',
+      config: {
+        responseMimeType: 'application/json',
+        temperature: 0.8,
+        systemInstruction: systemInstruction,
+      },
+      contents: [
+        {
+          role: 'user',
+          parts: [
+            { text: userPrompt }
+          ]
+        }
+      ]
+    });
+
     const content = response.text();
 
     console.log('AI response:', content);
@@ -111,7 +119,7 @@ serve(async (req) => {
       throw new Error('Invalid JSON structure: missing "questions" array');
     }
 
-    // 6. Добавляем метаданные к вопросам (сохраняем вашу логику)
+    // 6. Добавляем метаданные к вопросам
     const questions = parsedData.questions.map((q: any) => ({
       ...q,
       category,
