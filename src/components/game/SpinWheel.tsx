@@ -90,7 +90,7 @@ function SpinWheel<T>({
       <div 
         className="relative w-[380px] h-[380px] md:w-[700px] md:h-[700px] rounded-full"
         style={{
-          boxShadow: '0 0 80px rgba(124, 58, 237, 0.5), 0 0 120px rgba(124, 58, 237, 0.3)'
+          filter: 'drop-shadow(0 0 40px rgba(124, 58, 237, 0.5)) drop-shadow(0 0 80px rgba(124, 58, 237, 0.3))'
         }}
       >
         {/* Золотая рамка */}
