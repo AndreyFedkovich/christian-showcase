@@ -2,26 +2,32 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Users, Play, ArrowLeft } from "lucide-react";
+import { Users, Play, ArrowLeft, Settings2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 interface TeamSetupProps {
   onStart: (teamName: string, opponentName: string) => void;
+  gameId: string;
 }
 
-const TeamSetup = ({ onStart }: TeamSetupProps) => {
+const TeamSetup = ({ onStart, gameId }: TeamSetupProps) => {
   const [teamName, setTeamName] = useState("Команда");
   const [opponentName, setOpponentName] = useState("Противник");
   const navigate = useNavigate();
 
-  const handleStart = () => {
+  const handleStart = async () => {
+    try {
+      await document.documentElement.requestFullscreen();
+    } catch (e) {
+      console.log('Fullscreen not available');
+    }
     onStart(teamName || "Команда", opponentName || "Противник");
   };
 
   return (
     <div className="min-h-screen gradient-warm flex flex-col">
       {/* Header */}
-      <header className="p-4">
+      <header className="p-4 flex justify-between items-center">
         <Button
           variant="ghost"
           onClick={() => navigate(-1)}
@@ -29,6 +35,15 @@ const TeamSetup = ({ onStart }: TeamSetupProps) => {
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
           Назад
+        </Button>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => navigate(`/game/${gameId}/questions`)}
+          title="Управление вопросами"
+          className="text-muted-foreground hover:text-foreground"
+        >
+          <Settings2 className="h-5 w-5" />
         </Button>
       </header>
 

@@ -103,7 +103,12 @@ const VictoryScreen = ({
         {/* Action buttons */}
         <div className="flex flex-col sm:flex-row gap-4 mt-4">
           <Button
-            onClick={onPlayAgain}
+            onClick={() => {
+              if (document.fullscreenElement) {
+                document.exitFullscreen().catch(() => {});
+              }
+              onPlayAgain();
+            }}
             size="lg"
             className="px-8 py-6 text-lg rounded-full bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-sans font-semibold transition-smooth hover:scale-105"
           >
@@ -111,7 +116,12 @@ const VictoryScreen = ({
             Играть снова
           </Button>
           <Button
-            onClick={onGoHome}
+            onClick={() => {
+              if (document.fullscreenElement) {
+                document.exitFullscreen().catch(() => {});
+              }
+              onGoHome();
+            }}
             variant="outline"
             size="lg"
             className="px-8 py-6 text-lg rounded-full font-sans font-semibold transition-smooth hover:scale-105"

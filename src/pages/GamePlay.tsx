@@ -58,7 +58,7 @@ const GamePlay = () => {
   
   // Team setup phase
   if (state.gamePhase === 'team-setup') {
-    return <TeamSetup onStart={handleTeamSetup} />;
+    return <TeamSetup onStart={handleTeamSetup} gameId={gameId || 'bible-master'} />;
   }
 
   // Victory phase
