@@ -90,7 +90,7 @@ function SpinWheel<T>({
       <div 
         className="relative w-[380px] h-[380px] md:w-[700px] md:h-[700px] rounded-full"
         style={{
-          boxShadow: '0 0 80px rgba(124, 58, 237, 0.5), 0 0 120px rgba(124, 58, 237, 0.3), inset 0 0 60px rgba(0,0,0,0.3)'
+          boxShadow: '0 0 80px rgba(124, 58, 237, 0.5), 0 0 120px rgba(124, 58, 237, 0.3)'
         }}
       >
         {/* Золотая рамка */}
@@ -101,7 +101,7 @@ function SpinWheel<T>({
             padding: '8px'
           }}
         >
-          <div className="w-full h-full rounded-full bg-slate-900 overflow-hidden">
+          <div className="w-full h-full rounded-full overflow-hidden">
             {/* SVG колесо */}
             <svg
               viewBox="0 0 400 400"
