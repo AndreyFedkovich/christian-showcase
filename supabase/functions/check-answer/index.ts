@@ -11,6 +11,7 @@ serve(async (req) => {
     return new Response(null, { headers: corsHeaders });
   }
 
+
   try {
     const { question, correctAnswer, userAnswer, acceptableKeywords } = await req.json();
     const openAIApiKey = Deno.env.get('OPENAI_API_KEY');
