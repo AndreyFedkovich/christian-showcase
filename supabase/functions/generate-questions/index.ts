@@ -1,5 +1,5 @@
-import "https://deno.land/x/xhr@0.1.0/mod.ts";
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { GoogleGenerativeAI } from "https://esm.sh/@google/generative-ai@0.12.0";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -28,10 +28,11 @@ serve(async (req) => {
 
   try {
     const { category, difficulty, count = 5 } = await req.json();
-    const openAIApiKey = Deno.env.get('OPENAI_API_KEY');
 
-    if (!openAIApiKey) {
-      throw new Error('OPENAI_API_KEY is not configured');
+    // 1. Используем ключ Google
+    const googleApiKey = Deno.env.get('GOOGLE_API_KEY');
+    if (!googleApiKey) {
+      throw new Error('GOOGLE_API_KEY is not configured');
     }
 
     console.log('Generating questions:', { category, difficulty, count });
@@ -39,18 +40,17 @@ serve(async (req) => {
     const categoryLabel = categoryLabels[category] || category;
     const difficultyLabel = difficultyLabels[difficulty] || `Уровень ${difficulty}`;
 
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${openAIApiKey}`,
-        'Content-Type': 'application/json',
+    // 2. Инициализация клиента Gemini
+    const genAI = new GoogleGenerativeAI(googleApiKey);
+    const model = genAI.getGenerativeModel({
+      model: "gemini-1.5-flash", // Используем актуальную модель
+      // Включаем нативный JSON режим - модель гарантированно вернет JSON
+      generationConfig: {
+        responseMimeType: "application/json",
+        temperature: 0.8,
       },
-      body: JSON.stringify({
-        model: 'gpt-4o',
-        messages: [
-          {
-            role: 'system',
-            content: `Ты — эксперт по Библии. Генерируй вопросы для викторины на русском языке.
+      // Системный промпт переезжает сюда
+      systemInstruction: `Ты — эксперт по Библии. Генерируй вопросы для викторины на русском языке.
 
 Правила:
 - Вопросы должны быть точными и основанными на библейском тексте
@@ -62,7 +62,7 @@ serve(async (req) => {
 - Всегда добавляй ссылку на библейский текст (reference)
 - Для fuzzy вопросов добавь массив acceptableKeywords (3-5 ключевых слов)
 
-Ответь ТОЛЬКО в формате JSON без markdown:
+Формат JSON (без markdown):
 {
   "questions": [
     {
@@ -74,46 +74,45 @@ serve(async (req) => {
     }
   ]
 }`
-          },
-          {
-            role: 'user',
-            content: `Сгенерируй ${count} вопросов для библейской викторины.
-Категория: ${categoryLabel}
-Сложность: ${difficultyLabel}`
-          }
-        ],
-        temperature: 0.8,
-        max_tokens: 2000
-      }),
     });
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('OpenAI API error:', response.status, errorText);
-      throw new Error(`OpenAI API error: ${response.status}`);
-    }
+    // 3. Формируем запрос пользователя
+    const prompt = `Сгенерируй ${count} вопросов для библейской викторины.
+Категория: ${categoryLabel}
+Сложность: ${difficultyLabel}`;
 
-    const data = await response.json();
-    const content = data.choices[0].message.content;
-    
+    // 4. Выполняем запрос
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const content = response.text();
+
     console.log('AI response:', content);
 
-    // Parse JSON response
-    let result;
+    // 5. Парсинг JSON
+    let parsedData;
     try {
-      result = JSON.parse(content);
-    } catch {
-      // Try to extract JSON from response
+      // Gemini в режиме JSON вернет чистый JSON, но на всякий случай оставляем логику очистки
+      // если вдруг прилетит markdown (хотя с responseMimeType не должно)
+      const cleanContent = content.replace(/```json/g, '').replace(/```/g, '').trim();
+      parsedData = JSON.parse(cleanContent);
+    } catch (e) {
+      console.error("JSON Parse Error:", content);
+      // Fallback: пробуем найти JSON внутри текста регуляркой (как в старом коде)
       const jsonMatch = content.match(/\{[\s\S]*\}/);
       if (jsonMatch) {
-        result = JSON.parse(jsonMatch[0]);
+        parsedData = JSON.parse(jsonMatch[0]);
       } else {
         throw new Error('Failed to parse AI response');
       }
     }
 
-    // Add category and difficulty to each question
-    const questions = result.questions.map((q: any) => ({
+    // Проверка структуры
+    if (!parsedData.questions || !Array.isArray(parsedData.questions)) {
+      throw new Error('Invalid JSON structure: missing "questions" array');
+    }
+
+    // 6. Добавляем метаданные к вопросам (сохраняем вашу логику)
+    const questions = parsedData.questions.map((q: any) => ({
       ...q,
       category,
       difficulty
@@ -122,10 +121,11 @@ serve(async (req) => {
     return new Response(JSON.stringify({ questions }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
+
   } catch (error: unknown) {
     console.error('Error in generate-questions function:', error);
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    return new Response(JSON.stringify({ 
+    return new Response(JSON.stringify({
       error: errorMessage,
       questions: []
     }), {
