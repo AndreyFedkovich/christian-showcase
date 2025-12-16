@@ -74,10 +74,10 @@ function SpinWheel<T>({
   const center = 200;
 
   return (
-    <div className={cn("relative flex flex-col items-center justify-center py-10 overflow-hidden", className)}>
+    <div className={cn("relative flex flex-col items-center justify-center py-10", className)}>
       {/* Стрелка */}
       <div className="absolute top-4 z-20" style={{ filter: 'drop-shadow(0 0 20px rgba(251, 191, 36, 0.8))' }}>
-        <div 
+        <div
           className="w-0 h-0 border-l-[28px] border-r-[28px] border-t-[56px] border-l-transparent border-r-transparent"
           style={{
             borderTopColor: '#fbbf24',
@@ -87,14 +87,18 @@ function SpinWheel<T>({
       </div>
 
       {/* Внешний glow контейнер */}
-      <div 
-        className="relative w-[380px] h-[380px] md:w-[700px] md:h-[700px] rounded-full"
-        style={{
-          filter: 'drop-shadow(0 0 40px rgba(124, 58, 237, 0.5)) drop-shadow(0 0 80px rgba(124, 58, 237, 0.3))'
-        }}
-      >
+      <div className="relative w-[380px] h-[380px] md:w-[700px] md:h-[700px] rounded-full">
+        {/* Круглое свечение (без filter, чтобы не было квадрата) */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 rounded-full"
+          style={{
+            boxShadow: '0 0 60px rgba(124, 58, 237, 0.45), 0 0 120px rgba(124, 58, 237, 0.25)'
+          }}
+        />
+
         {/* Золотая рамка */}
-        <div 
+        <div
           className="absolute inset-0 rounded-full"
           style={{
             background: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%)',
