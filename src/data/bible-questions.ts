@@ -101,11 +101,11 @@ export const bibleQuestions: BibleQuestion[] = [
   },
   {
     question: "Какой плод съели Адам и Ева в саду Эдемском?",
-    type: "exact",
+    type: "fuzzy",
     difficulty: 1,
     category: "old-testament",
     correctAnswer: "Запретный плод",
-    acceptableKeywords: ["плод", "яблоко", "запретный"],
+    acceptableKeywords: ["плод", "познания", "добра и злп", "запретный"],
     reference: "Бытие 3:6"
   },
   {
@@ -114,6 +114,7 @@ export const bibleQuestions: BibleQuestion[] = [
     difficulty: 1,
     category: "new-testament",
     correctAnswer: "Иуда",
+    acceptableKeywords: ["иуда", "искариот"],
     reference: "Матфея 26:14-16"
   },
   {
@@ -150,7 +151,7 @@ export const bibleQuestions: BibleQuestion[] = [
     reference: "Даниил 6"
   },
   {
-    question: "Назовите одну из притч Иисуса о потерянном",
+    question: "Назовите одну из притч Иисуса о чем-то потерянном",
     type: "fuzzy",
     difficulty: 2,
     category: "parables",
@@ -165,7 +166,7 @@ export const bibleQuestions: BibleQuestion[] = [
     category: "epistles",
     correctAnswer: "Апостол Павел",
     acceptableKeywords: ["Павел"],
-    reference: "Послания Павла"
+    reference: "Послания"
   },
   {
     question: "Сколько книг в Новом Завете?",
@@ -190,6 +191,7 @@ export const bibleQuestions: BibleQuestion[] = [
     difficulty: 2,
     category: "prophets",
     correctAnswer: "Илия",
+    acceptableKeywords: ["илия", "илья"],
     reference: "4 Царств 2:11"
   },
   {
@@ -229,7 +231,7 @@ export const bibleQuestions: BibleQuestion[] = [
   },
   {
     question: "Кто был отцом Мелхиседека согласно Библии?",
-    type: "exact",
+    type: "fuzzy",
     difficulty: 3,
     category: "old-testament",
     correctAnswer: "Не указано",
@@ -251,6 +253,7 @@ export const bibleQuestions: BibleQuestion[] = [
     difficulty: 3,
     category: "prophets",
     correctAnswer: "С нами Бог",
+    acceptableKeywords: ["с нами бог", "бог с нами"],
     reference: "Исаия 7:14, Матфея 1:23"
   },
   {
