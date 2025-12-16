@@ -26,7 +26,7 @@ serve(async (req) => {
     // 2. Инициализируем модель
     const genAI = new GoogleGenerativeAI(googleApiKey);
     const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-flash",
+      model: "gemini-3-pro-preview",
       generationConfig: {
         // Гарантируем JSON ответ
         responseMimeType: "application/json",
