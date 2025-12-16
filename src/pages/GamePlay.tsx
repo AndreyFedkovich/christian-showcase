@@ -12,8 +12,6 @@ import AnswerResult from "@/components/game/AnswerResult";
 import RoundTransition from "@/components/game/RoundTransition";
 import VictoryScreen from "@/components/game/VictoryScreen";
 import TeamSetup from "@/components/game/TeamSetup";
-import { Button } from "@/components/ui/button";
-import { Settings2 } from "lucide-react";
 
 const difficultyItems = [
   { value: 1 as Difficulty, label: 'Легкий', icon: '⭐' },
@@ -77,26 +75,15 @@ const GamePlay = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-violet-950 to-slate-900 flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-violet-950 to-slate-900 flex flex-col overflow-hidden">
       {/* Header with scoreboard */}
       <header className="p-4 md:p-6">
-        <div className="flex items-start justify-between gap-4">
-          <GameScoreboard
-            teamName={state.teamName}
-            opponentName={state.opponentName}
-            teamScore={state.teamScore}
-            opponentScore={state.opponentScore}
-          />
-          <Button
-            variant="ghost"
-            size="icon"
-            className="text-white/50 hover:text-white hover:bg-white/10"
-            onClick={() => navigate(`/game/${gameId}/questions`)}
-            title="Управление вопросами"
-          >
-            <Settings2 className="h-5 w-5" />
-          </Button>
-        </div>
+        <GameScoreboard
+          teamName={state.teamName}
+          opponentName={state.opponentName}
+          teamScore={state.teamScore}
+          opponentScore={state.opponentScore}
+        />
       </header>
 
       {/* Main game area */}
