@@ -1,5 +1,5 @@
-import "https://deno.land/x/xhr@0.1.0/mod.ts";
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { GoogleGenerativeAI } from "https://esm.sh/@google/generative-ai@0.12.0";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -7,84 +7,84 @@ const corsHeaders = {
 };
 
 serve(async (req) => {
+  // Обработка Preflight запроса (CORS)
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
 
-
   try {
     const { question, correctAnswer, userAnswer, acceptableKeywords } = await req.json();
-    const openAIApiKey = Deno.env.get('OPENAI_API_KEY');
 
-    if (!openAIApiKey) {
-      throw new Error('OPENAI_API_KEY is not configured');
+    // 1. Проверяем ключ Google
+    const googleApiKey = Deno.env.get('GOOGLE_API_KEY');
+    if (!googleApiKey) {
+      throw new Error('GOOGLE_API_KEY is not configured');
     }
 
     console.log('Checking answer:', { question, userAnswer, correctAnswer });
 
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${openAIApiKey}`,
-        'Content-Type': 'application/json',
+    // 2. Инициализируем модель
+    const genAI = new GoogleGenerativeAI(googleApiKey);
+    const model = genAI.getGenerativeModel({
+      model: "gemini-1.5-flash",
+      generationConfig: {
+        // Гарантируем JSON ответ
+        responseMimeType: "application/json",
+        // Низкая температура для "Судьи" (более предсказуемые ответы)
+        temperature: 0.3,
       },
-      body: JSON.stringify({
-        model: 'gpt-4o',
-        messages: [
-          {
-            role: 'system',
-            content: `Ты — судья библейской викторины на русском языке. Оцени ответ игрока.
+      // Системная инструкция
+      systemInstruction: `Ты — судья библейской викторины на русском языке. Оцени ответ игрока.
 Ответ засчитывается как верный, если он передаёт суть правильного ответа, даже если формулировка немного другая.
 Будь снисходительным к опечаткам и синонимам.
 
-Ответь ТОЛЬКО в формате JSON без markdown:
-{"isCorrect": true или false, "feedback": "краткое объяснение на русском"}`
-          },
-          {
-            role: 'user',
-            content: `Вопрос: ${question}
-Правильный ответ: ${correctAnswer}
-Ключевые понятия: ${acceptableKeywords?.join(', ') || 'нет'}
-Ответ игрока: ${userAnswer}`
-          }
-        ],
-        temperature: 0.3,
-        max_tokens: 150
-      }),
+Ответь ТОЛЬКО валидным JSON объектом (без markdown обертки):
+{
+  "isCorrect": boolean,
+  "feedback": "string (краткое объяснение на русском)"
+}`
     });
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('OpenAI API error:', response.status, errorText);
-      throw new Error(`OpenAI API error: ${response.status}`);
-    }
+    // 3. Формируем запрос
+    const prompt = `Вопрос: ${question}
+Правильный ответ: ${correctAnswer}
+Ключевые понятия: ${acceptableKeywords?.join(', ') || 'нет'}
+Ответ игрока: ${userAnswer}`;
 
-    const data = await response.json();
-    const content = data.choices[0].message.content;
-    
+    // 4. Отправляем в Gemini
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const content = response.text();
+
     console.log('AI response:', content);
 
-    // Parse JSON response
-    let result;
+    // 5. Парсим ответ
+    let parsedData;
     try {
-      result = JSON.parse(content);
-    } catch {
-      // If parsing fails, try to extract from response
-      const isCorrect = content.toLowerCase().includes('"iscorrect": true') || 
-                        content.toLowerCase().includes('"iscorrect":true');
-      result = {
+      // Очистка на случай, если модель все же добавит markdown
+      const cleanContent = content.replace(/```json/g, '').replace(/```/g, '').trim();
+      parsedData = JSON.parse(cleanContent);
+    } catch (e) {
+      console.error("JSON Parse Error:", content);
+      // Fallback: пробуем найти true/false простым поиском
+      const isCorrect = content.toLowerCase().includes('"iscorrect": true') ||
+          content.toLowerCase().includes('"iscorrect":true');
+      parsedData = {
         isCorrect,
-        feedback: 'Ответ проверен AI'
+        feedback: 'Ответ проверен AI (ошибка парсинга JSON, результат приблизительный)'
       };
     }
 
-    return new Response(JSON.stringify(result), {
+    return new Response(JSON.stringify(parsedData), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
+
   } catch (error: unknown) {
     console.error('Error in check-answer function:', error);
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    return new Response(JSON.stringify({ 
+
+    // Возвращаем структуру ошибки, которую ждет фронтенд
+    return new Response(JSON.stringify({
       error: errorMessage,
       isCorrect: false,
       feedback: 'Ошибка проверки ответа'
