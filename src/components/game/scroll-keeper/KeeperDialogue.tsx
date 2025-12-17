@@ -106,14 +106,14 @@ export function KeeperDialogue({
       {/* Keeper indicator */}
       <div className="flex items-center gap-3 mb-4">
         <div className={cn(
-          "w-12 h-12 rounded-full flex items-center justify-center text-2xl",
+          "w-14 h-14 rounded-full flex items-center justify-center text-3xl",
           "bg-slate-900/50 border-2 border-amber-600/50",
-          "animate-pulse"
+          "drop-shadow-[0_0_15px_rgba(251,191,36,0.4)]"
         )}>
           {moodEmojis[mood]}
         </div>
         <div>
-          <p className="text-amber-400 font-semibold text-sm tracking-wide uppercase">
+          <p className="text-amber-400 font-semibold text-base tracking-wide uppercase">
             Хранитель
           </p>
           <p className="text-slate-500 text-xs">The Keeper</p>
@@ -122,7 +122,7 @@ export function KeeperDialogue({
 
       {/* Message text */}
       <p className={cn(
-        "text-lg md:text-xl leading-relaxed italic",
+        "text-xl md:text-2xl leading-relaxed italic",
         moodTextColors[mood]
       )}>
         «{displayedText}
