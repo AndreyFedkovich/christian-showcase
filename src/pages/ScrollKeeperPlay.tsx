@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils';
 import { PrologueScene } from '@/components/game/scroll-keeper/PrologueScene';
 import { HallTransition } from '@/components/game/scroll-keeper/HallTransition';
 import { KeeperDialogue } from '@/components/game/scroll-keeper/KeeperDialogue';
+import { VictoryScene } from '@/components/game/scroll-keeper/VictoryScene';
 import { HallOfShadows, Scriptorium, EchoChamber, GalleryOfWitnesses, TreasuryOfRelics, HallOfVoices, TimeSpiral } from '@/components/game/scroll-keeper/halls';
 import { Challenge, ShadowsChallenge, ScriptoriumChallenge, EchoChallenge, GalleryChallenge, TreasuryChallenge, VoicesChallenge, SpiralChallenge } from '@/data/scroll-keeper';
 
@@ -298,36 +299,13 @@ export default function ScrollKeeperPlay() {
 
       case 'victory':
         return (
-          <div className="flex flex-col items-center justify-center min-h-screen p-8 bg-gradient-to-b from-amber-950 via-slate-900 to-slate-950 text-center">
-            <div className="max-w-2xl space-y-8 animate-fade-in">
-              <div className="text-8xl animate-pulse">🏆</div>
-              <h1 className="text-4xl font-bold text-amber-400">
-                Победа!
-              </h1>
-              
-              <KeeperDialogue
-                message={state.keeperMessage}
-                mood="approving"
-              />
-              
-              <MemoryKeyCounter keys={state.memoryKeys} maxKeys={state.maxMemoryKeys} />
-              <div className="flex gap-4 justify-center pt-8">
-                <Button 
-                  onClick={goToSetup}
-                  variant="outline"
-                  className="border-amber-600 text-amber-400 hover:bg-amber-900/30"
-                >
-                  Играть снова
-                </Button>
-                <Button 
-                  onClick={handleExit}
-                  className="bg-amber-600 hover:bg-amber-700 text-white"
-                >
-                  Выйти
-                </Button>
-              </div>
-            </div>
-          </div>
+          <VictoryScene
+            teamName={state.teamName}
+            memoryKeys={state.memoryKeys}
+            maxKeys={state.maxMemoryKeys}
+            onPlayAgain={goToSetup}
+            onExit={handleExit}
+          />
         );
 
       case 'defeat':
