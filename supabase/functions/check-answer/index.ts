@@ -62,9 +62,8 @@ serve(async (req) => {
       ]
     });
 
-    console.log('AI response:', response);
     // 4. Получение текста ответа
-    const content = response.text();
+    const content = response.candidates?.[0]?.content?.parts?.[0]?.text;
     console.log('AI response:', content);
 
     // 5. Парсим ответ
