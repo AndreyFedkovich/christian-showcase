@@ -3,7 +3,8 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ShadowsChallenge } from '@/data/scroll-keeper';
-import { Clock, Lightbulb, Send } from 'lucide-react';
+import { Clock, Lightbulb, Send, Volume2, VolumeX } from 'lucide-react';
+import { useTypewriterSound } from '@/hooks/useTypewriterSound';
 
 interface HallOfShadowsProps {
   challenge: ShadowsChallenge;
@@ -26,6 +27,7 @@ export function HallOfShadows({
   const [showCursor, setShowCursor] = useState(true);
   const [showQuestion, setShowQuestion] = useState(false);
   const indexRef = useRef(0);
+  const { playTick, soundEnabled, setSoundEnabled } = useTypewriterSound();
 
   // Character-by-character typing effect
   useEffect(() => {
@@ -37,6 +39,7 @@ export function HallOfShadows({
     const typeInterval = setInterval(() => {
       if (indexRef.current < challenge.story.length) {
         setDisplayedText(challenge.story.slice(0, indexRef.current + 1));
+        playTick();
         indexRef.current++;
       } else {
         clearInterval(typeInterval);
@@ -46,7 +49,7 @@ export function HallOfShadows({
     }, 25);
 
     return () => clearInterval(typeInterval);
-  }, [challenge.story]);
+  }, [challenge.story, playTick]);
 
   // Cursor blinking
   useEffect(() => {
@@ -107,8 +110,18 @@ export function HallOfShadows({
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-48 bg-gradient-radial from-amber-500/10 to-transparent rounded-full blur-2xl" />
       </div>
 
-      {/* Timer */}
-      <div className="absolute top-4 right-4 z-50">
+      {/* Timer and Sound Toggle */}
+      <div className="absolute top-4 right-4 z-50 flex items-center gap-2">
+        <button
+          onClick={() => setSoundEnabled(!soundEnabled)}
+          className="flex items-center justify-center w-10 h-10 rounded-full bg-slate-800/50 border border-slate-600/50 backdrop-blur-sm hover:bg-slate-700/50 transition-colors"
+        >
+          {soundEnabled ? (
+            <Volume2 className="w-5 h-5 text-amber-400" />
+          ) : (
+            <VolumeX className="w-5 h-5 text-slate-500" />
+          )}
+        </button>
         <div className={cn(
           "flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-sm",
           timer <= 10 ? "bg-red-900/50 border border-red-500/50" : "bg-slate-800/50 border border-slate-600/50"
