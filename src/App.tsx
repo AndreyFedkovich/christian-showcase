@@ -9,6 +9,7 @@ import Presentation from "./pages/Presentation";
 import GamePlay from "./pages/GamePlay";
 import QuestionManager from "./pages/QuestionManager";
 import ScrollKeeperPlay from "./pages/ScrollKeeperPlay";
+import ScrollKeeperDetails from "./pages/ScrollKeeperDetails";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/presentation/:presentationId/view" element={<Presentation />} />
           <Route path="/game/:gameId/play" element={<GamePlay />} />
           <Route path="/game/:gameId/questions" element={<QuestionManager />} />
+          <Route path="/game/scroll-keeper/halls" element={<ScrollKeeperDetails />} />
           <Route path="/game/scroll-keeper/play" element={<ScrollKeeperPlay />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

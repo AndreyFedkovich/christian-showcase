@@ -1,10 +1,10 @@
 import { useScrollKeeperState } from '@/hooks/useScrollKeeperState';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { ArrowLeft, Key, BookOpen, Clock } from 'lucide-react';
-import { useState } from 'react';
+import { ArrowLeft, Key, BookOpen, Clock, Settings2 } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { PrologueScene } from '@/components/game/scroll-keeper/PrologueScene';
 import { HallTransition } from '@/components/game/scroll-keeper/HallTransition';
@@ -15,12 +15,14 @@ import { Challenge, ShadowsChallenge, ScriptoriumChallenge, EchoChallenge, Galle
 
 export default function ScrollKeeperPlay() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const {
     state,
     getCurrentHall,
     setTeamName,
     startGame,
     startHall,
+    startFromHall,
     startChallenge,
     submitAnswer,
     useHint,
@@ -28,6 +30,18 @@ export default function ScrollKeeperPlay() {
     proceedToNextHall,
     goToSetup
   } = useScrollKeeperState();
+
+  // Handle startHall query param
+  useEffect(() => {
+    const startHallParam = searchParams.get('startHall');
+    if (startHallParam !== null && state.phase === 'team-setup') {
+      const hallIndex = parseInt(startHallParam, 10);
+      if (!isNaN(hallIndex) && hallIndex >= 0) {
+        // Store the hall index to start from after team setup
+        sessionStorage.setItem('scrollkeeper_start_hall', startHallParam);
+      }
+    }
+  }, [searchParams, state.phase]);
 
   const [teamNameInput, setTeamNameInput] = useState('');
   const [answerInput, setAnswerInput] = useState('');
@@ -39,7 +53,15 @@ export default function ScrollKeeperPlay() {
     } catch (e) {
       console.log('Fullscreen not available');
     }
-    startGame();
+    
+    // Check if we should start from a specific hall
+    const startHallIndex = sessionStorage.getItem('scrollkeeper_start_hall');
+    if (startHallIndex !== null) {
+      sessionStorage.removeItem('scrollkeeper_start_hall');
+      startFromHall(parseInt(startHallIndex, 10));
+    } else {
+      startGame();
+    }
   };
 
   const handleExit = async () => {
@@ -160,6 +182,18 @@ export default function ScrollKeeperPlay() {
         return (
           <div className="flex flex-col items-center justify-center min-h-screen p-8 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
             <div className="max-w-md w-full space-y-8">
+              {/* Header with settings */}
+              <div className="flex justify-end">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => navigate('/game/scroll-keeper/halls')}
+                  className="text-slate-400 hover:text-white hover:bg-slate-700"
+                >
+                  <Settings2 className="w-5 h-5" />
+                </Button>
+              </div>
+              
               <div className="text-center space-y-4">
                 <div className="text-6xl mb-4">📚</div>
                 <h1 className="text-4xl font-bold text-amber-400">Хранитель Свитков</h1>
