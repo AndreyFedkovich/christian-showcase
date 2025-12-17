@@ -9,7 +9,8 @@ import { cn } from '@/lib/utils';
 import { PrologueScene } from '@/components/game/scroll-keeper/PrologueScene';
 import { HallTransition } from '@/components/game/scroll-keeper/HallTransition';
 import { KeeperDialogue } from '@/components/game/scroll-keeper/KeeperDialogue';
-import { Challenge, keeperDialogues } from '@/data/scroll-keeper';
+import { HallOfShadows, Scriptorium, EchoChamber } from '@/components/game/scroll-keeper/halls';
+import { Challenge, ShadowsChallenge, ScriptoriumChallenge, EchoChallenge } from '@/data/scroll-keeper';
 
 export default function ScrollKeeperPlay() {
   const navigate = useNavigate();
@@ -51,14 +52,67 @@ export default function ScrollKeeperPlay() {
     navigate('/');
   };
 
-  const handleSubmitAnswer = () => {
-    if (answerInput.trim()) {
-      submitAnswer(answerInput);
+  const handleSubmitAnswer = (answer: string) => {
+    if (answer.trim()) {
+      submitAnswer(answer);
       setAnswerInput('');
     }
   };
 
   const currentHall = getCurrentHall();
+
+  // Render specialized hall component
+  const renderHallChallenge = () => {
+    if (!state.currentChallenge || !currentHall) return null;
+
+    switch (state.currentChallenge.hallType) {
+      case 'shadows':
+        return (
+          <HallOfShadows
+            challenge={state.currentChallenge as ShadowsChallenge}
+            timer={state.timer}
+            usedHints={state.usedHints}
+            onUseHint={useHint}
+            onSubmitAnswer={handleSubmitAnswer}
+          />
+        );
+      
+      case 'scriptorium':
+        return (
+          <Scriptorium
+            challenge={state.currentChallenge as ScriptoriumChallenge}
+            timer={state.timer}
+            usedHints={state.usedHints}
+            onUseHint={useHint}
+            onSubmitAnswer={handleSubmitAnswer}
+          />
+        );
+      
+      case 'echo':
+        return (
+          <EchoChamber
+            challenge={state.currentChallenge as EchoChallenge}
+            timer={state.timer}
+            usedHints={state.usedHints}
+            onUseHint={useHint}
+            onSubmitAnswer={handleSubmitAnswer}
+          />
+        );
+      
+      // Default challenge display for halls not yet implemented
+      default:
+        return (
+          <DefaultChallengeView
+            challenge={state.currentChallenge}
+            timer={state.timer}
+            usedHints={state.usedHints}
+            currentHall={currentHall}
+            onUseHint={useHint}
+            onSubmitAnswer={handleSubmitAnswer}
+          />
+        );
+    }
+  };
 
   // Render based on game phase
   const renderContent = () => {
@@ -142,58 +196,7 @@ export default function ScrollKeeperPlay() {
         ) : null;
 
       case 'challenge':
-        return (
-          <div className="flex flex-col items-center justify-center min-h-screen p-8 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
-            <div className="max-w-3xl w-full space-y-8">
-              <div className="flex items-center justify-between">
-                <MemoryKeyCounter keys={state.memoryKeys} maxKeys={state.maxMemoryKeys} />
-                <div className="flex items-center gap-2 text-2xl font-mono">
-                  <Clock className={cn(
-                    "w-6 h-6",
-                    state.timer <= 10 ? "text-red-500 animate-pulse" : "text-amber-400"
-                  )} />
-                  <span className={cn(
-                    state.timer <= 10 ? "text-red-500" : "text-white"
-                  )}>
-                    {state.timer}с
-                  </span>
-                </div>
-              </div>
-
-              <div className="bg-slate-800/50 p-8 rounded-xl border border-slate-700 space-y-6">
-                <div className="flex items-center gap-3 text-amber-400">
-                  <span className="text-3xl">{currentHall?.icon}</span>
-                  <span className="text-lg font-medium">{currentHall?.name}</span>
-                </div>
-
-                {state.currentChallenge && (
-                  <ChallengeDisplay 
-                    challenge={state.currentChallenge} 
-                    usedHints={state.usedHints}
-                    onUseHint={useHint}
-                  />
-                )}
-
-                <div className="flex gap-4 pt-4">
-                  <Input
-                    value={answerInput}
-                    onChange={(e) => setAnswerInput(e.target.value)}
-                    onKeyDown={(e) => e.key === 'Enter' && handleSubmitAnswer()}
-                    placeholder="Ваш ответ..."
-                    className="flex-1 bg-slate-700 border-slate-600 text-white text-lg py-6"
-                  />
-                  <Button 
-                    onClick={handleSubmitAnswer}
-                    disabled={!answerInput.trim()}
-                    className="bg-amber-600 hover:bg-amber-700 text-white px-8"
-                  >
-                    Ответить
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
-        );
+        return renderHallChallenge();
 
       case 'result':
         return (
@@ -348,152 +351,133 @@ function MemoryKeyCounter({ keys, maxKeys }: { keys: number; maxKeys: number }) 
   );
 }
 
-// Challenge Display component
-function ChallengeDisplay({ 
-  challenge, 
-  usedHints, 
-  onUseHint 
-}: { 
-  challenge: Challenge; 
+// Default Challenge View for halls not yet implemented
+import { Hall } from '@/data/scroll-keeper';
+import { Input as InputField } from '@/components/ui/input';
+import { Send, Lightbulb } from 'lucide-react';
+
+interface DefaultChallengeViewProps {
+  challenge: Challenge;
+  timer: number;
   usedHints: number;
+  currentHall: Hall;
   onUseHint: () => void;
-}) {
-  switch (challenge.hallType) {
-    case 'shadows':
-      return (
-        <div className="space-y-4">
-          <p className="text-slate-300 text-lg leading-relaxed">{challenge.story}</p>
-          <p className="text-amber-400 font-medium text-xl">{challenge.question}</p>
-          {challenge.hints && usedHints < challenge.hints.length && (
-            <Button 
-              variant="outline" 
-              size="sm"
-              onClick={onUseHint}
-              className="border-slate-600 text-slate-400"
-            >
-              Подсказка ({challenge.hints.length - usedHints} осталось)
-            </Button>
-          )}
-          {challenge.hints && usedHints > 0 && (
-            <div className="text-slate-400 text-sm space-y-1">
-              {challenge.hints.slice(0, usedHints).map((hint, i) => (
-                <p key={i}>💡 {hint}</p>
+  onSubmitAnswer: (answer: string) => void;
+}
+
+function DefaultChallengeView({ 
+  challenge, 
+  timer, 
+  usedHints,
+  currentHall,
+  onUseHint,
+  onSubmitAnswer 
+}: DefaultChallengeViewProps) {
+  const [answer, setAnswer] = useState('');
+
+  const handleSubmit = () => {
+    if (answer.trim()) {
+      onSubmitAnswer(answer);
+      setAnswer('');
+    }
+  };
+
+  const renderChallengeContent = () => {
+    switch (challenge.hallType) {
+      case 'gallery':
+        return (
+          <div className="space-y-4">
+            <div className="bg-slate-900/50 p-6 rounded-lg border border-slate-700">
+              <p className="text-slate-200 text-lg italic leading-relaxed">
+                "{challenge.monologue}"
+              </p>
+            </div>
+            <p className="text-amber-400 font-medium">Кто это говорит?</p>
+          </div>
+        );
+
+      case 'treasury':
+        return (
+          <div className="space-y-4">
+            <p className="text-slate-300 text-lg leading-relaxed">{challenge.description}</p>
+            <p className="text-amber-400 font-medium">Что это за предмет?</p>
+          </div>
+        );
+
+      case 'voices':
+        return (
+          <div className="space-y-4">
+            <blockquote className="text-slate-200 text-2xl italic text-center py-4">
+              «{challenge.quote}»
+            </blockquote>
+            <p className="text-amber-400 font-medium text-center">Кто это сказал?</p>
+          </div>
+        );
+
+      case 'spiral':
+        return (
+          <div className="space-y-4">
+            <p className="text-amber-400 font-medium">Расположите события в хронологическом порядке (через запятую):</p>
+            <div className="grid grid-cols-2 gap-4">
+              {challenge.events.map((event) => (
+                <div key={event.id} className="bg-slate-900/50 p-4 rounded-lg border border-slate-700">
+                  <span className="text-amber-500 font-bold">{event.id}.</span>
+                  <span className="text-slate-300 ml-2">{event.name}</span>
+                  <p className="text-slate-500 text-sm mt-1">{event.era}</p>
+                </div>
               ))}
             </div>
-          )}
-        </div>
-      );
-
-    case 'scriptorium':
-      return (
-        <div className="space-y-4">
-          <blockquote className="text-slate-200 text-xl italic border-l-4 border-amber-600 pl-4">
-            "{challenge.verse}"
-          </blockquote>
-          <p className="text-amber-400 font-medium">Из какой книги Библии этот стих?</p>
-          {usedHints === 0 && (
-            <Button 
-              variant="outline" 
-              size="sm"
-              onClick={onUseHint}
-              className="border-slate-600 text-slate-400"
-            >
-              Подсказка: Завет
-            </Button>
-          )}
-          {usedHints >= 1 && (
-            <p className="text-slate-400 text-sm">💡 Завет: {challenge.hints.testament}</p>
-          )}
-          {usedHints === 1 && (
-            <Button 
-              variant="outline" 
-              size="sm"
-              onClick={onUseHint}
-              className="border-slate-600 text-slate-400"
-            >
-              Подсказка: Тип книги
-            </Button>
-          )}
-          {usedHints >= 2 && (
-            <p className="text-slate-400 text-sm">💡 Тип: {challenge.hints.bookType}</p>
-          )}
-        </div>
-      );
-
-    case 'echo':
-      return (
-        <div className="space-y-4">
-          <p className="text-amber-400 font-medium text-xl">
-            Угадайте по подсказкам (осталось очков: {Math.max(1, challenge.maxPoints - usedHints)})
-          </p>
-          <div className="space-y-2">
-            {challenge.clues.slice(0, usedHints + 1).map((clue, i) => (
-              <p key={i} className="text-slate-300">
-                <span className="text-amber-500">{i + 1}.</span> {clue}
-              </p>
-            ))}
+            <p className="text-slate-400 text-sm">Пример ответа: 1,2,3,4</p>
           </div>
-          {usedHints < challenge.clues.length - 1 && (
-            <Button 
-              variant="outline" 
-              size="sm"
-              onClick={onUseHint}
-              className="border-slate-600 text-slate-400"
-            >
-              Следующая подсказка (-1 очко)
-            </Button>
-          )}
-        </div>
-      );
+        );
 
-    case 'gallery':
-      return (
-        <div className="space-y-4">
-          <div className="bg-slate-900/50 p-6 rounded-lg border border-slate-700">
-            <p className="text-slate-200 text-lg italic leading-relaxed">
-              "{challenge.monologue}"
-            </p>
+      default:
+        return <p className="text-slate-400">Неизвестный тип испытания</p>;
+    }
+  };
+
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen p-8 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+      <div className="max-w-3xl w-full space-y-8">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/50 border border-slate-600/50">
+            <span className="text-2xl">{currentHall.icon}</span>
+            <span className="text-slate-300 font-medium">{currentHall.name}</span>
           </div>
-          <p className="text-amber-400 font-medium">Кто это говорит?</p>
-        </div>
-      );
-
-    case 'treasury':
-      return (
-        <div className="space-y-4">
-          <p className="text-slate-300 text-lg leading-relaxed">{challenge.description}</p>
-          <p className="text-amber-400 font-medium">Что это за предмет?</p>
-        </div>
-      );
-
-    case 'voices':
-      return (
-        <div className="space-y-4">
-          <blockquote className="text-slate-200 text-2xl italic text-center py-4">
-            «{challenge.quote}»
-          </blockquote>
-          <p className="text-amber-400 font-medium text-center">Кто это сказал?</p>
-        </div>
-      );
-
-    case 'spiral':
-      return (
-        <div className="space-y-4">
-          <p className="text-amber-400 font-medium">Расположите события в хронологическом порядке (через запятую):</p>
-          <div className="grid grid-cols-2 gap-4">
-            {challenge.events.map((event) => (
-              <div key={event.id} className="bg-slate-900/50 p-4 rounded-lg border border-slate-700">
-                <span className="text-amber-500 font-bold">{event.id}.</span>
-                <span className="text-slate-300 ml-2">{event.name}</span>
-                <p className="text-slate-500 text-sm mt-1">{event.era}</p>
-              </div>
-            ))}
+          <div className={cn(
+            "flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-sm",
+            timer <= 10 ? "bg-red-900/50 border border-red-500/50" : "bg-slate-800/50 border border-slate-600/50"
+          )}>
+            <Clock className={cn("w-5 h-5", timer <= 10 ? "text-red-400 animate-pulse" : "text-amber-400")} />
+            <span className={cn("text-xl font-mono font-bold", timer <= 10 ? "text-red-400" : "text-white")}>
+              {timer}с
+            </span>
           </div>
-          <p className="text-slate-400 text-sm">Пример ответа: 1,2,3,4</p>
         </div>
-      );
 
-    default:
-      return null;
-  }
+        <div className="bg-slate-800/50 p-8 rounded-xl border border-slate-700 space-y-6">
+          {renderChallengeContent()}
+        </div>
+
+        <div className="flex gap-4">
+          <InputField
+            value={answer}
+            onChange={(e) => setAnswer(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
+            placeholder="Ваш ответ..."
+            className="flex-1 bg-slate-800/50 border-slate-600 text-white text-lg py-6 placeholder:text-slate-500"
+            autoFocus
+          />
+          <Button 
+            onClick={handleSubmit}
+            disabled={!answer.trim()}
+            size="lg"
+            className="bg-amber-600 hover:bg-amber-700 text-white px-8"
+          >
+            <Send className="w-5 h-5" />
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
 }
