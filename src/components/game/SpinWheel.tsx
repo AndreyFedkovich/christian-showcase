@@ -87,7 +87,7 @@ function SpinWheel<T>({
       </div>
 
       {/* Внешний glow контейнер */}
-      <div className="relative w-[340px] h-[340px] md:w-[580px] md:h-[580px] rounded-full">
+      <div className="relative w-[380px] h-[380px] md:w-[690px] md:h-[690px] rounded-full">
         {/* Круглое свечение (без filter, чтобы не было квадрата) */}
         <div
           aria-hidden="true"

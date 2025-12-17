@@ -17,14 +17,14 @@ const GameScoreboard = ({
   maxScore = 10
 }: GameScoreboardProps) => {
   return (
-    <div className="flex items-center justify-between w-full gap-2 md:gap-4 px-4 md:px-8">
+    <div className="flex items-center justify-between w-full gap-6 md:gap-8 px-4 md:px-8">
       {/* Left zone - Team Trophies (emerald) */}
       <div className="flex-1 flex justify-end gap-1 md:gap-2">
         {Array.from({ length: maxScore }).map((_, i) => (
           <Trophy 
             key={i}
             className={cn(
-              "w-6 h-6 md:w-8 md:h-8 transition-all duration-300",
+              "w-8 h-8 md:w-12 md:h-12 transition-all duration-300",
               i < teamScore 
                 ? "text-emerald-400 fill-emerald-400/30 drop-shadow-[0_0_8px_rgba(52,211,153,0.6)] animate-trophy-in" 
                 : "text-slate-700/30"
@@ -34,13 +34,13 @@ const GameScoreboard = ({
       </div>
 
       {/* Central score panel */}
-      <div className="flex items-center gap-3 md:gap-5 py-3 px-4 md:py-4 md:px-6 bg-gradient-to-br from-slate-800/95 via-slate-800/90 to-slate-900/95 backdrop-blur-md rounded-2xl border border-white/10 shadow-xl shrink-0">
+      <div className="flex items-center gap-3 md:gap-5 py-4 px-8 md:py-6 md:px-12 bg-gradient-to-br from-slate-800/95 via-slate-800/90 to-slate-900/95 backdrop-blur-md rounded-2xl border border-white/10 shadow-xl shrink-0">
         {/* Team */}
         <div className="flex flex-col items-center">
-          <span className="text-xs md:text-sm text-white/60 truncate max-w-[70px] md:max-w-[100px]">
+          <span className="text-sm md:text-xl text-white/60 truncate max-w-[90px] md:max-w-[120px]">
             {teamName}
           </span>
-          <div className="text-2xl md:text-4xl font-bold text-emerald-400 drop-shadow-[0_0_10px_rgba(52,211,153,0.4)]">
+          <div className="text-4xl md:text-6xl font-bold text-emerald-400 drop-shadow-[0_0_10px_rgba(52,211,153,0.4)]">
             {teamScore}
           </div>
         </div>
@@ -52,10 +52,10 @@ const GameScoreboard = ({
 
         {/* Opponent */}
         <div className="flex flex-col items-center">
-          <span className="text-xs md:text-sm text-white/60 truncate max-w-[70px] md:max-w-[100px]">
+          <span className="text-sm md:text-xl text-white/60 truncate max-w-[90px] md:max-w-[120px]">
             {opponentName}
           </span>
-          <div className="text-2xl md:text-4xl font-bold text-rose-400 drop-shadow-[0_0_10px_rgba(251,113,133,0.4)]">
+          <div className="text-4xl md:text-6xl font-bold text-rose-400 drop-shadow-[0_0_10px_rgba(251,113,133,0.4)]">
             {opponentScore}
           </div>
         </div>
@@ -67,7 +67,7 @@ const GameScoreboard = ({
           <Trophy 
             key={i}
             className={cn(
-              "w-6 h-6 md:w-8 md:h-8 transition-all duration-300",
+              "w-8 h-8 md:w-12 md:h-12 transition-all duration-300",
               i < opponentScore 
                 ? "text-rose-400 fill-rose-400/30 drop-shadow-[0_0_8px_rgba(251,113,133,0.6)] animate-trophy-in" 
                 : "text-slate-700/30"
