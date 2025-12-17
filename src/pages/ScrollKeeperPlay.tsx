@@ -269,13 +269,13 @@ export default function ScrollKeeperPlay() {
           <div className="flex flex-col items-center justify-center min-h-screen p-8 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-center">
             <div className="max-w-2xl space-y-8 animate-fade-in">
               <div className={cn(
-                "text-8xl",
-                state.isCorrect ? "animate-bounce" : ""
+                "text-9xl drop-shadow-[0_0_40px_rgba(251,191,36,0.6)]",
+                state.isCorrect ? "" : ""
               )}>
                 {state.isCorrect ? '✨' : '💨'}
               </div>
               <h2 className={cn(
-                "text-3xl font-bold",
+                "text-4xl md:text-5xl font-bold",
                 state.isCorrect ? "text-emerald-400" : "text-rose-400"
               )}>
                 {state.isCorrect ? 'Верно!' : 'Неверно'}
@@ -384,12 +384,12 @@ export default function ScrollKeeperPlay() {
 // Memory Key Counter component
 function MemoryKeyCounter({ keys, maxKeys }: { keys: number; maxKeys: number }) {
   return (
-    <div className="flex items-center gap-3 bg-slate-800/50 px-4 py-2 rounded-full border border-amber-600/30">
-      <Key className="w-5 h-5 text-amber-400" />
-      <span className="text-amber-400 font-bold text-lg">{keys}</span>
-      <span className="text-slate-500">/</span>
-      <span className="text-slate-400">{maxKeys}</span>
-      <span className="text-slate-500 text-sm">Ключей Памяти</span>
+    <div className="flex items-center gap-3 bg-slate-800/50 px-6 py-3 rounded-full border-2 border-amber-600/30 shadow-lg backdrop-blur-sm">
+      <Key className="w-7 h-7 text-amber-400 drop-shadow-[0_0_10px_rgba(251,191,36,0.4)]" />
+      <span className="text-amber-400 font-bold text-2xl">{keys}</span>
+      <span className="text-slate-500 text-xl">/</span>
+      <span className="text-slate-400 text-xl">{maxKeys}</span>
+      <span className="text-slate-500 text-base">Ключей Памяти</span>
     </div>
   );
 }
