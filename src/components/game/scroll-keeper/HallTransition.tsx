@@ -83,31 +83,31 @@ export function HallTransition({
         stage !== 'door' && "opacity-0 scale-110"
       )}>
         {/* Door frame */}
-        <div className="relative w-48 md:w-64 h-72 md:h-96" style={{ perspective: '1000px' }}>
-          {/* Left door */}
+        <div className="relative" style={{ perspective: '1000px' }}>
+          {/* Glow behind door when opening */}
+          <div className={cn(
+            "absolute inset-0 flex items-center justify-center transition-opacity duration-500 -z-10",
+            stage !== 'door' ? "opacity-100" : "opacity-0"
+          )}>
+            <div className="w-32 h-48 md:w-48 md:h-64 bg-gradient-radial from-amber-400/40 via-amber-500/20 to-transparent blur-xl" />
+          </div>
+          
+          {/* Single door with emoji */}
           <div 
-            className="absolute left-0 top-0 w-1/2 h-full bg-gradient-to-r from-amber-900 to-amber-800 border-2 border-amber-600/50 transition-transform duration-1000"
+            className="transition-transform duration-1000"
             style={{ 
-              transformOrigin: 'left',
+              transformOrigin: 'left center',
               transformStyle: 'preserve-3d',
-              transform: stage !== 'door' ? 'rotateY(-90deg)' : 'rotateY(0deg)'
+              transform: stage !== 'door' ? 'rotateY(-110deg)' : 'rotateY(0deg)'
             }}
           >
-            <div className="absolute right-2 top-1/2 w-3 h-8 bg-amber-500 rounded-full" />
+            <span 
+              className="text-[12rem] md:text-[16rem] block drop-shadow-[0_0_40px_rgba(251,191,36,0.5)]"
+              style={{ lineHeight: 1 }}
+            >
+              🚪
+            </span>
           </div>
-          {/* Right door */}
-          <div 
-            className="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-l from-amber-900 to-amber-800 border-2 border-amber-600/50 transition-transform duration-1000"
-            style={{ 
-              transformOrigin: 'right',
-              transformStyle: 'preserve-3d',
-              transform: stage !== 'door' ? 'rotateY(90deg)' : 'rotateY(0deg)'
-            }}
-          >
-            <div className="absolute left-2 top-1/2 w-3 h-8 bg-amber-500 rounded-full" />
-          </div>
-          {/* Door glow */}
-          <div className="absolute inset-0 bg-gradient-radial from-amber-500/20 to-transparent animate-pulse" />
         </div>
       </div>
 
