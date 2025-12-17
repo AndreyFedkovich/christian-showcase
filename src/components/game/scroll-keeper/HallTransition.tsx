@@ -149,7 +149,7 @@ export function HallTransition({
 
       {/* Hall reveal */}
       <div className={cn(
-        "absolute inset-0 flex flex-col items-center justify-start pt-24 pb-48 transition-all duration-1000",
+        "absolute inset-0 flex flex-col items-center justify-start pt-48 pb-48 transition-all duration-1000",
         stage === 'reveal' || stage === 'dialogue' ? "opacity-100" : "opacity-0 scale-90"
       )}>
         {/* Hall number badge */}
