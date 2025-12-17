@@ -153,10 +153,7 @@ export function HallTransition({
         </div>
 
         {/* Hall icon */}
-        <div className={cn(
-          "text-7xl md:text-8xl mb-6 transition-all duration-500",
-          stage === 'dialogue' ? "animate-bounce" : "animate-pulse"
-        )}>
+        <div className="text-7xl md:text-8xl mb-6 drop-shadow-[0_0_30px_rgba(251,191,36,0.6)]">
           {hall.icon}
         </div>
 
