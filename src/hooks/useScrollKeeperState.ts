@@ -108,6 +108,22 @@ export function useScrollKeeperState() {
     }));
   }, []);
 
+  const startFromHall = useCallback((hallIndex: number) => {
+    const targetHallIndex = Math.min(hallIndex, DEFAULT_HALLS_ORDER.length - 1);
+    const targetHallType = DEFAULT_HALLS_ORDER[targetHallIndex];
+    const targetHall = halls.find(h => h.type === targetHallType);
+    
+    setState(prev => ({
+      ...prev,
+      phase: 'hall-intro',
+      currentHallIndex: targetHallIndex,
+      challengeIndex: 0,
+      keeperMood: 'neutral',
+      keeperMessage: targetHall?.keeperIntro || '',
+      usedHints: 0
+    }));
+  }, []);
+
   const startHall = useCallback(() => {
     const currentHall = getCurrentHall();
     if (!currentHall) return;
@@ -298,6 +314,7 @@ export function useScrollKeeperState() {
     getCurrentHall,
     setTeamName,
     startGame,
+    startFromHall,
     startHall,
     startChallenge,
     submitAnswer,
