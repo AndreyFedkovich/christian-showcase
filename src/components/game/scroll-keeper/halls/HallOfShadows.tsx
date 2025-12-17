@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -21,31 +21,48 @@ export function HallOfShadows({
   onSubmitAnswer 
 }: HallOfShadowsProps) {
   const [answer, setAnswer] = useState('');
-  const [storyProgress, setStoryProgress] = useState(0);
+  const [displayedText, setDisplayedText] = useState('');
+  const [isTyping, setIsTyping] = useState(true);
+  const [showCursor, setShowCursor] = useState(true);
   const [showQuestion, setShowQuestion] = useState(false);
+  const indexRef = useRef(0);
 
-  // Animate story reveal
+  // Character-by-character typing effect
   useEffect(() => {
-    const words = challenge.story.split(' ');
-    const wordsPerChunk = 5;
-    const totalChunks = Math.ceil(words.length / wordsPerChunk);
+    indexRef.current = 0;
+    setDisplayedText('');
+    setIsTyping(true);
+    setShowQuestion(false);
     
-    if (storyProgress < totalChunks) {
-      const timer = setTimeout(() => {
-        setStoryProgress(prev => prev + 1);
-      }, 150);
-      return () => clearTimeout(timer);
-    } else if (!showQuestion) {
-      const timer = setTimeout(() => setShowQuestion(true), 500);
-      return () => clearTimeout(timer);
-    }
-  }, [storyProgress, challenge.story, showQuestion]);
+    const typeInterval = setInterval(() => {
+      if (indexRef.current < challenge.story.length) {
+        setDisplayedText(challenge.story.slice(0, indexRef.current + 1));
+        indexRef.current++;
+      } else {
+        clearInterval(typeInterval);
+        setIsTyping(false);
+        setTimeout(() => setShowQuestion(true), 500);
+      }
+    }, 25);
 
-  const displayedStory = () => {
-    const words = challenge.story.split(' ');
-    const wordsPerChunk = 5;
-    const visibleWords = words.slice(0, storyProgress * wordsPerChunk);
-    return visibleWords.join(' ');
+    return () => clearInterval(typeInterval);
+  }, [challenge.story]);
+
+  // Cursor blinking
+  useEffect(() => {
+    const cursorInterval = setInterval(() => {
+      setShowCursor(prev => !prev);
+    }, 530);
+    return () => clearInterval(cursorInterval);
+  }, []);
+
+  const skipTyping = () => {
+    if (isTyping) {
+      indexRef.current = challenge.story.length;
+      setDisplayedText(challenge.story);
+      setIsTyping(false);
+      setTimeout(() => setShowQuestion(true), 300);
+    }
   };
 
   const handleSubmit = () => {
@@ -122,16 +139,25 @@ export function HallOfShadows({
             
             <div className="relative bg-slate-900/80 p-8 rounded-xl backdrop-blur-sm">
               {/* Story text */}
-              <div className="min-h-[150px] relative">
+              <div 
+                className="min-h-[150px] relative cursor-pointer" 
+                onClick={skipTyping}
+                title={isTyping ? "Нажмите, чтобы пропустить" : ""}
+              >
                 <p className="text-slate-200 text-lg md:text-xl leading-relaxed">
-                  {displayedStory()}
-                  {storyProgress < Math.ceil(challenge.story.split(' ').length / 5) && (
-                    <span className="inline-block w-2 h-5 ml-1 bg-amber-400 animate-blink" />
+                  {displayedText}
+                  {isTyping && (
+                    <span 
+                      className={cn(
+                        "inline-block w-0.5 h-5 ml-1 bg-amber-400 transition-opacity duration-100",
+                        showCursor ? "opacity-100" : "opacity-0"
+                      )} 
+                    />
                   )}
                 </p>
 
                 {/* Shadow overlay during reveal */}
-                {!showQuestion && (
+                {isTyping && (
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 to-transparent pointer-events-none" />
                 )}
               </div>
