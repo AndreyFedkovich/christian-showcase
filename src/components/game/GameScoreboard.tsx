@@ -27,7 +27,7 @@ const GameScoreboard = ({
               "w-8 h-8 md:w-12 md:h-12 transition-all duration-300",
               i < teamScore 
                 ? "text-emerald-400 fill-emerald-400/30 drop-shadow-[0_0_8px_rgba(52,211,153,0.6)] animate-trophy-in" 
-                : "text-slate-700/30"
+                : "text-slate-300/30"
             )}
           />
         ))}
@@ -70,7 +70,7 @@ const GameScoreboard = ({
               "w-8 h-8 md:w-12 md:h-12 transition-all duration-300",
               i < opponentScore 
                 ? "text-rose-400 fill-rose-400/30 drop-shadow-[0_0_8px_rgba(251,113,133,0.6)] animate-trophy-in" 
-                : "text-slate-700/30"
+                : "text-slate-300/30"
             )}
           />
         ))}
