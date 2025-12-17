@@ -9,8 +9,8 @@ import { cn } from '@/lib/utils';
 import { PrologueScene } from '@/components/game/scroll-keeper/PrologueScene';
 import { HallTransition } from '@/components/game/scroll-keeper/HallTransition';
 import { KeeperDialogue } from '@/components/game/scroll-keeper/KeeperDialogue';
-import { HallOfShadows, Scriptorium, EchoChamber } from '@/components/game/scroll-keeper/halls';
-import { Challenge, ShadowsChallenge, ScriptoriumChallenge, EchoChallenge } from '@/data/scroll-keeper';
+import { HallOfShadows, Scriptorium, EchoChamber, GalleryOfWitnesses, TreasuryOfRelics } from '@/components/game/scroll-keeper/halls';
+import { Challenge, ShadowsChallenge, ScriptoriumChallenge, EchoChallenge, GalleryChallenge, TreasuryChallenge } from '@/data/scroll-keeper';
 
 export default function ScrollKeeperPlay() {
   const navigate = useNavigate();
@@ -99,6 +99,23 @@ export default function ScrollKeeperPlay() {
           />
         );
       
+      case 'gallery':
+        return (
+          <GalleryOfWitnesses
+            challenge={state.currentChallenge as GalleryChallenge}
+            timer={state.timer}
+            onSubmitAnswer={handleSubmitAnswer}
+          />
+        );
+      
+      case 'treasury':
+        return (
+          <TreasuryOfRelics
+            challenge={state.currentChallenge as TreasuryChallenge}
+            timer={state.timer}
+            onSubmitAnswer={handleSubmitAnswer}
+          />
+        );
       // Default challenge display for halls not yet implemented
       default:
         return (
