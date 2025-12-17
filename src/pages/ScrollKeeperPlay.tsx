@@ -9,8 +9,8 @@ import { cn } from '@/lib/utils';
 import { PrologueScene } from '@/components/game/scroll-keeper/PrologueScene';
 import { HallTransition } from '@/components/game/scroll-keeper/HallTransition';
 import { KeeperDialogue } from '@/components/game/scroll-keeper/KeeperDialogue';
-import { HallOfShadows, Scriptorium, EchoChamber, GalleryOfWitnesses, TreasuryOfRelics } from '@/components/game/scroll-keeper/halls';
-import { Challenge, ShadowsChallenge, ScriptoriumChallenge, EchoChallenge, GalleryChallenge, TreasuryChallenge } from '@/data/scroll-keeper';
+import { HallOfShadows, Scriptorium, EchoChamber, GalleryOfWitnesses, TreasuryOfRelics, HallOfVoices, TimeSpiral } from '@/components/game/scroll-keeper/halls';
+import { Challenge, ShadowsChallenge, ScriptoriumChallenge, EchoChallenge, GalleryChallenge, TreasuryChallenge, VoicesChallenge, SpiralChallenge } from '@/data/scroll-keeper';
 
 export default function ScrollKeeperPlay() {
   const navigate = useNavigate();
@@ -116,6 +116,27 @@ export default function ScrollKeeperPlay() {
             onSubmitAnswer={handleSubmitAnswer}
           />
         );
+      
+      case 'voices':
+        return (
+          <HallOfVoices
+            challenge={state.currentChallenge as VoicesChallenge}
+            onAnswer={(answer, correct) => {
+              submitAnswer(answer);
+            }}
+          />
+        );
+      
+      case 'spiral':
+        return (
+          <TimeSpiral
+            challenge={state.currentChallenge as SpiralChallenge}
+            onAnswer={(answer, correct) => {
+              submitAnswer(answer);
+            }}
+          />
+        );
+
       // Default challenge display for halls not yet implemented
       default:
         return (
