@@ -83,19 +83,27 @@ export function HallTransition({
         stage !== 'door' && "opacity-0 scale-110"
       )}>
         {/* Door frame */}
-        <div className="relative w-48 md:w-64 h-72 md:h-96">
+        <div className="relative w-48 md:w-64 h-72 md:h-96" style={{ perspective: '1000px' }}>
           {/* Left door */}
-          <div className={cn(
-            "absolute left-0 top-0 w-1/2 h-full bg-gradient-to-r from-amber-900 to-amber-800 border-2 border-amber-600/50 transition-transform duration-1000 origin-left",
-            stage !== 'door' && "-rotate-y-90"
-          )}>
+          <div 
+            className="absolute left-0 top-0 w-1/2 h-full bg-gradient-to-r from-amber-900 to-amber-800 border-2 border-amber-600/50 transition-transform duration-1000"
+            style={{ 
+              transformOrigin: 'left',
+              transformStyle: 'preserve-3d',
+              transform: stage !== 'door' ? 'rotateY(-90deg)' : 'rotateY(0deg)'
+            }}
+          >
             <div className="absolute right-2 top-1/2 w-3 h-8 bg-amber-500 rounded-full" />
           </div>
           {/* Right door */}
-          <div className={cn(
-            "absolute right-0 top-0 w-1/2 h-full bg-gradient-to-l from-amber-900 to-amber-800 border-2 border-amber-600/50 transition-transform duration-1000 origin-right",
-            stage !== 'door' && "rotate-y-90"
-          )}>
+          <div 
+            className="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-l from-amber-900 to-amber-800 border-2 border-amber-600/50 transition-transform duration-1000"
+            style={{ 
+              transformOrigin: 'right',
+              transformStyle: 'preserve-3d',
+              transform: stage !== 'door' ? 'rotateY(90deg)' : 'rotateY(0deg)'
+            }}
+          >
             <div className="absolute left-2 top-1/2 w-3 h-8 bg-amber-500 rounded-full" />
           </div>
           {/* Door glow */}
