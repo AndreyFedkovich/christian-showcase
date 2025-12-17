@@ -246,15 +246,22 @@ export function useScrollKeeperState() {
         };
       }
 
+      // Load next challenge directly
+      const hallType = prev.hallOrder[prev.currentHallIndex];
+      const hallChallenges = sampleChallenges.filter(c => c.hallType === hallType);
+      const challengeIdx = nextChallengeIndex % hallChallenges.length;
+      const nextChallenge = hallChallenges[challengeIdx];
+
       // Start next challenge in same hall
       return {
         ...prev,
         challengeIndex: nextChallengeIndex,
         phase: 'challenge',
-        currentChallenge: null, // Will be set by startChallenge
+        currentChallenge: nextChallenge,
         isCorrect: null,
         timer: TIME_PER_CHALLENGE,
-        isTimerRunning: false
+        isTimerRunning: true,
+        usedHints: 0
       };
     });
   }, []);
