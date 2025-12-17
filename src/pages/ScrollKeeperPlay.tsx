@@ -31,17 +31,18 @@ export default function ScrollKeeperPlay() {
     goToSetup
   } = useScrollKeeperState();
 
-  // Handle startHall query param
+  // Handle startHall query param - auto-start game from selected hall
   useEffect(() => {
     const startHallParam = searchParams.get('startHall');
     if (startHallParam !== null && state.phase === 'team-setup') {
       const hallIndex = parseInt(startHallParam, 10);
       if (!isNaN(hallIndex) && hallIndex >= 0) {
-        // Store the hall index to start from after team setup
-        sessionStorage.setItem('scrollkeeper_start_hall', startHallParam);
+        setTeamName('Искатели');
+        document.documentElement.requestFullscreen().catch(() => {});
+        startFromHall(hallIndex);
       }
     }
-  }, [searchParams, state.phase]);
+  }, [searchParams, state.phase, setTeamName, startFromHall]);
 
   const [teamNameInput, setTeamNameInput] = useState('');
   const [answerInput, setAnswerInput] = useState('');
@@ -53,15 +54,7 @@ export default function ScrollKeeperPlay() {
     } catch (e) {
       console.log('Fullscreen not available');
     }
-    
-    // Check if we should start from a specific hall
-    const startHallIndex = sessionStorage.getItem('scrollkeeper_start_hall');
-    if (startHallIndex !== null) {
-      sessionStorage.removeItem('scrollkeeper_start_hall');
-      startFromHall(parseInt(startHallIndex, 10));
-    } else {
-      startGame();
-    }
+    startGame();
   };
 
   const handleExit = async () => {
