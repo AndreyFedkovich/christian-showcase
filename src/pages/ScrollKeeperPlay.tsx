@@ -6,6 +6,10 @@ import { Label } from '@/components/ui/label';
 import { ArrowLeft, Key, BookOpen, Clock } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
+import { PrologueScene } from '@/components/game/scroll-keeper/PrologueScene';
+import { HallTransition } from '@/components/game/scroll-keeper/HallTransition';
+import { KeeperDialogue } from '@/components/game/scroll-keeper/KeeperDialogue';
+import { Challenge, keeperDialogues } from '@/data/scroll-keeper';
 
 export default function ScrollKeeperPlay() {
   const navigate = useNavigate();
@@ -119,53 +123,23 @@ export default function ScrollKeeperPlay() {
 
       case 'prologue':
         return (
-          <div className="flex flex-col items-center justify-center min-h-screen p-8 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-center">
-            <div className="max-w-2xl space-y-8 animate-fade-in">
-              <div className="text-8xl mb-8">🏛️</div>
-              <h1 className="text-3xl md:text-4xl font-bold text-amber-400">
-                Библиотека Вечности
-              </h1>
-              <div className="space-y-4 text-lg md:text-xl text-slate-300 leading-relaxed">
-                <p>{state.keeperMessage}</p>
-                <p className="text-slate-400">{state.teamName}, {keeperDialogues.prologue.warning}</p>
-                <p className="text-amber-300 italic">{keeperDialogues.prologue.challenge}</p>
-              </div>
-              <Button 
-                onClick={startHall}
-                size="lg"
-                className="mt-8 bg-amber-600 hover:bg-amber-700 text-white px-12 py-6 text-xl"
-              >
-                Войти в Библиотеку
-              </Button>
-            </div>
-          </div>
+          <PrologueScene
+            teamName={state.teamName}
+            onEnterLibrary={startHall}
+          />
         );
 
       case 'hall-intro':
-        return (
-          <div className="flex flex-col items-center justify-center min-h-screen p-8 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-center">
-            <div className="max-w-2xl space-y-8 animate-fade-in">
-              <div className="flex items-center justify-center gap-4 mb-4">
-                <MemoryKeyCounter keys={state.memoryKeys} maxKeys={state.maxMemoryKeys} />
-              </div>
-              <div className="text-7xl mb-4">{currentHall?.icon}</div>
-              <h2 className="text-2xl md:text-3xl font-bold text-amber-400">
-                Зал {state.currentHallIndex + 1}: {currentHall?.name}
-              </h2>
-              <p className="text-lg text-slate-300 italic">
-                "{state.keeperMessage}"
-              </p>
-              <p className="text-slate-400">{currentHall?.description}</p>
-              <Button 
-                onClick={startChallenge}
-                size="lg"
-                className="mt-8 bg-amber-600 hover:bg-amber-700 text-white px-12 py-6 text-xl"
-              >
-                Принять испытание
-              </Button>
-            </div>
-          </div>
-        );
+        return currentHall ? (
+          <HallTransition
+            hall={currentHall}
+            hallNumber={state.currentHallIndex + 1}
+            totalHalls={state.hallOrder.length}
+            memoryKeys={state.memoryKeys}
+            maxKeys={state.maxMemoryKeys}
+            onStartChallenge={startChallenge}
+          />
+        ) : null;
 
       case 'challenge':
         return (
@@ -237,9 +211,12 @@ export default function ScrollKeeperPlay() {
               )}>
                 {state.isCorrect ? 'Верно!' : 'Неверно'}
               </h2>
-              <p className="text-xl text-slate-300 italic">
-                "{state.keeperMessage}"
-              </p>
+              
+              <KeeperDialogue
+                message={state.keeperMessage}
+                mood={state.keeperMood}
+              />
+              
               <MemoryKeyCounter keys={state.memoryKeys} maxKeys={state.maxMemoryKeys} />
               <Button 
                 onClick={proceedFromResult}
@@ -260,9 +237,12 @@ export default function ScrollKeeperPlay() {
               <h2 className="text-3xl font-bold text-amber-400">
                 Зал пройден!
               </h2>
-              <p className="text-xl text-slate-300 italic">
-                "{state.keeperMessage}"
-              </p>
+              
+              <KeeperDialogue
+                message={state.keeperMessage}
+                mood="approving"
+              />
+              
               <MemoryKeyCounter keys={state.memoryKeys} maxKeys={state.maxMemoryKeys} />
               <Button 
                 onClick={proceedToNextHall}
@@ -283,9 +263,12 @@ export default function ScrollKeeperPlay() {
               <h1 className="text-4xl font-bold text-amber-400">
                 Победа!
               </h1>
-              <p className="text-xl text-slate-300 italic">
-                "{state.keeperMessage}"
-              </p>
+              
+              <KeeperDialogue
+                message={state.keeperMessage}
+                mood="approving"
+              />
+              
               <MemoryKeyCounter keys={state.memoryKeys} maxKeys={state.maxMemoryKeys} />
               <div className="flex gap-4 justify-center pt-8">
                 <Button 
@@ -314,9 +297,12 @@ export default function ScrollKeeperPlay() {
               <h1 className="text-4xl font-bold text-slate-400">
                 Испытание не пройдено
               </h1>
-              <p className="text-xl text-slate-300 italic">
-                "{state.keeperMessage}"
-              </p>
+              
+              <KeeperDialogue
+                message={state.keeperMessage}
+                mood="thoughtful"
+              />
+              
               <MemoryKeyCounter keys={state.memoryKeys} maxKeys={state.maxMemoryKeys} />
               <div className="flex gap-4 justify-center pt-8">
                 <Button 
@@ -349,9 +335,6 @@ export default function ScrollKeeperPlay() {
   );
 }
 
-// Import keeper dialogues for prologue
-import { keeperDialogues } from '@/data/scroll-keeper';
-
 // Memory Key Counter component
 function MemoryKeyCounter({ keys, maxKeys }: { keys: number; maxKeys: number }) {
   return (
@@ -366,8 +349,6 @@ function MemoryKeyCounter({ keys, maxKeys }: { keys: number; maxKeys: number }) 
 }
 
 // Challenge Display component
-import { Challenge } from '@/data/scroll-keeper';
-
 function ChallengeDisplay({ 
   challenge, 
   usedHints, 
