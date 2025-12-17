@@ -79,8 +79,8 @@ export function HallTransition({
 
       {/* Door opening animation */}
       <div className={cn(
-        "absolute inset-0 flex items-center justify-center transition-all duration-1000",
-        stage !== 'door' && "opacity-0 scale-110"
+        "absolute inset-0 flex items-center justify-center transition-opacity duration-1000",
+        stage !== 'door' && "opacity-0"
       )}>
         {/* Door frame */}
         <div className="relative" style={{ perspective: '1000px' }}>
