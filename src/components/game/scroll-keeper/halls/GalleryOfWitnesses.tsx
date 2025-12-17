@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { GalleryChallenge } from '@/data/scroll-keeper';
-import { Clock, Send, User, Quote } from 'lucide-react';
+import { Clock, Send, User } from 'lucide-react';
 
 interface GalleryOfWitnessesProps {
   challenge: GalleryChallenge;
@@ -17,31 +17,48 @@ export function GalleryOfWitnesses({
   onSubmitAnswer 
 }: GalleryOfWitnessesProps) {
   const [answer, setAnswer] = useState('');
-  const [monologueProgress, setMonologueProgress] = useState(0);
+  const [displayedText, setDisplayedText] = useState('');
+  const [isTyping, setIsTyping] = useState(true);
+  const [showCursor, setShowCursor] = useState(true);
   const [showInput, setShowInput] = useState(false);
+  const indexRef = useRef(0);
 
-  // Animate monologue reveal
+  // Character-by-character typing effect
   useEffect(() => {
-    const words = challenge.monologue.split(' ');
-    const wordsPerChunk = 3;
-    const totalChunks = Math.ceil(words.length / wordsPerChunk);
+    indexRef.current = 0;
+    setDisplayedText('');
+    setIsTyping(true);
+    setShowInput(false);
     
-    if (monologueProgress < totalChunks) {
-      const timer = setTimeout(() => {
-        setMonologueProgress(prev => prev + 1);
-      }, 120);
-      return () => clearTimeout(timer);
-    } else if (!showInput) {
-      const timer = setTimeout(() => setShowInput(true), 800);
-      return () => clearTimeout(timer);
-    }
-  }, [monologueProgress, challenge.monologue, showInput]);
+    const typeInterval = setInterval(() => {
+      if (indexRef.current < challenge.monologue.length) {
+        setDisplayedText(challenge.monologue.slice(0, indexRef.current + 1));
+        indexRef.current++;
+      } else {
+        clearInterval(typeInterval);
+        setIsTyping(false);
+        setTimeout(() => setShowInput(true), 500);
+      }
+    }, 30);
 
-  const displayedMonologue = () => {
-    const words = challenge.monologue.split(' ');
-    const wordsPerChunk = 3;
-    const visibleWords = words.slice(0, monologueProgress * wordsPerChunk);
-    return visibleWords.join(' ');
+    return () => clearInterval(typeInterval);
+  }, [challenge.monologue]);
+
+  // Cursor blinking
+  useEffect(() => {
+    const cursorInterval = setInterval(() => {
+      setShowCursor(prev => !prev);
+    }, 530);
+    return () => clearInterval(cursorInterval);
+  }, []);
+
+  const skipTyping = () => {
+    if (isTyping) {
+      indexRef.current = challenge.monologue.length;
+      setDisplayedText(challenge.monologue);
+      setIsTyping(false);
+      setTimeout(() => setShowInput(true), 300);
+    }
   };
 
   const handleSubmit = () => {
@@ -145,17 +162,26 @@ export function GalleryOfWitnesses({
 
             {/* Speech bubble / Monologue box */}
             <div className="relative bg-slate-900/80 backdrop-blur-sm p-8 pt-40 md:pt-48 rounded-2xl border border-rose-500/30 shadow-xl">
-              {/* Decorative quotes at top */}
-              <div className="flex items-center justify-center h-[80px]">
-                <span className="text-[7rem] md:text-[9rem] lg:text-[12rem] text-accent font-serif leading-none">“</span>
+              {/* Decorative quote */}
+              <div className="absolute top-36 md:top-44 left-1/2 -translate-x-1/2">
+                <span className="text-6xl md:text-7xl text-rose-500/30 font-serif">"</span>
               </div>
 
               {/* Monologue text */}
-              <div className="min-h-[120px] relative px-4">
+              <div 
+                className="min-h-[120px] relative px-4 cursor-pointer" 
+                onClick={skipTyping}
+                title={isTyping ? "Нажмите, чтобы пропустить" : ""}
+              >
                 <p className="text-rose-100 text-lg md:text-xl leading-relaxed italic font-serif">
-                  {displayedMonologue()}
-                  {monologueProgress < Math.ceil(challenge.monologue.split(' ').length / 3) && (
-                    <span className="inline-block w-2 h-5 ml-1 bg-rose-400 animate-blink" />
+                  {displayedText}
+                  {isTyping && (
+                    <span 
+                      className={cn(
+                        "inline-block w-0.5 h-5 ml-1 bg-rose-400 transition-opacity duration-100",
+                        showCursor ? "opacity-100" : "opacity-0"
+                      )} 
+                    />
                   )}
                 </p>
               </div>
