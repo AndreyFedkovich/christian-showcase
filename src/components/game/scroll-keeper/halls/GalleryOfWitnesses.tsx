@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { GalleryChallenge } from '@/data/scroll-keeper';
 import { Clock, Send, User, Volume2, VolumeX } from 'lucide-react';
-import { useTypewriterSound } from '@/hooks/useTypewriterSound';
 
 interface GalleryOfWitnessesProps {
   challenge: GalleryChallenge;
@@ -23,7 +22,6 @@ export function GalleryOfWitnesses({
   const [showCursor, setShowCursor] = useState(true);
   const [showInput, setShowInput] = useState(false);
   const indexRef = useRef(0);
-  const { playTick, soundEnabled, setSoundEnabled } = useTypewriterSound();
 
   // Character-by-character typing effect
   useEffect(() => {
@@ -35,7 +33,6 @@ export function GalleryOfWitnesses({
     const typeInterval = setInterval(() => {
       if (indexRef.current < challenge.monologue.length) {
         setDisplayedText(challenge.monologue.slice(0, indexRef.current + 1));
-        playTick();
         indexRef.current++;
       } else {
         clearInterval(typeInterval);
@@ -45,7 +42,7 @@ export function GalleryOfWitnesses({
     }, 30);
 
     return () => clearInterval(typeInterval);
-  }, [challenge.monologue, playTick]);
+  }, [challenge.monologue]);
 
   // Cursor blinking
   useEffect(() => {
@@ -131,14 +128,9 @@ export function GalleryOfWitnesses({
       {/* Timer and Sound Toggle */}
       <div className="absolute top-4 right-4 z-50 flex items-center gap-2">
         <button
-          onClick={() => setSoundEnabled(!soundEnabled)}
           className="flex items-center justify-center w-10 h-10 rounded-full bg-rose-900/50 border border-rose-500/50 backdrop-blur-sm hover:bg-rose-800/50 transition-colors"
         >
-          {soundEnabled ? (
-            <Volume2 className="w-5 h-5 text-rose-300" />
-          ) : (
-            <VolumeX className="w-5 h-5 text-rose-500/50" />
-          )}
+          <VolumeX className="w-5 h-5 text-rose-500/50" />
         </button>
         <div className={cn(
           "flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-sm",
@@ -176,8 +168,8 @@ export function GalleryOfWitnesses({
             {/* Speech bubble / Monologue box */}
             <div className="relative bg-slate-900/80 backdrop-blur-sm p-8 pt-40 md:pt-48 rounded-2xl border border-rose-500/30 shadow-xl">
               {/* Decorative quote */}
-              <div className="absolute top-36 md:top-44 left-1/2 -translate-x-1/2">
-                <span className="text-6xl md:text-7xl text-rose-500/30 font-serif">"</span>
+              <div className="flex items-center justify-center h-[80px]">
+                <span className="text-[7rem] md:text-[9rem] lg:text-[12rem] text-accent font-serif leading-none">“</span>
               </div>
 
               {/* Monologue text */}

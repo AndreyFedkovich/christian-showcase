@@ -79,31 +79,37 @@ export function HallTransition({
 
       {/* Door opening animation */}
       <div className={cn(
-        "absolute inset-0 flex items-center justify-center transition-opacity duration-1000",
-        stage !== 'door' && "opacity-0"
+          "absolute inset-0 flex items-center justify-center transition-opacity duration-1000",
+          // Добавили delay-500, чтобы дверь успела начать открываться до того, как исчезнет
+          stage !== 'door' ? "opacity-0 delay-500 pointer-events-none" : "opacity-100"
       )}>
         {/* Door frame */}
-        <div className="relative" style={{ perspective: '1000px' }}>
+        <div className="relative" style={{ perspective: '1200px' }}> {/* Увеличили перспективу для реалистичности */}
+
           {/* Glow behind door when opening */}
           <div className={cn(
-            "absolute inset-0 flex items-center justify-center transition-opacity duration-500 -z-10",
-            stage !== 'door' ? "opacity-100" : "opacity-0"
+              "absolute inset-0 flex items-center justify-center transition-opacity duration-500 -z-10",
+              stage !== 'door' ? "opacity-100" : "opacity-0"
           )}>
             <div className="w-32 h-48 md:w-48 md:h-64 bg-gradient-radial from-amber-400/40 via-amber-500/20 to-transparent blur-xl" />
           </div>
-          
+
           {/* Single door with emoji */}
-          <div 
-            className="transition-transform duration-1000"
-            style={{ 
-              transformOrigin: 'left center',
-              transformStyle: 'preserve-3d',
-              transform: stage !== 'door' ? 'rotateY(-110deg)' : 'rotateY(0deg)'
-            }}
+          <div
+              className="transition-transform duration-1000 ease-in-out" // Добавили плавность (ease-in-out)
+              style={{
+                // Важно: '20% center' смещает петлю чуть внутрь эмодзи,
+                // так как у эмодзи есть пустые поля по краям.
+                // Если поставить 'left center', дверь будет открываться по слишком широкой дуге.
+                transformOrigin: '20% center',
+                transformStyle: 'preserve-3d',
+                // Только поворот, без translate
+                transform: stage !== 'door' ? 'rotateY(-105deg)' : 'rotateY(0deg)'
+              }}
           >
-            <span 
-              className="text-[12rem] md:text-[16rem] block drop-shadow-[0_0_40px_rgba(251,191,36,0.5)]"
-              style={{ lineHeight: 1 }}
+            <span
+                className="text-[12rem] md:text-[16rem] block drop-shadow-[0_0_40px_rgba(251,191,36,0.5)] select-none"
+                style={{ lineHeight: 1 }}
             >
               🚪
             </span>
