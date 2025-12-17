@@ -68,12 +68,12 @@ export function HallTransition({
       hallBackgrounds[hall.type]
     )}>
       {/* Memory Keys counter */}
-      <div className="absolute top-4 left-1/2 -translate-x-1/2 z-50">
-        <div className="flex items-center gap-3 bg-slate-900/80 px-4 py-2 rounded-full border border-amber-600/30 backdrop-blur-sm">
-          <Key className="w-5 h-5 text-amber-400" />
-          <span className="text-amber-400 font-bold text-lg">{memoryKeys}</span>
-          <span className="text-slate-500">/</span>
-          <span className="text-slate-400">{maxKeys}</span>
+      <div className="absolute top-6 left-1/2 -translate-x-1/2 z-50">
+        <div className="flex items-center gap-4 bg-slate-900/90 px-6 py-3 rounded-full border-2 border-amber-600/40 backdrop-blur-sm shadow-lg">
+          <Key className="w-7 h-7 text-amber-400" />
+          <span className="text-amber-400 font-bold text-2xl">{memoryKeys}</span>
+          <span className="text-slate-500 text-xl">/</span>
+          <span className="text-slate-400 text-xl">{maxKeys}</span>
         </div>
       </div>
 
@@ -146,8 +146,8 @@ export function HallTransition({
       )}>
         {/* Hall number badge */}
         <div className={cn(
-          "mb-4 px-4 py-1 rounded-full text-sm font-medium",
-          "bg-slate-800/80 border border-amber-600/30 text-amber-400"
+          "mb-6 px-6 py-2 rounded-full text-base font-semibold",
+          "bg-amber-600/20 border-2 border-amber-500/40 text-amber-300"
         )}>
           Зал {hallNumber} из {totalHalls}
         </div>
@@ -161,12 +161,12 @@ export function HallTransition({
         </div>
 
         {/* Hall name */}
-        <h2 className="text-3xl md:text-4xl font-bold text-amber-400 mb-4 text-center">
+        <h2 className="text-4xl md:text-5xl font-bold text-amber-400 mb-6 text-center drop-shadow-[0_0_20px_rgba(251,191,36,0.5)]">
           {hall.name}
         </h2>
 
         {/* Hall description */}
-        <p className="text-slate-400 text-center max-w-md px-4 mb-8">
+        <p className="text-white/90 text-lg md:text-xl text-center max-w-lg px-4 mb-8 leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
           {hall.description}
         </p>
       </div>
