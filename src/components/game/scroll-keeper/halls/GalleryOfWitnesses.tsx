@@ -145,9 +145,10 @@ export function GalleryOfWitnesses({
 
             {/* Speech bubble / Monologue box */}
             <div className="relative bg-slate-900/80 backdrop-blur-sm p-8 pt-40 md:pt-48 rounded-2xl border border-rose-500/30 shadow-xl">
-              {/* Quote marks */}
-              <Quote className="absolute top-44 md:top-52 left-6 w-8 h-8 text-rose-500/30 rotate-180" />
-              <Quote className="absolute bottom-6 right-6 w-8 h-8 text-rose-500/30" />
+              {/* Decorative quotes at top */}
+              <div className="flex items-center justify-center h-[80px]">
+                <span className="text-[7rem] md:text-[9rem] lg:text-[12rem] text-accent font-serif leading-none">“</span>
+              </div>
 
               {/* Monologue text */}
               <div className="min-h-[120px] relative px-4">

@@ -101,9 +101,6 @@ export function HallTransition({
           {/* Door glow */}
           <div className="absolute inset-0 bg-gradient-radial from-amber-500/20 to-transparent animate-pulse" />
         </div>
-        <p className="absolute bottom-1/4 text-amber-400/60 text-lg animate-pulse">
-          Дверь открывается...
-        </p>
       </div>
 
       {/* Corridor animation */}
@@ -134,9 +131,6 @@ export function HallTransition({
             ))}
           </div>
         </div>
-        <p className="absolute bottom-1/4 text-slate-400 text-lg">
-          Вы входите в зал...
-        </p>
       </div>
 
       {/* Hall reveal */}

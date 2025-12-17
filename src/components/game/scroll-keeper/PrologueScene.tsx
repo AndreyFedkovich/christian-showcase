@@ -67,11 +67,6 @@ export function PrologueScene({ teamName, onEnterLibrary }: PrologueSceneProps) 
             />
           ))}
         </div>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <p className="text-slate-500 text-lg animate-pulse">
-            Тьма космоса...
-          </p>
-        </div>
       </div>
 
       {/* Portal */}
@@ -103,9 +98,6 @@ export function PrologueScene({ teamName, onEnterLibrary }: PrologueSceneProps) 
                 {letter}
               </span>
             ))}
-          </div>
-          <div className="text-center text-amber-300 text-xl md:text-2xl animate-pulse">
-            Портал открывается...
           </div>
         </div>
       </div>
