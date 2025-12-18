@@ -158,6 +158,7 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
   const getSlideImage = () => {
     if (slide.type === 'profile') return slide.image;
     if (slide.type === 'story') return slide.image || storyDefault;
+    if (slide.type === 'drama-image') return slide.image;
     return undefined;
   };
 
@@ -364,6 +365,43 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
               </div>
             </div>
             <h3 className="text-2xl font-bold text-primary-foreground group-hover:text-primary-foreground transition-smooth">
+              {getTitle()}
+            </h3>
+          </div>
+        </div>
+      </Card>
+    );
+  }
+
+  // Drama-image slides - image with overlay
+  if (slide.type === 'drama-image') {
+    return (
+      <Card 
+        className="group relative overflow-hidden cursor-pointer transition-smooth hover:-translate-y-2 shadow-card hover:shadow-premium"
+        onClick={onClick}
+      >
+        <div className="aspect-[3/4] relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10 opacity-70 group-hover:opacity-80 transition-smooth" />
+          <img 
+            src={getSlideImage()} 
+            alt={getTitle()}
+            className="w-full h-full object-cover transition-smooth group-hover:scale-110"
+          />
+          
+          <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-amber-500/80 backdrop-blur-sm flex items-center justify-center z-20">
+            <span className="text-lg font-bold text-white">{slideNumber}</span>
+          </div>
+
+          <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
+            <div className="inline-block px-3 py-1 bg-amber-500/80 backdrop-blur-sm rounded-full mb-3">
+              <div className="flex items-center gap-2 text-white">
+                <Image className="w-4 h-4" />
+                <span className="text-xs font-sans font-medium uppercase tracking-wider">
+                  Образ
+                </span>
+              </div>
+            </div>
+            <h3 className="text-xl font-bold text-white line-clamp-2">
               {getTitle()}
             </h3>
           </div>
