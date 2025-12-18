@@ -53,15 +53,15 @@ const DramaActSlide = ({ slide, direction }: DramaActSlideProps) => {
       <div className="absolute inset-y-0 left-0 w-px bg-gradient-to-b from-transparent via-white/20 to-transparent" />
       <div className="absolute inset-y-0 right-0 w-px bg-gradient-to-b from-transparent via-white/20 to-transparent" />
       
-      <div className="relative z-10 text-center px-8 max-w-4xl">
+      <div className="relative z-10 text-center px-8 max-w-5xl">
         {/* Act number */}
         <motion.div
           initial={{ scale: 0.5, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-          className="mb-8"
+          className="mb-10"
         >
-          <span className={`text-6xl md:text-8xl font-serif font-bold ${getAccentColor()} tracking-wider`}>
+          <span className={`text-7xl md:text-9xl font-serif font-bold ${getAccentColor()} tracking-wider`}>
             {slide.actNumber}
           </span>
         </motion.div>
@@ -71,7 +71,7 @@ const DramaActSlide = ({ slide, direction }: DramaActSlideProps) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 0.5 }}
-          className="text-4xl md:text-6xl font-serif font-bold text-white mb-6 min-h-[1.5em]"
+          className="text-5xl md:text-7xl font-serif font-bold text-white mb-8 min-h-[1.5em]"
         >
           {actNameText}
           {!actNameComplete && (
@@ -85,7 +85,7 @@ const DramaActSlide = ({ slide, direction }: DramaActSlideProps) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: actNameComplete ? 1 : 0, y: actNameComplete ? 0 : 20 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-xl md:text-2xl text-white/60 font-sans mb-12"
+            className="text-2xl md:text-3xl text-white/60 font-sans mb-14"
           >
             {slide.subtitle}
           </motion.p>
@@ -97,12 +97,12 @@ const DramaActSlide = ({ slide, direction }: DramaActSlideProps) => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: actNameComplete ? 1 : 0, y: actNameComplete ? 0 : 30 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="mt-16 border-t border-white/10 pt-8"
+            className="mt-20 border-t border-white/10 pt-10"
           >
-            <p className="text-lg md:text-xl text-white/80 italic font-serif mb-3">
+            <p className="text-xl md:text-2xl text-white/80 italic font-serif mb-4">
               «{slide.verse.text}»
             </p>
-            <p className={`text-sm ${getAccentColor()} font-sans uppercase tracking-widest`}>
+            <p className={`text-base ${getAccentColor()} font-sans uppercase tracking-widest`}>
               {slide.verse.reference}
             </p>
           </motion.div>

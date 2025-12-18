@@ -81,15 +81,15 @@ const DramaScriptureSlide = ({ slide, direction }: DramaScriptureSlideProps) => 
         />
       )}
 
-      <div className="relative z-10 w-full max-w-4xl px-8 py-12">
+      <div className="relative z-10 w-full max-w-5xl px-8 py-12">
         {/* Act number */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-8"
+          className="text-center mb-10"
         >
-          <span className={`inline-block px-4 py-2 rounded-full ${getBadgeStyle()} font-sans text-sm uppercase tracking-widest`}>
+          <span className={`inline-block px-5 py-2.5 rounded-full ${getBadgeStyle()} font-sans text-base uppercase tracking-widest`}>
             {slide.actNumber}
           </span>
         </motion.div>
@@ -101,13 +101,13 @@ const DramaScriptureSlide = ({ slide, direction }: DramaScriptureSlideProps) => 
           transition={{ duration: 0.6, delay: 0.2 }}
           className="flex justify-center mb-4"
         >
-          <span className={`text-[10rem] md:text-[14rem] font-serif leading-none ${getQuoteColor()}`}>
+          <span className={`text-[12rem] md:text-[16rem] font-serif leading-none ${getQuoteColor()}`}>
             "
           </span>
         </motion.div>
 
         {/* Verses - appear sequentially */}
-        <div className="space-y-6 -mt-24 relative z-10">
+        <div className="space-y-8 -mt-28 relative z-10">
           {slide.verses.map((verse, index) => (
             <motion.div
               key={index}
@@ -117,11 +117,11 @@ const DramaScriptureSlide = ({ slide, direction }: DramaScriptureSlideProps) => 
               className="text-center"
             >
               {verse.number && (
-                <span className={`${getAccentColor()} font-sans text-sm mr-2`}>
+                <span className={`${getAccentColor()} font-sans text-base mr-3`}>
                   {verse.number}
                 </span>
               )}
-              <span className="text-2xl md:text-4xl font-serif text-white leading-relaxed">
+              <span className="text-3xl md:text-5xl font-serif text-white leading-relaxed">
                 {verse.text}
               </span>
             </motion.div>
@@ -133,9 +133,9 @@ const DramaScriptureSlide = ({ slide, direction }: DramaScriptureSlideProps) => 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.4 + slide.verses.length * 0.3 }}
-          className="text-center mt-10"
+          className="text-center mt-12"
         >
-          <span className={`${getAccentColor()} font-sans text-lg uppercase tracking-wider`}>
+          <span className={`${getAccentColor()} font-sans text-xl uppercase tracking-wider`}>
             — {slide.reference}
           </span>
         </motion.div>
@@ -146,9 +146,9 @@ const DramaScriptureSlide = ({ slide, direction }: DramaScriptureSlideProps) => 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 + slide.verses.length * 0.3 }}
-            className="mt-12 text-center"
+            className="mt-16 text-center"
           >
-            <p className="text-lg md:text-xl text-white/60 font-serif italic max-w-2xl mx-auto">
+            <p className="text-xl md:text-2xl text-white/60 font-serif italic max-w-3xl mx-auto">
               {slide.context}
             </p>
           </motion.div>
