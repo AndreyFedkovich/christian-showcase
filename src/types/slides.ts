@@ -21,6 +21,11 @@ import {
   GodExistsConclusionSlide,
   GodExistsReflectionSlide
 } from '@/data/god-exists';
+import {
+  DramaSceneSlide,
+  DramaActSlide,
+  DramaClimaxSlide
+} from '@/data/redemption-drama';
 import { Disciple } from '@/data/disciples';
 
 // Profile slide type for disciples
@@ -46,4 +51,7 @@ export type UniversalSlide =
   | GodExistsIntroductionSlide
   | GodExistsConclusionSlide
   | GodExistsReflectionSlide
+  | DramaSceneSlide
+  | DramaActSlide
+  | DramaClimaxSlide
   | ProfileSlide;

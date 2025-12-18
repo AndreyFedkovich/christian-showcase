@@ -10,6 +10,9 @@ import PracticalExampleSlide from '@/components/PracticalExampleSlide';
 import DialogueQuestionSlide from '@/components/DialogueQuestionSlide';
 import DialogueAnswerSlide from '@/components/DialogueAnswerSlide';
 import ArgumentSlide from '@/components/ArgumentSlide';
+import DramaSceneSlide from '@/components/DramaSceneSlide';
+import DramaActSlide from '@/components/DramaActSlide';
+import DramaClimaxSlide from '@/components/DramaClimaxSlide';
 
 interface SlideRendererProps {
   slide: UniversalSlide;
@@ -47,6 +50,12 @@ const SlideRenderer = ({ slide, direction, slideNumber }: SlideRendererProps) =>
       return <DialogueAnswerSlide slide={slide as any} direction={direction} />;
     case 'argument':
       return <ArgumentSlide slide={slide as any} direction={direction} />;
+    case 'drama-scene':
+      return <DramaSceneSlide slide={slide as any} direction={direction} />;
+    case 'drama-act':
+      return <DramaActSlide slide={slide as any} direction={direction} />;
+    case 'drama-climax':
+      return <DramaClimaxSlide slide={slide as any} direction={direction} />;
     case 'intro-hermeneutics':
       // Handled separately in IntroSlide
       return null;

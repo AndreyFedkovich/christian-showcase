@@ -6,7 +6,7 @@ import godExistsImg from "@/assets/god-exists-thumbnail.png";
 import { seminar } from '@/data/seminar';
 import { disciples } from '@/data/disciples';
 import { epistlesStructure } from '@/data/epistles-structure';
-import { salvation } from '@/data/salvation';
+import { redemptionDrama } from '@/data/redemption-drama';
 import { godExists } from '@/data/god-exists';
 
 export interface Presentation {
@@ -16,7 +16,7 @@ export interface Presentation {
   thumbnail: string;
   slideCount: number;
   duration: string;
-  type: 'disciples' | 'seminar' | 'hermeneutics' | 'god-exists';
+  type: 'disciples' | 'seminar' | 'hermeneutics' | 'god-exists' | 'drama';
 }
 
 export const presentations: Presentation[] = [
@@ -40,12 +40,12 @@ export const presentations: Presentation[] = [
   },
   {
     id: "salvation",
-    title: "Анатомия Искупления",
-    description: "Динамика Греха и Спасения в Четырех Евангелиях",
+    title: "Драма Искупления",
+    description: "Как развивается конфликт Греха и Спасения в евангельском повествовании",
     thumbnail: salvationImg,
-    slideCount: salvation.length,
-    duration: "20-25 минут",
-    type: 'seminar'
+    slideCount: redemptionDrama.length,
+    duration: "35-40 минут",
+    type: 'drama'
   },
   {
     id: "epistles-structure",
