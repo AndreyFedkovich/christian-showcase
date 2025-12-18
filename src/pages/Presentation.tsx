@@ -271,7 +271,7 @@ const Presentation = () => {
           <IntroSlide 
             onStart={startPresentation}
             title={presentation.title}
-            subtitle="Мастер Библии"
+            subtitle="Интерактивная Библия"
             description={presentation.description}
           />
         )

@@ -97,12 +97,12 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
   },
   {
     type: 'introduction',
-    title: 'Поступать достойно',
+    title: 'Поступать достойно звания',
     subtitle: 'Знание своего статуса',
     content: [
       'Можно выделить несколько принципов знания и поступков.',
       'Первый принцип "сначала понимать свой статус — затем приводить свою жизнь в соответствующее состояние"',
-      'Ключевые слова - поступать достойно, жить духом, преображаться обновлением ума'
+      'Ключевые слова - поступать достойно звания, жить духом, преображаться обновлением ума'
     ],
     image: StatusConditionImage
   },
@@ -157,7 +157,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Предустановление по избранию',
         'Избрание Израиля'
       ],
-      powerSource: 'Поступать достойно',
+      powerSource: 'Поступать достойно звания',
       powerSourceType: 'status'
     },
     doSection: {
@@ -251,7 +251,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Оправдание верой',
         'Свобода во Христе'
       ],
-      powerSource: 'Поступать достойно',
+      powerSource: 'Поступать достойно звания',
       powerSourceType: 'status',
     },
     doSection: {
@@ -280,7 +280,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Спасение по благодати',
         'Тайна Христа'
       ],
-      powerSource: 'Поступать достойно',
+      powerSource: 'Поступать достойно звания',
       powerSourceType: 'status',
     },
     doSection: {
@@ -309,7 +309,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Смирение Христа',
         'Пример служения'
       ],
-      powerSource: 'Поступать достойно',
+      powerSource: 'Поступать достойно звания',
       powerSourceType: 'status'
     },
     doSection: {
@@ -338,7 +338,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Полнота в Нем',
         'Тайна Евангелия'
       ],
-      powerSource: 'Поступать достойно',
+      powerSource: 'Поступать достойно звания',
       powerSourceType: 'status'
     },
     doSection: {
@@ -367,7 +367,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Служение Павла',
         'Утешение верующих'
       ],
-      powerSource: 'Поступать достойно',
+      powerSource: 'Поступать достойно звания',
       powerSourceType: 'status'
     },
     doSection: {
@@ -396,7 +396,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'День Господень',
         'Человек греха'
       ],
-      powerSource: 'Поступать достойно',
+      powerSource: 'Поступать достойно звания',
       powerSourceType: 'status'
     },
     doSection: {
@@ -423,7 +423,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Истинное учение',
         'Благодать Христа'
       ],
-      powerSource: 'Поступать достойно',
+      powerSource: 'Поступать достойно звания',
       powerSourceType: 'status'
     },
     doSection: {
@@ -453,7 +453,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Верность Христу',
         'Образец здравого учения'
       ],
-      powerSource: 'Поступать достойно',
+      powerSource: 'Поступать достойно звания',
       powerSourceType: 'status'
     },
     doSection: {
@@ -481,7 +481,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Назначение пресвитеров',
         'Здравое учение'
       ],
-      powerSource: 'Поступать достойно',
+      powerSource: 'Поступать достойно звания',
       powerSourceType: 'status'
     },
     doSection: {
@@ -541,7 +541,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Избранные Богом'
       ],
       powerSourceType: 'status',
-      powerSource: 'Поступать достойно'
+      powerSource: 'Поступать достойно звания'
     },
     doSection: {
       chapters: 'Гл. 3-5',

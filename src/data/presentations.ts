@@ -40,8 +40,8 @@ export const presentations: Presentation[] = [
   },
   {
     id: "salvation",
-    title: "Путь ко спасению",
-    description: "От греха к спасению через Иисуса Христа",
+    title: "Анатомия Искупления",
+    description: "Динамика Греха и Спасения в Четырех Евангелиях",
     thumbnail: salvationImg,
     slideCount: salvation.length,
     duration: "20-25 минут",

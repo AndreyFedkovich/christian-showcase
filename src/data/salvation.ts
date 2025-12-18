@@ -5,7 +5,7 @@ import { SeminarSlide, SeminarSection, SeminarIntroductionSlide } from './semina
 export const sinSlides: SeminarSlide[] = [
   {
     type: 'introduction',
-    title: 'Путь ко спасению',
+    title: 'Анатомия Искупления',
     subtitle: 'Раздел 1: Грех',
     content: [
       'Чтобы понять Божье спасение, нужно сначала понять проблему греха.',
@@ -19,7 +19,7 @@ export const sinSlides: SeminarSlide[] = [
 export const salvationSlides: SeminarSlide[] = [
   {
     type: 'introduction',
-    title: 'Путь ко спасению',
+    title: 'Анатомия Искупления',
     subtitle: 'Раздел 2: Спасение',
     content: [
       'Бог не оставил нас в безнадёжности.',
