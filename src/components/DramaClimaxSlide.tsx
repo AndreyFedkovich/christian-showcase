@@ -97,19 +97,19 @@ const DramaClimaxSlide = ({ slide, direction }: DramaClimaxSlideProps) => {
         />
       )}
 
-      <div className="relative z-10 w-full max-w-4xl px-8 py-12 text-center">
+      <div className="relative z-10 w-full max-w-5xl px-8 py-12 text-center">
         {/* Title */}
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-3xl md:text-5xl font-serif font-bold text-white mb-16"
+          className="text-4xl md:text-6xl font-serif font-bold text-white mb-20"
         >
           {slide.title}
         </motion.h1>
 
         {/* Statements - appear one by one */}
-        <div className="space-y-6 mb-16">
+        <div className="space-y-8 mb-20">
           {slide.statements.map((statement, index) => (
             <motion.p
               key={index}
@@ -122,7 +122,7 @@ const DramaClimaxSlide = ({ slide, direction }: DramaClimaxSlideProps) => {
                 duration: isDarkness ? 1.2 : 0.6, 
                 ease: "easeOut" 
               }}
-              className={`text-lg md:text-xl font-serif ${isDarkness ? 'text-white/70' : 'text-white/90'} leading-relaxed`}
+              className={`text-xl md:text-2xl font-serif ${isDarkness ? 'text-white/70' : 'text-white/90'} leading-relaxed`}
             >
               {statement}
             </motion.p>
@@ -143,9 +143,9 @@ const DramaClimaxSlide = ({ slide, direction }: DramaClimaxSlideProps) => {
               type: "spring",
               stiffness: 100
             }}
-            className="mb-16"
+            className="mb-20"
           >
-            <span className={`text-5xl md:text-7xl font-serif font-bold ${getCryStyle()}`}>
+            <span className={`text-6xl md:text-8xl font-serif font-bold ${getCryStyle()}`}>
               «{slide.cry}»
             </span>
           </motion.div>
@@ -156,17 +156,17 @@ const DramaClimaxSlide = ({ slide, direction }: DramaClimaxSlideProps) => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: showFocus ? 1 : 0, y: showFocus ? 0 : 30 }}
           transition={{ duration: 0.8 }}
-          className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10"
+          className="bg-white/5 backdrop-blur-sm rounded-xl p-10 border border-white/10"
         >
           {/* Scripture references */}
-          <div className="flex flex-wrap justify-center gap-2 mb-6">
+          <div className="flex flex-wrap justify-center gap-3 mb-8">
             {slide.focus.references.map((ref, index) => (
               <motion.span
                 key={index}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: showFocus ? 1 : 0, scale: showFocus ? 1 : 0.9 }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
-                className="px-4 py-1.5 bg-accent/20 text-accent rounded-full text-sm font-sans"
+                className="px-5 py-2 bg-accent/20 text-accent rounded-full text-base font-sans"
               >
                 {ref}
               </motion.span>
@@ -174,7 +174,7 @@ const DramaClimaxSlide = ({ slide, direction }: DramaClimaxSlideProps) => {
           </div>
 
           {/* Theological significance - typewriter */}
-          <p className="text-lg md:text-xl font-serif text-white/90 min-h-[3em]">
+          <p className="text-xl md:text-2xl font-serif text-white/90 min-h-[3em]">
             {significanceText}
             {showFocus && !significanceComplete && (
               <span className="animate-pulse text-accent">|</span>

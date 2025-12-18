@@ -82,15 +82,15 @@ const DramaImageSlide = ({ slide, direction }: DramaImageSlideProps) => {
 
       {/* Content positioned at bottom */}
       <div className="absolute inset-0 flex flex-col justify-end z-10">
-        <div className="w-full max-w-5xl mx-auto px-8 pb-16">
+        <div className="w-full max-w-6xl mx-auto px-8 pb-20">
           {/* Act number badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className={`inline-flex items-center px-4 py-2 rounded-full border backdrop-blur-sm mb-6 ${getBadgeStyle()}`}
+            className={`inline-flex items-center px-5 py-2.5 rounded-full border backdrop-blur-sm mb-8 ${getBadgeStyle()}`}
           >
-            <span className="text-sm font-sans font-medium uppercase tracking-wider">
+            <span className="text-base font-sans font-medium uppercase tracking-wider">
               {slide.actNumber}
             </span>
           </motion.div>
@@ -100,7 +100,7 @@ const DramaImageSlide = ({ slide, direction }: DramaImageSlideProps) => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4 }}
-            className="text-4xl md:text-6xl font-serif font-bold text-white mb-6 drop-shadow-2xl"
+            className="text-5xl md:text-7xl font-serif font-bold text-white mb-8 drop-shadow-2xl"
           >
             {slide.title}
           </motion.h1>
@@ -111,7 +111,7 @@ const DramaImageSlide = ({ slide, direction }: DramaImageSlideProps) => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="text-lg md:text-xl text-white/80 font-serif italic max-w-3xl mb-8"
+              className="text-xl md:text-2xl text-white/80 font-serif italic max-w-4xl mb-10"
             >
               {slide.caption}
             </motion.p>
@@ -123,12 +123,12 @@ const DramaImageSlide = ({ slide, direction }: DramaImageSlideProps) => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
-              className="bg-black/30 backdrop-blur-md rounded-xl p-6 border border-white/10 max-w-2xl"
+              className="bg-black/30 backdrop-blur-md rounded-xl p-8 border border-white/10 max-w-3xl"
             >
-              <p className={`text-xl md:text-2xl font-serif ${getAccentColor()} mb-3`}>
+              <p className={`text-2xl md:text-3xl font-serif ${getAccentColor()} mb-4`}>
                 «{slide.verse.text}»
               </p>
-              <span className="text-white/60 font-sans text-sm uppercase tracking-wider">
+              <span className="text-white/60 font-sans text-base uppercase tracking-wider">
                 — {slide.verse.reference}
               </span>
             </motion.div>

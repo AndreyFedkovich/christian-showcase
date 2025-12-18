@@ -44,15 +44,15 @@ const DramaSceneSlide = ({ slide, direction }: DramaSceneSlideProps) => {
   const getDynamicIcon = () => {
     switch (slide.intensity) {
       case 'low':
-        return <Sparkles className="w-4 h-4" />;
+        return <Sparkles className="w-5 h-5" />;
       case 'medium':
-        return <Zap className="w-4 h-4" />;
+        return <Zap className="w-5 h-5" />;
       case 'high':
-        return <Flame className="w-4 h-4" />;
+        return <Flame className="w-5 h-5" />;
       case 'climax':
-        return <Skull className="w-4 h-4" />;
+        return <Skull className="w-5 h-5" />;
       default:
-        return <Zap className="w-4 h-4" />;
+        return <Zap className="w-5 h-5" />;
     }
   };
 
@@ -85,18 +85,18 @@ const DramaSceneSlide = ({ slide, direction }: DramaSceneSlideProps) => {
         />
       )}
 
-      <div className="relative z-10 w-full max-w-5xl px-8 py-12">
+      <div className="relative z-10 w-full max-w-6xl px-8 py-12">
         {/* Header: Act number + Scene title */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="mb-8"
+          className="mb-10"
         >
-          <span className="text-white/40 font-sans text-sm uppercase tracking-widest">
+          <span className="text-white/40 font-sans text-base uppercase tracking-widest">
             {slide.actNumber}
           </span>
-          <h1 className="text-3xl md:text-5xl font-serif font-bold text-white mt-2">
+          <h1 className="text-4xl md:text-6xl font-serif font-bold text-white mt-3">
             {slide.sceneTitle}
           </h1>
         </motion.div>
@@ -106,10 +106,10 @@ const DramaSceneSlide = ({ slide, direction }: DramaSceneSlideProps) => {
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className={`inline-flex items-center gap-2 px-4 py-2 rounded-full ${getAccentColor()} mb-8`}
+          className={`inline-flex items-center gap-3 px-5 py-2.5 rounded-full ${getAccentColor()} mb-10`}
         >
           {getDynamicIcon()}
-          <span className="text-sm font-sans font-medium">{slide.dynamic}</span>
+          <span className="text-base font-sans font-medium">{slide.dynamic}</span>
         </motion.div>
 
         {/* Plot description */}
@@ -117,7 +117,7 @@ const DramaSceneSlide = ({ slide, direction }: DramaSceneSlideProps) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mb-10 space-y-4"
+          className="mb-12 space-y-5"
         >
           {slide.plot.map((paragraph, index) => (
             <motion.p
@@ -125,7 +125,7 @@ const DramaSceneSlide = ({ slide, direction }: DramaSceneSlideProps) => {
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.4, delay: 0.4 + index * 0.15 }}
-              className="text-lg md:text-xl text-white/80 font-serif leading-relaxed"
+              className="text-xl md:text-2xl text-white/80 font-serif leading-relaxed"
             >
               {paragraph}
             </motion.p>
@@ -137,9 +137,9 @@ const DramaSceneSlide = ({ slide, direction }: DramaSceneSlideProps) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.6 }}
-          className={`border-l-4 ${getBorderColor()} pl-6 py-4 mb-10`}
+          className={`border-l-[6px] ${getBorderColor()} pl-8 py-5 mb-12`}
         >
-          <p className="text-xl md:text-2xl font-serif font-semibold text-white min-h-[2em]">
+          <p className="text-2xl md:text-3xl font-serif font-semibold text-white min-h-[2em]">
             {thesisText}
             {!thesisComplete && (
               <span className="animate-pulse text-accent">|</span>
@@ -152,21 +152,21 @@ const DramaSceneSlide = ({ slide, direction }: DramaSceneSlideProps) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: thesisComplete ? 1 : 0, y: thesisComplete ? 0 : 20 }}
           transition={{ duration: 0.6 }}
-          className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10"
+          className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10"
         >
-          <h3 className="text-sm font-sans uppercase tracking-widest text-white/50 mb-4">
+          <h3 className="text-base font-sans uppercase tracking-widest text-white/50 mb-5">
             Фокус для углубления
           </h3>
           
           {/* Scripture references */}
-          <div className="flex flex-wrap gap-2 mb-4">
+          <div className="flex flex-wrap gap-3 mb-5">
             {slide.focus.references.map((ref, index) => (
               <motion.span
                 key={index}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: thesisComplete ? 1 : 0, scale: thesisComplete ? 1 : 0.9 }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
-                className="px-3 py-1 bg-accent/20 text-accent rounded-full text-sm font-sans"
+                className="px-4 py-1.5 bg-accent/20 text-accent rounded-full text-base font-sans"
               >
                 {ref}
               </motion.span>
@@ -179,7 +179,7 @@ const DramaSceneSlide = ({ slide, direction }: DramaSceneSlideProps) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: thesisComplete ? 1 : 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="text-white/70 font-serif italic"
+              className="text-lg text-white/70 font-serif italic"
             >
               {slide.focus.explanation}
             </motion.p>
