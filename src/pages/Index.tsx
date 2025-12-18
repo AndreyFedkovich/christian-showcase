@@ -51,88 +51,86 @@ const Index = () => {
           </div>
 
           <div className="relative max-w-4xl mx-auto space-y-6">
-            {/* Премиальная иконка */}
+            {/* Иконка + Заголовок в одну линию */}
             <motion.div
-              className="relative mb-8"
-              initial={{ opacity: 0, scale: 0.5, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
+              className="flex items-center justify-center gap-5 md:gap-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              {/* Внешнее свечение - пульсирующее */}
-              <motion.div
-                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 md:w-52 md:h-52 bg-gradient-to-r from-amber-400/20 via-yellow-300/30 to-amber-400/20 blur-3xl rounded-full"
-                animate={{
-                  scale: [1, 1.2, 1],
-                  opacity: [0.3, 0.5, 0.3],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
-              
-              {/* Лучи света */}
-              <motion.div
-                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 md:w-60 md:h-60"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              >
-                {[...Array(8)].map((_, i) => (
-                  <div
-                    key={i}
-                    className="absolute left-1/2 top-1/2 w-0.5 h-16 md:h-20 bg-gradient-to-t from-amber-400/30 to-transparent origin-bottom"
-                    style={{ transform: `rotate(${i * 45}deg) translateX(-50%)` }}
-                  />
-                ))}
-              </motion.div>
-
-              {/* Контейнер иконки */}
-              <div className="relative w-24 h-24 md:w-32 md:h-32 mx-auto">
-                {/* Декоративное кольцо с градиентом */}
-                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-amber-400 via-yellow-500 to-amber-600 p-[3px] shadow-2xl">
-                  <div className="w-full h-full rounded-full bg-gradient-to-br from-amber-50 via-white to-amber-100 flex items-center justify-center shadow-inner">
-                    <motion.img
-                      src="/favicon.png"
-                      alt="Интерактивная Библия"
-                      className="w-14 h-14 md:w-20 md:h-20 object-contain drop-shadow-lg"
-                      animate={{ 
-                        scale: [1, 1.05, 1],
-                      }}
-                      transition={{
-                        duration: 4,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                      }}
-                    />
-                  </div>
-                </div>
-                
-                {/* Внешнее декоративное кольцо */}
+              {/* Премиальная иконка */}
+              <div className="relative flex-shrink-0">
+                {/* Внешнее свечение - пульсирующее */}
                 <motion.div
-                  className="absolute -inset-2 rounded-full border-2 border-amber-400/30"
+                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 md:w-44 md:h-44 bg-gradient-to-r from-amber-400/20 via-yellow-300/30 to-amber-400/20 blur-3xl rounded-full"
                   animate={{
-                    scale: [1, 1.1, 1],
-                    opacity: [0.5, 0.2, 0.5],
+                    scale: [1, 1.2, 1],
+                    opacity: [0.3, 0.5, 0.3],
                   }}
                   transition={{
-                    duration: 2.5,
+                    duration: 3,
                     repeat: Infinity,
                     ease: "easeInOut",
                   }}
                 />
-              </div>
-            </motion.div>
+                
+                {/* Лучи света */}
+                <motion.div
+                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-36 h-36 md:w-48 md:h-48"
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                >
+                  {[...Array(8)].map((_, i) => (
+                    <div
+                      key={i}
+                      className="absolute left-1/2 top-1/2 w-0.5 h-12 md:h-16 bg-gradient-to-t from-amber-400/30 to-transparent origin-bottom"
+                      style={{ transform: `rotate(${i * 45}deg) translateX(-50%)` }}
+                    />
+                  ))}
+                </motion.div>
 
-            {/* Заголовок с градиентом */}
-            <motion.h1
-              className="text-5xl md:text-7xl font-bold tracking-tight bg-gradient-to-r from-amber-700 via-yellow-600 to-amber-700 bg-clip-text text-transparent drop-shadow-sm"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              Интерактивная Библия
-            </motion.h1>
+                {/* Контейнер иконки */}
+                <div className="relative w-20 h-20 md:w-28 md:h-28">
+                  {/* Декоративное кольцо с градиентом */}
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-amber-400 via-yellow-500 to-amber-600 p-[3px] shadow-2xl">
+                    <div className="w-full h-full rounded-full bg-gradient-to-br from-amber-50 via-white to-amber-100 flex items-center justify-center shadow-inner">
+                      <motion.img
+                        src="/favicon.png"
+                        alt="Интерактивная Библия"
+                        className="w-12 h-12 md:w-16 md:h-16 object-contain drop-shadow-lg"
+                        animate={{ 
+                          scale: [1, 1.05, 1],
+                        }}
+                        transition={{
+                          duration: 4,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }}
+                      />
+                    </div>
+                  </div>
+                  
+                  {/* Внешнее декоративное кольцо */}
+                  <motion.div
+                    className="absolute -inset-2 rounded-full border-2 border-amber-400/30"
+                    animate={{
+                      scale: [1, 1.1, 1],
+                      opacity: [0.5, 0.2, 0.5],
+                    }}
+                    transition={{
+                      duration: 2.5,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  />
+                </div>
+              </div>
+
+              {/* Заголовок справа */}
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight bg-gradient-to-r from-amber-700 via-yellow-600 to-amber-700 bg-clip-text text-transparent drop-shadow-sm">
+                Интерактивная Библия
+              </h1>
+            </motion.div>
             
             <motion.p
               className="text-xl md:text-2xl text-muted-foreground font-sans max-w-2xl mx-auto leading-relaxed"
