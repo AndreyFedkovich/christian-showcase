@@ -185,6 +185,18 @@ export const act1Slides: RedemptionDramaSlide[] = [
     intensity: 'low'
   },
   {
+    type: 'drama-image',
+    actNumber: 'Акт I',
+    title: 'Крещение: Солидарность со грешниками',
+    image: '/placeholder.svg',
+    caption: 'Святой становится в один ряд с грешными',
+    verse: {
+      text: 'Ибо так надлежит нам исполнить всякую правду.',
+      reference: 'Мф. 3:15'
+    },
+    intensity: 'medium'
+  },
+  {
     type: 'drama-scene',
     actNumber: 'Акт I',
     sceneTitle: 'Идентификация: Иисус входит в воды грешников',
@@ -230,6 +242,23 @@ export const act1Slides: RedemptionDramaSlide[] = [
       references: ['Мф. 5-7', 'Мк. 2:17'],
       explanation: '«Вы слышали... а Я говорю вам...» Гнев = убийство, вожделение = прелюбодеяние. «Я пришёл призвать не праведников, но грешников».'
     },
+    intensity: 'medium'
+  },
+  {
+    type: 'drama-parallel',
+    actNumber: 'Акт I',
+    title: 'Нагорная проповедь: Новый стандарт',
+    left: {
+      label: 'Вы слышали...',
+      content: ['Не убивай', 'Не прелюбодействуй', 'Око за око'],
+      tone: 'dark'
+    },
+    right: {
+      label: 'А Я говорю вам...',
+      content: ['Гнев = убийство', 'Вожделение = прелюбодеяние', 'Любите врагов'],
+      tone: 'light'
+    },
+    conclusion: 'Закон вскрывает рану, благодать исцеляет.',
     intensity: 'medium'
   }
 ];
@@ -342,6 +371,29 @@ export const act3Slides: RedemptionDramaSlide[] = [
     intensity: 'climax'
   },
   {
+    type: 'drama-scripture',
+    actNumber: 'Акт III',
+    verses: [
+      { text: 'Душа Моя скорбит смертельно; побудьте здесь и бодрствуйте со Мною.' },
+      { text: 'Отче Мой! если возможно, да минует Меня чаша сия; впрочем не как Я хочу, но как Ты.' }
+    ],
+    reference: 'Мф. 26:38-39',
+    context: 'Гефсимания. Последние часы перед арестом.',
+    intensity: 'climax'
+  },
+  {
+    type: 'drama-image',
+    actNumber: 'Акт III',
+    title: 'Голгофа',
+    image: '/placeholder.svg',
+    caption: 'Место черепа. Проклятие за нас.',
+    verse: {
+      text: 'Он грехи наши Сам вознёс телом Своим на древо.',
+      reference: '1 Пет. 2:24'
+    },
+    intensity: 'climax'
+  },
+  {
     type: 'drama-climax',
     title: 'Распятие: Суд и Оправдание',
     moment: 'darkness',
@@ -385,6 +437,18 @@ export const finaleSlides: RedemptionDramaSlide[] = [
       references: ['1 Кор. 15:17', 'Ин. 20-21'],
       significance: 'Если Христос не воскрес, вы ещё во грехах ваших. Восстановление Петра — как благодать работает с провалом.'
     }
+  },
+  {
+    type: 'drama-image',
+    actNumber: 'Финал',
+    title: 'Пустая гробница',
+    image: '/placeholder.svg',
+    caption: 'Смерть побеждена. Камень отвален.',
+    verse: {
+      text: 'Его нет здесь — Он воскрес!',
+      reference: 'Мф. 28:6'
+    },
+    intensity: 'climax'
   },
   {
     type: 'drama-scene',
