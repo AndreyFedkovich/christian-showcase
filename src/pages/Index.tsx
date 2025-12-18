@@ -50,10 +50,10 @@ const Index = () => {
             ))}
           </div>
 
-          <div className="relative max-w-full mx-auto space-y-6">
-            {/* Иконка + Заголовок в одну линию */}
+          <div className="relative max-w-4xl mx-auto space-y-6">
+            {/* Иконка + Тексты в одну линию */}
             <motion.div
-              className="flex items-center justify-center gap-5 md:gap-8"
+              className="flex items-center justify-center gap-6 md:gap-10"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
@@ -109,23 +109,33 @@ const Index = () => {
                       />
                     </div>
                   </div>
+                  
+                  {/* Внешнее декоративное кольцо */}
+                  <motion.div
+                    className="absolute -inset-2 rounded-full border-2 border-amber-400/30"
+                    animate={{
+                      scale: [1, 1.1, 1],
+                      opacity: [0.5, 0.2, 0.5],
+                    }}
+                    transition={{
+                      duration: 2.5,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  />
                 </div>
               </div>
 
-              {/* Заголовок справа */}
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight bg-gradient-to-r from-amber-700 via-yellow-600 to-amber-700 bg-clip-text text-transparent drop-shadow-sm">
-                Интерактивная Библия
-              </h1>
+              {/* Блок текстов справа — вертикально друг под другом */}
+              <div className="text-left">
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight bg-gradient-to-r from-amber-700 via-yellow-600 to-amber-700 bg-clip-text text-transparent drop-shadow-sm">
+                  Интерактивная Библия
+                </h1>
+                <p className="text-xl md:text-2xl text-muted-foreground font-sans leading-relaxed mt-2 md:mt-3">
+                  Раскрытие христианских истин, которые меняют жизнь
+                </p>
+              </div>
             </motion.div>
-
-            <motion.p
-              className="text-xl md:text-2xl text-muted-foreground font-sans max-w-2xl mx-auto leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-            >
-              Раскрытие христианских истин, которые меняют жизнь
-            </motion.p>
 
             {/* Табы в Hero Section */}
             <motion.div
