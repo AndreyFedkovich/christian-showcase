@@ -13,7 +13,10 @@ import {
   ThumbsDown,
   Theater,
   Flame,
-  Sunrise
+  Sunrise,
+  Image,
+  Quote,
+  Columns
 } from "lucide-react";
 import storyDefault from "@/assets/story-default.jpg";
 
@@ -54,6 +57,12 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
         return <BookOpen className="w-5 h-5" />;
       case 'drama-climax':
         return slide.moment === 'darkness' ? <Flame className="w-5 h-5" /> : <Sunrise className="w-5 h-5" />;
+      case 'drama-image':
+        return <Image className="w-5 h-5" />;
+      case 'drama-scripture':
+        return <Quote className="w-5 h-5" />;
+      case 'drama-parallel':
+        return <Columns className="w-5 h-5" />;
       default:
         return <FileText className="w-5 h-5" />;
     }
@@ -89,6 +98,12 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
         return 'Сцена';
       case 'drama-climax':
         return slide.moment === 'darkness' ? 'Тьма' : 'Свет';
+      case 'drama-image':
+        return 'Образ';
+      case 'drama-scripture':
+        return 'Писание';
+      case 'drama-parallel':
+        return 'Контраст';
       default:
         return 'Слайд';
     }
@@ -123,6 +138,12 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
       case 'drama-scene':
         return slide.sceneTitle;
       case 'drama-climax':
+        return slide.title;
+      case 'drama-image':
+        return slide.title;
+      case 'drama-scripture':
+        return slide.reference;
+      case 'drama-parallel':
         return slide.title;
       default:
         return 'Слайд';
@@ -170,6 +191,12 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
         return slide.moment === 'darkness' 
           ? 'from-black via-red-950 to-black'
           : 'from-amber-950 via-yellow-900 to-amber-950';
+      case 'drama-image':
+        return 'from-slate-900 via-indigo-900 to-slate-800';
+      case 'drama-scripture':
+        return 'from-slate-950 via-violet-950 to-slate-900';
+      case 'drama-parallel':
+        return 'from-slate-800 via-purple-900 to-amber-900';
       default:
         return 'from-primary via-primary/90 to-primary/80';
     }

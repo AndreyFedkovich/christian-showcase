@@ -24,7 +24,10 @@ import {
 import {
   DramaSceneSlide,
   DramaActSlide,
-  DramaClimaxSlide
+  DramaClimaxSlide,
+  DramaImageSlide,
+  DramaScriptureSlide,
+  DramaParallelSlide
 } from '@/data/redemption-drama';
 import { Disciple } from '@/data/disciples';
 
@@ -54,4 +57,7 @@ export type UniversalSlide =
   | DramaSceneSlide
   | DramaActSlide
   | DramaClimaxSlide
+  | DramaImageSlide
+  | DramaScriptureSlide
+  | DramaParallelSlide
   | ProfileSlide;

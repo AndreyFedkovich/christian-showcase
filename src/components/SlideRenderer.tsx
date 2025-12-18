@@ -13,6 +13,9 @@ import ArgumentSlide from '@/components/ArgumentSlide';
 import DramaSceneSlide from '@/components/DramaSceneSlide';
 import DramaActSlide from '@/components/DramaActSlide';
 import DramaClimaxSlide from '@/components/DramaClimaxSlide';
+import DramaImageSlide from '@/components/DramaImageSlide';
+import DramaScriptureSlide from '@/components/DramaScriptureSlide';
+import DramaParallelSlide from '@/components/DramaParallelSlide';
 
 interface SlideRendererProps {
   slide: UniversalSlide;
@@ -56,6 +59,12 @@ const SlideRenderer = ({ slide, direction, slideNumber }: SlideRendererProps) =>
       return <DramaActSlide slide={slide as any} direction={direction} />;
     case 'drama-climax':
       return <DramaClimaxSlide slide={slide as any} direction={direction} />;
+    case 'drama-image':
+      return <DramaImageSlide slide={slide as any} direction={direction} />;
+    case 'drama-scripture':
+      return <DramaScriptureSlide slide={slide as any} direction={direction} />;
+    case 'drama-parallel':
+      return <DramaParallelSlide slide={slide as any} direction={direction} />;
     case 'intro-hermeneutics':
       // Handled separately in IntroSlide
       return null;
