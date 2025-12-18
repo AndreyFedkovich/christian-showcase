@@ -10,7 +10,10 @@ import {
   User,
   Bot,
   ThumbsUp,
-  ThumbsDown
+  ThumbsDown,
+  Theater,
+  Flame,
+  Sunrise
 } from "lucide-react";
 import storyDefault from "@/assets/story-default.jpg";
 
@@ -45,6 +48,12 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
         return <Bot className="w-5 h-5" />;
       case 'argument':
         return slide.argumentType === 'pro' ? <ThumbsUp className="w-5 h-5" /> : <ThumbsDown className="w-5 h-5" />;
+      case 'drama-act':
+        return <Theater className="w-5 h-5" />;
+      case 'drama-scene':
+        return <BookOpen className="w-5 h-5" />;
+      case 'drama-climax':
+        return slide.moment === 'darkness' ? <Flame className="w-5 h-5" /> : <Sunrise className="w-5 h-5" />;
       default:
         return <FileText className="w-5 h-5" />;
     }
@@ -74,6 +83,12 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
         return 'Ответ ИИ';
       case 'argument':
         return slide.argumentType === 'pro' ? 'ЗА' : 'ПРОТИВ';
+      case 'drama-act':
+        return 'Акт';
+      case 'drama-scene':
+        return 'Сцена';
+      case 'drama-climax':
+        return slide.moment === 'darkness' ? 'Тьма' : 'Свет';
       default:
         return 'Слайд';
     }
@@ -103,6 +118,12 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
         return slide.title;
       case 'argument':
         return slide.name;
+      case 'drama-act':
+        return slide.actName;
+      case 'drama-scene':
+        return slide.sceneTitle;
+      case 'drama-climax':
+        return slide.title;
       default:
         return 'Слайд';
     }
@@ -141,6 +162,14 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
         return slide.argumentType === 'pro' 
           ? 'from-emerald-800 via-emerald-700 to-teal-800'
           : 'from-rose-800 via-rose-700 to-red-800';
+      case 'drama-act':
+        return 'from-slate-950 via-indigo-950 to-slate-900';
+      case 'drama-scene':
+        return 'from-slate-950 via-purple-950 to-violet-950';
+      case 'drama-climax':
+        return slide.moment === 'darkness' 
+          ? 'from-black via-red-950 to-black'
+          : 'from-amber-950 via-yellow-900 to-amber-950';
       default:
         return 'from-primary via-primary/90 to-primary/80';
     }

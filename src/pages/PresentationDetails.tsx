@@ -6,7 +6,7 @@ import SlideCardRenderer from "@/components/SlideCardRenderer";
 import { disciples } from "@/data/disciples";
 import { seminar, seminarSections } from "@/data/seminar";
 import { epistlesStructure } from "@/data/epistles-structure";
-import { salvation, salvationSections } from "@/data/salvation";
+import { redemptionDrama, redemptionSections } from "@/data/redemption-drama";
 import { godExists, godExistsSections } from "@/data/god-exists";
 import { presentations } from "@/data/presentations";
 import { useEffect } from "react";
@@ -39,15 +39,15 @@ const PresentationDetails = () => {
     ? epistlesStructure as UniversalSlide[]
     : presentation.type === 'god-exists'
     ? godExists as UniversalSlide[]
-    : presentationId === 'salvation'
-    ? salvation as UniversalSlide[]
+    : presentation.type === 'drama'
+    ? redemptionDrama as UniversalSlide[]
     : seminar as UniversalSlide[];
   
   // Load sections for tabbed presentations
   const sections = presentation.type === 'god-exists'
     ? godExistsSections
-    : presentationId === 'salvation' 
-    ? salvationSections 
+    : presentation.type === 'drama' 
+    ? redemptionSections 
     : seminarSections;
   
   const handleSlideClick = (slideIndex: number) => {
