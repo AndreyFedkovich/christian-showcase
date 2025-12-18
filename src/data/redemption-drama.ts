@@ -2,6 +2,7 @@ import SalvationThumbnail from "@/assets/salvation-thumbnail.png";
 import BaptismImage from "@/assets/baptism.png";
 import CrucifixionImage from "@/assets/crucifixion.png";
 import EmptyTombImage from "@/assets/empty-tomb.png";
+import ResurrectionImage from "@/assets/resurrection.png";
 
 // ============= ИНТЕРФЕЙСЫ СЛАЙДОВ ДРАМЫ =============
 
@@ -440,6 +441,18 @@ export const finaleSlides: RedemptionDramaSlide[] = [
       references: ['1 Кор. 15:17', 'Ин. 20-21'],
       significance: 'Если Христос не воскрес, вы ещё во грехах ваших. Восстановление Петра — как благодать работает с провалом.'
     }
+  },
+  {
+    type: 'drama-image',
+    actNumber: 'Финал',
+    title: 'Воскресение Христа',
+    image: ResurrectionImage,
+    caption: 'Победитель смерти. Первенец из мёртвых.',
+    verse: {
+      text: 'Я есмь воскресение и жизнь',
+      reference: 'Ин. 11:25'
+    },
+    intensity: 'climax'
   },
   {
     type: 'drama-image',
