@@ -45,7 +45,53 @@ export interface DramaClimaxSlide {
   };
 }
 
-export type RedemptionDramaSlide = DramaSceneSlide | DramaActSlide | DramaClimaxSlide;
+// Слайд с фокусом на изображении
+export interface DramaImageSlide {
+  type: 'drama-image';
+  actNumber: string;           // "Акт I"
+  title: string;               // Короткий заголовок
+  image: string;               // Изображение — центральный элемент
+  caption?: string;            // Подпись к изображению
+  verse?: {
+    text: string;
+    reference: string;
+  };
+  intensity: DramaIntensity;
+}
+
+// Слайд с фокусом на тексте Писания
+export interface DramaScriptureSlide {
+  type: 'drama-scripture';
+  actNumber: string;
+  verses: {
+    number?: string;
+    text: string;
+  }[];
+  reference: string;
+  context?: string;            // Краткий контекст
+  intensity: DramaIntensity;
+}
+
+// Слайд с двумя колонками для сравнения
+export interface DramaParallelSlide {
+  type: 'drama-parallel';
+  actNumber: string;
+  title: string;
+  left: {
+    label: string;             // "Адам" | "Грех" | "Закон"
+    content: string[];
+    tone: 'dark' | 'neutral';
+  };
+  right: {
+    label: string;             // "Христос" | "Благодать" | "Евангелие"
+    content: string[];
+    tone: 'light' | 'neutral';
+  };
+  conclusion?: string;
+  intensity: DramaIntensity;
+}
+
+export type RedemptionDramaSlide = DramaSceneSlide | DramaActSlide | DramaClimaxSlide | DramaImageSlide | DramaScriptureSlide | DramaParallelSlide;
 
 // ============= СЕКЦИЯ: ВСТУПЛЕНИЕ =============
 
