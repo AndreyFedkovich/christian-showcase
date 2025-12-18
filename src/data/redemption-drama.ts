@@ -2,7 +2,7 @@ import SalvationThumbnail from "@/assets/salvation-thumbnail.png";
 import BaptismImage from "@/assets/baptism.png";
 import CrucifixionImage from "@/assets/crucifixion.png";
 import EmptyTombImage from "@/assets/empty-tomb.png";
-import ResurrectionImage from "@/assets/resurrection.png";
+import ResurrectionImage from "@/assets/resurrection.jpeg";
 
 // ============= ИНТЕРФЕЙСЫ СЛАЙДОВ ДРАМЫ =============
 
