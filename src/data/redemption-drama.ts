@@ -1,4 +1,7 @@
 import SalvationThumbnail from "@/assets/salvation-thumbnail.png";
+import BaptismImage from "@/assets/baptism.png";
+import CrucifixionImage from "@/assets/crucifixion.png";
+import EmptyTombImage from "@/assets/empty-tomb.png";
 
 // ============= ИНТЕРФЕЙСЫ СЛАЙДОВ ДРАМЫ =============
 
@@ -188,7 +191,7 @@ export const act1Slides: RedemptionDramaSlide[] = [
     type: 'drama-image',
     actNumber: 'Акт I',
     title: 'Крещение: Солидарность со грешниками',
-    image: '/placeholder.svg',
+    image: BaptismImage,
     caption: 'Святой становится в один ряд с грешными',
     verse: {
       text: 'Ибо так надлежит нам исполнить всякую правду.',
@@ -385,7 +388,7 @@ export const act3Slides: RedemptionDramaSlide[] = [
     type: 'drama-image',
     actNumber: 'Акт III',
     title: 'Голгофа',
-    image: '/placeholder.svg',
+    image: CrucifixionImage,
     caption: 'Место черепа. Проклятие за нас.',
     verse: {
       text: 'Он грехи наши Сам вознёс телом Своим на древо.',
@@ -442,7 +445,7 @@ export const finaleSlides: RedemptionDramaSlide[] = [
     type: 'drama-image',
     actNumber: 'Финал',
     title: 'Пустая гробница',
-    image: '/placeholder.svg',
+    image: EmptyTombImage,
     caption: 'Смерть побеждена. Камень отвален.',
     verse: {
       text: 'Его нет здесь — Он воскрес!',
