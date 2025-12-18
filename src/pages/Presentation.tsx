@@ -7,7 +7,7 @@ import IntroSlide from "@/components/IntroSlide";
 import IntroHermeneuticsSlide from "@/components/IntroHermeneuticsSlide";
 import { disciples } from "@/data/disciples";
 import { seminar } from "@/data/seminar";
-import { salvation } from "@/data/salvation";
+import { redemptionDrama } from "@/data/redemption-drama";
 import { epistlesStructure } from "@/data/epistles-structure";
 import { godExists } from "@/data/god-exists";
 import { presentations } from "@/data/presentations";
@@ -50,8 +50,8 @@ const Presentation = () => {
     ? epistlesStructure as UniversalSlide[]
     : presentation.type === 'god-exists'
     ? godExists as UniversalSlide[]
-    : presentationId === 'salvation'
-    ? salvation as UniversalSlide[]
+    : presentation.type === 'drama'
+    ? redemptionDrama as UniversalSlide[]
     : seminar as UniversalSlide[];
   const totalSlides = slides.length;
 
