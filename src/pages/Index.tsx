@@ -50,7 +50,7 @@ const Index = () => {
             ))}
           </div>
 
-          <div className="relative max-w-4xl mx-auto space-y-6">
+          <div className="relative max-w-full mx-auto space-y-6">
             {/* Иконка + Заголовок в одну линию */}
             <motion.div
               className="flex items-center justify-center gap-5 md:gap-8"
@@ -109,20 +109,6 @@ const Index = () => {
                       />
                     </div>
                   </div>
-                  
-                  {/* Внешнее декоративное кольцо */}
-                  <motion.div
-                    className="absolute -inset-2 rounded-full border-2 border-amber-400/30"
-                    animate={{
-                      scale: [1, 1.1, 1],
-                      opacity: [0.5, 0.2, 0.5],
-                    }}
-                    transition={{
-                      duration: 2.5,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                  />
                 </div>
               </div>
 
@@ -131,7 +117,7 @@ const Index = () => {
                 Интерактивная Библия
               </h1>
             </motion.div>
-            
+
             <motion.p
               className="text-xl md:text-2xl text-muted-foreground font-sans max-w-2xl mx-auto leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
