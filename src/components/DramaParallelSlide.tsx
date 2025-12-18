@@ -85,7 +85,7 @@ const DramaParallelSlide = ({ slide, direction }: DramaParallelSlideProps) => {
           <span className={`px-4 py-2 rounded-full ${getIntensityBadge()} font-sans text-sm uppercase tracking-widest`}>
             {slide.actNumber}
           </span>
-          <h1 className="text-3xl md:text-5xl font-serif font-bold text-white">
+          <h1 className="text-4xl md:text-6xl font-serif font-bold text-white">
             {slide.title}
           </h1>
         </div>
@@ -100,31 +100,31 @@ const DramaParallelSlide = ({ slide, direction }: DramaParallelSlideProps) => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className={`flex-1 bg-gradient-to-br ${getLeftGradient()} flex flex-col justify-center items-center px-8 md:px-16 py-20 md:py-12`}
         >
-          <div className="max-w-xl w-full">
+          <div className="max-w-2xl w-full">
             {/* Label */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className={`border-l-4 ${getLeftAccent().split(' ')[0]} pl-6 mb-10`}
+              className={`border-l-[6px] ${getLeftAccent().split(' ')[0]} pl-8 mb-12`}
             >
-              <h2 className={`text-2xl md:text-4xl font-serif font-semibold ${getLeftAccent().split(' ')[1]}`}>
+              <h2 className={`text-3xl md:text-5xl font-serif font-semibold ${getLeftAccent().split(' ')[1]}`}>
                 {slide.left.label}
               </h2>
             </motion.div>
 
             {/* Content items */}
-            <div className="space-y-6">
+            <div className="space-y-8">
               {slide.left.content.map((item, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.4, delay: 0.5 + index * 0.15 }}
-                  className="flex items-start gap-4"
+                  className="flex items-start gap-5"
                 >
-                  <span className="text-red-500/60 text-2xl">•</span>
-                  <p className="text-xl md:text-2xl text-white/80 font-serif">
+                  <span className="text-red-500/60 text-3xl">•</span>
+                  <p className="text-2xl md:text-3xl text-white/80 font-serif">
                     {item}
                   </p>
                 </motion.div>
@@ -144,31 +144,31 @@ const DramaParallelSlide = ({ slide, direction }: DramaParallelSlideProps) => {
           transition={{ duration: 0.6, delay: 0.3 }}
           className={`flex-1 bg-gradient-to-br ${getRightGradient()} flex flex-col justify-center items-center px-8 md:px-16 py-12`}
         >
-          <div className="max-w-xl w-full">
+          <div className="max-w-2xl w-full">
             {/* Label */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              className={`border-l-4 ${getRightAccent().split(' ')[0]} pl-6 mb-10`}
+              className={`border-l-[6px] ${getRightAccent().split(' ')[0]} pl-8 mb-12`}
             >
-              <h2 className={`text-2xl md:text-4xl font-serif font-semibold ${getRightAccent().split(' ')[1]}`}>
+              <h2 className={`text-3xl md:text-5xl font-serif font-semibold ${getRightAccent().split(' ')[1]}`}>
                 {slide.right.label}
               </h2>
             </motion.div>
 
             {/* Content items */}
-            <div className="space-y-6">
+            <div className="space-y-8">
               {slide.right.content.map((item, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.4, delay: 0.6 + index * 0.15 }}
-                  className="flex items-start gap-4"
+                  className="flex items-start gap-5"
                 >
-                  <span className="text-amber-400/60 text-2xl">✦</span>
-                  <p className="text-xl md:text-2xl text-white/90 font-serif">
+                  <span className="text-amber-400/60 text-3xl">✦</span>
+                  <p className="text-2xl md:text-3xl text-white/90 font-serif">
                     {item}
                   </p>
                 </motion.div>
@@ -187,7 +187,7 @@ const DramaParallelSlide = ({ slide, direction }: DramaParallelSlideProps) => {
           className="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/90 via-black/60 to-transparent py-8 px-8"
         >
           <div className="max-w-5xl mx-auto text-center">
-            <p className="text-2xl md:text-3xl font-serif font-semibold text-white">
+            <p className="text-3xl md:text-4xl font-serif font-semibold text-white">
               {slide.conclusion}
             </p>
           </div>
