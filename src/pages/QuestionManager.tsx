@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuestions } from '@/hooks/useQuestions';
-import { QuestionTable } from '@/components/game/QuestionTable';
-import { QuestionForm } from '@/components/game/QuestionForm';
-import { GenerateQuestionsDialog } from '@/components/game/GenerateQuestionsDialog';
+import { QuestionTable } from '@/components/game/bible-master/QuestionTable';
+import { QuestionForm } from '@/components/game/bible-master/QuestionForm';
+import { GenerateQuestionsDialog } from '@/components/game/bible-master/GenerateQuestionsDialog';
 import { BibleQuestion, QuestionCategory, Difficulty, categoryLabels, difficultyLabels } from '@/data/bible-questions';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';

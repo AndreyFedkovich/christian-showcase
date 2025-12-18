@@ -102,7 +102,7 @@ const DramaScriptureSlide = ({ slide, direction }: DramaScriptureSlideProps) => 
           className="flex justify-center mb-4"
         >
           <span className={`text-[12rem] md:text-[16rem] font-serif leading-none ${getQuoteColor()}`}>
-            "
+            “
           </span>
         </motion.div>
 

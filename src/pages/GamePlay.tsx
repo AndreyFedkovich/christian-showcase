@@ -1,17 +1,17 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useGameState } from "@/hooks/useGameState";
 import { Difficulty, QuestionCategory, categoryLabels, categoryIcons, difficultyConfig } from "@/data/bible-questions";
-import GameScoreboard from "@/components/game/GameScoreboard";
-import SpinWheel from "@/components/game/SpinWheel";
-import DifficultyReveal from "@/components/game/DifficultyReveal";
-import TopicReveal from "@/components/game/TopicReveal";
-import QuestionCard from "@/components/game/QuestionCard";
-import GameTimer from "@/components/game/GameTimer";
-import AnswerInput from "@/components/game/AnswerInput";
-import AnswerResult from "@/components/game/AnswerResult";
-import RoundTransition from "@/components/game/RoundTransition";
-import VictoryScreen from "@/components/game/VictoryScreen";
-import TeamSetup from "@/components/game/TeamSetup";
+import GameScoreboard from "@/components/game/bible-master/GameScoreboard";
+import SpinWheel from "@/components/game/bible-master/SpinWheel";
+import DifficultyReveal from "@/components/game/bible-master/DifficultyReveal";
+import TopicReveal from "@/components/game/bible-master/TopicReveal";
+import QuestionCard from "@/components/game/bible-master/QuestionCard";
+import GameTimer from "@/components/game/bible-master/GameTimer";
+import AnswerInput from "@/components/game/bible-master/AnswerInput";
+import AnswerResult from "@/components/game/bible-master/AnswerResult";
+import RoundTransition from "@/components/game/bible-master/RoundTransition";
+import VictoryScreen from "@/components/game/bible-master/VictoryScreen";
+import TeamSetup from "@/components/game/bible-master/TeamSetup";
 
 const difficultyItems = [
   { value: 1 as Difficulty, label: 'Легкий', icon: '⭐' },
