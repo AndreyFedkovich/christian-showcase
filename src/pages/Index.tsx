@@ -6,9 +6,8 @@ import FixedNavbar from "@/components/FixedNavbar";
 import HeroSection from "@/components/HeroSection";
 import { presentations } from "@/data/presentations";
 import { games } from "@/data/games";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Input } from "@/components/ui/input";
-import { BookOpen, Gamepad2, Search, Sparkles } from "lucide-react";
+import { Tabs, TabsContent } from "@/components/ui/tabs";
+import { Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 
 const Index = () => {
@@ -78,7 +77,13 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       {/* Fixed Navbar */}
-      <FixedNavbar isScrolled={isScrolled} onNavigate={handleNavigate} />
+      <FixedNavbar 
+        isScrolled={isScrolled} 
+        onNavigate={handleNavigate}
+        activeTab={activeTab}
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+      />
 
       {/* Hero Section - 100vh */}
       {heroPresentation && (
@@ -96,44 +101,8 @@ const Index = () => {
           onValueChange={setActiveTab}
           className="w-full"
         >
-          <div className="sticky top-16 z-40 bg-background/95 backdrop-blur-md border-b border-border/50">
-            <div className="max-w-6xl mx-auto px-6 py-4">
-              <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-                {/* Tabs */}
-                <TabsList className="bg-transparent h-auto p-0 flex gap-6 md:gap-8 w-full md:w-auto justify-center md:justify-start">
-                  <TabsTrigger
-                    value="presentations"
-                    className="rounded-none border-b-2 border-transparent px-2 pb-3 pt-2 font-sans text-lg text-muted-foreground data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:text-primary data-[state=active]:shadow-none hover:text-primary/80 transition-colors"
-                  >
-                    <BookOpen className="w-5 h-5 mr-2" />
-                    Презентации
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="games"
-                    className="rounded-none border-b-2 border-transparent px-2 pb-3 pt-2 font-sans text-lg text-muted-foreground data-[state=active]:border-violet-500 data-[state=active]:bg-transparent data-[state=active]:text-violet-700 data-[state=active]:shadow-none hover:text-violet-600 transition-colors"
-                  >
-                    <Gamepad2 className="w-5 h-5 mr-2" />
-                    Игры
-                  </TabsTrigger>
-                </TabsList>
-
-                {/* Search */}
-                <div className="relative w-full md:w-[20rem]">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                  <Input
-                    type="text"
-                    placeholder="Поиск..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-10 h-11 bg-background border-border focus:border-primary focus:ring-primary/20 rounded-xl placeholder:text-muted-foreground/80 shadow-sm transition-all hover:bg-muted/50"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-
           {/* Content Area */}
-          <div className="max-w-6xl mx-auto px-6 py-8">
+          <div className="max-w-6xl mx-auto px-6 py-8 pt-24">
             <TabsContent value="presentations" className="mt-0 focus-visible:outline-none">
               {filteredPresentations.length > 0 ? (
                 <div className="space-y-6">
