@@ -51,7 +51,7 @@ const Index = () => {
             <div className="absolute inset-0 gradient-overlay opacity-5" />
 
             {/* Декоративные частицы */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {/*<div className="absolute inset-0 overflow-hidden pointer-events-none">
               {[...Array(6)].map((_, i) => (
                   <motion.div
                       key={i}
@@ -73,7 +73,7 @@ const Index = () => {
                       }}
                   />
               ))}
-            </div>
+            </div>*/}
 
             <div className="relative max-w-full mx-auto space-y-12">
               {/* Иконка + Тексты */}
@@ -93,12 +93,12 @@ const Index = () => {
                       }}
                       transition={{
                         duration: 3,
-                        repeat: Infinity,
+                        repeat: 1,
                         ease: "easeInOut",
                       }}
                   />
 
-                  <motion.div
+                  {/*<motion.div
                       className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-36 h-36 md:w-48 md:h-48"
                       animate={{ rotate: 360 }}
                       transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
@@ -110,7 +110,7 @@ const Index = () => {
                             style={{ transform: `rotate(${i * 45}deg) translateX(-50%)` }}
                         />
                     ))}
-                  </motion.div>
+                  </motion.div>*/}
 
                   <div className="relative w-20 h-20 md:w-28 md:h-28">
                     <div className="absolute inset-0 rounded-full bg-gradient-to-br from-amber-400 via-yellow-500 to-amber-600 p-[3px] shadow-2xl">
@@ -124,7 +124,7 @@ const Index = () => {
                             }}
                             transition={{
                               duration: 4,
-                              repeat: Infinity,
+                              repeat: 1,
                               ease: "easeInOut",
                             }}
                         />
