@@ -55,7 +55,7 @@ const FixedNavbar = ({ isScrolled, onNavigate }: FixedNavbarProps) => {
           <button
             onClick={() => onNavigate('presentations')}
             className={cn(
-              "text-lg font-medium transition-colors",
+              "text-2xl font-medium transition-colors",
               textColorMuted,
               "hover:opacity-100"
             )}
@@ -65,7 +65,7 @@ const FixedNavbar = ({ isScrolled, onNavigate }: FixedNavbarProps) => {
           <button
             onClick={() => onNavigate('games')}
             className={cn(
-              "text-lg font-medium transition-colors",
+              "text-2xl font-medium transition-colors",
               textColorMuted,
               "hover:opacity-100"
             )}
@@ -79,20 +79,20 @@ const FixedNavbar = ({ isScrolled, onNavigate }: FixedNavbarProps) => {
           {/* Search */}
           <Button 
             variant="ghost" 
-            size="icon" 
-            className={cn("hidden md:flex", hoverBg)}
+            size="sm"
+            className={cn("hidden md:flex [&_svg]:size-7", hoverBg)}
           >
-            <Search className={cn("w-6 h-6", textColorMuted)} />
+            <Search className={cn("w-10 h-10", textColorMuted)} />
           </Button>
 
           {/* Language */}
           <Button 
             variant="ghost" 
             size="sm" 
-            className={cn("gap-1.5", hoverBg, textColorMuted)}
+            className={cn("gap-1.5 [&_svg]:size-7", hoverBg, textColorMuted)}
           >
             <Globe className="w-5 h-5" />
-            <span className="text-base font-medium">EN</span>
+            <span className="text-base font-medium">RU</span>
           </Button>
 
           {/* User Menu */}
@@ -104,7 +104,7 @@ const FixedNavbar = ({ isScrolled, onNavigate }: FixedNavbarProps) => {
                 className={cn("rounded-full p-0", hoverBg)}
               >
                 <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-semibold text-base">
-                  A
+                  G
                 </div>
               </Button>
             </DropdownMenuTrigger>
@@ -113,8 +113,8 @@ const FixedNavbar = ({ isScrolled, onNavigate }: FixedNavbarProps) => {
               className="w-48 bg-popover border border-border shadow-lg rounded-lg p-1"
             >
               <div className="px-3 py-2">
-                <p className="font-medium text-foreground">fedkovich</p>
-                <p className="text-sm text-muted-foreground">fedkovich@gmail.com</p>
+                <p className="font-medium text-foreground">Guest</p>
+                <p className="text-sm text-muted-foreground">guest@gmail.com</p>
               </div>
               <DropdownMenuItem className="cursor-pointer text-foreground hover:bg-muted rounded-md mx-1">
                 <LogIn className="w-4 h-4 mr-2 rotate-180" />
