@@ -69,6 +69,10 @@ const HeroSection = ({ presentation }: HeroSectionProps) => {
             exit={{ opacity: 0 }}
             transition={{ duration: 1 }}
             className="w-full h-full"
+            style={{
+              maskImage: 'linear-gradient(to bottom, black 0%, black 50%, transparent 85%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 50%, transparent 85%)',
+            }}
           >
             {currentSlide && (
               <SlideRenderer 
@@ -81,12 +85,10 @@ const HeroSection = ({ presentation }: HeroSectionProps) => {
 
         {/* Gradient overlays for text readability */}
         <div className="absolute inset-0 pointer-events-none">
-          {/* Primary bottom gradient - strong and high */}
-          <div className="absolute inset-x-0 bottom-0 h-[60%] bg-gradient-to-t from-black via-black/80 to-transparent" />
-          {/* Secondary smooth transition */}
-          <div className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-black to-transparent" />
-          {/* Top subtle vignette for navbar */}
+          {/* Top vignette for navbar readability */}
           <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/50 to-transparent" />
+          {/* Bottom fade for smooth transition to info panel */}
+          <div className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-black via-black/60 to-transparent" />
         </div>
       </div>
 
