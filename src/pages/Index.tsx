@@ -75,10 +75,10 @@ const Index = () => {
               ))}
             </div>*/}
 
-            <div className="relative max-w-full mx-auto space-y-12">
+            <div className="relative max-w-6xl mx-auto space-y-12 px-6">
               {/* Иконка + Тексты */}
               <motion.div
-                  className="flex items-center justify-center gap-6 md:gap-10"
+                  className="flex items-center justify-start gap-6 md:gap-10"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, ease: "easeOut" }}
