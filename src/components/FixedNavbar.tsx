@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Search, Globe, LogIn, Menu, X } from "lucide-react";
+import { Search, Globe, LogIn, Menu, X, BookOpen, Gamepad2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,9 +14,12 @@ import { cn } from "@/lib/utils";
 interface FixedNavbarProps {
   isScrolled: boolean;
   onNavigate: (section: 'presentations' | 'games') => void;
+  activeTab: string;
+  searchQuery: string;
+  onSearchChange: (value: string) => void;
 }
 
-const FixedNavbar = ({ isScrolled, onNavigate }: FixedNavbarProps) => {
+const FixedNavbar = ({ isScrolled, onNavigate, activeTab, searchQuery, onSearchChange }: FixedNavbarProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const textColor = isScrolled ? "text-foreground" : "text-white";
@@ -55,35 +59,51 @@ const FixedNavbar = ({ isScrolled, onNavigate }: FixedNavbarProps) => {
           <button
             onClick={() => onNavigate('presentations')}
             className={cn(
-              "text-2xl font-medium transition-colors",
-              textColorMuted,
-              "hover:opacity-100"
+              "flex items-center gap-2 text-lg font-medium transition-colors pb-2 border-b-2",
+              activeTab === 'presentations' 
+                ? (isScrolled ? "text-primary border-primary" : "text-white border-white")
+                : (isScrolled ? "text-muted-foreground border-transparent hover:text-primary/80" : "text-white/70 border-transparent hover:text-white")
             )}
           >
+            <BookOpen className="w-5 h-5" />
             Презентации
           </button>
           <button
             onClick={() => onNavigate('games')}
             className={cn(
-              "text-2xl font-medium transition-colors",
-              textColorMuted,
-              "hover:opacity-100"
+              "flex items-center gap-2 text-lg font-medium transition-colors pb-2 border-b-2",
+              activeTab === 'games' 
+                ? (isScrolled ? "text-violet-600 border-violet-500" : "text-white border-white")
+                : (isScrolled ? "text-muted-foreground border-transparent hover:text-violet-600" : "text-white/70 border-transparent hover:text-white")
             )}
           >
+            <Gamepad2 className="w-5 h-5" />
             Игры
           </button>
         </div>
 
-        {/* Right: Search, Language, User */}
+        {/* Right: Search field (when scrolled) + Language + User */}
         <div className="flex items-center gap-2">
-          {/* Search */}
-          <Button 
-            variant="ghost" 
-            size="sm"
-            className={cn("hidden md:flex [&_svg]:size-7", hoverBg)}
-          >
-            <Search className={cn("w-10 h-10", textColorMuted)} />
-          </Button>
+          {/* Search field - visible when scrolled */}
+          {isScrolled && (
+            <div className="hidden md:flex relative w-64">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <Input
+                type="text"
+                placeholder="Поиск..."
+                value={searchQuery}
+                onChange={(e) => onSearchChange(e.target.value)}
+                className="pl-10 h-10 bg-background border-border focus:border-primary rounded-xl"
+              />
+            </div>
+          )}
+
+          {/* Search icon - hidden when scrolled */}
+          {!isScrolled && (
+            <Button variant="ghost" size="sm" className={cn("hidden md:flex [&_svg]:size-7", hoverBg)}>
+              <Search className={cn("w-10 h-10", textColorMuted)} />
+            </Button>
+          )}
 
           {/* Language */}
           <Button 
@@ -159,11 +179,14 @@ const FixedNavbar = ({ isScrolled, onNavigate }: FixedNavbarProps) => {
                 setMobileMenuOpen(false);
               }}
               className={cn(
-                "block w-full text-left py-2 px-3 rounded-lg font-medium transition-colors",
-                textColorMuted,
+                "flex items-center gap-2 w-full text-left py-2 px-3 rounded-lg font-medium transition-colors",
+                activeTab === 'presentations'
+                  ? (isScrolled ? "text-primary bg-primary/10" : "text-white bg-white/10")
+                  : textColorMuted,
                 hoverBg
               )}
             >
+              <BookOpen className="w-5 h-5" />
               Презентации
             </button>
             <button
@@ -172,13 +195,28 @@ const FixedNavbar = ({ isScrolled, onNavigate }: FixedNavbarProps) => {
                 setMobileMenuOpen(false);
               }}
               className={cn(
-                "block w-full text-left py-2 px-3 rounded-lg font-medium transition-colors",
-                textColorMuted,
+                "flex items-center gap-2 w-full text-left py-2 px-3 rounded-lg font-medium transition-colors",
+                activeTab === 'games'
+                  ? (isScrolled ? "text-violet-600 bg-violet-500/10" : "text-white bg-white/10")
+                  : textColorMuted,
                 hoverBg
               )}
             >
+              <Gamepad2 className="w-5 h-5" />
               Игры
             </button>
+            
+            {/* Mobile search */}
+            <div className="relative pt-2">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 mt-1 w-4 h-4 text-muted-foreground" />
+              <Input
+                type="text"
+                placeholder="Поиск..."
+                value={searchQuery}
+                onChange={(e) => onSearchChange(e.target.value)}
+                className="pl-10 h-11 bg-background/50 border-border focus:border-primary rounded-xl"
+              />
+            </div>
           </div>
         </motion.div>
       )}
