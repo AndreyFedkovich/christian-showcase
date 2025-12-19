@@ -54,7 +54,7 @@ const Index = () => {
       <div className="min-h-screen gradient-warm">
         <Tabs defaultValue="presentations" className="w-full flex flex-col min-h-screen">
           {/* Hero Section */}
-          <header className="relative pt-16 md:pt-20 pb-0 px-6 text-center overflow-hidden flex-shrink-0">
+          <header className="relative pt-14 md:pt-16 pb-0 px-6 text-center overflow-hidden flex-shrink-0">
             <div className="absolute inset-0 gradient-overlay opacity-5" />
 
             {/* Top Navigation Bar */}
@@ -112,10 +112,10 @@ const Index = () => {
               ))}
             </div>*/}
 
-            <div className="relative max-w-6xl mx-auto space-y-12 px-6">
+            <div className="relative max-w-6xl mx-auto space-y-8 px-6">
               {/* Иконка + Тексты */}
               <motion.div
-                  className="flex items-center justify-start gap-6 md:gap-10"
+                  className="flex items-center justify-start gap-4 md:gap-6"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, ease: "easeOut" }}
@@ -123,7 +123,7 @@ const Index = () => {
                 {/* Премиальная иконка */}
                 <div className="relative flex-shrink-0">
                   <motion.div
-                      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 md:w-44 md:h-44 bg-gradient-to-r from-amber-400/20 via-yellow-300/30 to-amber-400/20 blur-3xl rounded-full"
+                      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 md:w-32 md:h-32 bg-gradient-to-r from-amber-400/20 via-yellow-300/30 to-amber-400/20 blur-3xl rounded-full"
                       animate={{
                         scale: [1, 1.2, 1],
                         opacity: [0.3, 0.5, 0.3],
@@ -149,13 +149,13 @@ const Index = () => {
                     ))}
                   </motion.div>*/}
 
-                  <div className="relative w-20 h-20 md:w-28 md:h-28">
+                  <div className="relative w-14 h-14 md:w-[4.5rem] md:h-[4.5rem]">
                     <div className="absolute inset-0 rounded-full bg-gradient-to-br from-amber-400 via-yellow-500 to-amber-600 p-[3px] shadow-2xl">
                       <div className="w-full h-full rounded-full bg-gradient-to-br from-amber-50 via-white to-amber-100 flex items-center justify-center shadow-inner">
                         <motion.img
                             src="/favicon.png"
                             alt="Интерактивная Библия"
-                            className="w-12 h-12 md:w-16 md:h-14 object-contain drop-shadow-lg"
+                            className="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-lg"
                             animate={{
                               scale: [1, 1.05, 1],
                             }}
@@ -171,10 +171,10 @@ const Index = () => {
                 </div>
 
                 <div className="text-left">
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl h-[4.1rem] font-bold tracking-tight bg-gradient-to-r from-amber-700 via-yellow-600 to-amber-700 bg-clip-text text-transparent drop-shadow-sm">
+                  <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight bg-gradient-to-r from-amber-700 via-yellow-600 to-amber-700 bg-clip-text text-transparent drop-shadow-sm">
                     Интерактивная Библия
                   </h1>
-                  <p className="text-xl md:text-2xl text-muted-foreground font-sans leading-relaxed mt-2 md:mt-3">
+                  <p className="text-base md:text-lg text-muted-foreground font-sans leading-relaxed mt-1 md:mt-2">
                     Раскрытие христианских истин, которые меняют жизнь
                   </p>
                 </div>
@@ -182,7 +182,7 @@ const Index = () => {
 
               {/* Панель навигации и поиска */}
               <motion.div
-                  className="mt-12 md:mt-16 w-full border-b border-amber-200/30 backdrop-blur-[2px]"
+                  className="mt-6 md:mt-8 w-full border-b border-amber-200/30 backdrop-blur-[2px]"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.5 }}
