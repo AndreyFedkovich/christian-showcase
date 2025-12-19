@@ -100,7 +100,7 @@ const FixedNavbar = ({ isScrolled, onNavigate, activeTab, searchQuery, onSearchC
 
           {/* Search icon - hidden when scrolled */}
           {!isScrolled && (
-            <Button variant="ghost" size="sm" className={cn("hidden md:flex [&_svg]:size-7", hoverBg)}>
+            <Button variant="ghost" size="sm" className={cn("hidden md:flex [&_svg]:size-6", hoverBg)}>
               <Search className={cn("w-10 h-10", textColorMuted)} />
             </Button>
           )}
@@ -109,7 +109,7 @@ const FixedNavbar = ({ isScrolled, onNavigate, activeTab, searchQuery, onSearchC
           <Button 
             variant="ghost" 
             size="sm" 
-            className={cn("gap-1.5 [&_svg]:size-7", hoverBg, textColorMuted)}
+            className={cn("gap-1.5 [&_svg]:size-6", hoverBg, textColorMuted)}
           >
             <Globe className="w-5 h-5" />
             <span className="text-base font-medium">RU</span>
