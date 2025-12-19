@@ -18,6 +18,7 @@ export interface Presentation {
   slideCount: number;
   duration: string;
   type: 'disciples' | 'seminar' | 'hermeneutics' | 'god-exists' | 'drama';
+  isHero?: boolean;
 }
 
 export const presentations: Presentation[] = [
@@ -46,7 +47,8 @@ export const presentations: Presentation[] = [
     thumbnail: salvationImg,
     slideCount: redemptionDrama.length,
     duration: "35-40 минут",
-    type: 'drama'
+    type: 'drama',
+    isHero: true
   },
   {
     id: "epistles-structure",
