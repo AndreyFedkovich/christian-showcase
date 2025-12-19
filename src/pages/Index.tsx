@@ -6,7 +6,7 @@ import { presentations } from "@/data/presentations";
 import { games } from "@/data/games";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
-import { BookOpen, Gamepad2, Search, Sparkles, Globe, LogIn, ChevronDown } from "lucide-react";
+import { BookOpen, Gamepad2, Search, Sparkles, Globe, LogIn } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
@@ -54,135 +54,99 @@ const Index = () => {
       <div className="min-h-screen gradient-warm">
         <Tabs defaultValue="presentations" className="w-full flex flex-col min-h-screen">
           {/* Hero Section */}
-          <header className="relative pt-14 md:pt-16 pb-0 px-6 text-center overflow-hidden flex-shrink-0">
+          <header className="relative pt-4 md:pt-6 pb-0 px-6 overflow-hidden flex-shrink-0">
             <div className="absolute inset-0 gradient-overlay opacity-5" />
 
-            {/* Top Navigation Bar */}
-            <div className="absolute top-0 left-0 right-0 flex items-center justify-end gap-3 px-6 py-4 z-10">
-              {/* Language Selector */}
-              <Button variant="ghost" size="sm" className="gap-1.5 text-gray-600 hover:text-gray-900 hover:bg-gray-100/50">
-                <Globe className="w-4 h-4" />
-                <span className="text-sm font-medium">EN</span>
-              </Button>
+            <div className="relative max-w-6xl mx-auto space-y-6 px-6">
+              {/* Header Row: Logo + Title + Buttons */}
+              <div className="flex items-center justify-between gap-4">
+                {/* Left: Icon + Title */}
+                <motion.div
+                    className="flex items-center gap-4 md:gap-6"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.7, ease: "easeOut" }}
+                >
+                  {/* Премиальная иконка */}
+                  <div className="relative flex-shrink-0">
+                    <motion.div
+                        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 md:w-32 md:h-32 bg-gradient-to-r from-amber-400/20 via-yellow-300/30 to-amber-400/20 blur-3xl rounded-full"
+                        animate={{
+                          scale: [1, 1.2, 1],
+                          opacity: [0.3, 0.5, 0.3],
+                        }}
+                        transition={{
+                          duration: 3,
+                          repeat: 1,
+                          ease: "easeInOut",
+                        }}
+                    />
 
-              {/* User Menu */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon" className="w-10 h-10 rounded-full p-0 hover:bg-transparent">
-                    <div className="w-9 h-9 rounded-full bg-violet-500 flex items-center justify-center text-white font-semibold text-sm">
-                      A
-                    </div>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-48 bg-white border border-gray-200 shadow-lg rounded-lg p-1">
-                  <div className="px-3 py-2">
-                    <p className="font-medium text-gray-900">fedkovich</p>
-                    <p className="text-sm text-gray-500">fedkovich@gmail.com</p>
-                  </div>
-                  <DropdownMenuItem className="cursor-pointer text-gray-700 hover:bg-gray-100 rounded-md mx-1">
-                    <LogIn className="w-4 h-4 mr-2 rotate-180" />
-                    Logout
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
-
-            {/* Декоративные частицы */}
-            {/*<div className="absolute inset-0 overflow-hidden pointer-events-none">
-              {[...Array(6)].map((_, i) => (
-                  <motion.div
-                      key={i}
-                      className="absolute w-1 h-1 bg-amber-400/40 rounded-full"
-                      style={{
-                        left: `${20 + i * 12}%`,
-                        top: `${30 + (i % 3) * 20}%`,
-                      }}
-                      animate={{
-                        y: [0, -20, 0],
-                        opacity: [0.3, 0.7, 0.3],
-                        scale: [1, 1.5, 1],
-                      }}
-                      transition={{
-                        duration: 3 + i * 0.5,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: i * 0.3,
-                      }}
-                  />
-              ))}
-            </div>*/}
-
-            <div className="relative max-w-6xl mx-auto space-y-8 px-6">
-              {/* Иконка + Тексты */}
-              <motion.div
-                  className="flex items-center justify-start gap-4 md:gap-6"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, ease: "easeOut" }}
-              >
-                {/* Премиальная иконка */}
-                <div className="relative flex-shrink-0">
-                  <motion.div
-                      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 md:w-32 md:h-32 bg-gradient-to-r from-amber-400/20 via-yellow-300/30 to-amber-400/20 blur-3xl rounded-full"
-                      animate={{
-                        scale: [1, 1.2, 1],
-                        opacity: [0.3, 0.5, 0.3],
-                      }}
-                      transition={{
-                        duration: 3,
-                        repeat: 1,
-                        ease: "easeInOut",
-                      }}
-                  />
-
-                  {/*<motion.div
-                      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-36 h-36 md:w-48 md:h-48"
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                  >
-                    {[...Array(8)].map((_, i) => (
-                        <div
-                            key={i}
-                            className="absolute left-1/2 top-1/2 w-0.5 h-12 md:h-16 bg-gradient-to-t from-amber-400/30 to-transparent origin-bottom"
-                            style={{ transform: `rotate(${i * 45}deg) translateX(-50%)` }}
-                        />
-                    ))}
-                  </motion.div>*/}
-
-                  <div className="relative w-14 h-14 md:w-[4.5rem] md:h-[4.5rem]">
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-br from-amber-400 via-yellow-500 to-amber-600 p-[3px] shadow-2xl">
-                      <div className="w-full h-full rounded-full bg-gradient-to-br from-amber-50 via-white to-amber-100 flex items-center justify-center shadow-inner">
-                        <motion.img
-                            src="/favicon.png"
-                            alt="Интерактивная Библия"
-                            className="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-lg"
-                            animate={{
-                              scale: [1, 1.05, 1],
-                            }}
-                            transition={{
-                              duration: 4,
-                              repeat: 1,
-                              ease: "easeInOut",
-                            }}
-                        />
+                    <div className="relative w-14 h-14 md:w-[4.5rem] md:h-[4.5rem]">
+                      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-amber-400 via-yellow-500 to-amber-600 p-[3px] shadow-2xl">
+                        <div className="w-full h-full rounded-full bg-gradient-to-br from-amber-50 via-white to-amber-100 flex items-center justify-center shadow-inner">
+                          <motion.img
+                              src="/favicon.png"
+                              alt="Интерактивная Библия"
+                              className="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-lg"
+                              animate={{
+                                scale: [1, 1.05, 1],
+                              }}
+                              transition={{
+                                duration: 4,
+                                repeat: 1,
+                                ease: "easeInOut",
+                              }}
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
-                <div className="text-left">
-                  <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight bg-gradient-to-r from-amber-700 via-yellow-600 to-amber-700 bg-clip-text text-transparent drop-shadow-sm">
-                    Интерактивная Библия
-                  </h1>
-                  <p className="text-base md:text-lg text-muted-foreground font-sans leading-relaxed mt-1 md:mt-2">
-                    Раскрытие христианских истин, которые меняют жизнь
-                  </p>
+                  <div className="text-left">
+                    <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight bg-gradient-to-r from-amber-700 via-yellow-600 to-amber-700 bg-clip-text text-transparent drop-shadow-sm">
+                      Интерактивная Библия
+                    </h1>
+                    <p className="text-base md:text-lg text-muted-foreground font-sans leading-relaxed mt-1 md:mt-2">
+                      Раскрытие христианских истин, которые меняют жизнь
+                    </p>
+                  </div>
+                </motion.div>
+
+                {/* Right: Language + User buttons */}
+                <div className="flex items-center gap-3 flex-shrink-0">
+                  {/* Language Selector */}
+                  <Button variant="ghost" size="sm" className="gap-1.5 text-gray-600 hover:text-gray-900 hover:bg-gray-100/50">
+                    <Globe className="w-4 h-4" />
+                    <span className="text-sm font-medium">EN</span>
+                  </Button>
+
+                  {/* User Menu */}
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="ghost" size="icon" className="w-10 h-10 rounded-full p-0 hover:bg-transparent">
+                        <div className="w-9 h-9 rounded-full bg-violet-500 flex items-center justify-center text-white font-semibold text-sm">
+                          A
+                        </div>
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end" className="w-48 bg-white border border-gray-200 shadow-lg rounded-lg p-1">
+                      <div className="px-3 py-2">
+                        <p className="font-medium text-gray-900">fedkovich</p>
+                        <p className="text-sm text-gray-500">fedkovich@gmail.com</p>
+                      </div>
+                      <DropdownMenuItem className="cursor-pointer text-gray-700 hover:bg-gray-100 rounded-md mx-1">
+                        <LogIn className="w-4 h-4 mr-2 rotate-180" />
+                        Logout
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 </div>
-              </motion.div>
+              </div>
 
               {/* Панель навигации и поиска */}
               <motion.div
-                  className="mt-6 md:mt-8 w-full border-b border-amber-200/30 backdrop-blur-[2px]"
+                  className="w-full border-b border-amber-200/30 backdrop-blur-[2px]"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.5 }}
