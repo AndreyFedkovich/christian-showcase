@@ -79,8 +79,15 @@ const HeroSection = ({ presentation }: HeroSectionProps) => {
           </motion.div>
         </AnimatePresence>
 
-        {/* Dark overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/50 pointer-events-none" />
+        {/* Gradient overlays for text readability */}
+        <div className="absolute inset-0 pointer-events-none">
+          {/* Primary bottom gradient - strong and high */}
+          <div className="absolute inset-x-0 bottom-0 h-[60%] bg-gradient-to-t from-black via-black/80 to-transparent" />
+          {/* Secondary smooth transition */}
+          <div className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-black to-transparent" />
+          {/* Top subtle vignette for navbar */}
+          <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/50 to-transparent" />
+        </div>
       </div>
 
       {/* Content Overlay - Bottom */}
