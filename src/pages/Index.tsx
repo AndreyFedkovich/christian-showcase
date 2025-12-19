@@ -22,7 +22,7 @@ const Index = () => {
     <div className="min-h-screen gradient-warm">
       <Tabs defaultValue="presentations" className="w-full">
         {/* Hero Section */}
-        <header className="relative py-16 md:py-20 px-6 text-center overflow-hidden">
+        <header className="relative py-12 md:py-16 pb-2 md:pb-4 px-6 text-center overflow-hidden">
           <div className="absolute inset-0 gradient-overlay opacity-5" />
           
           {/* Декоративные частицы */}
@@ -50,7 +50,7 @@ const Index = () => {
             ))}
           </div>
 
-          <div className="relative max-w-4xl mx-auto space-y-6">
+          <div className="relative max-w-full mx-auto space-y-6">
             {/* Иконка + Тексты в одну линию */}
             <motion.div
               className="flex items-center justify-center gap-6 md:gap-10"
@@ -109,20 +109,6 @@ const Index = () => {
                       />
                     </div>
                   </div>
-                  
-                  {/* Внешнее декоративное кольцо */}
-                  <motion.div
-                    className="absolute -inset-2 rounded-full border-2 border-amber-400/30"
-                    animate={{
-                      scale: [1, 1.1, 1],
-                      opacity: [0.5, 0.2, 0.5],
-                    }}
-                    transition={{
-                      duration: 2.5,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                  />
                 </div>
               </div>
 
@@ -143,7 +129,7 @@ const Index = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.7 }}
             >
-              <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mt-4 h-14 p-1 bg-card shadow-card">
+              <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mt-16 h-14 p-1 bg-card shadow-card">
                 <TabsTrigger 
                   value="presentations" 
                   className="flex items-center gap-2 text-base font-sans data-[state=active]:gradient-gold data-[state=active]:text-primary-foreground rounded-lg h-12"
