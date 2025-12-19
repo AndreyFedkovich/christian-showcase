@@ -1,24 +1,40 @@
 import { useNavigate } from "react-router-dom";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef, useCallback } from "react";
 import PresentationCard from "@/components/PresentationCard";
 import GameCard from "@/components/GameCard";
+import FixedNavbar from "@/components/FixedNavbar";
+import HeroSection from "@/components/HeroSection";
 import { presentations } from "@/data/presentations";
 import { games } from "@/data/games";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
-import { BookOpen, Gamepad2, Search, Sparkles, Globe, LogIn } from "lucide-react";
+import { BookOpen, Gamepad2, Search, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 
 const Index = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [activeTab, setActiveTab] = useState<string>("presentations");
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  // Find hero presentation
+  const heroPresentation = useMemo(() => 
+    presentations.find(p => p.isHero), 
+    []
+  );
+
+  // Track scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const threshold = window.innerHeight - 100;
+      setIsScrolled(scrollY > threshold);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handlePresentationClick = (presentationId: string) => {
     navigate(`/presentation/${presentationId}`);
@@ -28,223 +44,154 @@ const Index = () => {
     navigate(`/game/${gameId}/play`);
   };
 
-  // Логика фильтрации презентаций
+  const handleNavigate = useCallback((section: 'presentations' | 'games') => {
+    setActiveTab(section);
+    const contentSection = document.getElementById('content-section');
+    if (contentSection) {
+      contentSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []);
+
+  // Filter presentations (exclude hero from list)
   const filteredPresentations = useMemo(() => {
-    if (!searchQuery.trim()) return presentations;
+    const list = presentations.filter(p => !p.isHero);
+    if (!searchQuery.trim()) return list;
     const query = searchQuery.toLowerCase();
-    return presentations.filter(
-        (p) =>
-            p.title.toLowerCase().includes(query) ||
-            p.description.toLowerCase().includes(query)
+    return list.filter(
+      (p) =>
+        p.title.toLowerCase().includes(query) ||
+        p.description.toLowerCase().includes(query)
     );
   }, [searchQuery]);
 
-  // Логика фильтрации игр
+  // Filter games
   const filteredGames = useMemo(() => {
     if (!searchQuery.trim()) return games;
     const query = searchQuery.toLowerCase();
     return games.filter(
-        (g) =>
-            g.title.toLowerCase().includes(query) ||
-            g.description.toLowerCase().includes(query)
+      (g) =>
+        g.title.toLowerCase().includes(query) ||
+        g.description.toLowerCase().includes(query)
     );
   }, [searchQuery]);
 
   return (
-      <div className="min-h-screen gradient-warm">
-        <Tabs defaultValue="presentations" className="w-full flex flex-col min-h-screen">
-          {/* Hero Section */}
-          <header className="relative pt-4 md:pt-6 pb-0 px-6 overflow-hidden flex-shrink-0">
-            <div className="absolute inset-0 gradient-overlay opacity-5" />
+    <div className="min-h-screen">
+      {/* Fixed Navbar */}
+      <FixedNavbar isScrolled={isScrolled} onNavigate={handleNavigate} />
 
-            <div className="relative max-w-6xl mx-auto space-y-6 px-6">
-              {/* Header Row: Logo + Title + Buttons */}
-              <div className="flex items-center justify-between gap-4">
-                {/* Left: Icon + Title */}
-                <motion.div
-                    className="flex items-center gap-4 md:gap-6"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.7, ease: "easeOut" }}
-                >
-                  {/* Премиальная иконка */}
-                  <div className="relative flex-shrink-0">
-                    <motion.div
-                        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 md:w-32 md:h-32 bg-gradient-to-r from-amber-400/20 via-yellow-300/30 to-amber-400/20 blur-3xl rounded-full"
-                        animate={{
-                          scale: [1, 1.2, 1],
-                          opacity: [0.3, 0.5, 0.3],
-                        }}
-                        transition={{
-                          duration: 3,
-                          repeat: 1,
-                          ease: "easeInOut",
-                        }}
-                    />
+      {/* Hero Section - 100vh */}
+      {heroPresentation && (
+        <HeroSection presentation={heroPresentation} />
+      )}
 
-                    <motion.img
-                        src="/favicon.png"
-                        alt="Интерактивная Библия"
-                        className="w-12 h-12 md:w-16 md:h-16 object-contain drop-shadow-lg"
-                        animate={{
-                          scale: [1, 1.05, 1],
-                        }}
-                        transition={{
-                          duration: 4,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                        }}
-                    />
-                  </div>
+      {/* Content Section */}
+      <main 
+        id="content-section" 
+        ref={contentRef}
+        className="min-h-screen gradient-warm"
+      >
+        <Tabs 
+          value={activeTab} 
+          onValueChange={setActiveTab}
+          className="w-full"
+        >
+          <div className="sticky top-16 z-40 bg-background/95 backdrop-blur-md border-b border-border/50">
+            <div className="max-w-6xl mx-auto px-6 py-4">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                {/* Tabs */}
+                <TabsList className="bg-transparent h-auto p-0 flex gap-6 md:gap-8 w-full md:w-auto justify-center md:justify-start">
+                  <TabsTrigger
+                    value="presentations"
+                    className="rounded-none border-b-2 border-transparent px-2 pb-3 pt-2 font-sans text-lg text-muted-foreground data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:text-primary data-[state=active]:shadow-none hover:text-primary/80 transition-colors"
+                  >
+                    <BookOpen className="w-5 h-5 mr-2" />
+                    Презентации
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="games"
+                    className="rounded-none border-b-2 border-transparent px-2 pb-3 pt-2 font-sans text-lg text-muted-foreground data-[state=active]:border-violet-500 data-[state=active]:bg-transparent data-[state=active]:text-violet-700 data-[state=active]:shadow-none hover:text-violet-600 transition-colors"
+                  >
+                    <Gamepad2 className="w-5 h-5 mr-2" />
+                    Игры
+                  </TabsTrigger>
+                </TabsList>
 
-                  <div className="text-left">
-                    <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight bg-gradient-to-r from-amber-700 via-yellow-600 to-amber-700 bg-clip-text text-transparent drop-shadow-sm">
-                      Интерактивная Библия
-                    </h1>
-                    <p className="text-base md:text-lg text-muted-foreground font-sans leading-relaxed mt-1 md:mt-2">
-                      Раскрытие христианских истин, которые меняют жизнь
-                    </p>
-                  </div>
-                </motion.div>
-
-                {/* Right: Language + User buttons */}
-                <div className="flex items-center gap-3 flex-shrink-0">
-                  {/* Language Selector */}
-                  <Button variant="ghost" size="sm" className="gap-1.5 text-gray-600 hover:text-gray-900 hover:bg-gray-100/50">
-                    <Globe className="w-4 h-4" />
-                    <span className="text-sm font-medium">EN</span>
-                  </Button>
-
-                  {/* User Menu */}
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" size="icon" className="w-10 h-10 rounded-full p-0 hover:bg-transparent">
-                        <div className="w-9 h-9 rounded-full bg-violet-500 flex items-center justify-center text-white font-semibold text-sm">
-                          A
-                        </div>
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" className="w-48 bg-white border border-gray-200 shadow-lg rounded-lg p-1">
-                      <div className="px-3 py-2">
-                        <p className="font-medium text-gray-900">fedkovich</p>
-                        <p className="text-sm text-gray-500">fedkovich@gmail.com</p>
-                      </div>
-                      <DropdownMenuItem className="cursor-pointer text-gray-700 hover:bg-gray-100 rounded-md mx-1">
-                        <LogIn className="w-4 h-4 mr-2 rotate-180" />
-                        Logout
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
+                {/* Search */}
+                <div className="relative w-full md:w-[20rem]">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <Input
+                    type="text"
+                    placeholder="Поиск..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="pl-10 h-11 bg-background border-border focus:border-primary focus:ring-primary/20 rounded-xl placeholder:text-muted-foreground/80 shadow-sm transition-all hover:bg-muted/50"
+                  />
                 </div>
               </div>
-
-              {/* Панель навигации и поиска */}
-              <motion.div
-                  className="w-full border-b border-amber-200/30 backdrop-blur-[2px]"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.5 }}
-              >
-                <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 pb-0 md:px-6">
-
-                  {/* Табы слева - прозрачный стиль */}
-                  <TabsList className="bg-transparent h-auto p-0 flex gap-6 md:gap-8 w-full md:w-auto justify-center md:justify-start">
-                    <TabsTrigger
-                        value="presentations"
-                        className="rounded-none border-b-2 border-transparent px-2 pb-3 pt-2 font-sans text-lg text-muted-foreground data-[state=active]:border-amber-500 data-[state=active]:bg-transparent data-[state=active]:text-amber-700 data-[state=active]:shadow-none hover:text-amber-600 transition-colors"
-                    >
-                      <BookOpen className="w-5 h-5 mr-2" />
-                      Презентации
-                    </TabsTrigger>
-                    <TabsTrigger
-                        value="games"
-                        className="rounded-none border-b-2 border-transparent px-2 pb-3 pt-2 font-sans text-lg text-muted-foreground data-[state=active]:border-violet-500 data-[state=active]:bg-transparent data-[state=active]:text-violet-700 data-[state=active]:shadow-none hover:text-violet-600 transition-colors"
-                    >
-                      <Gamepad2 className="w-5 h-5 mr-2" />
-                      Игры
-                    </TabsTrigger>
-                  </TabsList>
-
-                  {/* Поиск справа */}
-                  <div className="relative w-full md:w-[20rem] mb-4 md:mb-2">
-                    <div className="relative">
-                      <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-amber-800/90" />
-                      <Input
-                          type="text"
-                          placeholder="Поиск..."
-                          value={searchQuery}
-                          onChange={(e) => setSearchQuery(e.target.value)}
-                          className="pl-10 h-12 bg-white/80 backdrop-blur-md border-amber-200/50
-                               focus:border-amber-400 focus:ring-amber-400/20 rounded-xl
-                               placeholder:text-muted-foreground/80 shadow-sm transition-all
-                               hover:bg-white/90"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
             </div>
-          </header>
+          </div>
 
           {/* Content Area */}
-          <main className="flex-1 max-w-6xl mx-auto px-6 py-8 w-full">
+          <div className="max-w-6xl mx-auto px-6 py-8">
             <TabsContent value="presentations" className="mt-0 focus-visible:outline-none">
               {filteredPresentations.length > 0 ? (
-                  <div className="space-y-6">
-                    {filteredPresentations.map((presentation) => (
-                        <PresentationCard
-                            key={presentation.id}
-                            presentation={presentation}
-                            onClick={() => handlePresentationClick(presentation.id)}
-                        />
-                    ))}
-                  </div>
+                <div className="space-y-6">
+                  {filteredPresentations.map((presentation) => (
+                    <PresentationCard
+                      key={presentation.id}
+                      presentation={presentation}
+                      onClick={() => handlePresentationClick(presentation.id)}
+                    />
+                  ))}
+                </div>
               ) : (
-                  <EmptyState type="presentation" />
+                <EmptyState type="presentation" />
               )}
             </TabsContent>
 
             <TabsContent value="games" className="mt-0 focus-visible:outline-none">
               {filteredGames.length > 0 ? (
-                  <div className="space-y-6">
-                    {filteredGames.map((game) => (
-                        <GameCard
-                            key={game.id}
-                            game={game}
-                            onClick={() => handleGameClick(game.id)}
-                        />
-                    ))}
-                  </div>
+                <div className="space-y-6">
+                  {filteredGames.map((game) => (
+                    <GameCard
+                      key={game.id}
+                      game={game}
+                      onClick={() => handleGameClick(game.id)}
+                    />
+                  ))}
+                </div>
               ) : (
-                  <EmptyState type="game" />
+                <EmptyState type="game" />
               )}
             </TabsContent>
-          </main>
+          </div>
         </Tabs>
 
         {/* Footer */}
-        <footer className="py-8 text-center text-muted-foreground font-sans text-sm border-t border-amber-100">
+        <footer className="py-8 text-center text-muted-foreground font-sans text-sm border-t border-border/50">
           <p>Интерактивная Библия • 2025</p>
         </footer>
-      </div>
+      </main>
+    </div>
   );
 };
 
-// Компонент для отображения пустого результата
+// Empty state component
 const EmptyState = ({ type }: { type: 'presentation' | 'game' }) => (
-    <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="flex flex-col items-center justify-center py-20 text-center text-muted-foreground"
-    >
-      <div className="w-16 h-16 bg-amber-50 rounded-full flex items-center justify-center mb-4 shadow-inner">
-        <Sparkles className="w-8 h-8 text-amber-300" />
-      </div>
-      <h3 className="text-xl font-medium text-amber-900 mb-2">Ничего не найдено</h3>
-      <p className="max-w-xs mx-auto text-balance">
-        Попробуйте изменить поисковый запрос или выберите другую категорию.
-      </p>
-    </motion.div>
+  <motion.div
+    initial={{ opacity: 0, scale: 0.95 }}
+    animate={{ opacity: 1, scale: 1 }}
+    className="flex flex-col items-center justify-center py-20 text-center text-muted-foreground"
+  >
+    <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mb-4 shadow-inner">
+      <Sparkles className="w-8 h-8 text-muted-foreground/50" />
+    </div>
+    <h3 className="text-xl font-medium text-foreground mb-2">Ничего не найдено</h3>
+    <p className="max-w-xs mx-auto text-balance">
+      Попробуйте изменить поисковый запрос или выберите другую категорию.
+    </p>
+  </motion.div>
 );
 
 export default Index;
