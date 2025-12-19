@@ -34,7 +34,7 @@ const FixedNavbar = ({ isScrolled, onNavigate }: FixedNavbarProps) => {
       animate={{ y: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="max-w-7xl mx-auto px-4 md:px-6 h-28 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 h-20 flex items-center justify-between">
         {/* Left: Logo + Site name */}
         <div className="flex items-center gap-3">
           <img 
@@ -55,7 +55,7 @@ const FixedNavbar = ({ isScrolled, onNavigate }: FixedNavbarProps) => {
           <button
             onClick={() => onNavigate('presentations')}
             className={cn(
-              "text-3xl font-medium transition-colors",
+              "text-lg font-medium transition-colors",
               textColorMuted,
               "hover:opacity-100"
             )}
@@ -65,7 +65,7 @@ const FixedNavbar = ({ isScrolled, onNavigate }: FixedNavbarProps) => {
           <button
             onClick={() => onNavigate('games')}
             className={cn(
-              "text-3xl font-medium transition-colors",
+              "text-lg font-medium transition-colors",
               textColorMuted,
               "hover:opacity-100"
             )}
@@ -75,14 +75,14 @@ const FixedNavbar = ({ isScrolled, onNavigate }: FixedNavbarProps) => {
         </div>
 
         {/* Right: Search, Language, User */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2">
           {/* Search */}
           <Button 
             variant="ghost" 
             size="icon" 
             className={cn("hidden md:flex", hoverBg)}
           >
-            <Search className={cn("w-12 h-12", textColorMuted)} />
+            <Search className={cn("w-6 h-6", textColorMuted)} />
           </Button>
 
           {/* Language */}
@@ -91,8 +91,8 @@ const FixedNavbar = ({ isScrolled, onNavigate }: FixedNavbarProps) => {
             size="sm" 
             className={cn("gap-1.5", hoverBg, textColorMuted)}
           >
-            <Globe className="w-10 h-10" />
-            <span className="text-2xl font-medium">EN</span>
+            <Globe className="w-5 h-5" />
+            <span className="text-base font-medium">EN</span>
           </Button>
 
           {/* User Menu */}
@@ -103,7 +103,7 @@ const FixedNavbar = ({ isScrolled, onNavigate }: FixedNavbarProps) => {
                 size="icon" 
                 className={cn("rounded-full p-0", hoverBg)}
               >
-                <div className="w-20 h-20 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-semibold text-3xl">
+                <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-semibold text-base">
                   A
                 </div>
               </Button>
