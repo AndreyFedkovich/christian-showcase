@@ -82,25 +82,19 @@ const Index = () => {
                         }}
                     />
 
-                    <div className="relative w-14 h-14 md:w-[4.5rem] md:h-[4.5rem]">
-                      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-amber-400 via-yellow-500 to-amber-600 p-[3px] shadow-2xl">
-                        <div className="w-full h-full rounded-full bg-gradient-to-br from-amber-50 via-white to-amber-100 flex items-center justify-center shadow-inner">
-                          <motion.img
-                              src="/favicon.png"
-                              alt="Интерактивная Библия"
-                              className="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-lg"
-                              animate={{
-                                scale: [1, 1.05, 1],
-                              }}
-                              transition={{
-                                duration: 4,
-                                repeat: 1,
-                                ease: "easeInOut",
-                              }}
-                          />
-                        </div>
-                      </div>
-                    </div>
+                    <motion.img
+                        src="/favicon.png"
+                        alt="Интерактивная Библия"
+                        className="w-12 h-12 md:w-16 md:h-16 object-contain drop-shadow-lg"
+                        animate={{
+                          scale: [1, 1.05, 1],
+                        }}
+                        transition={{
+                          duration: 4,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }}
+                    />
                   </div>
 
                   <div className="text-left">
