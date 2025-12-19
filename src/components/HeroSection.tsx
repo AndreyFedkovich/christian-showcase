@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, Play } from "lucide-react";
+import { Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Presentation } from "@/data/presentations";
 import SlideRenderer from "@/components/SlideRenderer";
@@ -46,12 +46,6 @@ const HeroSection = ({ presentation }: HeroSectionProps) => {
     navigate(`/presentation/${presentation.id}`);
   }, [navigate, presentation.id]);
 
-  const scrollToContent = useCallback(() => {
-    const contentSection = document.getElementById('content-section');
-    if (contentSection) {
-      contentSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, []);
 
   if (slides.length === 0) {
     return null;
@@ -93,15 +87,12 @@ const HeroSection = ({ presentation }: HeroSectionProps) => {
       </div>
 
       {/* Content Overlay - Bottom */}
-      <div className="absolute bottom-24 left-0 right-0 text-center px-6 z-10">
+      <div className="absolute bottom-12 left-0 right-0 text-center px-6 z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          <p className="text-sm uppercase tracking-widest text-white/50 mb-3">
-            Избранная презентация
-          </p>
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
             {presentation.title}
           </h2>
@@ -133,22 +124,6 @@ const HeroSection = ({ presentation }: HeroSectionProps) => {
         ))}
       </div>
 
-      {/* Scroll Indicator */}
-      <motion.button
-        onClick={scrollToContent}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-white/50 hover:text-white/80 transition-colors cursor-pointer"
-        animate={{
-          y: [0, 8, 0],
-        }}
-        transition={{
-          duration: 2,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      >
-        <span className="text-xs uppercase tracking-wider">Scroll</span>
-        <ChevronDown className="w-5 h-5" />
-      </motion.button>
     </section>
   );
 };
