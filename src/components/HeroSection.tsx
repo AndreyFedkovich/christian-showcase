@@ -77,6 +77,9 @@ const HeroSection = ({ presentation }: HeroSectionProps) => {
           </motion.div>
         </AnimatePresence>
 
+        {/* Dark overlay for entire slide area */}
+        <div className="absolute inset-0 bg-black/30 pointer-events-none" />
+
         {/* Gradient overlays for text readability */}
         <div className="absolute inset-0 pointer-events-none">
           {/* Top vignette for navbar readability */}
