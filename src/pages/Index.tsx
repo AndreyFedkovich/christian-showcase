@@ -6,8 +6,15 @@ import { presentations } from "@/data/presentations";
 import { games } from "@/data/games";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
-import { BookOpen, Gamepad2, Search, Sparkles } from "lucide-react";
+import { BookOpen, Gamepad2, Search, Sparkles, Globe, LogIn, ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -47,8 +54,38 @@ const Index = () => {
       <div className="min-h-screen gradient-warm">
         <Tabs defaultValue="presentations" className="w-full flex flex-col min-h-screen">
           {/* Hero Section */}
-          <header className="relative pt-12 md:pt-16 pb-0 px-6 text-center overflow-hidden flex-shrink-0">
+          <header className="relative pt-16 md:pt-20 pb-0 px-6 text-center overflow-hidden flex-shrink-0">
             <div className="absolute inset-0 gradient-overlay opacity-5" />
+
+            {/* Top Navigation Bar */}
+            <div className="absolute top-0 left-0 right-0 flex items-center justify-end gap-3 px-6 py-4 z-10">
+              {/* Language Selector */}
+              <Button variant="ghost" size="sm" className="gap-1.5 text-gray-600 hover:text-gray-900 hover:bg-gray-100/50">
+                <Globe className="w-4 h-4" />
+                <span className="text-sm font-medium">EN</span>
+              </Button>
+
+              {/* User Menu */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon" className="w-10 h-10 rounded-full p-0 hover:bg-transparent">
+                    <div className="w-9 h-9 rounded-full bg-violet-500 flex items-center justify-center text-white font-semibold text-sm">
+                      A
+                    </div>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-48 bg-white border border-gray-200 shadow-lg rounded-lg p-1">
+                  <div className="px-3 py-2">
+                    <p className="font-medium text-gray-900">fedkovich</p>
+                    <p className="text-sm text-gray-500">fedkovich@gmail.com</p>
+                  </div>
+                  <DropdownMenuItem className="cursor-pointer text-gray-700 hover:bg-gray-100 rounded-md mx-1">
+                    <LogIn className="w-4 h-4 mr-2 rotate-180" />
+                    Logout
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
 
             {/* Декоративные частицы */}
             {/*<div className="absolute inset-0 overflow-hidden pointer-events-none">
