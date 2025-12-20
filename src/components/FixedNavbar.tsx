@@ -23,7 +23,7 @@ const FixedNavbar = ({ isScrolled, onNavigate, activeTab, searchQuery, onSearchC
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const textColor = isScrolled ? "text-foreground" : "text-white";
-  const textColorMuted = isScrolled ? "text-muted-foreground" : "text-white/70";
+  const textColorMuted = isScrolled ? "text-muted-foreground" : "text-white";
   const hoverBg = isScrolled ? "hover:bg-muted" : "hover:bg-white/10";
 
   return (
@@ -93,7 +93,7 @@ const FixedNavbar = ({ isScrolled, onNavigate, activeTab, searchQuery, onSearchC
                 placeholder="Поиск..."
                 value={searchQuery}
                 onChange={(e) => onSearchChange(e.target.value)}
-                className="pl-10 h-10 bg-background border-border focus:border-primary rounded-xl"
+                className="pl-10 h-10 bg-white border-border focus:border-primary rounded-xl"
               />
             </div>
           )}
