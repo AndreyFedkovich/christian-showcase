@@ -96,7 +96,7 @@ export function KeeperDialogue({
   return (
     <div 
       className={cn(
-        "relative p-6 md:p-8 rounded-2xl cursor-pointer transition-all duration-500",
+        "relative p-8 md:p-10 rounded-2xl cursor-pointer transition-all duration-500",
         "bg-gradient-to-br border border-amber-600/30 backdrop-blur-sm",
         moodColors[mood],
         className
@@ -104,30 +104,30 @@ export function KeeperDialogue({
       onClick={handleClick}
     >
       {/* Keeper indicator */}
-      <div className="flex items-center gap-3 mb-4">
+      <div className="flex items-center gap-4 mb-6">
         <div className={cn(
-          "w-14 h-14 rounded-full flex items-center justify-center text-3xl",
+          "w-16 h-16 rounded-full flex items-center justify-center text-4xl",
           "bg-slate-900/50 border-2 border-amber-600/50",
           "drop-shadow-[0_0_15px_rgba(251,191,36,0.4)]"
         )}>
           {moodEmojis[mood]}
         </div>
         <div>
-          <p className="text-amber-400 font-semibold text-base tracking-wide uppercase">
+          <p className="text-amber-400 font-semibold text-lg tracking-wide uppercase">
             Хранитель
           </p>
-          <p className="text-slate-500 text-xs">The Keeper</p>
+          <p className="text-slate-500 text-sm">The Keeper</p>
         </div>
       </div>
 
       {/* Message text */}
       <p className={cn(
-        "text-xl md:text-2xl leading-relaxed italic",
+        "text-2xl md:text-3xl leading-relaxed italic",
         moodTextColors[mood]
       )}>
         «{displayedText}
         <span className={cn(
-          "inline-block w-0.5 h-5 ml-0.5 -mb-0.5 bg-amber-400",
+          "inline-block w-0.5 h-6 ml-0.5 -mb-0.5 bg-amber-400",
           showCursor && isTyping ? "opacity-100" : "opacity-0"
         )} />
         {!isTyping && '»'}
@@ -135,16 +135,16 @@ export function KeeperDialogue({
 
       {/* Skip hint */}
       {isTyping && (
-        <p className="absolute bottom-2 right-4 text-slate-600 text-xs">
+        <p className="absolute bottom-3 right-5 text-slate-600 text-sm">
           Нажмите, чтобы пропустить
         </p>
       )}
 
       {/* Decorative corners */}
-      <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-amber-600/40 rounded-tl-2xl" />
-      <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-amber-600/40 rounded-tr-2xl" />
-      <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-amber-600/40 rounded-bl-2xl" />
-      <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-amber-600/40 rounded-br-2xl" />
+      <div className="absolute top-0 left-0 w-10 h-10 border-t-2 border-l-2 border-amber-600/40 rounded-tl-2xl" />
+      <div className="absolute top-0 right-0 w-10 h-10 border-t-2 border-r-2 border-amber-600/40 rounded-tr-2xl" />
+      <div className="absolute bottom-0 left-0 w-10 h-10 border-b-2 border-l-2 border-amber-600/40 rounded-bl-2xl" />
+      <div className="absolute bottom-0 right-0 w-10 h-10 border-b-2 border-r-2 border-amber-600/40 rounded-br-2xl" />
     </div>
   );
 }

@@ -50,23 +50,23 @@ export const HallOfVoices: React.FC<HallOfVoicesProps> = ({ challenge, onAnswer 
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-purple-500/10 blur-3xl animate-pulse" />
         
         {/* Sound wave bars - left side */}
-        <div className="absolute left-8 top-1/2 -translate-y-1/2 flex items-center gap-1">
+        <div className="absolute left-8 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
           {soundWaves.slice(0, 10).map((height, i) => (
             <div
               key={`left-${i}`}
-              className="w-1 bg-gradient-to-t from-purple-500/60 to-indigo-400/60 rounded-full transition-all duration-150"
-              style={{ height: `${20 + height * 0.8}px` }}
+              className="w-1.5 bg-gradient-to-t from-purple-500/60 to-indigo-400/60 rounded-full transition-all duration-150"
+              style={{ height: `${24 + height * 0.8}px` }}
             />
           ))}
         </div>
         
         {/* Sound wave bars - right side */}
-        <div className="absolute right-8 top-1/2 -translate-y-1/2 flex items-center gap-1">
+        <div className="absolute right-8 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
           {soundWaves.slice(10, 20).map((height, i) => (
             <div
               key={`right-${i}`}
-              className="w-1 bg-gradient-to-t from-purple-500/60 to-indigo-400/60 rounded-full transition-all duration-150"
-              style={{ height: `${20 + height * 0.8}px` }}
+              className="w-1.5 bg-gradient-to-t from-purple-500/60 to-indigo-400/60 rounded-full transition-all duration-150"
+              style={{ height: `${24 + height * 0.8}px` }}
             />
           ))}
         </div>
@@ -75,7 +75,7 @@ export const HallOfVoices: React.FC<HallOfVoicesProps> = ({ challenge, onAnswer 
         {Array.from({ length: 15 }).map((_, i) => (
           <div
             key={i}
-            className="absolute w-2 h-2 rounded-full bg-purple-400/30 animate-float"
+            className="absolute w-3 h-3 rounded-full bg-purple-400/30 animate-float"
             style={{
               left: `${10 + Math.random() * 80}%`,
               top: `${10 + Math.random() * 80}%`,
@@ -106,9 +106,9 @@ export const HallOfVoices: React.FC<HallOfVoicesProps> = ({ challenge, onAnswer 
       <div className="relative z-10 min-h-screen flex flex-col items-center justify-center p-8">
         {/* Hall title */}
         <div className="absolute top-8 left-1/2 -translate-x-1/2 flex items-center gap-3">
-          <Volume2 className="w-6 h-6 text-purple-400" />
-          <h2 className="text-xl font-light text-purple-300/80 tracking-wider">ПАЛАТА ГОЛОСОВ</h2>
-          <Volume2 className="w-6 h-6 text-purple-400" />
+          <Volume2 className="w-7 h-7 text-purple-400" />
+          <h2 className="text-2xl font-light text-purple-300/80 tracking-wider">ПАЛАТА ГОЛОСОВ</h2>
+          <Volume2 className="w-7 h-7 text-purple-400" />
         </div>
 
         {/* Quote display */}
@@ -117,8 +117,8 @@ export const HallOfVoices: React.FC<HallOfVoicesProps> = ({ challenge, onAnswer 
           <div className="flex justify-center mb-8">
             <div className="relative">
               <div className="absolute inset-0 bg-purple-500/30 blur-xl rounded-full scale-150" />
-              <div className="relative w-20 h-20 rounded-full bg-gradient-to-br from-purple-600 to-indigo-700 flex items-center justify-center border border-purple-400/30 shadow-2xl">
-                <Mic className="w-10 h-10 text-purple-200" />
+              <div className="relative w-24 h-24 rounded-full bg-gradient-to-br from-purple-600 to-indigo-700 flex items-center justify-center border border-purple-400/30 shadow-2xl">
+                <Mic className="w-12 h-12 text-purple-200" />
               </div>
             </div>
           </div>
@@ -127,19 +127,19 @@ export const HallOfVoices: React.FC<HallOfVoicesProps> = ({ challenge, onAnswer 
           <div 
             className={`transition-all duration-1000 ${showQuote ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
           >
-            <div className="relative bg-gradient-to-br from-slate-900/80 to-purple-950/80 backdrop-blur-sm rounded-2xl p-8 border border-purple-500/20 shadow-2xl">
+            <div className="relative bg-gradient-to-br from-slate-900/80 to-purple-950/80 backdrop-blur-sm rounded-2xl p-10 border border-purple-500/20 shadow-2xl">
               {/* Quote marks */}
-              <Quote className="absolute -top-4 -left-4 w-10 h-10 text-purple-400/50" />
-              <Quote className="absolute -bottom-4 -right-4 w-10 h-10 text-purple-400/50 rotate-180" />
+              <Quote className="absolute -top-5 -left-5 w-12 h-12 text-purple-400/50" />
+              <Quote className="absolute -bottom-5 -right-5 w-12 h-12 text-purple-400/50 rotate-180" />
               
               {/* Quote text with typewriter effect appearance */}
-              <p className="text-2xl md:text-3xl text-center text-white/90 font-serif italic leading-relaxed px-8">
+              <p className="text-3xl md:text-4xl text-center text-white/90 font-serif italic leading-relaxed px-8">
                 «{challenge.quote}»
               </p>
 
               {/* Book reference if available */}
               {challenge.bookReference && (
-                <p className="text-center text-purple-400/60 mt-4 text-sm tracking-wider">
+                <p className="text-center text-purple-400/60 mt-6 text-base tracking-wider">
                   — {challenge.bookReference}
                 </p>
               )}
@@ -149,14 +149,15 @@ export const HallOfVoices: React.FC<HallOfVoicesProps> = ({ challenge, onAnswer 
             {challenge.context && (
               <div className="mt-6 text-center">
                 {showContext ? (
-                  <p className="text-purple-300/70 italic animate-fade-in">
+                  <p className="text-purple-300/70 text-lg italic animate-fade-in">
                     Контекст: {challenge.context}
                   </p>
                 ) : (
                   <Button
                     variant="ghost"
+                    size="lg"
                     onClick={requestContext}
-                    className="text-purple-400/60 hover:text-purple-300 hover:bg-purple-500/10"
+                    className="text-purple-400/60 hover:text-purple-300 hover:bg-purple-500/10 text-lg"
                   >
                     Показать контекст
                   </Button>
@@ -167,20 +168,21 @@ export const HallOfVoices: React.FC<HallOfVoicesProps> = ({ challenge, onAnswer 
 
           {/* Question */}
           <div className={`mt-8 text-center transition-all duration-700 delay-500 ${showQuote ? 'opacity-100' : 'opacity-0'}`}>
-            <p className="text-xl text-purple-200/80 mb-6">Кто произнёс эти слова?</p>
+            <p className="text-2xl text-purple-200/80 mb-6">Кто произнёс эти слова?</p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-lg mx-auto">
               <Input
                 value={answer}
                 onChange={(e) => setAnswer(e.target.value)}
                 placeholder="Имя говорящего..."
-                className="bg-slate-900/60 border-purple-500/30 text-white placeholder:text-purple-300/40 focus:border-purple-400"
+                className="bg-slate-900/60 border-purple-500/30 text-white text-xl py-7 placeholder:text-purple-300/40 focus:border-purple-400"
                 onKeyPress={(e) => e.key === 'Enter' && handleSubmit()}
               />
               <Button
                 onClick={handleSubmit}
                 disabled={!answer.trim()}
-                className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white px-8 whitespace-nowrap"
+                size="lg"
+                className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white px-10 text-lg whitespace-nowrap"
               >
                 Ответить
               </Button>
