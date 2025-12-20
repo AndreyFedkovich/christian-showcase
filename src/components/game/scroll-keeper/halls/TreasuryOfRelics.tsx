@@ -209,8 +209,8 @@ export function TreasuryOfRelics({
               <Button 
                 onClick={handleSubmit}
                 disabled={!answer.trim()}
-                size="xl"
-                className="bg-yellow-600 hover:bg-yellow-700 text-white px-10 shadow-[0_0_20px_rgba(234,179,8,0.3)]"
+                size="lg"
+                className="bg-yellow-600 hover:bg-yellow-700 text-white px-10 py-6 shadow-[0_0_20px_rgba(234,179,8,0.3)]"
               >
                 <Send className="w-6 h-6" />
               </Button>

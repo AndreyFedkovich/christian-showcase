@@ -88,6 +88,7 @@ export default function ScrollKeeperPlay() {
             challenge={state.currentChallenge as ShadowsChallenge}
             timer={state.timer}
             usedHints={state.usedHints}
+            isChecking={state.isCheckingAnswer}
             onUseHint={useHint}
             onSubmitAnswer={handleSubmitAnswer}
           />

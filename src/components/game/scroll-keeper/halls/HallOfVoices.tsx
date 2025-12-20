@@ -181,8 +181,8 @@ export const HallOfVoices: React.FC<HallOfVoicesProps> = ({ challenge, onAnswer 
               <Button
                 onClick={handleSubmit}
                 disabled={!answer.trim()}
-                size="2xl"
-                className="h-12 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white px-10 md:text-2xl whitespace-nowrap"
+                size="lg"
+                className="h-14 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white px-10 py-6 md:text-xl whitespace-nowrap"
               >
                 Ответить
               </Button>
