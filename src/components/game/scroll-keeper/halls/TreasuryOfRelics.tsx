@@ -11,10 +11,10 @@ interface TreasuryOfRelicsProps {
   onSubmitAnswer: (answer: string) => void;
 }
 
-export function TreasuryOfRelics({ 
-  challenge, 
-  timer, 
-  onSubmitAnswer 
+export function TreasuryOfRelics({
+  challenge,
+  timer,
+  onSubmitAnswer
 }: TreasuryOfRelicsProps) {
   const [answer, setAnswer] = useState('');
   const [revealProgress, setRevealProgress] = useState(0);
@@ -23,7 +23,7 @@ export function TreasuryOfRelics({
   // Animate description reveal
   useEffect(() => {
     const sentences = challenge.description.split('. ');
-    
+
     if (revealProgress < sentences.length) {
       const timer = setTimeout(() => {
         setRevealProgress(prev => prev + 1);
@@ -117,7 +117,7 @@ export function TreasuryOfRelics({
             <div className="absolute inset-0 border-4 border-yellow-600/60 rounded-xl bg-gradient-to-b from-slate-900/60 via-slate-800/40 to-slate-900/60 backdrop-blur-md shadow-[0_0_60px_rgba(234,179,8,0.2)]">
               {/* Top reflection */}
               <div className="absolute top-0 left-0 right-0 h-12 bg-gradient-to-b from-yellow-400/10 to-transparent rounded-t-xl" />
-              
+
               {/* Mystery artifact silhouette */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className={cn(
@@ -146,7 +146,7 @@ export function TreasuryOfRelics({
           {/* Description clues */}
           <div className="space-y-4 mt-8">
             {sentences.slice(0, revealProgress).map((sentence, i) => (
-              <div 
+              <div
                 key={i}
                 className="bg-slate-900/60 backdrop-blur-sm px-8 py-5 rounded-xl border border-yellow-600/30 animate-fade-in"
                 style={{ animationDelay: `${i * 0.2}s` }}
@@ -193,10 +193,10 @@ export function TreasuryOfRelics({
                 className="flex-1 bg-yellow-950/50 border-yellow-600/50 text-white md:text-xl py-8 placeholder:text-yellow-300/50 focus:border-yellow-500"
                 autoFocus
               />
-              <Button 
+              <Button
                 onClick={handleSubmit}
                 disabled={!answer.trim()}
-                size="lg"
+                size="xl"
                 className="bg-yellow-600 hover:bg-yellow-700 text-white px-10 py-6 shadow-[0_0_20px_rgba(234,179,8,0.3)]"
               >
                 <Send className="w-6 h-6" />

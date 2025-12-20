@@ -208,7 +208,7 @@ export function EchoChamber({
             <Button 
               onClick={handleSubmit}
               disabled={!answer.trim()}
-              size="lg"
+              size="xl"
               className="bg-purple-600 hover:bg-purple-700 text-white px-10 py-6 shadow-[0_0_20px_rgba(168,85,247,0.3)]"
             >
               <Send className="w-6 h-6" />
