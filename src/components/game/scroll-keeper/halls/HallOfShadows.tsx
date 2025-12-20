@@ -3,12 +3,13 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ShadowsChallenge } from '@/data/scroll-keeper';
-import { Clock, Lightbulb, Send, Volume2, VolumeX } from 'lucide-react';
+import { Clock, Lightbulb, Send, Volume2, VolumeX, Loader2 } from 'lucide-react';
 
 interface HallOfShadowsProps {
   challenge: ShadowsChallenge;
   timer: number;
   usedHints: number;
+  isChecking?: boolean;
   onUseHint: () => void;
   onSubmitAnswer: (answer: string) => void;
 }
@@ -17,6 +18,7 @@ export function HallOfShadows({
   challenge, 
   timer, 
   usedHints, 
+  isChecking = false,
   onUseHint, 
   onSubmitAnswer 
 }: HallOfShadowsProps) {
@@ -222,11 +224,11 @@ export function HallOfShadows({
               />
               <Button 
                 onClick={handleSubmit}
-                disabled={!answer.trim()}
-                size="xl"
-                className="bg-amber-600 hover:bg-amber-700 text-white px-10"
+                disabled={!answer.trim() || isChecking}
+                size="lg"
+                className="bg-amber-600 hover:bg-amber-700 text-white px-10 py-6"
               >
-                <Send className="w-6 h-6" />
+                {isChecking ? <Loader2 className="w-6 h-6 animate-spin" /> : <Send className="w-6 h-6" />}
               </Button>
             </div>
           )}

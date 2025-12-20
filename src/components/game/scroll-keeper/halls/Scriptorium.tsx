@@ -214,8 +214,8 @@ export function Scriptorium({
             <Button 
               onClick={handleSubmit}
               disabled={!answer.trim()}
-              size="xl"
-              className="bg-amber-600 hover:bg-amber-700 text-white px-10"
+              size="lg"
+              className="bg-amber-600 hover:bg-amber-700 text-white px-10 py-6"
             >
               <Send className="w-6 h-6" />
             </Button>

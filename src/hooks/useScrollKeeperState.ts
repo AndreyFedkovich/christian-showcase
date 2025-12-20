@@ -9,6 +9,7 @@ import {
   sampleChallenges,
   keeperDialogues 
 } from '@/data/scroll-keeper';
+import { checkAnswerWithAI } from '@/lib/ai-service';
 
 export interface ScrollKeeperState {
   phase: GamePhase;
@@ -26,6 +27,7 @@ export interface ScrollKeeperState {
   usedHints: number;
   timer: number;
   isTimerRunning: boolean;
+  isCheckingAnswer: boolean;
 }
 
 const DEFAULT_HALLS_ORDER: HallType[] = ['shadows', 'scriptorium', 'echo', 'gallery', 'treasury', 'voices', 'spiral'];
@@ -49,7 +51,8 @@ export function useScrollKeeperState() {
     isCorrect: null,
     usedHints: 0,
     timer: TIME_PER_CHALLENGE,
-    isTimerRunning: false
+    isTimerRunning: false,
+    isCheckingAnswer: false
   });
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
@@ -162,10 +165,15 @@ export function useScrollKeeperState() {
     }));
   }, [state.hallOrder, state.currentHallIndex, state.challengeIndex, getChallengesForHall]);
 
-  const submitAnswer = useCallback((answer: string) => {
+  const submitAnswer = useCallback(async (answer: string) => {
     if (!state.currentChallenge) return;
 
+    // Stop timer and set checking state
+    setState(prev => ({ ...prev, isTimerRunning: false, isCheckingAnswer: true }));
+
     let correctAnswer = '';
+    let isCorrect = false;
+    let feedback = '';
     
     // Extract correct answer based on challenge type
     switch (state.currentChallenge.hallType) {
@@ -193,11 +201,38 @@ export function useScrollKeeperState() {
         break;
     }
 
-    // Simple comparison (case-insensitive, trimmed)
-    const isCorrect = answer.toLowerCase().trim() === correctAnswer.toLowerCase().trim();
+    // Check if this is a fuzzy question (AI check)
+    const isFuzzy = 'type' in state.currentChallenge && 
+                    state.currentChallenge.type === 'fuzzy';
+
+    if (isFuzzy) {
+      // AI check for fuzzy questions
+      try {
+        const acceptableKeywords = 'acceptableKeywords' in state.currentChallenge 
+          ? state.currentChallenge.acceptableKeywords 
+          : [];
+        
+        const result = await checkAnswerWithAI({
+          question: 'question' in state.currentChallenge ? state.currentChallenge.question : '',
+          correctAnswer: correctAnswer,
+          userAnswer: answer,
+          acceptableKeywords: acceptableKeywords || []
+        });
+        isCorrect = result.isCorrect;
+        feedback = result.feedback || '';
+      } catch (error) {
+        console.error('AI check failed, using exact match:', error);
+        // Fallback to exact match
+        isCorrect = answer.toLowerCase().trim() === correctAnswer.toLowerCase().trim();
+      }
+    } else {
+      // Simple comparison (case-insensitive, trimmed)
+      isCorrect = answer.toLowerCase().trim() === correctAnswer.toLowerCase().trim();
+    }
     
     const messages = isCorrect ? keeperDialogues.correct : keeperDialogues.incorrect;
     const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+    const feedbackText = feedback ? `\n\n💡 ${feedback}` : '';
 
     // Calculate points based on hints used (for echo room)
     let pointsEarned = isCorrect ? 1 : 0;
@@ -212,8 +247,9 @@ export function useScrollKeeperState() {
       isCorrect,
       memoryKeys: prev.memoryKeys + pointsEarned,
       keeperMood: isCorrect ? 'approving' : 'warning',
-      keeperMessage: randomMessage,
-      isTimerRunning: false
+      keeperMessage: randomMessage + feedbackText,
+      isTimerRunning: false,
+      isCheckingAnswer: false
     }));
   }, [state.currentChallenge, state.usedHints]);
 
@@ -298,7 +334,8 @@ export function useScrollKeeperState() {
       isCorrect: null,
       usedHints: 0,
       timer: TIME_PER_CHALLENGE,
-      isTimerRunning: false
+      isTimerRunning: false,
+      isCheckingAnswer: false
     });
   }, []);
 
