@@ -91,11 +91,11 @@ export function Scriptorium({
       {/* Timer */}
       <div className="absolute top-4 right-4 z-50">
         <div className={cn(
-          "flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-sm",
+          "flex items-center gap-2 px-5 py-3 rounded-full backdrop-blur-sm",
           timer <= 10 ? "bg-red-900/50 border border-red-500/50" : "bg-amber-900/50 border border-amber-600/50"
         )}>
-          <Clock className={cn("w-5 h-5", timer <= 10 ? "text-red-400 animate-pulse" : "text-amber-400")} />
-          <span className={cn("text-xl font-mono font-bold", timer <= 10 ? "text-red-400" : "text-amber-200")}>
+          <Clock className={cn("w-6 h-6", timer <= 10 ? "text-red-400 animate-pulse" : "text-amber-400")} />
+          <span className={cn("text-2xl font-mono font-bold", timer <= 10 ? "text-red-400" : "text-amber-200")}>
             {timer}с
           </span>
         </div>
@@ -103,9 +103,9 @@ export function Scriptorium({
 
       {/* Hall icon */}
       <div className="absolute top-4 left-4 z-50">
-        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-amber-900/50 border border-amber-600/50 backdrop-blur-sm">
-          <span className="text-2xl">📜</span>
-          <span className="text-amber-200 font-medium">Скрипторий</span>
+        <div className="flex items-center gap-3 px-5 py-3 rounded-full bg-amber-900/50 border border-amber-600/50 backdrop-blur-sm">
+          <span className="text-3xl">📜</span>
+          <span className="text-amber-200 font-semibold text-lg">Скрипторий</span>
         </div>
       </div>
 
@@ -129,29 +129,29 @@ export function Scriptorium({
             </div>
             
             {/* Parchment body */}
-            <div className="relative bg-gradient-to-b from-amber-100 via-amber-50 to-amber-100 p-8 md:p-12 shadow-2xl">
+            <div className="relative bg-gradient-to-b from-amber-100 via-amber-50 to-amber-100 p-10 md:p-14 shadow-2xl">
               {/* Parchment texture */}
               <div className="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIj48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuOCIgbnVtT2N0YXZlcz0iNCIgc3RpdGNoVGlsZXM9InN0aXRjaCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNub2lzZSkiIG9wYWNpdHk9IjAuNSIvPjwvc3ZnPg==')]" />
               
               {/* Verse icon */}
               <div className="flex justify-center mb-6">
-                <Scroll className="w-10 h-10 text-amber-700 opacity-50" />
+                <Scroll className="w-12 h-12 text-amber-700 opacity-50" />
               </div>
 
               {/* Verse text */}
-              <blockquote className="text-amber-950 text-xl md:text-2xl leading-relaxed font-serif text-center italic">
+              <blockquote className="text-amber-950 text-2xl md:text-3xl leading-relaxed font-serif text-center italic">
                 «{challenge.verse}»
               </blockquote>
 
               {/* Decorative line */}
-              <div className="flex items-center justify-center gap-4 my-6">
+              <div className="flex items-center justify-center gap-4 my-8">
                 <div className="flex-1 h-px bg-amber-700/30" />
-                <BookOpen className="w-5 h-5 text-amber-700/50" />
+                <BookOpen className="w-6 h-6 text-amber-700/50" />
                 <div className="flex-1 h-px bg-amber-700/30" />
               </div>
 
               {/* Question */}
-              <p className="text-amber-800 text-lg md:text-xl font-medium text-center">
+              <p className="text-amber-800 text-xl md:text-2xl font-medium text-center">
                 Из какой книги Библии этот стих?
               </p>
             </div>
@@ -160,16 +160,16 @@ export function Scriptorium({
           {/* Hints section */}
           <div className="space-y-3">
             {usedHints >= 1 && (
-              <div className="flex items-center gap-3 text-amber-200 bg-amber-900/50 px-4 py-3 rounded-lg border border-amber-600/30 animate-fade-in">
-                <Lightbulb className="w-5 h-5 text-amber-400" />
-                <span>Завет: <strong>{challenge.hints.testament}</strong></span>
+              <div className="flex items-center gap-3 text-amber-200 bg-amber-900/50 px-5 py-4 rounded-lg border border-amber-600/30 animate-fade-in">
+                <Lightbulb className="w-6 h-6 text-amber-400" />
+                <span className="text-lg">Завет: <strong>{challenge.hints.testament}</strong></span>
               </div>
             )}
             
             {usedHints >= 2 && (
-              <div className="flex items-center gap-3 text-amber-200 bg-amber-900/50 px-4 py-3 rounded-lg border border-amber-600/30 animate-fade-in">
-                <BookOpen className="w-5 h-5 text-amber-400" />
-                <span>Тип книги: <strong>{challenge.hints.bookType}</strong></span>
+              <div className="flex items-center gap-3 text-amber-200 bg-amber-900/50 px-5 py-4 rounded-lg border border-amber-600/30 animate-fade-in">
+                <BookOpen className="w-6 h-6 text-amber-400" />
+                <span className="text-lg">Тип книги: <strong>{challenge.hints.bookType}</strong></span>
               </div>
             )}
 
@@ -178,22 +178,22 @@ export function Scriptorium({
                 {usedHints === 0 && (
                   <Button 
                     variant="outline" 
-                    size="sm"
+                    size="lg"
                     onClick={onUseHint}
-                    className="border-amber-600/50 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200"
+                    className="border-amber-600/50 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200 text-base"
                   >
-                    <Lightbulb className="w-4 h-4 mr-2" />
+                    <Lightbulb className="w-5 h-5 mr-2" />
                     Подсказка: Завет
                   </Button>
                 )}
                 {usedHints === 1 && (
                   <Button 
                     variant="outline" 
-                    size="sm"
+                    size="lg"
                     onClick={onUseHint}
-                    className="border-amber-600/50 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200"
+                    className="border-amber-600/50 text-amber-300 hover:bg-amber-900/50 hover:text-amber-200 text-base"
                   >
-                    <BookOpen className="w-4 h-4 mr-2" />
+                    <BookOpen className="w-5 h-5 mr-2" />
                     Подсказка: Тип книги
                   </Button>
                 )}
@@ -208,16 +208,16 @@ export function Scriptorium({
               onChange={(e) => setAnswer(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
               placeholder="Название книги..."
-              className="flex-1 bg-amber-900/50 border-amber-600/50 text-white text-lg py-6 placeholder:text-amber-300/50"
+              className="flex-1 bg-amber-900/50 border-amber-600/50 text-white text-xl py-8 placeholder:text-amber-300/50"
               autoFocus
             />
             <Button 
               onClick={handleSubmit}
               disabled={!answer.trim()}
               size="lg"
-              className="bg-amber-600 hover:bg-amber-700 text-white px-8"
+              className="bg-amber-600 hover:bg-amber-700 text-white px-10"
             >
-              <Send className="w-5 h-5" />
+              <Send className="w-6 h-6" />
             </Button>
           </div>
         </div>

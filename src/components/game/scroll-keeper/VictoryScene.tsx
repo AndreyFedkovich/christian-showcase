@@ -78,7 +78,7 @@ export const VictoryScene: React.FC<VictorySceneProps> = ({
       {phase === 'approach' && (
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center animate-fade-in">
-            <p className="text-amber-400/80 text-xl tracking-widest uppercase">
+            <p className="text-amber-400/80 text-2xl tracking-widest uppercase">
               Приближаясь к Сердцу Библиотеки...
             </p>
           </div>
@@ -117,7 +117,7 @@ export const VictoryScene: React.FC<VictorySceneProps> = ({
             
             {/* Heart container */}
             <div className={`
-              relative w-40 h-40 rounded-full 
+              relative w-48 h-48 rounded-full 
               bg-gradient-to-br from-amber-400 via-amber-500 to-amber-700
               flex items-center justify-center
               shadow-2xl shadow-amber-500/50
@@ -129,13 +129,13 @@ export const VictoryScene: React.FC<VictorySceneProps> = ({
               <div className="absolute inset-8 rounded-full bg-gradient-to-br from-white via-amber-100 to-amber-300 opacity-60" />
               
               {/* Central icon */}
-              <BookOpen className="relative w-16 h-16 text-amber-900" />
+              <BookOpen className="relative w-20 h-20 text-amber-900" />
 
               {/* Sparkle particles around heart */}
               {Array.from({ length: 12 }).map((_, i) => (
                 <Sparkles
                   key={i}
-                  className="absolute w-4 h-4 text-amber-300 animate-float"
+                  className="absolute w-5 h-5 text-amber-300 animate-float"
                   style={{
                     top: `${50 + Math.sin(i * 30 * Math.PI / 180) * 60}%`,
                     left: `${50 + Math.cos(i * 30 * Math.PI / 180) * 60}%`,
@@ -163,7 +163,7 @@ export const VictoryScene: React.FC<VictorySceneProps> = ({
                     transitionDelay: `${i * 100}ms`
                   }}
                 >
-                  <Key className="w-8 h-8 text-amber-400 drop-shadow-lg" />
+                  <Key className="w-10 h-10 text-amber-400 drop-shadow-lg" />
                 </div>
               ))}
             </div>
@@ -188,22 +188,22 @@ export const VictoryScene: React.FC<VictorySceneProps> = ({
         <div className="absolute top-8 left-1/2 -translate-x-1/2 animate-fade-in">
           {/* Victory crown */}
           <div className="flex flex-col items-center gap-4">
-            <Crown className="w-16 h-16 text-amber-400 animate-float" />
-            <h1 className="text-4xl md:text-5xl font-bold text-amber-400 text-center">
+            <Crown className="w-20 h-20 text-amber-400 animate-float" />
+            <h1 className="text-5xl md:text-6xl font-bold text-amber-400 text-center">
               Победа!
             </h1>
             
             {/* Stats */}
             <div className="flex items-center gap-6 mt-4">
-              <div className="flex items-center gap-2 bg-slate-800/60 px-4 py-2 rounded-full border border-amber-500/30">
-                <Key className="w-5 h-5 text-amber-400" />
-                <span className="text-amber-300 font-bold">{memoryKeys}</span>
-                <span className="text-slate-400">/</span>
-                <span className="text-slate-400">{maxKeys}</span>
+              <div className="flex items-center gap-3 bg-slate-800/60 px-5 py-3 rounded-full border border-amber-500/30">
+                <Key className="w-6 h-6 text-amber-400" />
+                <span className="text-amber-300 font-bold text-xl">{memoryKeys}</span>
+                <span className="text-slate-400 text-lg">/</span>
+                <span className="text-slate-400 text-lg">{maxKeys}</span>
               </div>
               
-              <div className="bg-gradient-to-r from-amber-600/80 to-amber-700/80 px-4 py-2 rounded-full border border-amber-400/30">
-                <span className="text-amber-100 font-medium">{rank}</span>
+              <div className="bg-gradient-to-r from-amber-600/80 to-amber-700/80 px-5 py-3 rounded-full border border-amber-400/30">
+                <span className="text-amber-100 font-medium text-lg">{rank}</span>
               </div>
             </div>
           </div>
@@ -216,13 +216,15 @@ export const VictoryScene: React.FC<VictorySceneProps> = ({
           <Button
             onClick={onPlayAgain}
             variant="outline"
-            className="border-amber-500/50 text-amber-400 hover:bg-amber-900/30 px-8"
+            size="lg"
+            className="border-amber-500/50 text-amber-400 hover:bg-amber-900/30 px-10 text-lg"
           >
             Играть снова
           </Button>
           <Button
             onClick={onExit}
-            className="bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-white px-8"
+            size="lg"
+            className="bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-white px-10 text-lg"
           >
             Выйти
           </Button>

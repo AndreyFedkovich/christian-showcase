@@ -70,7 +70,7 @@ export function EchoChamber({
             <div 
               key={i}
               className={cn(
-                "w-16 h-24 md:w-24 md:h-36 rounded-t-full flex items-center justify-center text-2xl md:text-3xl",
+                "w-20 h-28 md:w-28 md:h-40 rounded-t-full flex items-center justify-center text-3xl md:text-4xl",
                 i <= usedHints ? "bg-slate-800 border-2 border-slate-600" : "bg-purple-900/50 border-2 border-purple-500/30"
               )}
             >
@@ -86,11 +86,11 @@ export function EchoChamber({
       {/* Timer */}
       <div className="absolute top-4 right-4 z-50">
         <div className={cn(
-          "flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-sm",
+          "flex items-center gap-2 px-5 py-3 rounded-full backdrop-blur-sm",
           timer <= 10 ? "bg-red-900/50 border border-red-500/50" : "bg-purple-900/50 border border-purple-500/50"
         )}>
-          <Clock className={cn("w-5 h-5", timer <= 10 ? "text-red-400 animate-pulse" : "text-purple-400")} />
-          <span className={cn("text-xl font-mono font-bold", timer <= 10 ? "text-red-400" : "text-purple-200")}>
+          <Clock className={cn("w-6 h-6", timer <= 10 ? "text-red-400 animate-pulse" : "text-purple-400")} />
+          <span className={cn("text-2xl font-mono font-bold", timer <= 10 ? "text-red-400" : "text-purple-200")}>
             {timer}с
           </span>
         </div>
@@ -98,18 +98,18 @@ export function EchoChamber({
 
       {/* Hall icon */}
       <div className="absolute top-4 left-4 z-50">
-        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-purple-900/50 border border-purple-500/50 backdrop-blur-sm">
-          <span className="text-2xl">🔊</span>
-          <span className="text-purple-200 font-medium">Комната Эха</span>
+        <div className="flex items-center gap-3 px-5 py-3 rounded-full bg-purple-900/50 border border-purple-500/50 backdrop-blur-sm">
+          <span className="text-3xl">🔊</span>
+          <span className="text-purple-200 font-semibold text-lg">Комната Эха</span>
         </div>
       </div>
 
       {/* Points indicator */}
       <div className="absolute top-4 left-1/2 -translate-x-1/2 z-50">
-        <div className="flex items-center gap-2 px-6 py-2 rounded-full bg-slate-900/80 border border-amber-500/50 backdrop-blur-sm">
-          <Key className="w-5 h-5 text-amber-400" />
-          <span className="text-amber-400 font-bold text-lg">{currentPoints}</span>
-          <span className="text-slate-400 text-sm">очков за ответ</span>
+        <div className="flex items-center gap-2 px-6 py-3 rounded-full bg-slate-900/80 border border-amber-500/50 backdrop-blur-sm">
+          <Key className="w-6 h-6 text-amber-400" />
+          <span className="text-amber-400 font-bold text-xl">{currentPoints}</span>
+          <span className="text-slate-400 text-base">очков за ответ</span>
         </div>
       </div>
 
@@ -118,7 +118,7 @@ export function EchoChamber({
         <div className="max-w-2xl w-full space-y-8">
           {/* Instructions */}
           <div className="text-center mb-4">
-            <p className="text-purple-300 text-lg">
+            <p className="text-purple-300 text-xl">
               Угадайте по подсказкам. Чем меньше подсказок — тем больше очков!
             </p>
           </div>
@@ -129,7 +129,7 @@ export function EchoChamber({
               <div 
                 key={i}
                 className={cn(
-                  "relative p-6 rounded-xl border backdrop-blur-sm animate-fade-in",
+                  "relative p-8 rounded-xl border backdrop-blur-sm animate-fade-in",
                   i === usedHints 
                     ? "bg-purple-900/40 border-purple-500/50 shadow-[0_0_30px_rgba(168,85,247,0.2)]" 
                     : "bg-slate-800/40 border-slate-600/50"
@@ -138,7 +138,7 @@ export function EchoChamber({
               >
                 {/* Echo number */}
                 <div className={cn(
-                  "absolute -left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold",
+                  "absolute -left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold",
                   i === usedHints 
                     ? "bg-purple-600 text-white shadow-[0_0_15px_rgba(168,85,247,0.5)]" 
                     : "bg-slate-700 text-slate-400"
@@ -147,13 +147,13 @@ export function EchoChamber({
                 </div>
 
                 {/* Clue text */}
-                <div className="flex items-center gap-3 ml-6">
+                <div className="flex items-center gap-4 ml-8">
                   <Volume2 className={cn(
-                    "w-5 h-5 flex-shrink-0",
+                    "w-6 h-6 flex-shrink-0",
                     i === usedHints ? "text-purple-400 animate-pulse" : "text-slate-500"
                   )} />
                   <p className={cn(
-                    "text-lg md:text-xl",
+                    "text-xl md:text-2xl",
                     i === usedHints ? "text-purple-100" : "text-slate-400"
                   )}>
                     {clue}
@@ -166,9 +166,9 @@ export function EchoChamber({
                     {Array.from({ length: 3 }).map((_, j) => (
                       <div 
                         key={j}
-                        className="w-1 bg-purple-400 rounded-full animate-pulse"
+                        className="w-1.5 bg-purple-400 rounded-full animate-pulse"
                         style={{ 
-                          height: `${12 + j * 6}px`,
+                          height: `${16 + j * 8}px`,
                           animationDelay: `${j * 0.15}s`
                         }}
                       />
@@ -184,10 +184,11 @@ export function EchoChamber({
             <div className="flex justify-center">
               <Button 
                 variant="outline" 
+                size="lg"
                 onClick={onUseHint}
-                className="border-purple-500/50 text-purple-300 hover:bg-purple-900/50 hover:text-purple-200 group"
+                className="border-purple-500/50 text-purple-300 hover:bg-purple-900/50 hover:text-purple-200 group text-lg"
               >
-                <ChevronRight className="w-4 h-4 mr-2 group-hover:translate-x-1 transition-transform" />
+                <ChevronRight className="w-5 h-5 mr-2 group-hover:translate-x-1 transition-transform" />
                 Следующая подсказка
                 <span className="ml-2 text-purple-500">(-1 очко)</span>
               </Button>
@@ -201,26 +202,26 @@ export function EchoChamber({
               onChange={(e) => setAnswer(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
               placeholder="Ваш ответ..."
-              className="flex-1 bg-purple-900/30 border-purple-500/50 text-white text-lg py-6 placeholder:text-purple-300/50 focus:border-purple-400"
+              className="flex-1 bg-purple-900/30 border-purple-500/50 text-white text-xl py-8 placeholder:text-purple-300/50 focus:border-purple-400"
               autoFocus
             />
             <Button 
               onClick={handleSubmit}
               disabled={!answer.trim()}
               size="lg"
-              className="bg-purple-600 hover:bg-purple-700 text-white px-8 shadow-[0_0_20px_rgba(168,85,247,0.3)]"
+              className="bg-purple-600 hover:bg-purple-700 text-white px-10 shadow-[0_0_20px_rgba(168,85,247,0.3)]"
             >
-              <Send className="w-5 h-5" />
+              <Send className="w-6 h-6" />
             </Button>
           </div>
 
           {/* Points breakdown */}
-          <div className="flex justify-center gap-4 text-sm">
+          <div className="flex justify-center gap-4 text-base">
             {challenge.clues.map((_, i) => (
               <div 
                 key={i}
                 className={cn(
-                  "px-3 py-1 rounded-full",
+                  "px-4 py-2 rounded-full",
                   i <= usedHints 
                     ? "bg-slate-700/50 text-slate-500 line-through" 
                     : "bg-purple-900/30 text-purple-300 border border-purple-500/30"

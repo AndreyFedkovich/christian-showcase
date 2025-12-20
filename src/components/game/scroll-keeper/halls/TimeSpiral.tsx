@@ -1,7 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { SpiralChallenge } from '@/data/scroll-keeper';
-import { Clock, GripVertical, Check, RotateCcw } from 'lucide-react';
+import { Clock, GripVertical, Check, RotateCcw, ChevronUp, ChevronDown } from 'lucide-react';
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  DragEndEvent,
+  DragStartEvent,
+  DragOverlay,
+} from '@dnd-kit/core';
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  useSortable,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 
 interface TimeEvent {
   id: number;
@@ -14,14 +33,124 @@ interface TimeSpiralProps {
   onAnswer: (answer: string, correct: boolean) => void;
 }
 
+const getEraColor = (era: string) => {
+  const colors: Record<string, string> = {
+    'Творение': 'from-amber-400 to-yellow-500',
+    'Патриархи': 'from-emerald-400 to-teal-500',
+    'Исход': 'from-orange-400 to-red-500',
+    'Цари': 'from-purple-400 to-violet-500',
+    'Пророки': 'from-blue-400 to-indigo-500',
+    'Пришествие': 'from-rose-400 to-pink-500'
+  };
+  return colors[era] || 'from-slate-400 to-slate-500';
+};
+
+interface SortableEventItemProps {
+  event: TimeEvent;
+  index: number;
+  totalEvents: number;
+  onMoveUp: () => void;
+  onMoveDown: () => void;
+}
+
+function SortableEventItem({ event, index, totalEvents, onMoveUp, onMoveDown }: SortableEventItemProps) {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: event.id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : 1,
+    zIndex: isDragging ? 10 : 1,
+  };
+
+  return (
+    <div
+      ref={setNodeRef}
+      style={style}
+      className="relative group"
+    >
+      {/* Timeline dot */}
+      <div className={`
+        absolute -left-[42px] top-1/2 -translate-y-1/2 w-6 h-6 rounded-full
+        bg-gradient-to-br ${getEraColor(event.era)}
+        shadow-lg border-2 border-white/20
+        transition-transform group-hover:scale-125
+      `} />
+
+      {/* Event card */}
+      <div className={`
+        flex items-center gap-4 p-5 rounded-xl
+        bg-gradient-to-r from-slate-900/90 to-slate-800/90
+        border border-cyan-500/20 hover:border-cyan-400/40
+        backdrop-blur-sm shadow-lg
+        transition-all duration-300
+        hover:shadow-cyan-500/10 hover:shadow-xl
+        ${isDragging ? 'ring-2 ring-cyan-400' : ''}
+      `}>
+        {/* Drag handle */}
+        <div 
+          {...attributes} 
+          {...listeners}
+          className="text-cyan-500/40 hover:text-cyan-400 transition-colors cursor-grab active:cursor-grabbing"
+        >
+          <GripVertical className="w-6 h-6" />
+        </div>
+
+        {/* Position number */}
+        <div className="w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center text-cyan-300 font-bold text-lg">
+          {index + 1}
+        </div>
+
+        {/* Event info */}
+        <div className="flex-1">
+          <h3 className="text-white/90 font-medium text-lg">{event.name}</h3>
+          <p className={`text-base bg-gradient-to-r ${getEraColor(event.era)} bg-clip-text text-transparent`}>
+            {event.era}
+          </p>
+        </div>
+
+        {/* Move buttons for mobile */}
+        <div className="flex flex-col gap-1">
+          <button
+            onClick={onMoveUp}
+            disabled={index === 0}
+            className="p-1.5 text-cyan-500/50 hover:text-cyan-400 disabled:opacity-30 disabled:cursor-not-allowed"
+          >
+            <ChevronUp className="w-5 h-5" />
+          </button>
+          <button
+            onClick={onMoveDown}
+            disabled={index === totalEvents - 1}
+            className="p-1.5 text-cyan-500/50 hover:text-cyan-400 disabled:opacity-30 disabled:cursor-not-allowed"
+          >
+            <ChevronDown className="w-5 h-5" />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export const TimeSpiral: React.FC<TimeSpiralProps> = ({ challenge, onAnswer }) => {
   const [events, setEvents] = useState<TimeEvent[]>([]);
   const [showSpiral, setShowSpiral] = useState(false);
-  const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [activeId, setActiveId] = useState<number | null>(null);
+
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
 
   useEffect(() => {
-    // Shuffle events initially
     const shuffled = [...challenge.events].sort(() => Math.random() - 0.5);
     setEvents(shuffled);
     
@@ -29,37 +158,26 @@ export const TimeSpiral: React.FC<TimeSpiralProps> = ({ challenge, onAnswer }) =
     return () => clearTimeout(timer);
   }, [challenge]);
 
-  const handleDragStart = (index: number) => {
-    setDraggedIndex(index);
+  const handleDragStart = (event: DragStartEvent) => {
+    setActiveId(event.active.id as number);
   };
 
-  const handleDragOver = (e: React.DragEvent, index: number) => {
-    e.preventDefault();
-    setHoveredIndex(index);
-  };
-
-  const handleDrop = (dropIndex: number) => {
-    if (draggedIndex === null) return;
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    setActiveId(null);
     
-    const newEvents = [...events];
-    const [draggedItem] = newEvents.splice(draggedIndex, 1);
-    newEvents.splice(dropIndex, 0, draggedItem);
-    setEvents(newEvents);
-    setDraggedIndex(null);
-    setHoveredIndex(null);
-  };
-
-  const handleDragEnd = () => {
-    setDraggedIndex(null);
-    setHoveredIndex(null);
+    if (over && active.id !== over.id) {
+      setEvents((items) => {
+        const oldIndex = items.findIndex(item => item.id === active.id);
+        const newIndex = items.findIndex(item => item.id === over.id);
+        return arrayMove(items, oldIndex, newIndex);
+      });
+    }
   };
 
   const moveEvent = (fromIndex: number, toIndex: number) => {
     if (toIndex < 0 || toIndex >= events.length) return;
-    const newEvents = [...events];
-    const [item] = newEvents.splice(fromIndex, 1);
-    newEvents.splice(toIndex, 0, item);
-    setEvents(newEvents);
+    setEvents((items) => arrayMove(items, fromIndex, toIndex));
   };
 
   const resetOrder = () => {
@@ -73,17 +191,7 @@ export const TimeSpiral: React.FC<TimeSpiralProps> = ({ challenge, onAnswer }) =
     onAnswer(currentOrder.join(','), isCorrect);
   };
 
-  const getEraColor = (era: string) => {
-    const colors: Record<string, string> = {
-      'Творение': 'from-amber-400 to-yellow-500',
-      'Патриархи': 'from-emerald-400 to-teal-500',
-      'Исход': 'from-orange-400 to-red-500',
-      'Цари': 'from-purple-400 to-violet-500',
-      'Пророки': 'from-blue-400 to-indigo-500',
-      'Пришествие': 'from-rose-400 to-pink-500'
-    };
-    return colors[era] || 'from-slate-400 to-slate-500';
-  };
+  const activeEvent = activeId ? events.find(e => e.id === activeId) : null;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-indigo-950 relative overflow-hidden">
@@ -142,15 +250,15 @@ export const TimeSpiral: React.FC<TimeSpiralProps> = ({ challenge, onAnswer }) =
       <div className="relative z-10 min-h-screen flex flex-col items-center justify-center p-8">
         {/* Hall title */}
         <div className="absolute top-8 left-1/2 -translate-x-1/2 flex items-center gap-3">
-          <Clock className="w-6 h-6 text-cyan-400 animate-pulse" />
-          <h2 className="text-xl font-light text-cyan-300/80 tracking-wider">СПИРАЛЬ ВРЕМЕНИ</h2>
-          <Clock className="w-6 h-6 text-cyan-400 animate-pulse" />
+          <Clock className="w-7 h-7 text-cyan-400 animate-pulse" />
+          <h2 className="text-2xl font-light text-cyan-300/80 tracking-wider">СПИРАЛЬ ВРЕМЕНИ</h2>
+          <Clock className="w-7 h-7 text-cyan-400 animate-pulse" />
         </div>
 
         {/* Instructions */}
         <div className={`mb-8 text-center transition-all duration-700 ${showSpiral ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}>
-          <p className="text-cyan-200/70 text-lg">Расставьте события в хронологическом порядке</p>
-          <p className="text-cyan-400/50 text-sm mt-1">Перетащите события или используйте стрелки</p>
+          <p className="text-cyan-200/70 text-xl">Расставьте события в хронологическом порядке</p>
+          <p className="text-cyan-400/50 text-base mt-1">Перетащите события или используйте стрелки</p>
         </div>
 
         {/* Events list - draggable */}
@@ -160,83 +268,51 @@ export const TimeSpiral: React.FC<TimeSpiralProps> = ({ challenge, onAnswer }) =
             <div className="absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-cyan-500/50 via-cyan-400/30 to-cyan-500/50" />
             
             {/* Timeline markers */}
-            <div className="absolute left-8 top-0 w-3 h-3 -translate-x-1/2 rounded-full bg-cyan-400 shadow-lg shadow-cyan-500/50" />
-            <div className="absolute left-8 bottom-0 w-3 h-3 -translate-x-1/2 rounded-full bg-cyan-400 shadow-lg shadow-cyan-500/50" />
+            <div className="absolute left-8 top-0 w-4 h-4 -translate-x-1/2 rounded-full bg-cyan-400 shadow-lg shadow-cyan-500/50" />
+            <div className="absolute left-8 bottom-0 w-4 h-4 -translate-x-1/2 rounded-full bg-cyan-400 shadow-lg shadow-cyan-500/50" />
 
             {/* Events */}
-            <div className="space-y-4 pl-16">
-              {events.map((event, index) => (
-                <div
-                  key={event.id}
-                  draggable
-                  onDragStart={() => handleDragStart(index)}
-                  onDragOver={(e) => handleDragOver(e, index)}
-                  onDrop={() => handleDrop(index)}
-                  onDragEnd={handleDragEnd}
-                  className={`
-                    relative group cursor-grab active:cursor-grabbing
-                    transition-all duration-300
-                    ${draggedIndex === index ? 'opacity-50 scale-95' : ''}
-                    ${hoveredIndex === index && draggedIndex !== null ? 'transform translate-y-2' : ''}
-                  `}
-                  style={{ animationDelay: `${index * 100}ms` }}
-                >
-                  {/* Timeline dot */}
-                  <div className={`
-                    absolute -left-[42px] top-1/2 -translate-y-1/2 w-5 h-5 rounded-full
-                    bg-gradient-to-br ${getEraColor(event.era)}
-                    shadow-lg border-2 border-white/20
-                    transition-transform group-hover:scale-125
-                  `} />
+            <DndContext
+              sensors={sensors}
+              collisionDetection={closestCenter}
+              onDragStart={handleDragStart}
+              onDragEnd={handleDragEnd}
+            >
+              <SortableContext
+                items={events.map(e => e.id)}
+                strategy={verticalListSortingStrategy}
+              >
+                <div className="space-y-4 pl-16">
+                  {events.map((event, index) => (
+                    <SortableEventItem
+                      key={event.id}
+                      event={event}
+                      index={index}
+                      totalEvents={events.length}
+                      onMoveUp={() => moveEvent(index, index - 1)}
+                      onMoveDown={() => moveEvent(index, index + 1)}
+                    />
+                  ))}
+                </div>
+              </SortableContext>
 
-                  {/* Event card */}
-                  <div className={`
-                    flex items-center gap-4 p-4 rounded-xl
-                    bg-gradient-to-r from-slate-900/90 to-slate-800/90
-                    border border-cyan-500/20 hover:border-cyan-400/40
-                    backdrop-blur-sm shadow-lg
-                    transition-all duration-300
-                    hover:shadow-cyan-500/10 hover:shadow-xl
-                  `}>
-                    {/* Drag handle */}
-                    <div className="text-cyan-500/40 hover:text-cyan-400 transition-colors">
-                      <GripVertical className="w-5 h-5" />
+              <DragOverlay>
+                {activeEvent ? (
+                  <div className="flex items-center gap-4 p-5 rounded-xl bg-gradient-to-r from-slate-900/95 to-slate-800/95 border-2 border-cyan-400 backdrop-blur-sm shadow-xl shadow-cyan-500/20">
+                    <GripVertical className="w-6 h-6 text-cyan-400" />
+                    <div className="w-10 h-10 rounded-full bg-cyan-500/30 flex items-center justify-center text-cyan-300 font-bold text-lg">
+                      ?
                     </div>
-
-                    {/* Position number */}
-                    <div className="w-8 h-8 rounded-full bg-cyan-500/20 flex items-center justify-center text-cyan-300 font-bold">
-                      {index + 1}
-                    </div>
-
-                    {/* Event info */}
                     <div className="flex-1">
-                      <h3 className="text-white/90 font-medium">{event.name}</h3>
-                      <p className={`text-sm bg-gradient-to-r ${getEraColor(event.era)} bg-clip-text text-transparent`}>
-                        {event.era}
+                      <h3 className="text-white font-medium text-lg">{activeEvent.name}</h3>
+                      <p className={`text-base bg-gradient-to-r ${getEraColor(activeEvent.era)} bg-clip-text text-transparent`}>
+                        {activeEvent.era}
                       </p>
                     </div>
-
-                    {/* Move buttons for mobile */}
-                    <div className="flex flex-col gap-1">
-                      <button
-                        onClick={() => moveEvent(index, index - 1)}
-                        disabled={index === 0}
-                        className="p-1 text-cyan-500/50 hover:text-cyan-400 disabled:opacity-30 disabled:cursor-not-allowed"
-                      >
-                        ▲
-                      </button>
-                      <button
-                        onClick={() => moveEvent(index, index + 1)}
-                        disabled={index === events.length - 1}
-                        className="p-1 text-cyan-500/50 hover:text-cyan-400 disabled:opacity-30 disabled:cursor-not-allowed"
-                      >
-                        ▼
-                      </button>
-                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ) : null}
+              </DragOverlay>
+            </DndContext>
           </div>
         </div>
 
@@ -245,16 +321,16 @@ export const TimeSpiral: React.FC<TimeSpiralProps> = ({ challenge, onAnswer }) =
           <Button
             variant="outline"
             onClick={resetOrder}
-            className="border-cyan-500/30 text-cyan-300 hover:bg-cyan-500/10 hover:border-cyan-400/50"
+            className="border-cyan-500/30 text-cyan-300 hover:bg-cyan-500/10 hover:border-cyan-400/50 text-lg px-6 py-6"
           >
-            <RotateCcw className="w-4 h-4 mr-2" />
+            <RotateCcw className="w-5 h-5 mr-2" />
             Перемешать
           </Button>
           <Button
             onClick={handleSubmit}
-            className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white px-8"
+            className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white px-8 text-lg py-6"
           >
-            <Check className="w-4 h-4 mr-2" />
+            <Check className="w-5 h-5 mr-2" />
             Проверить порядок
           </Button>
         </div>
