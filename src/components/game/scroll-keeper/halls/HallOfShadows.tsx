@@ -217,13 +217,13 @@ export function HallOfShadows({
                 onChange={(e) => setAnswer(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
                 placeholder="Ваш ответ..."
-                className="flex-1 bg-slate-800/50 border-slate-600 text-white text-xl py-8 placeholder:text-slate-500"
+                className="flex-1 bg-slate-800/50 border-slate-600 text-white md:text-xl py-8 placeholder:text-slate-500"
                 autoFocus
               />
               <Button 
                 onClick={handleSubmit}
                 disabled={!answer.trim()}
-                size="lg"
+                size="xl"
                 className="bg-amber-600 hover:bg-amber-700 text-white px-10"
               >
                 <Send className="w-6 h-6" />

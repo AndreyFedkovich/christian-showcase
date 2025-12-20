@@ -175,14 +175,14 @@ export const HallOfVoices: React.FC<HallOfVoicesProps> = ({ challenge, onAnswer 
                 value={answer}
                 onChange={(e) => setAnswer(e.target.value)}
                 placeholder="Имя говорящего..."
-                className="bg-slate-900/60 border-purple-500/30 text-white text-xl py-7 placeholder:text-purple-300/40 focus:border-purple-400"
+                className="bg-slate-900/60 border-purple-500/30 text-white md:text-xl py-7 placeholder:text-purple-300/40 focus:border-purple-400"
                 onKeyPress={(e) => e.key === 'Enter' && handleSubmit()}
               />
               <Button
                 onClick={handleSubmit}
                 disabled={!answer.trim()}
-                size="lg"
-                className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white px-10 text-lg whitespace-nowrap"
+                size="2xl"
+                className="h-12 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white px-10 md:text-2xl whitespace-nowrap"
               >
                 Ответить
               </Button>

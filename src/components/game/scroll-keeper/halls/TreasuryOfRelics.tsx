@@ -203,13 +203,13 @@ export function TreasuryOfRelics({
                 onChange={(e) => setAnswer(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
                 placeholder="Название предмета..."
-                className="flex-1 bg-yellow-950/50 border-yellow-600/50 text-white text-xl py-8 placeholder:text-yellow-300/50 focus:border-yellow-500"
+                className="flex-1 bg-yellow-950/50 border-yellow-600/50 text-white md:text-xl py-8 placeholder:text-yellow-300/50 focus:border-yellow-500"
                 autoFocus
               />
               <Button 
                 onClick={handleSubmit}
                 disabled={!answer.trim()}
-                size="lg"
+                size="xl"
                 className="bg-yellow-600 hover:bg-yellow-700 text-white px-10 shadow-[0_0_20px_rgba(234,179,8,0.3)]"
               >
                 <Send className="w-6 h-6" />

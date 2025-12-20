@@ -208,13 +208,13 @@ export function Scriptorium({
               onChange={(e) => setAnswer(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
               placeholder="Название книги..."
-              className="flex-1 bg-amber-900/50 border-amber-600/50 text-white text-xl py-8 placeholder:text-amber-300/50"
+              className="flex-1 bg-amber-900/50 border-amber-600/50 text-white md:text-xl py-8 placeholder:text-amber-300/50"
               autoFocus
             />
             <Button 
               onClick={handleSubmit}
               disabled={!answer.trim()}
-              size="lg"
+              size="xl"
               className="bg-amber-600 hover:bg-amber-700 text-white px-10"
             >
               <Send className="w-6 h-6" />

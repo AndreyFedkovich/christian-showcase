@@ -154,7 +154,7 @@ export function HallTransition({
       )}>
         {/* Hall number badge */}
         <div className={cn(
-          "mb-6 px-6 py-2 rounded-full text-base font-semibold",
+          "mb-6 px-6 py-2 rounded-full text-2xl font-semibold",
           "bg-amber-600/20 border-2 border-amber-500/40 text-amber-300"
         )}>
           Зал {hallNumber} из {totalHalls}
@@ -171,9 +171,9 @@ export function HallTransition({
         </h2>
 
         {/* Hall description */}
-        <p className="text-white/90 text-lg md:text-xl text-center max-w-lg px-4 mb-8 leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+        {/*<p className="text-white/90 text-lg md:text-xl text-center max-w-lg px-4 mb-8 leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
           {hall.description}
-        </p>
+        </p>*/}
       </div>
 
       {/* Keeper dialogue */}

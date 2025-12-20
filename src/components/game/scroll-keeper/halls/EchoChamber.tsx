@@ -107,9 +107,9 @@ export function EchoChamber({
       {/* Points indicator */}
       <div className="absolute top-4 left-1/2 -translate-x-1/2 z-50">
         <div className="flex items-center gap-2 px-6 py-3 rounded-full bg-slate-900/80 border border-amber-500/50 backdrop-blur-sm">
-          <Key className="w-6 h-6 text-amber-400" />
-          <span className="text-amber-400 font-bold text-xl">{currentPoints}</span>
-          <span className="text-slate-400 text-base">очков за ответ</span>
+          <Key className="w-8 h-8 text-amber-400" />
+          <span className="text-amber-400 font-bold text-2xl">{currentPoints}</span>
+          <span className="text-slate-400 text-xl">очков за ответ</span>
         </div>
       </div>
 
@@ -118,7 +118,7 @@ export function EchoChamber({
         <div className="max-w-2xl w-full space-y-8">
           {/* Instructions */}
           <div className="text-center mb-4">
-            <p className="text-purple-300 text-xl">
+            <p className="text-purple-300 text-2xl">
               Угадайте по подсказкам. Чем меньше подсказок — тем больше очков!
             </p>
           </div>
@@ -202,13 +202,13 @@ export function EchoChamber({
               onChange={(e) => setAnswer(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
               placeholder="Ваш ответ..."
-              className="flex-1 bg-purple-900/30 border-purple-500/50 text-white text-xl py-8 placeholder:text-purple-300/50 focus:border-purple-400"
+              className="flex-1 bg-purple-900/30 border-purple-500/50 text-white md:text-xl py-8 placeholder:text-purple-300/50 focus:border-purple-400"
               autoFocus
             />
             <Button 
               onClick={handleSubmit}
               disabled={!answer.trim()}
-              size="lg"
+              size="xl"
               className="bg-purple-600 hover:bg-purple-700 text-white px-10 shadow-[0_0_20px_rgba(168,85,247,0.3)]"
             >
               <Send className="w-6 h-6" />

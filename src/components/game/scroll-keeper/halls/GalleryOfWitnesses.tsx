@@ -146,7 +146,7 @@ export function GalleryOfWitnesses({
       {/* Hall icon */}
       <div className="absolute top-4 left-4 z-50">
         <div className="flex items-center gap-3 px-5 py-3 rounded-full bg-rose-900/50 border border-rose-500/50 backdrop-blur-sm">
-          <span className="text-3xl">🖼️</span>
+          <span className="text-3xl">👤</span>
           <span className="text-rose-200 font-semibold text-lg">Галерея Свидетелей</span>
         </div>
       </div>
@@ -166,10 +166,10 @@ export function GalleryOfWitnesses({
             </div>
 
             {/* Speech bubble / Monologue box */}
-            <div className="relative bg-slate-900/80 backdrop-blur-sm p-10 pt-44 md:pt-52 rounded-2xl border border-rose-500/30 shadow-xl">
+            <div className="relative bg-slate-900/80 backdrop-blur-sm p-10 pt-26 md:pt-32 rounded-2xl border border-rose-500/30 shadow-xl">
               {/* Decorative quote */}
               <div className="flex items-center justify-center h-[80px]">
-                <span className="text-[8rem] md:text-[10rem] lg:text-[13rem] text-accent font-serif leading-none">"</span>
+                <span className="text-[8rem] md:text-[10rem] lg:text-[13rem] text-accent font-serif leading-none">“</span>
               </div>
 
               {/* Monologue text */}
@@ -217,13 +217,13 @@ export function GalleryOfWitnesses({
                 onChange={(e) => setAnswer(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
                 placeholder="Имя свидетеля..."
-                className="flex-1 bg-rose-950/50 border-rose-500/50 text-white text-xl py-8 placeholder:text-rose-300/50 focus:border-rose-400"
+                className="flex-1 bg-rose-950/50 border-rose-500/50 text-white md:text-xl py-8 placeholder:text-rose-300/50 focus:border-rose-400"
                 autoFocus
               />
               <Button 
                 onClick={handleSubmit}
                 disabled={!answer.trim()}
-                size="lg"
+                size="xl"
                 className="bg-rose-600 hover:bg-rose-700 text-white px-10 shadow-[0_0_20px_rgba(244,63,94,0.3)]"
               >
                 <Send className="w-6 h-6" />

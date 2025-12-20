@@ -107,9 +107,10 @@ export function KeeperDialogue({
       {/* Keeper indicator */}
       <div className="flex items-center gap-4 mb-6">
         <div className={cn(
-          "w-16 h-16 rounded-full flex items-center justify-center text-4xl",
-          "bg-slate-900/50 border-2 border-amber-600/50",
-          "drop-shadow-[0_0_15px_rgba(251,191,36,0.4)]"
+            "w-16 h-16 rounded-full flex items-center justify-center text-4xl",
+            "leading-none pb-3",
+            "bg-slate-900/50 border-2 border-amber-600/50",
+            "drop-shadow-[0_0_15px_rgba(251,191,36,0.4)]"
         )}>
           {moodEmojis[mood]}
         </div>
