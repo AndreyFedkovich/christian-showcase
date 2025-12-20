@@ -3,17 +3,19 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { GalleryChallenge } from '@/data/scroll-keeper';
-import { Clock, Send, User, Volume2, VolumeX } from 'lucide-react';
+import { Clock, Loader2, Send, User, Volume2, VolumeX } from 'lucide-react';
 
 interface GalleryOfWitnessesProps {
   challenge: GalleryChallenge;
   timer: number;
+  isChecking?: boolean;
   onSubmitAnswer: (answer: string) => void;
 }
 
 export function GalleryOfWitnesses({ 
   challenge, 
-  timer, 
+  timer,
+  isChecking,
   onSubmitAnswer 
 }: GalleryOfWitnessesProps) {
   const [answer, setAnswer] = useState('');
@@ -226,7 +228,7 @@ export function GalleryOfWitnesses({
                 size="xl"
                 className="bg-rose-600 hover:bg-rose-700 text-white px-10 py-6 shadow-[0_0_20px_rgba(244,63,94,0.3)]"
               >
-                <Send className="w-6 h-6" />
+                {isChecking ? <Loader2 className="w-6 h-6 animate-spin" /> : <Send className="w-6 h-6" />}
               </Button>
             </div>
           )}

@@ -100,6 +100,7 @@ export default function ScrollKeeperPlay() {
             challenge={state.currentChallenge as ScriptoriumChallenge}
             timer={state.timer}
             usedHints={state.usedHints}
+            isChecking={state.isCheckingAnswer}
             onUseHint={useHint}
             onSubmitAnswer={handleSubmitAnswer}
           />
@@ -111,6 +112,7 @@ export default function ScrollKeeperPlay() {
             challenge={state.currentChallenge as EchoChallenge}
             timer={state.timer}
             usedHints={state.usedHints}
+            isChecking={state.isCheckingAnswer}
             onUseHint={useHint}
             onSubmitAnswer={handleSubmitAnswer}
           />
@@ -121,6 +123,7 @@ export default function ScrollKeeperPlay() {
           <GalleryOfWitnesses
             challenge={state.currentChallenge as GalleryChallenge}
             timer={state.timer}
+            isChecking={state.isCheckingAnswer}
             onSubmitAnswer={handleSubmitAnswer}
           />
         );
@@ -130,6 +133,7 @@ export default function ScrollKeeperPlay() {
           <TreasuryOfRelics
             challenge={state.currentChallenge as TreasuryChallenge}
             timer={state.timer}
+            isChecking={state.isCheckingAnswer}
             onSubmitAnswer={handleSubmitAnswer}
           />
         );
@@ -138,6 +142,7 @@ export default function ScrollKeeperPlay() {
         return (
           <HallOfVoices
             challenge={state.currentChallenge as VoicesChallenge}
+            isChecking={state.isCheckingAnswer}
             onAnswer={(answer, correct) => {
               submitAnswer(answer);
             }}

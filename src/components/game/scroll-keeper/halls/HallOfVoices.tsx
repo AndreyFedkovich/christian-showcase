@@ -2,14 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { VoicesChallenge } from '@/data/scroll-keeper';
-import { Quote, Mic, Volume2 } from 'lucide-react';
+import { Quote, Mic, Volume2, Loader2, Send } from 'lucide-react';
 
 interface HallOfVoicesProps {
   challenge: VoicesChallenge;
+  isChecking?: boolean;
   onAnswer: (answer: string, correct: boolean) => void;
 }
 
-export const HallOfVoices: React.FC<HallOfVoicesProps> = ({ challenge, onAnswer }) => {
+export const HallOfVoices: React.FC<HallOfVoicesProps> = ({ challenge, isChecking, onAnswer }) => {
   const [answer, setAnswer] = useState('');
   const [showQuote, setShowQuote] = useState(false);
   const [showContext, setShowContext] = useState(false);
@@ -184,7 +185,7 @@ export const HallOfVoices: React.FC<HallOfVoicesProps> = ({ challenge, onAnswer 
                 size="lg"
                 className="h-14 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white px-10 py-6 md:text-xl whitespace-nowrap"
               >
-                Ответить
+                {isChecking ? <Loader2 className="w-6 h-6 animate-spin" /> : <Send className="w-6 h-6" />}
               </Button>
             </div>
           </div>

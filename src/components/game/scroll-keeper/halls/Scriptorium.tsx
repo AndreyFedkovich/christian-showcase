@@ -3,12 +3,13 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ScriptoriumChallenge } from '@/data/scroll-keeper';
-import { Clock, BookOpen, Lightbulb, Send, Scroll } from 'lucide-react';
+import { Clock, BookOpen, Lightbulb, Send, Scroll, Loader2 } from 'lucide-react';
 
 interface ScriptoriumProps {
   challenge: ScriptoriumChallenge;
   timer: number;
   usedHints: number;
+  isChecking?: boolean;
   onUseHint: () => void;
   onSubmitAnswer: (answer: string) => void;
 }
@@ -16,7 +17,8 @@ interface ScriptoriumProps {
 export function Scriptorium({ 
   challenge, 
   timer, 
-  usedHints, 
+  usedHints,
+  isChecking,
   onUseHint, 
   onSubmitAnswer 
 }: ScriptoriumProps) {
@@ -217,7 +219,7 @@ export function Scriptorium({
               size="xl"
               className="bg-amber-600 hover:bg-amber-700 text-white px-10 py-6"
             >
-              <Send className="w-6 h-6" />
+              {isChecking ? <Loader2 className="w-6 h-6 animate-spin" /> : <Send className="w-6 h-6" />}
             </Button>
           </div>
         </div>

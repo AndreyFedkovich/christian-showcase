@@ -3,13 +3,14 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { EchoChallenge } from '@/data/scroll-keeper';
-import { Clock, Volume2, Send, Key, ChevronRight } from 'lucide-react';
+import { Clock, Volume2, Send, Key, ChevronRight, Loader2 } from 'lucide-react';
 
 interface EchoChamberProps {
   challenge: EchoChallenge;
   timer: number;
   usedHints: number;
   onUseHint: () => void;
+  isChecking?: boolean;
   onSubmitAnswer: (answer: string) => void;
 }
 
@@ -17,7 +18,8 @@ export function EchoChamber({
   challenge, 
   timer, 
   usedHints, 
-  onUseHint, 
+  onUseHint,
+  isChecking,
   onSubmitAnswer 
 }: EchoChamberProps) {
   const [answer, setAnswer] = useState('');
@@ -211,7 +213,7 @@ export function EchoChamber({
               size="xl"
               className="bg-purple-600 hover:bg-purple-700 text-white px-10 py-6 shadow-[0_0_20px_rgba(168,85,247,0.3)]"
             >
-              <Send className="w-6 h-6" />
+              {isChecking ? <Loader2 className="w-6 h-6 animate-spin" /> : <Send className="w-6 h-6" />}
             </Button>
           </div>
 
