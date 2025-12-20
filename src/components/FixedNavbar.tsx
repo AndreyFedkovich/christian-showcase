@@ -111,8 +111,8 @@ const FixedNavbar = ({ isScrolled, onNavigate, activeTab, searchQuery, onSearchC
             size="sm" 
             className={cn("gap-1.5 [&_svg]:size-6", hoverBg, textColorMuted)}
           >
-            <Globe className="w-5 h-5" />
-            <span className="text-base font-medium">RU</span>
+            <Globe className={cn("w-5 h-5", textColorMuted)} />
+            <span className={cn("text-base font-medium", textColorMuted)}>RU</span>
           </Button>
 
           {/* User Menu */}
