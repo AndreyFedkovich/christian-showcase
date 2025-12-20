@@ -98,6 +98,7 @@ export function KeeperDialogue({
       className={cn(
         "relative p-8 md:p-10 rounded-2xl cursor-pointer transition-all duration-500",
         "bg-gradient-to-br border border-amber-600/30 backdrop-blur-sm",
+        "w-full max-w-2xl",
         moodColors[mood],
         className
       )}
@@ -120,18 +121,29 @@ export function KeeperDialogue({
         </div>
       </div>
 
-      {/* Message text */}
-      <p className={cn(
-        "text-2xl md:text-3xl leading-relaxed italic",
-        moodTextColors[mood]
-      )}>
-        «{displayedText}
-        <span className={cn(
-          "inline-block w-0.5 h-6 ml-0.5 -mb-0.5 bg-amber-400",
-          showCursor && isTyping ? "opacity-100" : "opacity-0"
-        )} />
-        {!isTyping && '»'}
-      </p>
+      {/* Message text container with reserved height */}
+      <div className="relative">
+        {/* Invisible placeholder for full text height */}
+        <p className={cn(
+          "text-2xl md:text-3xl leading-relaxed italic invisible",
+          moodTextColors[mood]
+        )} aria-hidden="true">
+          «{message}»
+        </p>
+        
+        {/* Visible typewriter text positioned over placeholder */}
+        <p className={cn(
+          "text-2xl md:text-3xl leading-relaxed italic absolute top-0 left-0 right-0",
+          moodTextColors[mood]
+        )}>
+          «{displayedText}
+          <span className={cn(
+            "inline-block w-0.5 h-6 ml-0.5 -mb-0.5 bg-amber-400",
+            showCursor && isTyping ? "opacity-100" : "opacity-0"
+          )} />
+          {!isTyping && '»'}
+        </p>
+      </div>
 
       {/* Skip hint */}
       {isTyping && (
