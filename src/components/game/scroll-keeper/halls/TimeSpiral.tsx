@@ -10,8 +10,6 @@ import {
   useSensor,
   useSensors,
   DragEndEvent,
-  DragStartEvent,
-  DragOverlay,
 } from '@dnd-kit/core';
 import {
   arrayMove,
@@ -66,8 +64,7 @@ function SortableEventItem({ event, index, totalEvents, onMoveUp, onMoveDown }: 
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
-    opacity: isDragging ? 0.5 : 1,
-    zIndex: isDragging ? 10 : 1,
+    zIndex: isDragging ? 50 : 1,
   };
 
   return (
@@ -92,7 +89,7 @@ function SortableEventItem({ event, index, totalEvents, onMoveUp, onMoveDown }: 
         backdrop-blur-sm shadow-lg
         transition-all duration-300
         hover:shadow-cyan-500/10 hover:shadow-xl
-        ${isDragging ? 'ring-2 ring-cyan-400' : ''}
+        ${isDragging ? 'ring-2 ring-cyan-400 shadow-2xl shadow-cyan-500/30 scale-105' : ''}
       `}>
         {/* Drag handle */}
         <div 
@@ -141,8 +138,6 @@ function SortableEventItem({ event, index, totalEvents, onMoveUp, onMoveDown }: 
 export const TimeSpiral: React.FC<TimeSpiralProps> = ({ challenge, onAnswer }) => {
   const [events, setEvents] = useState<TimeEvent[]>([]);
   const [showSpiral, setShowSpiral] = useState(false);
-  const [activeId, setActiveId] = useState<number | null>(null);
-
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -158,13 +153,8 @@ export const TimeSpiral: React.FC<TimeSpiralProps> = ({ challenge, onAnswer }) =
     return () => clearTimeout(timer);
   }, [challenge]);
 
-  const handleDragStart = (event: DragStartEvent) => {
-    setActiveId(event.active.id as number);
-  };
-
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
-    setActiveId(null);
     
     if (over && active.id !== over.id) {
       setEvents((items) => {
@@ -191,7 +181,7 @@ export const TimeSpiral: React.FC<TimeSpiralProps> = ({ challenge, onAnswer }) =
     onAnswer(currentOrder.join(','), isCorrect);
   };
 
-  const activeEvent = activeId ? events.find(e => e.id === activeId) : null;
+  
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-indigo-950 relative overflow-hidden">
@@ -275,7 +265,6 @@ export const TimeSpiral: React.FC<TimeSpiralProps> = ({ challenge, onAnswer }) =
             <DndContext
               sensors={sensors}
               collisionDetection={closestCenter}
-              onDragStart={handleDragStart}
               onDragEnd={handleDragEnd}
             >
               <SortableContext
@@ -295,23 +284,6 @@ export const TimeSpiral: React.FC<TimeSpiralProps> = ({ challenge, onAnswer }) =
                   ))}
                 </div>
               </SortableContext>
-
-              <DragOverlay>
-                {activeEvent ? (
-                  <div className="flex items-center gap-4 p-5 rounded-xl bg-gradient-to-r from-slate-900/95 to-slate-800/95 border-2 border-cyan-400 backdrop-blur-sm shadow-xl shadow-cyan-500/20">
-                    <GripVertical className="w-6 h-6 text-cyan-400" />
-                    <div className="w-10 h-10 rounded-full bg-cyan-500/30 flex items-center justify-center text-cyan-300 font-bold text-lg">
-                      ?
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-white font-medium text-lg">{activeEvent.name}</h3>
-                      <p className={`text-base bg-gradient-to-r ${getEraColor(activeEvent.era)} bg-clip-text text-transparent`}>
-                        {activeEvent.era}
-                      </p>
-                    </div>
-                  </div>
-                ) : null}
-              </DragOverlay>
             </DndContext>
           </div>
         </div>
