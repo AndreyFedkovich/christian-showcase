@@ -201,8 +201,9 @@ export function useScrollKeeperState() {
         break;
     }
 
-    // Check if this is a fuzzy question (AI check)
-    const isFuzzy = 'type' in state.currentChallenge && 
+    // Check if this is a fuzzy question (AI check) - all halls except spiral
+    const isFuzzy = state.currentChallenge.hallType !== 'spiral' &&
+                    'type' in state.currentChallenge && 
                     state.currentChallenge.type === 'fuzzy';
 
     if (isFuzzy) {

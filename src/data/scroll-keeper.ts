@@ -46,6 +46,7 @@ export interface ShadowsChallenge {
 // Скрипторий Писаний - узнай книгу по стиху
 export interface ScriptoriumChallenge {
   hallType: 'scriptorium';
+  type: AnswerCheckType;
   verse: string;
   book: string;
   chapter?: number;
@@ -53,39 +54,48 @@ export interface ScriptoriumChallenge {
     testament: 'ВЗ' | 'НЗ';
     bookType: string;
   };
+  acceptableKeywords?: string[];
 }
 
 // Комната Эха - последовательные подсказки
 export interface EchoChallenge {
   hallType: 'echo';
+  type: AnswerCheckType;
   answer: string;
   clues: string[];
   maxPoints: number;
+  acceptableKeywords?: string[];
 }
 
 // Галерея Свидетелей - монолог от первого лица
 export interface GalleryChallenge {
   hallType: 'gallery';
+  type: AnswerCheckType;
   monologue: string;
   character: string;
   bookReference?: string;
+  acceptableKeywords?: string[];
 }
 
 // Сокровищница Реликвий - библейские предметы
 export interface TreasuryChallenge {
   hallType: 'treasury';
+  type: AnswerCheckType;
   description: string;
   item: string;
   relatedEvents?: string[];
+  acceptableKeywords?: string[];
 }
 
 // Палата Голосов - кто это сказал
 export interface VoicesChallenge {
   hallType: 'voices';
+  type: AnswerCheckType;
   quote: string;
   speaker: string;
   context?: string;
   bookReference?: string;
+  acceptableKeywords?: string[];
 }
 
 // Спираль Времени - хронология событий
@@ -242,78 +252,99 @@ export const sampleChallenges: Challenge[] = [
   // Скрипторий Писаний
   {
     hallType: 'scriptorium',
+    type: 'fuzzy',
     verse: 'Вот, наступают дни, говорит Господь Бог, когда Я пошлю на землю голод, — не голод хлеба, не жажду воды, но жажду слышания слов Господних.',
     book: 'Амос',
     chapter: 8,
-    hints: { testament: 'ВЗ', bookType: 'Малый пророк' }
+    hints: { testament: 'ВЗ', bookType: 'Малый пророк' },
+    acceptableKeywords: ['Амос', 'Amoz', 'пророк']
   },
   {
     hallType: 'scriptorium',
+    type: 'fuzzy',
     verse: 'Хотя бы не расцвела смоковница, и не было плода на виноградных лозах, и маслина изменила, и нива не дала пищи, хотя бы не стало овец в загоне и рогатого скота в стойлах, — но и тогда я буду радоваться о Господе и веселиться о Боге спасения моего.',
     book: 'Аввакум',
     chapter: 3,
-    hints: { testament: 'ВЗ', bookType: 'Малый пророк' }
+    hints: { testament: 'ВЗ', bookType: 'Малый пророк' },
+    acceptableKeywords: ['Аввакум', 'Habakkuk', 'пророк']
   },
   {
     hallType: 'scriptorium',
+    type: 'fuzzy',
     verse: 'Но Он знает путь мой; пусть испытает меня — выйду, как золото.',
     book: 'Иов',
     chapter: 23,
-    hints: { testament: 'ВЗ', bookType: 'Поэтическая книга' }
+    hints: { testament: 'ВЗ', bookType: 'Поэтическая книга' },
+    acceptableKeywords: ['Иов', 'Job']
   },
   {
     hallType: 'scriptorium',
+    type: 'fuzzy',
     verse: 'Для меня нет большей радости, как слышать, что дети мои ходят в истине.',
     book: '3 Иоанна',
     chapter: 1,
-    hints: { testament: 'НЗ', bookType: 'Соборное послание' }
+    hints: { testament: 'НЗ', bookType: 'Соборное послание' },
+    acceptableKeywords: ['Иоанна', '3 Иоанна', 'третье Иоанна', 'John']
   },
   {
     hallType: 'scriptorium',
+    type: 'fuzzy',
     verse: 'О, человек! сказано тебе, что — добро и чего требует от тебя Господь: действовать справедливо, любить дела милосердия и смиренномудренно ходить пред Богом твоим.',
     book: 'Михей',
     chapter: 6,
-    hints: { testament: 'ВЗ', bookType: 'Малый пророк' }
+    hints: { testament: 'ВЗ', bookType: 'Малый пророк' },
+    acceptableKeywords: ['Михей', 'Micah', 'пророк']
   },
   {
     hallType: 'scriptorium',
+    type: 'fuzzy',
     verse: 'Итак познаем, будем стремиться познать Господа; как утренняя заря — явление Его, и Он придет к нам как дождь, как поздний дождь, оросит землю.',
     book: 'Осия',
     chapter: 6,
-    hints: { testament: 'ВЗ', bookType: 'Малый пророк' }
+    hints: { testament: 'ВЗ', bookType: 'Малый пророк' },
+    acceptableKeywords: ['Осия', 'Hosea', 'пророк']
   },
   {
     hallType: 'scriptorium',
+    type: 'fuzzy',
     verse: 'По милости Господа мы не исчезли, ибо милосердие Его не истощилось. Оно обновляется каждое утро; велика верность Твоя!',
     book: 'Плач Иеремии',
     chapter: 3,
-    hints: { testament: 'ВЗ', bookType: 'Большой пророк' }
+    hints: { testament: 'ВЗ', bookType: 'Большой пророк' },
+    acceptableKeywords: ['Плач', 'Иеремии', 'Lamentations', 'Иеремия']
   },
   {
     hallType: 'scriptorium',
+    type: 'fuzzy',
     verse: 'Многие воды не могут потушить любви, и реки не зальют ее; если бы кто давал все богатство дома своего за любовь, то он был бы отвергнут с презрением.',
     book: 'Песнь Песней',
     chapter: 8,
-    hints: { testament: 'ВЗ', bookType: 'Поэтическая книга' }
+    hints: { testament: 'ВЗ', bookType: 'Поэтическая книга' },
+    acceptableKeywords: ['Песнь', 'Песней', 'Соломона', 'Song']
   },
   {
     hallType: 'scriptorium',
+    type: 'fuzzy',
     verse: 'Будь верен до смерти, и дам тебе венец жизни.',
     book: 'Откровение Иоанна',
     chapter: 2,
-    hints: { testament: 'НЗ', bookType: 'Пророческая книга' }
+    hints: { testament: 'НЗ', bookType: 'Пророческая книга' },
+    acceptableKeywords: ['Откровение', 'Апокалипсис', 'Revelation', 'Иоанна']
   },
   {
     hallType: 'scriptorium',
+    type: 'fuzzy',
     verse: 'Гордость сердца твоего обольстила тебя, живущего в расселинах скал, на возвышенном месте своем, говорящего в сердце своем: "кто низвергнет меня на землю?"',
     book: 'Авдий',
     chapter: 1,
-    hints: { testament: 'ВЗ', bookType: 'Малый пророк' }
+    hints: { testament: 'ВЗ', bookType: 'Малый пророк' },
+    acceptableKeywords: ['Авдий', 'Obadiah', 'пророк']
   },
   
   // Комната Эха
   {
     hallType: 'echo',
+    type: 'fuzzy',
     answer: 'Ворон',
     clues: [
       'Это первое живое существо, выпущенное на свободу после всемирной катастрофы',
@@ -321,10 +352,12 @@ export const sampleChallenges: Challenge[] = [
       'Эти птицы приносили хлеб и мясо пророку Илии утром и вечером',
       'Иисус приводил их в пример: они не сеют, не жнут, но Бог питает их'
     ],
-    maxPoints: 4
+    maxPoints: 4,
+    acceptableKeywords: ['ворон', 'птица', 'Илия', 'ковчег', 'Ной']
   },
   {
     hallType: 'echo',
+    type: 'fuzzy',
     answer: 'Соль',
     clues: [
       'В древности новорожденных младенцев омывали водой и натирали этим (Иез. 16:4)',
@@ -332,10 +365,12 @@ export const sampleChallenges: Challenge[] = [
       'Если это потеряет силу, то уже ни к чему не годно, как только быть выброшенным вон',
       'Жена Лота превратилась в столп из этого вещества'
     ],
-    maxPoints: 4
+    maxPoints: 4,
+    acceptableKeywords: ['соль', 'Лот', 'завет', 'столп']
   },
   {
     hallType: 'echo',
+    type: 'fuzzy',
     answer: 'Авессалом',
     clues: [
       'У него не было сыновей, поэтому он поставил себе памятник в царской долине еще при жизни',
@@ -343,10 +378,12 @@ export const sampleChallenges: Challenge[] = [
       'Он «крал сердца» Израильтян, стоя у ворот и выслушивая их жалобы',
       'Он погиб, повиснув между небом и землей, запутавшись длинными волосами в ветвях дуба'
     ],
-    maxPoints: 4
+    maxPoints: 4,
+    acceptableKeywords: ['Авессалом', 'Absalom', 'сын Давида', 'волосы', 'дуб']
   },
   {
     hallType: 'echo',
+    type: 'fuzzy',
     answer: 'Есфирь (Гадасса)',
     clues: [
       'Ее еврейское имя означало «Мирт»',
@@ -354,10 +391,12 @@ export const sampleChallenges: Challenge[] = [
       'Она постилась три дня и три ночи перед тем, как нарушить закон царя',
       'Она сказала: «Если погибнуть — погибну», и спасла свой народ от Амана'
     ],
-    maxPoints: 4
+    maxPoints: 4,
+    acceptableKeywords: ['Есфирь', 'Гадасса', 'Esther', 'царица', 'Аман']
   },
   {
     hallType: 'echo',
+    type: 'fuzzy',
     answer: 'Стефан',
     clues: [
       'Его имя означает «Венец»',
@@ -365,58 +404,73 @@ export const sampleChallenges: Challenge[] = [
       'Его лицо видели как лицо Ангела на суде синедриона',
       'Он стал первым христианским мучеником, побитым камнями'
     ],
-    maxPoints: 4
+    maxPoints: 4,
+    acceptableKeywords: ['Стефан', 'Stephen', 'мученик', 'диакон', 'камни']
   },
   
   // Галерея Свидетелей
   {
     hallType: 'gallery',
+    type: 'fuzzy',
     monologue: 'Я выбрал направление, где никто не знал моего имени и клейма за ним. В новом городе меня нашёл не пристав, а человек, который говорил о свободе иначе, чем покупатели на рынке. Я возвращался назад уже не с украденным, а с листом, на котором меня называли не вещью, а братом.',
     character: 'Онисим',
-    bookReference: 'Филимону 1'
+    bookReference: 'Филимону 1',
+    acceptableKeywords: ['Онисим', 'Onesimus', 'раб', 'Павел', 'Филимон']
   },
   {
     hallType: 'gallery',
+    type: 'fuzzy',
     monologue: 'Я ведал домом человека, от одного слова которого в нашей стране могли замолчать и небо, и люди. Приказы от него и от его жены были достаточно ясны, чтобы голоса пророков больше не слышались на площадях. Но пока наверху за столом звенели кубки, я делил хлеб и воду с теми, кого прятал по пещерам, зная, что один неосторожный шёпот слуги стоил бы жизни не только им, но и мне.',
     character: 'Авдий, управитель Ахава',
-    bookReference: '3 Царств 18'
+    bookReference: '3 Царств 18',
+    acceptableKeywords: ['Авдий', 'Obadiah', 'управитель', 'Ахав', 'пророки', 'пещера']
   },
   
   // Сокровищница Реликвий
   {
     hallType: 'treasury',
+    type: 'fuzzy',
     description: 'Этот предмет был вырезан из камня рукой Божьей. На нём были начертаны заповеди. Он хранился в особом ковчеге и был святыней народа.',
     item: 'Скрижали Завета',
-    relatedEvents: ['Синайский завет', 'Золотой телец', 'Ковчег Завета']
+    relatedEvents: ['Синайский завет', 'Золотой телец', 'Ковчег Завета'],
+    acceptableKeywords: ['скрижали', 'завет', 'заповеди', 'Моисей', 'камень', 'ковчег']
   },
   {
     hallType: 'treasury',
+    type: 'fuzzy',
     description: 'Простое оружие пастуха. Два куска верёвки и кожаный карман. С его помощью юноша сразил великана одним камнем.',
     item: 'Праща Давида',
-    relatedEvents: ['Битва с Голиафом']
+    relatedEvents: ['Битва с Голиафом'],
+    acceptableKeywords: ['праща', 'Давид', 'Голиаф', 'камень', 'оружие']
   },
   
   // Палата Голосов
   {
     hallType: 'voices',
+    type: 'fuzzy',
     quote: 'Господь дал, Господь и взял; да будет имя Господне благословенно!',
     speaker: 'Иов',
     context: 'После потери всего имущества и детей',
-    bookReference: 'Иов 1:21'
+    bookReference: 'Иов 1:21',
+    acceptableKeywords: ['Иов', 'Job']
   },
   {
     hallType: 'voices',
+    type: 'fuzzy',
     quote: 'Что есть истина?',
     speaker: 'Понтий Пилат',
     context: 'На суде над Иисусом',
-    bookReference: 'Иоанна 18:38'
+    bookReference: 'Иоанна 18:38',
+    acceptableKeywords: ['Пилат', 'Pilate', 'Понтий', 'прокуратор']
   },
   {
     hallType: 'voices',
+    type: 'fuzzy',
     quote: 'А я и дом мой будем служить Господу.',
     speaker: 'Иисус Навин',
     context: 'Призыв к народу выбрать, кому служить',
-    bookReference: 'Иисус Навин 24:15'
+    bookReference: 'Иисус Навин 24:15',
+    acceptableKeywords: ['Навин', 'Joshua', 'Иисус Навин']
   },
   
   // Спираль Времени
