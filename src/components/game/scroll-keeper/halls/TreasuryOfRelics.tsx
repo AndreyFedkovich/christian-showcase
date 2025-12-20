@@ -112,7 +112,7 @@ export function TreasuryOfRelics({
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-8">
         <div className="max-w-2xl w-full space-y-8">
           {/* Central display case */}
-          <div className="relative mx-auto w-72 h-88 md:w-88 md:h-104">
+          <div className="relative mx-auto w-72 h-[22rem] md:w-[22rem] md:h-[26rem]">
             {/* Glass case frame */}
             <div className="absolute inset-0 border-4 border-yellow-600/60 rounded-xl bg-gradient-to-b from-slate-900/60 via-slate-800/40 to-slate-900/60 backdrop-blur-md shadow-[0_0_60px_rgba(234,179,8,0.2)]">
               {/* Top reflection */}
@@ -126,7 +126,7 @@ export function TreasuryOfRelics({
                 )}>
                   {/* Glowing artifact placeholder */}
                   <div className="w-28 h-36 md:w-36 md:h-44 bg-gradient-to-b from-yellow-500/20 via-yellow-600/10 to-transparent rounded-lg blur-sm animate-pulse" />
-                  <Sparkles className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-18 h-18 md:w-24 md:h-24 text-yellow-400/40" />
+                  <Sparkles className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[4.5rem] h-[4.5rem] md:w-24 md:h-24 text-yellow-400/40" />
                 </div>
               </div>
 
@@ -181,19 +181,6 @@ export function TreasuryOfRelics({
             </div>
           )}
 
-          {/* Related events hint */}
-          {challenge.relatedEvents && showInput && (
-            <div className="flex flex-wrap justify-center gap-3 animate-fade-in">
-              {challenge.relatedEvents.map((event, i) => (
-                <span 
-                  key={i}
-                  className="px-4 py-2 rounded-full bg-yellow-900/40 border border-yellow-600/30 text-yellow-300/70 text-base"
-                >
-                  {event}
-                </span>
-              ))}
-            </div>
-          )}
 
           {/* Answer input */}
           {showInput && (
