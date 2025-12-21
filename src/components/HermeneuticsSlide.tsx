@@ -1,4 +1,4 @@
-import { HermeneuticsSlide as HermeneuticsSlideType } from "@/data/epistles-structure";
+import { HermeneuticsSlide as HermeneuticsSlideType, PowerSourceType } from "@/data/epistles-structure";
 import iconPromise from "@/assets/icon-promise.png";
 import iconExample from "@/assets/icon-example.png";
 import iconGlory from "@/assets/icon-glory.png";
@@ -9,16 +9,29 @@ interface HermeneuticsSlideProps {
   direction: 'next' | 'prev';
 }
 
-const powerSourceConfig = {
+const powerSourceConfig: Record<PowerSourceType | 'default', {
+  gradient: string;
+  badge: string;
+  title: string;
+  text: string;
+  bullet: string;
+  border: string;
+  progressBar: string;
+  icon: string | null;
+  label: string;
+  panelGradient: string;
+}> = {
   promise: {
     gradient: 'from-blue-50 to-blue-100 dark:from-blue-950 dark:to-blue-900',
     badge: 'bg-blue-600',
     title: 'text-blue-900 dark:text-blue-100',
     text: 'text-blue-800 dark:text-blue-200',
     bullet: 'bg-blue-600',
-    border: 'border-blue-300 dark:border-blue-700',
+    border: 'border-blue-400',
     progressBar: 'from-blue-500 to-blue-600',
     icon: iconPromise,
+    label: 'Обещания',
+    panelGradient: 'from-blue-50/80 to-blue-100/80 dark:from-blue-950/80 dark:to-blue-900/80',
   },
   example: {
     gradient: 'from-violet-50 to-violet-100 dark:from-violet-950 dark:to-violet-900',
@@ -26,9 +39,11 @@ const powerSourceConfig = {
     title: 'text-violet-900 dark:text-violet-100',
     text: 'text-violet-800 dark:text-violet-200',
     bullet: 'bg-violet-600',
-    border: 'border-violet-300 dark:border-violet-700',
+    border: 'border-violet-400',
     progressBar: 'from-violet-500 to-violet-600',
     icon: iconExample,
+    label: 'Пример',
+    panelGradient: 'from-violet-50/80 to-violet-100/80 dark:from-violet-950/80 dark:to-violet-900/80',
   },
   glory: {
     gradient: 'from-yellow-50 to-yellow-100 dark:from-yellow-950 dark:to-yellow-900',
@@ -36,9 +51,11 @@ const powerSourceConfig = {
     title: 'text-yellow-900 dark:text-yellow-100',
     text: 'text-yellow-800 dark:text-yellow-200',
     bullet: 'bg-yellow-500',
-    border: 'border-yellow-300 dark:border-yellow-700',
+    border: 'border-yellow-400',
     progressBar: 'from-yellow-400 to-yellow-500',
     icon: iconGlory,
+    label: 'Слава Божия',
+    panelGradient: 'from-yellow-50/80 to-yellow-100/80 dark:from-yellow-950/80 dark:to-yellow-900/80',
   },
   status: {
     gradient: 'from-emerald-50 to-emerald-100 dark:from-emerald-950 dark:to-emerald-900',
@@ -46,9 +63,11 @@ const powerSourceConfig = {
     title: 'text-emerald-900 dark:text-emerald-100',
     text: 'text-emerald-800 dark:text-emerald-200',
     bullet: 'bg-emerald-600',
-    border: 'border-emerald-300 dark:border-emerald-700',
+    border: 'border-emerald-400',
     progressBar: 'from-emerald-500 to-emerald-600',
     icon: iconStatus,
+    label: 'Статус во Христе',
+    panelGradient: 'from-emerald-50/80 to-emerald-100/80 dark:from-emerald-950/80 dark:to-emerald-900/80',
   },
   default: {
     gradient: 'from-emerald-50 to-emerald-100 dark:from-emerald-950 dark:to-emerald-900',
@@ -56,13 +75,22 @@ const powerSourceConfig = {
     title: 'text-emerald-900 dark:text-emerald-100',
     text: 'text-emerald-800 dark:text-emerald-200',
     bullet: 'bg-emerald-600',
-    border: 'border-emerald-300 dark:border-emerald-700',
+    border: 'border-emerald-400',
     progressBar: 'from-emerald-500 to-emerald-600',
-    icon: null as string | null,
+    icon: null,
+    label: '',
+    panelGradient: 'from-emerald-50/80 to-emerald-100/80 dark:from-emerald-950/80 dark:to-emerald-900/80',
   }
 };
 
-const doSectionConfig = {
+const doSectionConfig: Record<PowerSourceType | 'default', {
+  gradient: string;
+  badge: string;
+  title: string;
+  text: string;
+  bullet: string;
+  progressBar: string;
+}> = {
   promise: {
     gradient: 'from-teal-50 to-teal-100 dark:from-teal-950 dark:to-teal-900',
     badge: 'bg-teal-600',
@@ -106,9 +134,10 @@ const doSectionConfig = {
 };
 
 const HermeneuticsSlide = ({ slide, direction }: HermeneuticsSlideProps) => {
-  const powerSourceType = slide.knowSection.powerSourceType || 'default';
-  const knowConfig = powerSourceConfig[powerSourceType];
-  const doConfig = doSectionConfig[powerSourceType];
+  // Get primary type from first powerSource or default
+  const primaryType: PowerSourceType | 'default' = slide.powerSources?.[0]?.type || 'default';
+  const knowConfig = powerSourceConfig[primaryType];
+  const doConfig = doSectionConfig[primaryType];
 
   return (
     <div 
@@ -116,19 +145,19 @@ const HermeneuticsSlide = ({ slide, direction }: HermeneuticsSlideProps) => {
         direction === 'next' ? 'slide-in-from-right-12' : 'slide-in-from-left-12'
       }`}
     >
-      <div className="max-w-7xl w-full space-y-8">
+      <div className="max-w-7xl w-full space-y-6">
         {/* Book Name */}
-        <div className="text-center space-y-3">
-          <h1 className="text-6xl md:text-7xl font-bold text-foreground tracking-tight">
+        <div className="text-center space-y-2">
+          <h1 className="text-5xl md:text-6xl font-bold text-foreground tracking-tight">
             {slide.bookName}
           </h1>
-          <p className="text-xl text-muted-foreground font-sans">
+          <p className="text-lg text-muted-foreground font-sans">
             Структура послания
           </p>
         </div>
 
         {/* Visual Progress Bar */}
-        <div className="w-full h-16 rounded-full overflow-hidden flex shadow-premium">
+        <div className="w-full h-14 rounded-full overflow-hidden flex shadow-premium">
           <div 
             className={`bg-gradient-to-r ${knowConfig.progressBar} flex items-center justify-center text-white font-bold text-lg transition-all`}
             style={{ width: `${slide.knowSection.percentage}%` }}
@@ -144,56 +173,43 @@ const HermeneuticsSlide = ({ slide, direction }: HermeneuticsSlideProps) => {
         </div>
 
         {/* Two Sections */}
-        <div className="grid md:grid-cols-2 gap-8 mt-12">
+        <div className="grid md:grid-cols-2 gap-6">
           {/* KNOW Section */}
-          <div className={`bg-gradient-to-br ${knowConfig.gradient} rounded-3xl p-8 shadow-card`}>
-            <div className="space-y-4">
+          <div className={`bg-gradient-to-br ${knowConfig.gradient} rounded-3xl p-6 shadow-card`}>
+            <div className="space-y-3">
               <div className={`inline-block px-4 py-2 ${knowConfig.badge} text-white rounded-full font-bold text-sm uppercase tracking-wider`}>
                 Знать
               </div>
-              <h2 className={`text-3xl font-bold ${knowConfig.title}`}>
+              <h2 className={`text-2xl font-bold ${knowConfig.title}`}>
                 {slide.knowSection.chapters}
               </h2>
-              <ul className="space-y-3">
+              <ul className="space-y-2">
                 {slide.knowSection.themes.map((theme, idx) => (
                   <li key={idx} className="flex items-start gap-3">
-                    <span className={`w-2 h-2 ${knowConfig.bullet} rounded-full mt-3 flex-shrink-0`} />
-                    <span className={`text-2xl ${knowConfig.text} font-sans`}>
+                    <span className={`w-2 h-2 ${knowConfig.bullet} rounded-full mt-2.5 flex-shrink-0`} />
+                    <span className={`text-xl ${knowConfig.text} font-sans`}>
                       {theme}
                     </span>
                   </li>
                 ))}
               </ul>
-
-              {slide.knowSection.powerSource && (
-                <div className={`pt-4 border-t ${knowConfig.border}`}>
-                  <p className={`text-lg ${knowConfig.text} font-sans italic flex items-center gap-3`}>
-                    {knowConfig.icon ? (
-                      <img src={knowConfig.icon} alt="" className="w-16 h-16 object-contain" />
-                    ) : (
-                      <span>📖</span>
-                    )}
-                    {slide.knowSection.powerSource}
-                  </p>
-                </div>
-              )}
             </div>
           </div>
 
           {/* DO Section */}
-          <div className={`bg-gradient-to-br ${doConfig.gradient} rounded-3xl p-8 shadow-card`}>
-            <div className="space-y-4">
+          <div className={`bg-gradient-to-br ${doConfig.gradient} rounded-3xl p-6 shadow-card`}>
+            <div className="space-y-3">
               <div className={`inline-block px-4 py-2 ${doConfig.badge} text-white rounded-full font-bold text-sm uppercase tracking-wider`}>
                 Делать
               </div>
-              <h2 className={`text-3xl font-bold ${doConfig.title}`}>
+              <h2 className={`text-2xl font-bold ${doConfig.title}`}>
                 {slide.doSection.chapters}
               </h2>
-              <ul className="space-y-3">
+              <ul className="space-y-2">
                 {slide.doSection.themes.map((theme, idx) => (
                   <li key={idx} className="flex items-start gap-3">
-                    <span className={`w-2 h-2 ${doConfig.bullet} rounded-full mt-3 flex-shrink-0`} />
-                    <span className={`text-2xl ${doConfig.text} font-sans`}>
+                    <span className={`w-2 h-2 ${doConfig.bullet} rounded-full mt-2.5 flex-shrink-0`} />
+                    <span className={`text-xl ${doConfig.text} font-sans`}>
                       {theme}
                     </span>
                   </li>
@@ -203,15 +219,39 @@ const HermeneuticsSlide = ({ slide, direction }: HermeneuticsSlideProps) => {
           </div>
         </div>
 
-        {/* Key Verse (if exists) */}
-        {slide.keyVerse && (
-          <div className="mt-8 p-6 bg-secondary/50 rounded-2xl border-l-4 border-accent">
-            <p className="text-2xl italic text-foreground font-serif leading-relaxed">
-              "{slide.keyVerse.text}"
-            </p>
-            <p className="text-xl text-muted-foreground font-sans mt-3 font-semibold">
-              — {slide.keyVerse.reference}
-            </p>
+        {/* Power Sources Panels */}
+        {slide.powerSources && slide.powerSources.length > 0 && (
+          <div 
+            className="grid gap-4"
+            style={{ 
+              gridTemplateColumns: `repeat(${Math.min(slide.powerSources.length, 4)}, 1fr)` 
+            }}
+          >
+            {slide.powerSources.map((source, idx) => {
+              const config = powerSourceConfig[source.type];
+              
+              return (
+                <div 
+                  key={idx} 
+                  className={`p-5 rounded-2xl border-l-4 ${config.border} bg-gradient-to-br ${config.panelGradient} backdrop-blur-sm shadow-card`}
+                >
+                  <div className="flex items-center gap-3 mb-3">
+                    {config.icon && (
+                      <img src={config.icon} alt="" className="w-10 h-10 object-contain" />
+                    )}
+                    <span className={`font-bold text-lg ${config.title}`}>
+                      {config.label}
+                    </span>
+                  </div>
+                  <p className={`text-lg italic ${config.text} font-serif leading-relaxed`}>
+                    "{source.keyVerse.text}"
+                  </p>
+                  <p className={`text-base ${config.title} font-sans mt-2 font-semibold`}>
+                    — {source.keyVerse.reference}
+                  </p>
+                </div>
+              );
+            })}
           </div>
         )}
       </div>
