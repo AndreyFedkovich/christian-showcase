@@ -53,7 +53,7 @@ const Index = () => {
 
   // Filter presentations (exclude hero from list)
   const filteredPresentations = useMemo(() => {
-    const list = presentations.filter(p => !p.isHero);
+    const list = presentations;
     if (!searchQuery.trim()) return list;
     const query = searchQuery.toLowerCase();
     return list.filter(
