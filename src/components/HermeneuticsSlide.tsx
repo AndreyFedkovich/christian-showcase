@@ -158,61 +158,61 @@ const HermeneuticsSlide = ({ slide, direction }: HermeneuticsSlideProps) => {
 
         {/* Visual Progress Bar */}
         <div className="w-full h-14 rounded-full overflow-hidden flex shadow-premium">
-          <div 
-            className={`bg-gradient-to-r ${knowConfig.progressBar} flex items-center justify-center text-white font-bold text-lg transition-all`}
-            style={{ width: `${slide.knowSection.percentage}%` }}
+          <div
+              className={`bg-gradient-to-r ${knowConfig.progressBar} flex items-center justify-center text-white font-bold text-lg transition-all`}
+              style={{ width: `${slide.knowSection.percentage}%` }}
           >
             {slide.knowSection.percentage}%
           </div>
-          <div 
-            className={`bg-gradient-to-r ${doConfig.progressBar} flex items-center justify-center text-white font-bold text-lg transition-all`}
-            style={{ width: `${slide.doSection.percentage}%` }}
+          <div
+              className={`bg-gradient-to-r ${doConfig.progressBar} flex items-center justify-center text-white font-bold text-lg transition-all`}
+              style={{ width: `${slide.doSection.percentage}%` }}
           >
             {slide.doSection.percentage}%
           </div>
         </div>
 
         {/* Two Sections */}
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-8 mt-12">
           {/* KNOW Section */}
-          <div className={`bg-gradient-to-br ${knowConfig.gradient} rounded-3xl p-6 shadow-card`}>
-            <div className="space-y-3">
+          <div className={`bg-gradient-to-br ${knowConfig.gradient} rounded-3xl p-8 shadow-card`}>
+            <div className="space-y-4">
               <div className={`inline-block px-4 py-2 ${knowConfig.badge} text-white rounded-full font-bold text-sm uppercase tracking-wider`}>
                 Знать
               </div>
-              <h2 className={`text-2xl font-bold ${knowConfig.title}`}>
+              <h2 className={`text-3xl font-bold ${knowConfig.title}`}>
                 {slide.knowSection.chapters}
               </h2>
-              <ul className="space-y-2">
+              <ul className="space-y-3">
                 {slide.knowSection.themes.map((theme, idx) => (
-                  <li key={idx} className="flex items-start gap-3">
-                    <span className={`w-2 h-2 ${knowConfig.bullet} rounded-full mt-2.5 flex-shrink-0`} />
-                    <span className={`text-xl ${knowConfig.text} font-sans`}>
+                    <li key={idx} className="flex items-start gap-3">
+                      <span className={`w-2 h-2 ${knowConfig.bullet} rounded-full mt-3 flex-shrink-0`} />
+                      <span className={`text-2xl ${knowConfig.text} font-sans`}>
                       {theme}
                     </span>
-                  </li>
+                    </li>
                 ))}
               </ul>
             </div>
           </div>
 
           {/* DO Section */}
-          <div className={`bg-gradient-to-br ${doConfig.gradient} rounded-3xl p-6 shadow-card`}>
-            <div className="space-y-3">
+          <div className={`bg-gradient-to-br ${doConfig.gradient} rounded-3xl p-8 shadow-card`}>
+            <div className="space-y-4">
               <div className={`inline-block px-4 py-2 ${doConfig.badge} text-white rounded-full font-bold text-sm uppercase tracking-wider`}>
                 Делать
               </div>
-              <h2 className={`text-2xl font-bold ${doConfig.title}`}>
+              <h2 className={`text-3xl font-bold ${doConfig.title}`}>
                 {slide.doSection.chapters}
               </h2>
-              <ul className="space-y-2">
+              <ul className="space-y-3">
                 {slide.doSection.themes.map((theme, idx) => (
-                  <li key={idx} className="flex items-start gap-3">
-                    <span className={`w-2 h-2 ${doConfig.bullet} rounded-full mt-2.5 flex-shrink-0`} />
-                    <span className={`text-xl ${doConfig.text} font-sans`}>
+                    <li key={idx} className="flex items-start gap-3">
+                      <span className={`w-2 h-2 ${doConfig.bullet} rounded-full mt-3 flex-shrink-0`} />
+                      <span className={`text-2xl ${doConfig.text} font-sans`}>
                       {theme}
                     </span>
-                  </li>
+                    </li>
                 ))}
               </ul>
             </div>
@@ -224,7 +224,7 @@ const HermeneuticsSlide = ({ slide, direction }: HermeneuticsSlideProps) => {
           <div 
             className="grid gap-4"
             style={{ 
-              gridTemplateColumns: `repeat(${Math.min(slide.powerSources.length, 4)}, 1fr)` 
+              gridTemplateRows: `repeat(${Math.min(slide.powerSources.length, 4)}, 1fr)`
             }}
           >
             {slide.powerSources.map((source, idx) => {
@@ -243,10 +243,10 @@ const HermeneuticsSlide = ({ slide, direction }: HermeneuticsSlideProps) => {
                       {config.label}
                     </span>
                   </div>
-                  <p className={`text-lg italic ${config.text} font-serif leading-relaxed`}>
+                  <p className={`text-2xl italic ${config.text} font-serif leading-relaxed`}>
                     "{source.keyVerse.text}"
                   </p>
-                  <p className={`text-base ${config.title} font-sans mt-2 font-semibold`}>
+                  <p className={`text-xl ${config.title} font-sans mt-2 font-semibold`}>
                     — {source.keyVerse.reference}
                   </p>
                 </div>
