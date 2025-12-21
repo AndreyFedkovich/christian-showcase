@@ -99,10 +99,10 @@ const DramaActSlide = ({ slide, direction }: DramaActSlideProps) => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="mt-20 border-t border-white/10 pt-10"
           >
-            <p className="text-xl md:text-2xl text-white/80 italic font-serif mb-4">
+            <p className="text-2xl md:text-3xl text-white/80 italic font-serif mb-4">
               «{slide.verse.text}»
             </p>
-            <p className={`text-base ${getAccentColor()} font-sans uppercase tracking-widest`}>
+            <p className={`text-xl ${getAccentColor()} font-sans uppercase tracking-widest`}>
               {slide.verse.reference}
             </p>
           </motion.div>

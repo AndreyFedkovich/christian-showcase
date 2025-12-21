@@ -122,7 +122,7 @@ const DramaClimaxSlide = ({ slide, direction }: DramaClimaxSlideProps) => {
                 duration: isDarkness ? 1.2 : 0.6, 
                 ease: "easeOut" 
               }}
-              className={`text-xl md:text-2xl font-serif ${isDarkness ? 'text-white/70' : 'text-white/90'} leading-relaxed`}
+              className={`text-2xl md:text-3xl font-serif ${isDarkness ? 'text-white/70' : 'text-white/90'} leading-relaxed`}
             >
               {statement}
             </motion.p>

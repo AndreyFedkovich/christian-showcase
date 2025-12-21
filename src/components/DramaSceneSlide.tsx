@@ -93,7 +93,7 @@ const DramaSceneSlide = ({ slide, direction }: DramaSceneSlideProps) => {
           transition={{ duration: 0.6 }}
           className="mb-10"
         >
-          <span className="text-white/40 font-sans text-base uppercase tracking-widest">
+          <span className="text-white/40 font-sans text-xl uppercase tracking-widest">
             {slide.actNumber}
           </span>
           <h1 className="text-4xl md:text-6xl font-serif font-bold text-white mt-3">
@@ -166,7 +166,7 @@ const DramaSceneSlide = ({ slide, direction }: DramaSceneSlideProps) => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: thesisComplete ? 1 : 0, scale: thesisComplete ? 1 : 0.9 }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
-                className="px-4 py-1.5 bg-accent/20 text-accent rounded-full text-base font-sans"
+                className="px-4 py-1.5 bg-accent/20 text-accent rounded-full text-lg font-sans"
               >
                 {ref}
               </motion.span>
@@ -179,7 +179,7 @@ const DramaSceneSlide = ({ slide, direction }: DramaSceneSlideProps) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: thesisComplete ? 1 : 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="text-lg text-white/70 font-serif italic"
+              className="text-2xl text-white/70 font-serif italic"
             >
               {slide.focus.explanation}
             </motion.p>
