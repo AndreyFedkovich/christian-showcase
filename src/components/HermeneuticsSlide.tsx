@@ -237,7 +237,7 @@ const HermeneuticsSlide = ({ slide, direction }: HermeneuticsSlideProps) => {
                 >
                   <div className="flex items-center gap-3 mb-3">
                     {config.icon && (
-                      <img src={config.icon} alt="" className="w-10 h-10 object-contain" />
+                      <img src={config.icon} alt="" className="w-12 h-12 object-contain" />
                     )}
                     <span className={`font-bold text-lg ${config.title}`}>
                       {config.label}
