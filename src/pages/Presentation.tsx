@@ -10,6 +10,7 @@ import { seminar } from "@/data/seminar";
 import { redemptionDrama } from "@/data/redemption-drama";
 import { epistlesStructure } from "@/data/epistles-structure";
 import { godExists } from "@/data/god-exists";
+import { eternalTemporal } from "@/data/eternal-temporal";
 import { presentations } from "@/data/presentations";
 import { UniversalSlide } from "@/types/slides";
 
@@ -52,6 +53,8 @@ const Presentation = () => {
     ? godExists as UniversalSlide[]
     : presentation.type === 'drama'
     ? redemptionDrama as UniversalSlide[]
+    : presentation.type === 'eternal-temporal'
+    ? eternalTemporal as UniversalSlide[]
     : seminar as UniversalSlide[];
   const totalSlides = slides.length;
 
