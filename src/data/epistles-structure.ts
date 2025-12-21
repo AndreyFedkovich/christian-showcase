@@ -9,25 +9,30 @@ export interface Slide {
   type: string;
 }
 
+export type PowerSourceType = 'promise' | 'example' | 'glory' | 'status';
+
+export interface PowerSource {
+  type: PowerSourceType;
+  keyVerse: {
+    text: string;
+    reference: string;
+  };
+}
+
 export interface HermeneuticsSlide extends Slide {
   type: 'hermeneutics';
   bookName: string;
   bookNameEn: string;
+  powerSources: PowerSource[];
   knowSection: {
     chapters: string;
     percentage: number;
     themes: string[];
-    powerSource?: string;
-    powerSourceType?: 'promise' | 'example' | 'glory' | 'status';
   };
   doSection: {
     chapters: string;
     percentage: number;
     themes: string[];
-  };
-  keyVerse?: {
-    text: string;
-    reference: string;
   };
   image?: string;
 }
@@ -146,6 +151,15 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
     type: 'hermeneutics',
     bookName: 'Римлянам',
     bookNameEn: 'Romans',
+    powerSources: [
+      {
+        type: 'status',
+        keyVerse: {
+          text: 'Итак умоляю вас, братия, милосердием Божиим, представьте тела ваши в жертву живую, святую, благоугодную Богу',
+          reference: 'Римлянам 12:1'
+        }
+      }
+    ],
     knowSection: {
       chapters: 'Гл. 1-11',
       percentage: 69,
@@ -156,9 +170,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Обещание прославления тела',
         'Предустановление по избранию',
         'Избрание Израиля'
-      ],
-      powerSource: 'Поступать достойно звания',
-      powerSourceType: 'status'
+      ]
     },
     doSection: {
       chapters: 'Гл. 12-16',
@@ -171,16 +183,21 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Отношение к властям',
         'Взаимоотношения в церкви, отношение к немощным в вере'
       ]
-    },
-    keyVerse: {
-      text: 'Итак умоляю вас, братия, милосердием Божиим, представьте тела ваши в жертву живую, святую, благоугодную Богу',
-      reference: 'Римлянам 12:1'
     }
   },
   {
     type: 'hermeneutics',
     bookName: '1 Коринфянам',
     bookNameEn: '1 Corinthians',
+    powerSources: [
+      {
+        type: 'example',
+        keyVerse: {
+          text: 'Это применил я, братья, к себе и Аполлосу ради вас, чтобы вы научились на нашем примере правилу: «Ничего сверх того, что написано», — чтобы никто из вас не надмевался в пользу одного против другого.',
+          reference: '1-е Коринфянам 4:6'
+        }
+      }
+    ],
     knowSection: {
       chapters: 'Гл. 1-4',
       percentage: 25,
@@ -190,9 +207,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Дух Божий, а не дух мира',
         'Все что мы имеем - мы получили',
         'Строительство из драгоценных камней'
-      ],
-      powerSource: 'Пример',
-      powerSourceType: 'example'
+      ]
     },
     doSection: {
       chapters: 'Гл. 5-16',
@@ -204,16 +219,21 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Любовь и порядок',
         'Воскресение - преуспевать в деле Господа'
       ]
-    },
-    keyVerse: {
-      text: 'Это применил я, братья, к себе и Аполлосу ради вас, чтобы вы научились на нашем примере правилу: «Ничего сверх того, что написано», — чтобы никто из вас не надмевался в пользу одного против другого.',
-      reference: '1-е Коринфянам 4:6'
     }
   },
   {
     type: 'hermeneutics',
     bookName: '2 Коринфянам',
     bookNameEn: '2 Corinthians',
+    powerSources: [
+      {
+        type: 'promise',
+        keyVerse: {
+          text: 'Итак, возлюбленные, имея такие обетования, очистим себя от всякой скверны плоти и духа, совершая святыню в страхе Божием.',
+          reference: '2 Коринфянам 7:1'
+        }
+      }
+    ],
     knowSection: {
       chapters: 'Гл. 1-6',
       percentage: 54,
@@ -221,9 +241,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Утешение в скорбях',
         'Новый завет',
         'Служение примирения'
-      ],
-      powerSource: 'Обещания',
-      powerSourceType: 'promise'
+      ]
     },
     doSection: {
       chapters: 'Гл. 7-13',
@@ -233,16 +251,21 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Духовная война',
         'Защита апостольства'
       ]
-    },
-    keyVerse: {
-      text: 'Итак, возлюбленные, имея такие обетования, очистим себя от всякой скверны плоти и духа, совершая святыню в страхе Божием.',
-      reference: '2 Коринфянам 7:1'
     }
   },
   {
     type: 'hermeneutics',
     bookName: 'Галатам',
     bookNameEn: 'Galatians',
+    powerSources: [
+      {
+        type: 'status',
+        keyVerse: {
+          text: 'К свободе призваны вы, братия, только бы свобода ваша не была поводом к угождению плоти',
+          reference: 'Галатам 5:13'
+        }
+      }
+    ],
     knowSection: {
       chapters: 'Гл. 1-4',
       percentage: 67,
@@ -250,9 +273,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Евангелие благодати',
         'Оправдание верой',
         'Свобода во Христе'
-      ],
-      powerSource: 'Поступать достойно звания',
-      powerSourceType: 'status',
+      ]
     },
     doSection: {
       chapters: 'Гл. 5-6',
@@ -262,16 +283,21 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Плод Духа',
         'Практика свободы'
       ]
-    },
-    keyVerse: {
-      text: 'К свободе призваны вы, братия, только бы свобода ваша не была поводом к угождению плоти',
-      reference: 'Галатам 5:13'
     }
   },
   {
     type: 'hermeneutics',
     bookName: 'Ефесянам',
     bookNameEn: 'Ephesians',
+    powerSources: [
+      {
+        type: 'status',
+        keyVerse: {
+          text: 'Итак, я, узник в Господе, умоляю вас поступать достойно звания, в которое вы призваны, со всяким смиренномудрием и кротостью и долготерпением, снисходя друг ко другу любовью',
+          reference: 'Ефесянам 4:1-2'
+        }
+      }
+    ],
     knowSection: {
       chapters: 'Гл. 1-3',
       percentage: 50,
@@ -279,9 +305,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Благословения во Христе',
         'Спасение по благодати',
         'Тайна Христа'
-      ],
-      powerSource: 'Поступать достойно звания',
-      powerSourceType: 'status',
+      ]
     },
     doSection: {
       chapters: 'Гл. 4-6',
@@ -291,16 +315,21 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Новая жизнь',
         'Духовное вооружение'
       ]
-    },
-    keyVerse: {
-      text: 'Итак, я, узник в Господе, умоляю вас поступать достойно звания, в которое вы призваны, со всяким смиренномудрием и кротостью и долготерпением, снисходя друг ко другу любовью',
-      reference: 'Ефесянам 4:1-2'
     }
   },
   {
     type: 'hermeneutics',
     bookName: 'Филиппийцам',
     bookNameEn: 'Philippians',
+    powerSources: [
+      {
+        type: 'status',
+        keyVerse: {
+          text: 'Только живите достойно благовествования Христова, чтобы мне, приду ли я и увижу вас, или не приду, слышать о вас, что вы стоите в одном духе, подвизаясь единодушно за веру Евангельскую',
+          reference: 'Филиппийцам 1:27'
+        }
+      }
+    ],
     knowSection: {
       chapters: 'Гл. 1',
       percentage: 25,
@@ -308,9 +337,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Радость во Христе',
         'Смирение Христа',
         'Пример служения'
-      ],
-      powerSource: 'Поступать достойно звания',
-      powerSourceType: 'status'
+      ]
     },
     doSection: {
       chapters: 'Гл. 2-4',
@@ -320,16 +347,21 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Радость и мир',
         'Благодарность'
       ]
-    },
-    keyVerse: {
-      text: 'Только живите достойно благовествования Христова, чтобы мне, приду ли я и увижу вас, или не приду, слышать о вас, что вы стоите в одном духе, подвизаясь единодушно за веру Евангельскую',
-      reference: 'Филиппийцам 1:27'
     }
   },
   {
     type: 'hermeneutics',
     bookName: 'Колоссянам',
     bookNameEn: 'Colossians',
+    powerSources: [
+      {
+        type: 'status',
+        keyVerse: {
+          text: 'Итак, если вы воскресли со Христом, то ищите горнего, где Христос сидит одесную Бога; о горнем помышляйте, а не о земном.',
+          reference: 'Колосянам 3:1 - 2'
+        }
+      }
+    ],
     knowSection: {
       chapters: 'Гл. 1-2',
       percentage: 50,
@@ -337,9 +369,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Превосходство Христа',
         'Полнота в Нем',
         'Тайна Евангелия'
-      ],
-      powerSource: 'Поступать достойно звания',
-      powerSourceType: 'status'
+      ]
     },
     doSection: {
       chapters: 'Гл. 3-4',
@@ -349,16 +379,21 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Отношения в семье',
         'Мудрость в общении'
       ]
-    },
-    keyVerse: {
-      text: 'Итак, если вы воскресли со Христом, то ищите горнего, где Христос сидит одесную Бога; о горнем помышляйте, а не о земном.',
-      reference: 'Колосянам 3:1 - 2'
     }
   },
   {
     type: 'hermeneutics',
     bookName: '1 Фессалоникийцам',
     bookNameEn: '1 Thessalonians',
+    powerSources: [
+      {
+        type: 'status',
+        keyVerse: {
+          text: 'За сим, братия, просим и умоляем вас Христом Иисусом, чтобы вы, приняв от нас, как должно вам поступать и угождать Богу, более в том преуспевали',
+          reference: '1-е Фессалоникийцам 4:1'
+        }
+      }
+    ],
     knowSection: {
       chapters: 'Гл. 1-3',
       percentage: 60,
@@ -366,9 +401,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Пример веры',
         'Служение Павла',
         'Утешение верующих'
-      ],
-      powerSource: 'Поступать достойно звания',
-      powerSourceType: 'status'
+      ]
     },
     doSection: {
       chapters: 'Гл. 4-5',
@@ -378,16 +411,21 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Пришествие Христа',
         'Жизнь в свете'
       ]
-    },
-    keyVerse: {
-      text: 'За сим, братия, просим и умоляем вас Христом Иисусом, чтобы вы, приняв от нас, как должно вам поступать и угождать Богу, более в том преуспевали',
-      reference: '1-е Фессалоникийцам 4:1'
     }
   },
   {
     type: 'hermeneutics',
     bookName: '2 Фессалоникийцам',
     bookNameEn: '2 Thessalonians',
+    powerSources: [
+      {
+        type: 'status',
+        keyVerse: {
+          text: 'Для сего и молимся всегда за вас, чтобы Бог наш соделал вас достойными звания и совершил всякое благоволение благости и дело веры в силе',
+          reference: '2-е Фессалоникийцам 1:11'
+        }
+      }
+    ],
     knowSection: {
       chapters: 'Гл. 1-2',
       percentage: 67,
@@ -395,9 +433,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Воздаяние Божье',
         'День Господень',
         'Человек греха'
-      ],
-      powerSource: 'Поступать достойно звания',
-      powerSourceType: 'status'
+      ]
     },
     doSection: {
       chapters: 'Гл. 3',
@@ -406,25 +442,28 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Молитва и труд',
         'Дисциплина в церкви'
       ]
-    },
-    keyVerse: {
-      text: 'Для сего и молимся всегда за вас, чтобы Бог наш соделал вас достойными звания и совершил всякое благоволение благости и дело веры в силе',
-      reference: '2-е Фессалоникийцам 1:11'
     }
   },
   {
     type: 'hermeneutics',
     bookName: '1 Тимофею',
     bookNameEn: '1 Timothy',
+    powerSources: [
+      {
+        type: 'status',
+        keyVerse: {
+          text: 'Итак, прежде всего прошу совершать молитвы, прошения, моления, благодарения за всех человеков, за царей и за всех начальствующих, дабы проводить нам жизнь тихую и безмятежную во всяком благочестии и чистоте',
+          reference: '1 Тимофею 2:1-2'
+        }
+      }
+    ],
     knowSection: {
       chapters: 'Гл. 1',
       percentage: 17,
       themes: [
         'Истинное учение',
         'Благодать Христа'
-      ],
-      powerSource: 'Поступать достойно звания',
-      powerSourceType: 'status'
+      ]
     },
     doSection: {
       chapters: 'Гл. 2-6',
@@ -435,16 +474,21 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Наставления пастору',
         'Богатство и благочестие'
       ]
-    },
-    keyVerse: {
-      text: 'Итак, прежде всего прошу совершать молитвы, прошения, моления, благодарения за всех человеков, за царей и за всех начальствующих, дабы проводить нам жизнь тихую и безмятежную во всяком благочестии и чистоте',
-      reference: '1 Тимофею 2:1-2'
     }
   },
   {
     type: 'hermeneutics',
     bookName: '2 Тимофею',
     bookNameEn: '2 Timothy',
+    powerSources: [
+      {
+        type: 'status',
+        keyVerse: {
+          text: 'Итак, укрепляйся, сын мой, в благодати Христом Иисусом, и что слышал от меня при многих свидетелях, то передай верным людям, которые были бы способны и других научить.',
+          reference: '2 Тимофею 2:1-2'
+        }
+      }
+    ],
     knowSection: {
       chapters: 'Гл. 1',
       percentage: 50,
@@ -452,9 +496,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Дар Божий',
         'Верность Христу',
         'Образец здравого учения'
-      ],
-      powerSource: 'Поступать достойно звания',
-      powerSourceType: 'status'
+      ]
     },
     doSection: {
       chapters: 'Гл. 2-4',
@@ -464,25 +506,28 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Проповедь Слова',
         'Венец правды'
       ]
-    },
-    keyVerse: {
-      text: 'Итак, укрепляйся, сын мой, в благодати Христом Иисусом, и что слышал от меня при многих свидетелях, то передай верным людям, которые были бы способны и других научить.',
-      reference: '2 Тимофею 2:1-2'
     }
   },
   {
     type: 'hermeneutics',
     bookName: 'Титу',
     bookNameEn: 'Titus',
+    powerSources: [
+      {
+        type: 'status',
+        keyVerse: {
+          text: 'Ты же говори то, что сообразно с здравым учением',
+          reference: 'Титу 2:1'
+        }
+      }
+    ],
     knowSection: {
       chapters: 'Гл. 1',
       percentage: 33,
       themes: [
         'Назначение пресвитеров',
         'Здравое учение'
-      ],
-      powerSource: 'Поступать достойно звания',
-      powerSourceType: 'status'
+      ]
     },
     doSection: {
       chapters: 'Гл. 2-3',
@@ -492,16 +537,21 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Добрые дела',
         'Благочестивая жизнь'
       ]
-    },
-    keyVerse: {
-      text: 'Ты же говори то, что сообразно с здравым учением',
-      reference: 'Титу 2:1'
     }
   },
   {
     type: 'hermeneutics',
     bookName: 'Евреям',
     bookNameEn: 'Hebrews',
+    powerSources: [
+      {
+        type: 'glory',
+        keyVerse: {
+          text: 'Взирая на начальника и совершителя веры Иисуса, Который, вместо предлежавшей Ему радости, претерпел крест, пренебрегши посрамление, и воссел одесную престола Божия.',
+          reference: 'Евреям 12:2'
+        }
+      }
+    ],
     knowSection: {
       chapters: 'Гл. 1-11',
       percentage: 77,
@@ -510,9 +560,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Новое священство',
         'Новый завет',
         'Совершенная жертва'
-      ],
-      powerSource: 'Созерцать славу Божию',
-      powerSourceType: 'glory'
+      ]
     },
     doSection: {
       chapters: 'Гл. 12-13',
@@ -522,16 +570,21 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Устремление к цели',
         'Практика христианской жизни'
       ]
-    },
-    keyVerse: {
-      text: 'Взирая на начальника и совершителя веры Иисуса, Который, вместо предлежавшей Ему радости, претерпел крест, пренебрегши посрамление, и воссел одесную престола Божия.',
-      reference: 'Евреям 12:2'
     }
   },
   {
     type: 'hermeneutics',
     bookName: '1 Петра',
     bookNameEn: '1 Peter',
+    powerSources: [
+      {
+        type: 'status',
+        keyVerse: {
+          text: 'Но вы — род избранный, царственное священство, народ святой, люди, взятые в удел, дабы возвещать совершенства Призвавшего вас из тьмы в чудный Свой свет',
+          reference: '1 Петра 2:9'
+        }
+      }
+    ],
     knowSection: {
       chapters: 'Гл. 1-2',
       percentage: 40,
@@ -539,9 +592,7 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Живая надежда',
         'Святой народ',
         'Избранные Богом'
-      ],
-      powerSourceType: 'status',
-      powerSource: 'Поступать достойно звания'
+      ]
     },
     doSection: {
       chapters: 'Гл. 3-5',
@@ -551,25 +602,28 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'Страдания за Христа',
         'Служение и смирение'
       ]
-    },
-    keyVerse: {
-      text: 'Но вы — род избранный, царственное священство, народ святой, люди, взятые в удел, дабы возвещать совершенства Призвавшего вас из тьмы в чудный Свой свет',
-      reference: '1 Петра 2:9'
     }
   },
   {
     type: 'hermeneutics',
     bookName: '2 Петра',
     bookNameEn: '2 Peter',
+    powerSources: [
+      {
+        type: 'promise',
+        keyVerse: {
+          text: 'Которыми дарованы нам великие и драгоценные обетования, дабы вы через них соделались причастниками Божеского естества, удалившись от господствующего в мире растления похотью',
+          reference: '2 Петра 1:4'
+        }
+      }
+    ],
     knowSection: {
       chapters: 'Гл. 1',
       percentage: 33,
       themes: [
         'Божественная сила',
         'Надежное пророчество'
-      ],
-      powerSource: 'Обещания',
-      powerSourceType: 'promise'
+      ]
     },
     doSection: {
       chapters: 'Гл. 2-3',
@@ -579,10 +633,6 @@ export const epistlesStructure: (IntroHermeneuticsSlide | IntroductionSlide | He
         'День Господень',
         'Святая жизнь'
       ]
-    },
-    keyVerse: {
-      text: 'Которыми дарованы нам великие и драгоценные обетования, дабы вы через них соделались причастниками Божеского естества, удалившись от господствующего в мире растления похотью',
-      reference: '2 Петра 1:4'
     }
   },
   {

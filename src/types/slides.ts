@@ -11,7 +11,9 @@ import {
   IntroHermeneuticsSlide, 
   PracticalExampleSlide, 
   IntroductionSlide as EpistlesIntroductionSlide,
-  ConclusionSlide as EpistlesConclusionSlide
+  ConclusionSlide as EpistlesConclusionSlide,
+  PowerSource,
+  PowerSourceType
 } from '@/data/epistles-structure';
 import { 
   DialogueQuestionSlide, 
