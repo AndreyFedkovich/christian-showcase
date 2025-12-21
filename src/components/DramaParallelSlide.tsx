@@ -81,7 +81,7 @@ const DramaParallelSlide = ({ slide, direction }: DramaParallelSlideProps) => {
         transition={{ duration: 0.5 }}
         className="absolute top-0 left-0 right-0 z-20 bg-gradient-to-b from-black/80 to-transparent py-8 px-8"
       >
-        <div className="max-w-7xl mx-auto flex items-center justify-center gap-4">
+        <div className="max-w-7xl mx-auto flex items-center justify-center gap-4 pt-16">
           <span className={`px-4 py-2 rounded-full ${getIntensityBadge()} font-sans text-sm uppercase tracking-widest`}>
             {slide.actNumber}
           </span>
@@ -186,7 +186,7 @@ const DramaParallelSlide = ({ slide, direction }: DramaParallelSlideProps) => {
           transition={{ duration: 0.6, delay: 1 }}
           className="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/90 via-black/60 to-transparent py-8 px-8"
         >
-          <div className="max-w-5xl mx-auto text-center">
+          <div className="max-w-5xl mx-auto text-center pb-16">
             <p className="text-3xl md:text-4xl font-serif font-semibold text-white">
               {slide.conclusion}
             </p>
