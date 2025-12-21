@@ -1,14 +1,16 @@
-// Last updated: 2025-12-19
+// Last updated: 2025-12-21
 import peterImg from "@/assets/peter.jpg";
 import josephImg from "@/assets/joseph-thumbnail.png";
 import knowDoImg from "@/assets/know-do.png";
 import salvationImg from "@/assets/salvation-thumbnail.png";
 import godExistsImg from "@/assets/god-exists-thumbnail.png";
+import eternalCosmosImg from "@/assets/eternal-cosmos.png";
 import { seminar } from '@/data/seminar';
 import { disciples } from '@/data/disciples';
 import { epistlesStructure } from '@/data/epistles-structure';
 import { redemptionDrama } from '@/data/redemption-drama';
 import { godExists } from '@/data/god-exists';
+import { eternalTemporal } from '@/data/eternal-temporal';
 
 export interface Presentation {
   id: string;
@@ -17,7 +19,7 @@ export interface Presentation {
   thumbnail: string;
   slideCount: number;
   duration: string;
-  type: 'disciples' | 'seminar' | 'hermeneutics' | 'god-exists' | 'drama';
+  type: 'disciples' | 'seminar' | 'hermeneutics' | 'god-exists' | 'drama' | 'eternal-temporal';
   isHero?: boolean;
 }
 
@@ -30,6 +32,15 @@ export const presentations: Presentation[] = [
     slideCount: godExists.length,
     duration: "25-30 минут",
     type: 'god-exists'
+  },
+  {
+    id: "eternal-temporal",
+    title: "Вечное и временное",
+    description: "Как правильно жить в свете вечности — размышление над Псалмом 89",
+    thumbnail: eternalCosmosImg,
+    slideCount: eternalTemporal.length,
+    duration: "25-30 минут",
+    type: 'eternal-temporal'
   },
   {
     id: "seminar",
