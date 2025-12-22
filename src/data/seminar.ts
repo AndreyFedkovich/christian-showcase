@@ -24,7 +24,8 @@ import RuthMarriage2 from "@/assets/ruth-marriage2.jpeg";
 import RuthBoazConclusion from "@/assets/ruth-boaz-conclusion.jpeg";
 import RuthNaomiConclusion from "@/assets/ruth-naomi-conclusion.jpeg";
 import JosephThumbnail from "@/assets/joseph-thumbnail.png";
-import StoryDefault from "@/assets/story-default.jpg";
+import StoryDefault from "@/assets/story-default-generic.jpg";
+import JosephBrothersBow from "@/assets/joseph-brothers-bow.png";
 
 
 export interface Slide {
@@ -315,7 +316,7 @@ export const josephSlides: SeminarSlide[] = [
     type: 'story',
     title: 'Возвышение',
     chapter: 'Глава 11',
-    image: josephRuler,
+    image: JosephBrothersBow,
     story: [
       'Во время голода братья пришли в Египет за хлебом и поклонились Иосифу, не узнав его.',
       'Сбылись сны юности, но теперь Иосиф видел в этом Божий план спасения.'

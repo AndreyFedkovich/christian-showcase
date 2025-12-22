@@ -18,7 +18,7 @@ import {
   Quote,
   Columns
 } from "lucide-react";
-import storyDefault from "@/assets/story-default.jpg";
+import storyDefault from "@/assets/story-default-generic.jpg";
 
 interface SlideCardRendererProps {
   slide: UniversalSlide;
