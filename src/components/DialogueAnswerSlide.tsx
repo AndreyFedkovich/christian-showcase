@@ -1,17 +1,49 @@
 import { DialogueAnswerSlide as DialogueAnswerSlideType } from "@/data/god-exists";
 import { Bot } from "lucide-react";
 import { useTypewriter } from "@/hooks/use-typewriter";
+import { motion } from "framer-motion";
 
 interface DialogueAnswerSlideProps {
   slide: DialogueAnswerSlideType;
   direction?: 'next' | 'prev';
 }
 
-const DialogueAnswerSlide = ({ slide, direction = 'next' }: DialogueAnswerSlideProps) => {
-  const animationClass = direction === 'next' 
-    ? 'animate-slide-in-right' 
-    : 'animate-slide-in-left';
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1,
+    }
+  }
+};
 
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.4, 0, 0.2, 1] as const
+    }
+  }
+};
+
+const imageVariants = {
+  hidden: { opacity: 0, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.8,
+      ease: [0.4, 0, 0.2, 1] as const
+    }
+  }
+};
+
+const DialogueAnswerSlide = ({ slide }: DialogueAnswerSlideProps) => {
   const { displayedText: titleText, isComplete: titleComplete } = useTypewriter({
     text: slide.title,
     speed: 25,
@@ -21,47 +53,67 @@ const DialogueAnswerSlide = ({ slide, direction = 'next' }: DialogueAnswerSlideP
   // Variant with image
   if (slide.image) {
     return (
-      <div className={`absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-slate-100 flex items-center justify-center p-8 ${animationClass}`}>
-        <div className="max-w-7xl w-full">
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-slate-100 flex items-center justify-center p-8 md:p-12">
+        <motion.div 
+          className="max-w-7xl w-full"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Content Section */}
-            <div className="space-y-6">
+            <div className="space-y-8">
               {/* AI Header */}
-              <div className="flex items-center gap-4">
-                <div className="flex-shrink-0 w-14 h-14 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg">
-                  <Bot className="w-7 h-7 text-white" />
+              <motion.div className="flex items-center gap-5" variants={itemVariants}>
+                <div className="flex-shrink-0 w-20 h-20 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg">
+                  <Bot className="w-10 h-10 text-white" />
                 </div>
-                <div className="inline-block px-4 py-1 bg-emerald-500/20 rounded-full">
-                  <span className="text-sm font-sans font-medium text-emerald-700 uppercase tracking-wider">
+                <div className="inline-block px-5 py-2 bg-emerald-500/20 rounded-full">
+                  <span className="text-base md:text-lg font-sans font-medium text-emerald-700 uppercase tracking-wider">
                     Ответ ИИ
                   </span>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Title with typewriter */}
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 leading-tight">
+              <motion.h2 
+                className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 leading-tight"
+                variants={itemVariants}
+              >
                 {titleText}
                 {!titleComplete && (
                   <span className="animate-blink text-emerald-500 ml-1">|</span>
                 )}
-              </h2>
+              </motion.h2>
 
               {/* Content - appears after title completes */}
-              <div className={`space-y-4 transition-opacity duration-500 ${titleComplete ? 'opacity-100' : 'opacity-0'}`}>
+              <motion.div 
+                className="space-y-5"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: titleComplete ? 1 : 0 }}
+                transition={{ duration: 0.5 }}
+              >
                 {slide.content.map((paragraph, index) => (
-                  <p
+                  <motion.p
                     key={index}
-                    className="text-xl md:text-2xl text-slate-700 leading-relaxed font-sans animate-fade-in"
-                    style={{ animationDelay: `${index * 200}ms` }}
+                    className="text-2xl md:text-3xl text-slate-700 leading-relaxed font-sans"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: titleComplete ? 1 : 0, y: titleComplete ? 0 : 20 }}
+                    transition={{ duration: 0.5, delay: index * 0.15 }}
                   >
                     {paragraph}
-                  </p>
+                  </motion.p>
                 ))}
-              </div>
+              </motion.div>
             </div>
 
             {/* Image Section */}
-            <div className={`relative group transition-opacity duration-700 ${titleComplete ? 'opacity-100' : 'opacity-0'}`}>
+            <motion.div 
+              className="relative group"
+              variants={imageVariants}
+              initial="hidden"
+              animate={titleComplete ? "visible" : "hidden"}
+            >
               <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-500 opacity-30 blur-2xl group-hover:opacity-50 transition-smooth rounded-2xl" />
               <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-premium">
                 <img 
@@ -70,35 +122,43 @@ const DialogueAnswerSlide = ({ slide, direction = 'next' }: DialogueAnswerSlideP
                   className="w-full h-full object-cover"
                 />
               </div>
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
     );
   }
 
   // Variant without image
   return (
-    <div className={`absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-slate-100 flex items-center justify-center p-8 ${animationClass}`}>
-      <div className="max-w-4xl w-full">
+    <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-slate-100 flex items-center justify-center p-8 md:p-12">
+      <motion.div 
+        className="max-w-5xl w-full"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
         {/* AI bubble */}
-        <div className="flex items-start gap-6">
+        <div className="flex items-start gap-8">
           {/* Avatar */}
-          <div className="flex-shrink-0 w-16 h-16 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg">
-            <Bot className="w-8 h-8 text-white" />
-          </div>
+          <motion.div 
+            className="flex-shrink-0 w-20 h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg"
+            variants={itemVariants}
+          >
+            <Bot className="w-10 h-10 md:w-12 md:h-12 text-white" />
+          </motion.div>
 
           {/* Message */}
-          <div className="flex-1">
+          <motion.div className="flex-1" variants={itemVariants}>
             {/* Label */}
-            <div className="inline-block px-4 py-1 bg-emerald-500/20 rounded-full mb-4">
-              <span className="text-sm font-sans font-medium text-emerald-700 uppercase tracking-wider">
+            <div className="inline-block px-5 py-2 bg-emerald-500/20 rounded-full mb-6">
+              <span className="text-base md:text-lg font-sans font-medium text-emerald-700 uppercase tracking-wider">
                 Ответ ИИ
               </span>
             </div>
 
             {/* Title with typewriter */}
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 leading-tight mb-8">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 leading-tight mb-10">
               {titleText}
               {!titleComplete && (
                 <span className="animate-blink text-emerald-500 ml-1">|</span>
@@ -106,25 +166,37 @@ const DialogueAnswerSlide = ({ slide, direction = 'next' }: DialogueAnswerSlideP
             </h2>
 
             {/* Content - appears after title completes */}
-            <div className={`space-y-6 transition-opacity duration-500 ${titleComplete ? 'opacity-100' : 'opacity-0'}`}>
+            <motion.div 
+              className="space-y-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: titleComplete ? 1 : 0 }}
+              transition={{ duration: 0.5 }}
+            >
               {slide.content.map((paragraph, index) => (
-                <p
+                <motion.p
                   key={index}
-                  className="text-xl md:text-2xl text-slate-700 leading-relaxed font-sans animate-fade-in"
-                  style={{ animationDelay: `${index * 200}ms` }}
+                  className="text-2xl md:text-3xl text-slate-700 leading-relaxed font-sans"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: titleComplete ? 1 : 0, y: titleComplete ? 0 : 20 }}
+                  transition={{ duration: 0.5, delay: index * 0.15 }}
                 >
                   {paragraph}
-                </p>
+                </motion.p>
               ))}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
 
         {/* Decorative element */}
-        <div className={`mt-12 flex items-center gap-2 transition-opacity duration-500 ${titleComplete ? 'opacity-30' : 'opacity-0'}`}>
+        <motion.div 
+          className="mt-14 flex items-center gap-2"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: titleComplete ? 0.3 : 0 }}
+          transition={{ duration: 0.5 }}
+        >
           <div className="h-px flex-1 bg-gradient-to-r from-transparent via-emerald-500 to-transparent" />
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 };

@@ -184,10 +184,10 @@ const Presentation = () => {
   // Keyboard navigation
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.key === "ArrowRight" || e.key === " ") {
+      if (e.key === "ArrowRight" || e.key === " " || e.key === "ArrowDown" || e.key === "PageDown") {
         e.preventDefault();
         nextSlide();
-      } else if (e.key === "ArrowLeft") {
+      } else if (e.key === "ArrowLeft" || e.key === "ArrowUp" || e.key === "PageUp") {
         e.preventDefault();
         prevSlide();
       } else if (e.key === "Escape") {
