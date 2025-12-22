@@ -54,7 +54,7 @@ const DialogueAnswerImageSlide = ({ slide }: DialogueAnswerImageSlideProps) => {
             className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-emerald-500/30 border border-emerald-400/30 backdrop-blur-sm mb-6"
           >
             <Bot className="w-5 h-5 text-emerald-200" />
-            <span className="text-emerald-200 font-sans text-sm font-medium uppercase tracking-wider">
+            <span className="text-emerald-200 font-sans text-2xl font-medium uppercase tracking-wider">
               Ответ ИИ
             </span>
           </motion.div>
@@ -85,7 +85,7 @@ const DialogueAnswerImageSlide = ({ slide }: DialogueAnswerImageSlideProps) => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 1 + index * 0.15 }}
-                className="text-lg md:text-xl lg:text-2xl text-emerald-100/90 leading-relaxed mb-4 last:mb-0"
+                className="text-xl md:text-2xl lg:text-2xl text-emerald-100/90 leading-relaxed mb-4 last:mb-0"
               >
                 {paragraph}
               </motion.p>
