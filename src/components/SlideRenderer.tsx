@@ -9,6 +9,7 @@ import IntroductionSlide from '@/components/IntroductionSlide';
 import PracticalExampleSlide from '@/components/PracticalExampleSlide';
 import DialogueQuestionSlide from '@/components/DialogueQuestionSlide';
 import DialogueAnswerSlide from '@/components/DialogueAnswerSlide';
+import DialogueAnswerImageSlide from '@/components/DialogueAnswerImageSlide';
 import ArgumentSlide from '@/components/ArgumentSlide';
 import DramaSceneSlide from '@/components/DramaSceneSlide';
 import DramaActSlide from '@/components/DramaActSlide';
@@ -51,6 +52,8 @@ const SlideRenderer = ({ slide, direction, slideNumber }: SlideRendererProps) =>
       return <DialogueQuestionSlide slide={slide as any} direction={direction} />;
     case 'dialogue-answer':
       return <DialogueAnswerSlide slide={slide as any} direction={direction} />;
+    case 'dialogue-answer-image':
+      return <DialogueAnswerImageSlide slide={slide as any} direction={direction} />;
     case 'argument':
       return <ArgumentSlide slide={slide as any} direction={direction} />;
     case 'drama-scene':

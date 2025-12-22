@@ -48,6 +48,7 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
       case 'dialogue-question':
         return <User className="w-5 h-5" />;
       case 'dialogue-answer':
+      case 'dialogue-answer-image':
         return <Bot className="w-5 h-5" />;
       case 'argument':
         return slide.argumentType === 'pro' ? <ThumbsUp className="w-5 h-5" /> : <ThumbsDown className="w-5 h-5" />;
@@ -89,6 +90,7 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
       case 'dialogue-question':
         return 'Вопрос';
       case 'dialogue-answer':
+      case 'dialogue-answer-image':
         return 'Ответ ИИ';
       case 'argument':
         return slide.argumentType === 'pro' ? 'ЗА' : 'ПРОТИВ';
@@ -130,6 +132,7 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
       case 'dialogue-question':
         return slide.question;
       case 'dialogue-answer':
+      case 'dialogue-answer-image':
         return slide.title;
       case 'argument':
         return slide.name;
@@ -159,6 +162,7 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
     if (slide.type === 'profile') return slide.image;
     if (slide.type === 'story') return slide.image || storyDefault;
     if (slide.type === 'drama-image') return slide.image;
+    if (slide.type === 'dialogue-answer-image') return slide.image;
     return undefined;
   };
 
@@ -180,6 +184,8 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
         return 'from-slate-800 via-slate-700 to-blue-900';
       case 'dialogue-answer':
         return 'from-slate-100 via-white to-emerald-50';
+      case 'dialogue-answer-image':
+        return 'from-emerald-900 via-emerald-800 to-teal-900';
       case 'argument':
         return slide.argumentType === 'pro' 
           ? 'from-emerald-800 via-emerald-700 to-teal-800'
@@ -236,6 +242,7 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
 
   const getTextColor = () => {
     if (slide.type === 'dialogue-answer') return 'text-slate-800';
+    if (slide.type === 'dialogue-answer-image') return 'text-white';
     return 'text-white';
   };
 
@@ -398,6 +405,43 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
                 <Image className="w-4 h-4" />
                 <span className="text-xs font-sans font-medium uppercase tracking-wider">
                   Образ
+                </span>
+              </div>
+            </div>
+            <h3 className="text-xl font-bold text-white line-clamp-2">
+              {getTitle()}
+            </h3>
+          </div>
+        </div>
+      </Card>
+    );
+  }
+
+  // Dialogue-answer-image slides - image with overlay (AI response with full-screen image)
+  if (slide.type === 'dialogue-answer-image') {
+    return (
+      <Card 
+        className="group relative overflow-hidden cursor-pointer transition-smooth hover:-translate-y-2 shadow-card hover:shadow-premium"
+        onClick={onClick}
+      >
+        <div className="aspect-[3/4] relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/90 via-emerald-950/50 to-transparent z-10 opacity-80 group-hover:opacity-90 transition-smooth" />
+          <img 
+            src={getSlideImage()} 
+            alt={getTitle()}
+            className="w-full h-full object-cover transition-smooth group-hover:scale-110"
+          />
+          
+          <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-emerald-500/80 backdrop-blur-sm flex items-center justify-center z-20">
+            <span className="text-lg font-bold text-white">{slideNumber}</span>
+          </div>
+
+          <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
+            <div className="inline-block px-3 py-1 bg-emerald-500/80 backdrop-blur-sm rounded-full mb-3">
+              <div className="flex items-center gap-2 text-white">
+                <Bot className="w-4 h-4" />
+                <span className="text-xs font-sans font-medium uppercase tracking-wider">
+                  Ответ ИИ
                 </span>
               </div>
             </div>

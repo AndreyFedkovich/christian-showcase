@@ -17,6 +17,13 @@ export interface DialogueAnswerSlide {
   image?: string;
 }
 
+export interface DialogueAnswerImageSlide {
+  type: 'dialogue-answer-image';
+  title: string;
+  content: string[];
+  image: string;
+}
+
 export interface ArgumentSlide {
   type: 'argument';
   argumentType: 'pro' | 'contra';
@@ -53,6 +60,7 @@ export interface GodExistsReflectionSlide {
 export type GodExistsSlide = 
   | DialogueQuestionSlide 
   | DialogueAnswerSlide 
+  | DialogueAnswerImageSlide
   | ArgumentSlide 
   | GodExistsIntroductionSlide
   | GodExistsConclusionSlide
@@ -106,7 +114,7 @@ export const introSlides: GodExistsSlide[] = [
 // Раздел 2: Аргументы ЗА
 export const proArgumentSlides: GodExistsSlide[] = [
   {
-    type: 'dialogue-answer',
+    type: 'dialogue-answer-image',
     title: 'Аргументы ЗА существование Бога',
     content: [
       'Эти аргументы предполагают, что существование Бога логично, необходимо или является лучшим объяснением мира, каким мы его видим.'
@@ -189,7 +197,7 @@ export const deepDialogueSlides: GodExistsSlide[] = [
     question: 'Как такая сложная Вселенная могла появиться без Творца?'
   },
   {
-    type: 'dialogue-answer',
+    type: 'dialogue-answer-image',
     title: 'Сложность может возникать из простых правил',
     content: [
       'Научное объяснение — сложность может возникать спонтанно из простых правил, действующих на протяжении огромного времени.',
@@ -219,7 +227,7 @@ export const deepDialogueSlides: GodExistsSlide[] = [
     question: 'Разве не очевидно, что такие сложные и гармоничные законы не могут быть случайными?'
   },
   {
-    type: 'dialogue-answer',
+    type: 'dialogue-answer-image',
     title: 'ИИ признаёт силу этого аргумента',
     content: [
       'Вы идеально сформулировали суть Аргумента от Замысла — одного из самых убедительных аргументов за существование Бога на протяжении тысячелетий.',
@@ -311,7 +319,7 @@ export const conclusionSlides: GodExistsSlide[] = [
     question: 'Если отбросить глупые аналогии вроде чайника Рассела, Летающего Макаронного Монстра или невидимых драконов?'
   },
   {
-    type: 'dialogue-answer',
+    type: 'dialogue-answer-image',
     title: 'Это блестящий синтез!',
     content: [
       'Вы взяли центральный принцип скептика и превратили его в краеугольный камень вашего аргумента.',
