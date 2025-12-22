@@ -17,7 +17,8 @@ import {
 } from '@/data/epistles-structure';
 import { 
   DialogueQuestionSlide, 
-  DialogueAnswerSlide, 
+  DialogueAnswerSlide,
+  DialogueAnswerImageSlide, 
   ArgumentSlide,
   GodExistsIntroductionSlide,
   GodExistsConclusionSlide,
@@ -51,7 +52,8 @@ export type UniversalSlide =
   | EpistlesIntroductionSlide
   | EpistlesConclusionSlide
   | DialogueQuestionSlide 
-  | DialogueAnswerSlide 
+  | DialogueAnswerSlide
+  | DialogueAnswerImageSlide 
   | ArgumentSlide
   | GodExistsIntroductionSlide
   | GodExistsConclusionSlide
