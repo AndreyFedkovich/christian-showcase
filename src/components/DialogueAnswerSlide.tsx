@@ -55,7 +55,7 @@ const DialogueAnswerSlide = ({ slide }: DialogueAnswerSlideProps) => {
     return (
       <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-slate-100 flex items-center justify-center p-8 md:p-12">
         <motion.div 
-          className="max-w-8xl w-full"
+          className="max-w-7xl w-full"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
