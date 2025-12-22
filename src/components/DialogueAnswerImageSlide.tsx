@@ -85,7 +85,7 @@ const DialogueAnswerImageSlide = ({ slide }: DialogueAnswerImageSlideProps) => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 1 + index * 0.15 }}
-                className="text-xl md:text-2xl lg:text-2xl text-emerald-100/90 leading-relaxed mb-4 last:mb-0"
+                className="text-2xl md:text-3xl lg:text-4xl text-emerald-100/90 leading-relaxed mb-4 last:mb-0"
               >
                 {paragraph}
               </motion.p>
