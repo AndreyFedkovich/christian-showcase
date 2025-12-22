@@ -1,20 +1,58 @@
 import { ReflectionSlide as ReflectionSlideType } from "@/data/seminar";
+import { motion } from "framer-motion";
+import type { Variants } from "framer-motion";
 
 interface ReflectionSlideProps {
   slide: ReflectionSlideType;
   direction?: 'next' | 'prev';
 }
 
-const ReflectionSlide = ({ slide, direction = 'next' }: ReflectionSlideProps) => {
-  const animationClass = direction === 'next' 
-    ? 'animate-slide-in-right' 
-    : 'animate-slide-in-left';
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.1
+    }
+  },
+  exit: { 
+    opacity: 0,
+    transition: { duration: 0.2 }
+  }
+};
 
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] }
+  }
+};
+
+const iconVariants: Variants = {
+  hidden: { opacity: 0, scale: 0.8 },
+  visible: { 
+    opacity: 1, 
+    scale: 1,
+    transition: { duration: 0.5, ease: [0.4, 0, 0.2, 1] }
+  }
+};
+
+const ReflectionSlide = ({ slide, direction = 'next' }: ReflectionSlideProps) => {
   return (
-    <div className={`absolute inset-0 gradient-overlay flex items-center justify-center p-8 ${animationClass}`}>
+    <motion.div 
+      className="absolute inset-0 gradient-overlay flex items-center justify-center p-8"
+      key={slide.question}
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+    >
       <div className="max-w-3xl w-full text-center space-y-12">
         {/* Icon */}
-        <div className="flex justify-center">
+        <motion.div className="flex justify-center" variants={iconVariants}>
           <div className="w-24 h-24 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
             <svg 
               className="w-12 h-12 text-white" 
@@ -30,28 +68,34 @@ const ReflectionSlide = ({ slide, direction = 'next' }: ReflectionSlideProps) =>
               />
             </svg>
           </div>
-        </div>
+        </motion.div>
 
         {/* Subtitle */}
         {slide.subtitle && (
-          <div className="inline-block px-6 py-2 bg-white/10 backdrop-blur-sm rounded-full">
+          <motion.div 
+            className="inline-block px-6 py-2 bg-white/10 backdrop-blur-sm rounded-full"
+            variants={itemVariants}
+          >
             <span className="text-2xl font-sans font-medium text-white uppercase tracking-wider">
               {slide.subtitle}
             </span>
-          </div>
+          </motion.div>
         )}
 
         {/* Question */}
-        <h2 className="text-4xl md:text-5xl font-bold text-white md:leading-[4rem] leading-[4rem] px-4">
+        <motion.h2 
+          className="text-4xl md:text-5xl font-bold text-white md:leading-[4rem] leading-[4rem] px-4"
+          variants={itemVariants}
+        >
           {slide.question}
-        </h2>
+        </motion.h2>
 
         {/* Decorative line */}
-        <div className="flex justify-center">
+        <motion.div className="flex justify-center" variants={itemVariants}>
           <div className="w-64 h-[2px] bg-gradient-to-r from-transparent via-white/40 to-transparent"></div>
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
