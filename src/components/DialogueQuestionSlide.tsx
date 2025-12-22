@@ -73,7 +73,7 @@ const DialogueQuestionSlide = ({ slide }: DialogueQuestionSlideProps) => {
                   before:content-['']
                   before:absolute before:-left-3 before:top-6
                   before:w-6 before:h-6
-                  before:bg-[#26395c]
+                  before:bg-[#1e3359]
                   before:border-l before:border-b
                   before:border-blue-500/30
                   before:rotate-45
