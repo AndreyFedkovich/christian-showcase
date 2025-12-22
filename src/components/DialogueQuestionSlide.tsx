@@ -1,17 +1,37 @@
 import { DialogueQuestionSlide as DialogueQuestionSlideType } from "@/data/god-exists";
 import { User } from "lucide-react";
 import { useTypewriter } from "@/hooks/use-typewriter";
+import { motion } from "framer-motion";
 
 interface DialogueQuestionSlideProps {
   slide: DialogueQuestionSlideType;
   direction?: 'next' | 'prev';
 }
 
-const DialogueQuestionSlide = ({ slide, direction = 'next' }: DialogueQuestionSlideProps) => {
-  const animationClass = direction === 'next' 
-    ? 'animate-slide-in-right' 
-    : 'animate-slide-in-left';
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1,
+    }
+  }
+};
 
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.4, 0, 0.2, 1] as const
+    }
+  }
+};
+
+const DialogueQuestionSlide = ({ slide }: DialogueQuestionSlideProps) => {
   const { displayedText, isComplete } = useTypewriter({
     text: slide.question,
     speed: 40,
@@ -19,31 +39,39 @@ const DialogueQuestionSlide = ({ slide, direction = 'next' }: DialogueQuestionSl
   });
 
   return (
-    <div className={`absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-8 ${animationClass}`}>
+    <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-8 md:p-12">
       {/* Decorative background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
       </div>
 
-      <div className="relative max-w-4xl w-full">
+      <motion.div 
+        className="relative max-w-5xl w-full"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
         {/* User bubble */}
-        <div className="flex items-start gap-6">
+        <div className="flex items-start gap-8">
           {/* Avatar */}
-          <div className="flex-shrink-0 w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg">
-            <User className="w-8 h-8 text-white" />
-          </div>
+          <motion.div 
+            className="flex-shrink-0 w-20 h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg"
+            variants={itemVariants}
+          >
+            <User className="w-10 h-10 md:w-12 md:h-12 text-white" />
+          </motion.div>
 
           {/* Message bubble */}
-          <div className="flex-1">
+          <motion.div className="flex-1" variants={itemVariants}>
             <div
                 className="
                   relative
                   bg-gradient-to-br from-blue-500/20 to-blue-600/20
-                  backdrop-blur-sm rounded-2xl p-8
+                  backdrop-blur-sm rounded-2xl p-10 md:p-12
                   border border-blue-500/30
                   before:content-['']
-                  before:absolute before:-left-3 before:top-4
+                  before:absolute before:-left-3 before:top-6
                   before:w-6 before:h-6
                   before:bg-[#26395c]
                   before:border-l before:border-b
@@ -53,30 +81,35 @@ const DialogueQuestionSlide = ({ slide, direction = 'next' }: DialogueQuestionSl
                 "
             >
               {/* Label */}
-              <div className="inline-block px-4 py-1 bg-blue-500/30 rounded-full mb-6">
-                  <span className="text-sm font-sans font-medium text-blue-300 uppercase tracking-wider">
+              <div className="inline-block px-5 py-2 bg-blue-500/30 rounded-full mb-8">
+                  <span className="text-base md:text-lg font-sans font-medium text-blue-300 uppercase tracking-wider">
                     Вопрос человека
                   </span>
               </div>
 
               {/* Question with typewriter effect */}
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
                 {displayedText}
                 {!isComplete && (
                   <span className="animate-blink text-blue-400 ml-1">|</span>
                 )}
               </h2>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Hint text - appears after typing complete */}
-        <div className={`mt-12 text-center transition-opacity duration-500 ${isComplete ? 'opacity-100' : 'opacity-0'}`}>
-          <p className="text-3xl text-slate-400 italic">
+        <motion.div 
+          className="mt-14 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: isComplete ? 1 : 0, y: isComplete ? 0 : 20 }}
+          transition={{ duration: 0.5 }}
+        >
+          <p className="text-2xl md:text-3xl text-slate-400 italic">
             Вопрос задан искусственному интеллекту...
           </p>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 };
