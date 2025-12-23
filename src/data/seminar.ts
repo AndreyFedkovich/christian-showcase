@@ -85,6 +85,7 @@ export interface StoryImageSlide extends Slide {
   image: string;
   chapter: string;
   quote?: string;
+  imagePosition?: 'top' | 'center' | 'bottom';
 }
 
 export type SeminarSlide = StorySlide | StoryImageSlide | ReflectionSlide | ConclusionSlide | ScriptureDarkSlide | SeminarIntroductionSlide;
@@ -596,6 +597,7 @@ export const ruthSlides: SeminarSlide[] = [
     title: 'Женитьба',
     chapter: 'Глава 7',
     image: RuthMarriage2,
+    imagePosition: 'top',
     story: [
       'Так Вооз стал родственником-искупителем, чтобы сохранить имя Елимелеха и Махлона.',
       'Он женился на Руфи, и через этот брак Бог благословил всех, кто был в этом задействован, и осуществил Свой план искупления.'
@@ -606,6 +608,7 @@ export const ruthSlides: SeminarSlide[] = [
     title: 'Ноеминь',
     chapter: 'Глава 8',
     image: RuthNaomiConclusion,
+    imagePosition: 'top',
     story: [
       'Ноеминь, которая в начале этой истории чувствовала себя опустошённой, в конце была благословенна.',
       'Она потеряла двух сыновей, но теперь у неё была невестка, стоившая больше, чем семь сыновей.',
@@ -628,6 +631,7 @@ export const ruthSlides: SeminarSlide[] = [
     title: 'Руфь',
     chapter: 'Глава 10',
     image: RuthMarriage,
+    imagePosition: 'top',
     story: [
       'Руфь начала свой путь как моавитянка-вдова, но, потому что она решила поклоняться Господу и любить Его народ, она получила благочестивого мужа и место среди Божьего народа.',
       'Через неё моавитянская кровь потечёт в жилах Давида и Иисуса.',

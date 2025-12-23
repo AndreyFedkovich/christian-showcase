@@ -18,6 +18,13 @@ const StoryImageSlide = ({ slide, direction }: StoryImageSlideProps) => {
     return () => clearTimeout(timer);
   }, []);
 
+  // Determine image position class
+  const imagePositionClass = {
+    top: 'object-top',
+    center: 'object-center',
+    bottom: 'object-bottom'
+  }[slide.imagePosition || 'center'];
+
   return (
     <div className="min-h-screen w-full relative">
       {/* Full-screen background image with Ken Burns effect */}
@@ -30,7 +37,7 @@ const StoryImageSlide = ({ slide, direction }: StoryImageSlideProps) => {
         <img
           src={slide.image}
           alt={slide.title}
-          className="w-full h-full object-cover"
+          className={`w-full h-full object-cover ${imagePositionClass}`}
         />
       </motion.div>
 
