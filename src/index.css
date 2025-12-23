@@ -101,7 +101,6 @@ All colors MUST be HSL.
 .star-wars-crawl {
   perspective: 600px;
   perspective-origin: 50% 100%;
-  overflow: visible;
   overflow-y: hidden;
   height: 50vh;
   position: relative;

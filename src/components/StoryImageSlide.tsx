@@ -86,8 +86,8 @@ const StoryImageSlide = ({ slide, direction }: StoryImageSlideProps) => {
                 )}
 
                 {/* Star Wars Crawl story content */}
-                <div className="star-wars-crawl crawl-fade w-full">
-                  <div className="crawl-content px-4">
+                <div className="star-wars-crawl crawl-fade w-full overflow-x-hidden">
+                  <div className="crawl-content px-[20rem]">
                     {slide.story.map((paragraph, index) => (
                       <p 
                         key={index} 
