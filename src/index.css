@@ -99,17 +99,18 @@ All colors MUST be HSL.
 @layer utilities {
 /* Star Wars Crawl Effect */
 .star-wars-crawl {
-  perspective: 400px;
+  perspective: 600px;
   perspective-origin: 50% 100%;
-  overflow: hidden;
-  height: 55vh;
+  overflow: visible;
+  overflow-y: hidden;
+  height: 50vh;
   position: relative;
 }
 
 .crawl-content {
-  transform: rotateX(25deg);
+  transform: rotateX(12deg);
   transform-origin: 50% 0%;
-  animation: crawl 45s linear forwards;
+  animation: crawl 35s linear forwards;
 }
 
 .crawl-content:hover {
@@ -118,14 +119,14 @@ All colors MUST be HSL.
 
 @keyframes crawl {
   0% { 
-    transform: rotateX(25deg) translateY(100%); 
+    transform: rotateX(12deg) translateY(100%); 
     opacity: 1;
   }
-  85% {
+  80% {
     opacity: 1;
   }
   100% { 
-    transform: rotateX(25deg) translateY(-280%); 
+    transform: rotateX(12deg) translateY(-200%); 
     opacity: 0;
   }
 }
