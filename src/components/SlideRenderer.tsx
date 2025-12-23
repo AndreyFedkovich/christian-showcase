@@ -1,6 +1,7 @@
 import { UniversalSlide } from '@/types/slides';
 import ProfileSlide from '@/components/ProfileSlide';
 import StorySlide from '@/components/StorySlide';
+import StoryImageSlide from '@/components/StoryImageSlide';
 import ReflectionSlide from '@/components/ReflectionSlide';
 import ConclusionSlide from '@/components/ConclusionSlide';
 import ScriptureDarkSlide from '@/components/ScriptureDarkSlide';
@@ -38,6 +39,8 @@ const SlideRenderer = ({ slide, direction, slideNumber }: SlideRendererProps) =>
       return <IntroductionSlide slide={slide as any} direction={direction} />;
     case 'story':
       return <StorySlide slide={slide as any} direction={direction} />;
+    case 'story-image':
+      return <StoryImageSlide slide={slide as any} direction={direction} />;
     case 'reflection':
       return <ReflectionSlide slide={slide as any} direction={direction} />;
     case 'conclusion':
