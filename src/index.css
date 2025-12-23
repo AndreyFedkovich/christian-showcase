@@ -97,7 +97,48 @@ All colors MUST be HSL.
 }
 
 @layer utilities {
-  .gradient-gold {
+/* Star Wars Crawl Effect */
+.star-wars-crawl {
+  perspective: 300px;
+  perspective-origin: 50% 100%;
+  overflow: hidden;
+  height: 50vh;
+  position: relative;
+}
+
+.crawl-content {
+  transform: rotateX(20deg);
+  transform-origin: 50% 0%;
+  animation: crawl 60s linear infinite;
+}
+
+.crawl-content:hover {
+  animation-play-state: paused;
+}
+
+@keyframes crawl {
+  0% { transform: rotateX(20deg) translateY(100%); }
+  100% { transform: rotateX(20deg) translateY(-300%); }
+}
+
+.crawl-fade {
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
+}
+
+.gradient-gold {
     background: var(--gradient-gold);
   }
   
