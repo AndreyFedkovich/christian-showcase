@@ -91,8 +91,7 @@ const StoryImageSlide = ({ slide, direction }: StoryImageSlideProps) => {
                     {slide.story.map((paragraph, index) => (
                       <p 
                         key={index} 
-                        className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-amber-100 font-serif leading-tight mb-12 whitespace-normal break-words hyphens-auto"
-                        lang="ru"
+                        className="text-4xl md:text-5xl lg:text-6xl text-amber-100 font-serif leading-relaxed mb-10 whitespace-normal break-words"
                       >
                         {paragraph}
                       </p>
