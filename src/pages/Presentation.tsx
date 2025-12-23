@@ -18,7 +18,7 @@ const Presentation = () => {
   const { presentationId } = useParams();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const [wakeLock, setWakeLock] = useState<WakeLockSentinel | null>(null);
+  const wakeLockRef = useRef<WakeLockSentinel | null>(null);
 
   // Get initial slide from query params
   const initialSlide = parseInt(searchParams.get('slide') || '0');
@@ -60,17 +60,23 @@ const Presentation = () => {
 
   // Wake Lock API to prevent screen from turning off
   useEffect(() => {
+    let isActive = true;
+
     const requestWakeLock = async () => {
       try {
-        if ('wakeLock' in navigator) {
+        if ('wakeLock' in navigator && isActive && !wakeLockRef.current) {
           const lock = await navigator.wakeLock.request('screen');
-          setWakeLock(lock);
-          console.log('Wake Lock активирован');
+          if (isActive) {
+            wakeLockRef.current = lock;
+            console.log('Wake Lock активирован');
 
-          lock.addEventListener('release', () => {
-            console.log('Wake Lock освобождён');
-            setWakeLock(null);
-          });
+            lock.addEventListener('release', () => {
+              console.log('Wake Lock освобождён');
+              wakeLockRef.current = null;
+            });
+          } else {
+            void lock.release();
+          }
         }
       } catch (err) {
         console.log('Wake Lock не удалось активировать:', err);
@@ -78,7 +84,7 @@ const Presentation = () => {
     };
 
     const handleVisibilityChange = async () => {
-      if (document.visibilityState === 'visible' && !wakeLock) {
+      if (document.visibilityState === 'visible' && !wakeLockRef.current) {
         await requestWakeLock();
       }
     };
@@ -87,12 +93,14 @@ const Presentation = () => {
     document.addEventListener('visibilitychange', handleVisibilityChange);
 
     return () => {
-      if (wakeLock) {
-        void wakeLock.release();
+      isActive = false;
+      if (wakeLockRef.current) {
+        void wakeLockRef.current.release();
+        wakeLockRef.current = null;
       }
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
-  }, [wakeLock]);
+  }, []);
 
   // Fullscreen management
   useEffect(() => {
