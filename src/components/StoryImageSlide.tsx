@@ -107,7 +107,7 @@ const StoryImageSlide = ({ slide, direction }: StoryImageSlideProps) => {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: "easeOut" }}
-              className="absolute bottom-8 left-6 right-6 md:left-10 md:right-10 lg:left-16 lg:right-16"
+              className="absolute bottom-24 left-6 right-6 md:left-10 md:right-10 lg:left-16 lg:right-16"
             >
               {/* Chapter badge */}
               <div className="inline-flex items-center px-6 py-3 rounded-full bg-amber-500/30 border border-amber-400/30 backdrop-blur-sm mb-6">
