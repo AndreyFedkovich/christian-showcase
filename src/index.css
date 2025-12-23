@@ -102,8 +102,7 @@ All colors MUST be HSL.
   perspective: 600px;
   perspective-origin: 50% 100%;
   overflow: visible;
-  overflow-y: hidden;
-  height: 50vh;
+  height: 60vh;
   position: relative;
 }
 
@@ -111,6 +110,8 @@ All colors MUST be HSL.
   transform: rotateX(12deg);
   transform-origin: 50% 0%;
   animation: crawl 35s linear forwards;
+  position: relative;
+  z-index: 1;
 }
 
 .crawl-content:hover {
@@ -126,26 +127,35 @@ All colors MUST be HSL.
     opacity: 1;
   }
   100% { 
-    transform: rotateX(12deg) translateY(-200%); 
+    transform: rotateX(12deg) translateY(-180%); 
     opacity: 0;
   }
 }
 
+/* Fade overlays using pseudo-elements instead of mask-image */
 .crawl-fade {
-  mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    black 10%,
-    black 90%,
-    transparent 100%
-  );
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    black 10%,
-    black 90%,
-    transparent 100%
-  );
+  position: relative;
+}
+
+.crawl-fade::before,
+.crawl-fade::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 15%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.crawl-fade::before {
+  top: 0;
+  background: linear-gradient(to bottom, hsl(24 52% 10% / 1) 0%, transparent 100%);
+}
+
+.crawl-fade::after {
+  bottom: 0;
+  background: linear-gradient(to top, hsl(24 52% 10% / 1) 0%, transparent 100%);
 }
 
 .gradient-gold {
