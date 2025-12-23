@@ -32,6 +32,7 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
       case 'profile':
         return <User className="w-5 h-5" />;
       case 'story':
+      case 'story-image':
         return <BookOpen className="w-5 h-5" />;
       case 'reflection':
         return <HelpCircle className="w-5 h-5" />;
@@ -74,6 +75,7 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
       case 'profile':
         return 'Апостол';
       case 'story':
+      case 'story-image':
         return 'История';
       case 'reflection':
         return 'Задумайтесь';
@@ -116,6 +118,7 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
       case 'profile':
         return slide.name;
       case 'story':
+      case 'story-image':
         return slide.title;
       case 'reflection':
         return slide.subtitle || 'Вопрос для размышления';
@@ -161,6 +164,7 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
   const getSlideImage = () => {
     if (slide.type === 'profile') return slide.image;
     if (slide.type === 'story') return slide.image || storyDefault;
+    if (slide.type === 'story-image') return slide.image;
     if (slide.type === 'drama-image') return slide.image;
     if (slide.type === 'dialogue-answer-image') return slide.image;
     return undefined;
@@ -342,36 +346,36 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
   }
 
   // Story slides - image with overlay
-  if (slide.type === 'story') {
+  if (slide.type === 'story' || slide.type === 'story-image') {
     return (
       <Card 
         className="group relative overflow-hidden cursor-pointer transition-smooth hover:-translate-y-2 shadow-card hover:shadow-premium"
         onClick={onClick}
       >
         <div className="aspect-[3/4] relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent z-10 opacity-30 group-hover:opacity-40 transition-smooth" />
+          <div className="absolute inset-0 bg-gradient-to-t from-amber-950/90 via-amber-950/40 to-transparent z-10 opacity-70 group-hover:opacity-80 transition-smooth" />
           <img 
             src={getSlideImage()} 
             alt={getTitle()}
             className="w-full h-full object-cover transition-smooth group-hover:scale-110"
           />
           
-          <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-accent/80 backdrop-blur-sm flex items-center justify-center z-20">
-            <span className="text-lg font-bold text-[#FFF5E6]">{slideNumber}</span>
+          <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-amber-500/80 backdrop-blur-sm flex items-center justify-center z-20">
+            <span className="text-lg font-bold text-white">{slideNumber}</span>
           </div>
 
           <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
-            <div className={`inline-block px-3 py-1 ${getBadgeStyle()} backdrop-blur-sm rounded-full mb-3`}>
+            <div className="inline-block px-3 py-1 bg-amber-500/80 backdrop-blur-sm rounded-full mb-3">
               <div className="flex items-center gap-2">
-                <div className="text-[#FFF5E6]">
+                <div className="text-white">
                   {getIcon()}
                 </div>
-                <span className="text-xs font-sans font-medium text-[#FFF5E6] uppercase tracking-wider">
+                <span className="text-xs font-sans font-medium text-white uppercase tracking-wider">
                   {getTypeName()}
                 </span>
               </div>
             </div>
-            <h3 className="text-2xl font-bold text-primary-foreground group-hover:text-primary-foreground transition-smooth">
+            <h3 className="text-2xl font-bold text-white group-hover:text-white transition-smooth">
               {getTitle()}
             </h3>
           </div>

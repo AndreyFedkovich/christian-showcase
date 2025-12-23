@@ -29,7 +29,7 @@ import JosephBrothersBow from "@/assets/joseph-brothers-bow.png";
 
 
 export interface Slide {
-  type: 'story' | 'reflection' | 'conclusion' | 'scripture-dark' | 'introduction';
+  type: 'story' | 'story-image' | 'reflection' | 'conclusion' | 'scripture-dark' | 'introduction';
 }
 
 export interface SeminarIntroductionSlide extends Slide {
@@ -77,7 +77,17 @@ export interface ScriptureDarkSlide extends Slide {
   }[];
 }
 
-export type SeminarSlide = StorySlide | ReflectionSlide | ConclusionSlide | ScriptureDarkSlide | SeminarIntroductionSlide;
+export interface StoryImageSlide extends Slide {
+  type: 'story-image';
+  title: string;
+  subtitle?: string;
+  story: string[];
+  image: string;
+  chapter: string;
+  quote?: string;
+}
+
+export type SeminarSlide = StorySlide | StoryImageSlide | ReflectionSlide | ConclusionSlide | ScriptureDarkSlide | SeminarIntroductionSlide;
 
 // Секция/вкладка презентации
 export interface SeminarSection {
@@ -163,7 +173,7 @@ export const josephSlides: SeminarSlide[] = [
     ]
   },
   {
-    type: 'story',
+    type: 'story-image',
     title: 'Торговый путь',
     chapter: 'Глава 2',
     image: josephSlaveryMap,
@@ -173,7 +183,7 @@ export const josephSlides: SeminarSlide[] = [
     ]
   },
   {
-    type: 'story',
+    type: 'story-image',
     title: 'Случайный человек',
     chapter: 'Глава 3',
     image: JosephAccidentalMan,
@@ -183,7 +193,7 @@ export const josephSlides: SeminarSlide[] = [
     ]
   },
   {
-    type: 'story',
+    type: 'story-image',
     title: 'Предательство братьев',
     chapter: 'Глава 4',
     image: JosephBrothersHatred,
@@ -193,7 +203,7 @@ export const josephSlides: SeminarSlide[] = [
     ]
   },
   {
-    type: 'story',
+    type: 'story-image',
     title: 'Караван',
     chapter: 'Глава 5',
     image: josephBetrayal,
@@ -257,7 +267,7 @@ export const josephSlides: SeminarSlide[] = [
     ]
   },
   {
-    type: 'story',
+    type: 'story-image',
     title: 'Клевета',
     chapter: 'Глава 7',
     image: JosephSlander,
@@ -267,7 +277,7 @@ export const josephSlides: SeminarSlide[] = [
     ]
   },
   {
-    type: 'story',
+    type: 'story-image',
     title: 'В тюрьме',
     chapter: 'Глава 8',
     image: josephPrison,
@@ -283,7 +293,7 @@ export const josephSlides: SeminarSlide[] = [
     subtitle: 'Присутствие Бога в испытаниях'
   },
   {
-    type: 'story',
+    type: 'story-image',
     title: 'Возвышение',
     chapter: 'Глава 9',
     image: JosephPharaohDreams,
@@ -303,7 +313,7 @@ export const josephSlides: SeminarSlide[] = [
     subtitle: 'Присутствие Бога в испытаниях'
   },
   {
-    type: 'story',
+    type: 'story-image',
     title: 'Возвышение',
     chapter: 'Глава 10',
     image: josephRuler,
@@ -313,7 +323,7 @@ export const josephSlides: SeminarSlide[] = [
     ]
   },
   {
-    type: 'story',
+    type: 'story-image',
     title: 'Возвышение',
     chapter: 'Глава 11',
     image: JosephBrothersBow,
@@ -323,7 +333,7 @@ export const josephSlides: SeminarSlide[] = [
     ]
   },
   {
-    type: 'story',
+    type: 'story-image',
     title: 'Прощение и примирение',
     chapter: 'Глава 12',
     image: josephForgiveness,
@@ -381,7 +391,7 @@ export const samsonSlides: SeminarSlide[] = [
     ]
   },
   {
-    type: 'story',
+    type: 'story-image',
     title: 'Свадьба',
     chapter: 'Глава 1',
     image: SamsonWedding,
@@ -392,7 +402,7 @@ export const samsonSlides: SeminarSlide[] = [
     ]
   },
   {
-    type: 'story',
+    type: 'story-image',
     title: 'Месть',
     chapter: 'Глава 2',
     image: SamsonBurns,
@@ -413,7 +423,7 @@ export const samsonSlides: SeminarSlide[] = [
     subtitle: 'Суверенитет Бога'
   },
   {
-    type: 'story',
+    type: 'story-image',
     title: 'Ослиная челюсть',
     chapter: 'Глава 3',
     image: SamsonJaw,
@@ -424,7 +434,7 @@ export const samsonSlides: SeminarSlide[] = [
     ]
   },
   {
-    type: 'story',
+    type: 'story-image',
     title: 'Далида',
     chapter: 'Глава 4',
     image: SamsonWedding,
@@ -434,7 +444,7 @@ export const samsonSlides: SeminarSlide[] = [
     ]
   },
   {
-    type: 'story',
+    type: 'story-image',
     title: 'Храм Дагона',
     chapter: 'Глава 5',
     image: SamsonTemple,
@@ -491,7 +501,7 @@ export const ruthSlides: SeminarSlide[] = [
     ]
   },
   {
-    type: 'story',
+    type: 'story-image',
     title: 'Бедствие',
     chapter: 'Глава 1',
     image: RuthSad,
@@ -526,7 +536,7 @@ export const ruthSlides: SeminarSlide[] = [
     ]
   },
   {
-    type: 'story',
+    type: 'story-image',
     title: 'Возвращение',
     chapter: 'Глава 2',
     image: RuthBack,
@@ -537,7 +547,7 @@ export const ruthSlides: SeminarSlide[] = [
     ]
   },
   {
-    type: 'story',
+    type: 'story-image',
     title: 'Руфь',
     chapter: 'Глава 3',
     image: RuthNaomi,
@@ -546,7 +556,7 @@ export const ruthSlides: SeminarSlide[] = [
     ]
   },
   {
-    type: 'story',
+    type: 'story-image',
     title: 'Поля Вифлеема',
     chapter: 'Глава 4',
     image: RuthField,
@@ -556,7 +566,7 @@ export const ruthSlides: SeminarSlide[] = [
     ]
   },
   {
-    type: 'story',
+    type: 'story-image',
     title: 'Вооз',
     chapter: 'Глава 5',
     image: RuthBoaz,
@@ -571,7 +581,7 @@ export const ruthSlides: SeminarSlide[] = [
     subtitle: 'Суверенитет Бога'
   },
   {
-    type: 'story',
+    type: 'story-image',
     title: 'Искупитель',
     chapter: 'Глава 6',
     image: RuthHappy,
@@ -582,7 +592,7 @@ export const ruthSlides: SeminarSlide[] = [
     ]
   },
   {
-    type: 'story',
+    type: 'story-image',
     title: 'Женитьба',
     chapter: 'Глава 7',
     image: RuthMarriage2,
@@ -592,7 +602,7 @@ export const ruthSlides: SeminarSlide[] = [
     ]
   },
   {
-    type: 'story',
+    type: 'story-image',
     title: 'Ноеминь',
     chapter: 'Глава 8',
     image: RuthNaomiConclusion,
@@ -603,7 +613,7 @@ export const ruthSlides: SeminarSlide[] = [
     ]
   },
   {
-    type: 'story',
+    type: 'story-image',
     title: 'Вооз',
     chapter: 'Глава 9',
     image: RuthBoazConclusion,
@@ -614,7 +624,7 @@ export const ruthSlides: SeminarSlide[] = [
     ]
   },
   {
-    type: 'story',
+    type: 'story-image',
     title: 'Руфь',
     chapter: 'Глава 10',
     image: RuthMarriage,

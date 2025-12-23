@@ -1,6 +1,7 @@
 // Universal slide types for all presentations
 import { 
   StorySlide, 
+  StoryImageSlide,
   ReflectionSlide as SeminarReflectionSlide, 
   ConclusionSlide as SeminarConclusionSlide, 
   ScriptureDarkSlide, 
@@ -41,8 +42,9 @@ export interface ProfileSlide extends Disciple {
 
 // Universal union type for all slides
 export type UniversalSlide = 
-  | StorySlide 
-  | SeminarReflectionSlide 
+  | StorySlide
+  | StoryImageSlide 
+  | SeminarReflectionSlide
   | SeminarConclusionSlide 
   | ScriptureDarkSlide 
   | SeminarIntroductionSlide
