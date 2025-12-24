@@ -39,7 +39,7 @@ const IntroImageSlide = ({ slide, direction }: IntroImageSlideProps) => {
       </motion.div>
 
       {/* Warm gradient overlay from bottom */}
-      <div className="absolute inset-0 bg-gradient-to-t from-amber-950/95 via-amber-950/70 to-amber-950/30" />
+      <div className="absolute inset-0 bg-gradient-to-t from-amber-950/65 via-amber-950/40 to-amber-950/10" />
 
       {/* Content container */}
       <div className="absolute inset-0 z-10 flex flex-col justify-end">
@@ -49,7 +49,7 @@ const IntroImageSlide = ({ slide, direction }: IntroImageSlideProps) => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-4 drop-shadow-2xl"
+            className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-8 drop-shadow-2xl"
           >
             {slide.title}
           </motion.h1>
@@ -60,7 +60,7 @@ const IntroImageSlide = ({ slide, direction }: IntroImageSlideProps) => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-2xl md:text-3xl text-amber-200 font-serif italic mb-8"
+              className="text-4xl md:text-5xl text-amber-200 font-serif italic mb-16"
             >
               {slide.subtitle}
             </motion.p>
@@ -74,7 +74,7 @@ const IntroImageSlide = ({ slide, direction }: IntroImageSlideProps) => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.6 + index * 0.2 }}
-                className="text-xl md:text-2xl text-amber-100/90 font-serif leading-relaxed mb-4"
+                className="text-3xl md:text-4xl text-amber-100/90 font-serif leading-relaxed mb-4"
               >
                 {paragraph}
               </motion.p>

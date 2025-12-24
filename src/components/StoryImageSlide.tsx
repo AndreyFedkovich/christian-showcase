@@ -32,7 +32,7 @@ const StoryImageSlide = ({ slide, direction }: StoryImageSlideProps) => {
     if (!animationStarted) return;
     const timer = setTimeout(() => {
       setCrawlComplete(true);
-    }, 25000);
+    }, 30000);
     return () => clearTimeout(timer);
   }, [animationStarted]);
 

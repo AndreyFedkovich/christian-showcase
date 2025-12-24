@@ -114,7 +114,7 @@ All colors MUST be HSL.
 }
 
 .crawl-content.animate {
-  animation: crawl 35s linear forwards;
+  animation: crawl 50s linear forwards;
 }
 
 .crawl-content:hover {
