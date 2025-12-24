@@ -7,6 +7,7 @@ import ConclusionSlide from '@/components/ConclusionSlide';
 import ScriptureDarkSlide from '@/components/ScriptureDarkSlide';
 import HermeneuticsSlide from '@/components/HermeneuticsSlide';
 import IntroductionSlide from '@/components/IntroductionSlide';
+import IntroImageSlide from '@/components/IntroImageSlide';
 import PracticalExampleSlide from '@/components/PracticalExampleSlide';
 import DialogueQuestionSlide from '@/components/DialogueQuestionSlide';
 import DialogueAnswerSlide from '@/components/DialogueAnswerSlide';
@@ -37,6 +38,8 @@ const SlideRenderer = ({ slide, direction, slideNumber }: SlideRendererProps) =>
       );
     case 'introduction':
       return <IntroductionSlide slide={slide as any} direction={direction} />;
+    case 'intro-image':
+      return <IntroImageSlide slide={slide as any} direction={direction} />;
     case 'story':
       return <StorySlide slide={slide as any} direction={direction} />;
     case 'story-image':
