@@ -11,9 +11,14 @@ const StoryImageSlide = ({ slide, direction }: StoryImageSlideProps) => {
   const [crawlComplete, setCrawlComplete] = useState(false);
   const [animationStarted, setAnimationStarted] = useState(false);
 
+  // Reset states when slide changes
+  useEffect(() => {
+    setCrawlComplete(false);
+    setAnimationStarted(false);
+  }, [slide.title]);
+
   // Start animation after mount to ensure initial transform is applied first
   useEffect(() => {
-    setAnimationStarted(false);
     const frameId = requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         setAnimationStarted(true);
@@ -22,13 +27,14 @@ const StoryImageSlide = ({ slide, direction }: StoryImageSlideProps) => {
     return () => cancelAnimationFrame(frameId);
   }, [slide.title]);
 
-  // Auto-complete after 25 seconds (when text has mostly passed)
+  // Auto-complete 25 seconds after animation starts
   useEffect(() => {
+    if (!animationStarted) return;
     const timer = setTimeout(() => {
       setCrawlComplete(true);
     }, 25000);
     return () => clearTimeout(timer);
-  }, [slide.title]);
+  }, [animationStarted]);
 
   // Determine image position style
   const getImagePositionStyle = () => {
