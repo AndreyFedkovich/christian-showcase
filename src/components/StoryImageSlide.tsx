@@ -18,12 +18,19 @@ const StoryImageSlide = ({ slide, direction }: StoryImageSlideProps) => {
     return () => clearTimeout(timer);
   }, []);
 
-  // Determine image position class
-  const imagePositionClass = {
-    top: 'object-top',
-    center: 'object-center',
-    bottom: 'object-bottom'
-  }[slide.imagePosition || 'center'];
+  // Determine image position style
+  const getImagePositionStyle = () => {
+    switch (slide.imagePosition) {
+      case 'top':
+        return { objectPosition: '50% 0%' };
+      case 'top-center':
+        return { objectPosition: '50% 25%' };
+      case 'bottom':
+        return { objectPosition: '50% 100%' };
+      default:
+        return { objectPosition: '50% 50%' };
+    }
+  };
 
   return (
     <div className="min-h-screen w-full relative">
@@ -37,7 +44,8 @@ const StoryImageSlide = ({ slide, direction }: StoryImageSlideProps) => {
         <img
           src={slide.image}
           alt={slide.title}
-          className={`w-full h-full object-cover ${imagePositionClass}`}
+          className="w-full h-full object-cover"
+          style={getImagePositionStyle()}
         />
       </motion.div>
 
