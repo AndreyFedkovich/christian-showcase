@@ -11,6 +11,7 @@ import SamsonWedding from "@/assets/samson-wedding.png";
 import SamsonBurns from "@/assets/samson-burns.png";
 import SamsonTitle from "@/assets/samson-title.jpeg";
 import SamsonTemple from "@/assets/samson-temple.png";
+import SamsonDelilah from "@/assets/samson-delilah.png";
 import RuthTitle from "@/assets/ruth-title.png";
 import SamsonJaw from "@/assets/samson-jaw.png";
 import RuthSad from "@/assets/ruth-sad.png";
@@ -448,7 +449,7 @@ export const samsonSlides: SeminarSlide[] = [
     type: 'story-image',
     title: 'Далида',
     chapter: 'Глава 4',
-    image: SamsonWedding,
+    image: SamsonDelilah,
     story: [
       'Тем не менее Самсон продолжал следовать своим желаниям, увлёкшись уже третьей женщиной — Далидой.',
       'В конце концов она выведала у него тайну его силы и за огромную сумму серебра предала его филистимлянам.',
