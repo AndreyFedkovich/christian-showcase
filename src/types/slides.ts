@@ -23,7 +23,8 @@ import {
   ArgumentSlide,
   GodExistsIntroductionSlide,
   GodExistsConclusionSlide,
-  GodExistsReflectionSlide
+  GodExistsReflectionSlide,
+  GodExistsClimaxSlide
 } from '@/data/god-exists';
 import {
   DramaSceneSlide,
@@ -60,6 +61,7 @@ export type UniversalSlide =
   | GodExistsIntroductionSlide
   | GodExistsConclusionSlide
   | GodExistsReflectionSlide
+  | GodExistsClimaxSlide
   | DramaSceneSlide
   | DramaActSlide
   | DramaClimaxSlide

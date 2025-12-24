@@ -57,6 +57,17 @@ export interface GodExistsReflectionSlide {
   question: string;
 }
 
+export interface GodExistsClimaxSlide {
+  type: 'god-exists-climax';
+  title: string;
+  statements: string[];
+  conclusion: string;
+  verse?: {
+    text: string;
+    reference: string;
+  };
+}
+
 export type GodExistsSlide = 
   | DialogueQuestionSlide 
   | DialogueAnswerSlide 
@@ -65,6 +76,7 @@ export type GodExistsSlide =
   | GodExistsIntroductionSlide
   | GodExistsConclusionSlide
   | GodExistsReflectionSlide
+  | GodExistsClimaxSlide
   | ScriptureDarkSlide;
 
 export interface GodExistsSection {
@@ -336,6 +348,21 @@ export const conclusionSlides: GodExistsSlide[] = [
       'Основываясь на логике: ДА, Творец — наиболее связный вывод.'
     ],
     image: creatorLight
+  },
+  {
+    type: 'god-exists-climax',
+    title: 'Логический вывод',
+    statements: [
+      'Вселенная существует — это неоспоримый факт.',
+      'Её сложность и гармония — экстраординарны.',
+      'ИИ, лишённый эмоций и предубеждений, проанализировал все аргументы.',
+      'И пришёл к неизбежному выводу...'
+    ],
+    conclusion: 'Основываясь на логике: ДА, Творец — наиболее связный вывод',
+    verse: {
+      text: 'Ибо невидимое Его, вечная сила Его и Божество, от создания мира через рассматривание творений видимы.',
+      reference: 'Римлянам 1:20'
+    }
   },
   {
     type: 'reflection',
