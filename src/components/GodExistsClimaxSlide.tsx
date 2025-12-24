@@ -106,7 +106,7 @@ const GodExistsClimaxSlide = ({ slide, direction }: GodExistsClimaxSlideProps) =
                 x: visibleStatements > index ? 0 : -30 
               }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="text-xl md:text-2xl font-serif text-white/80 leading-relaxed"
+              className="text-2xl md:text-3xl font-serif text-white/80 leading-relaxed"
             >
               {statement}
             </motion.p>
@@ -141,7 +141,7 @@ const GodExistsClimaxSlide = ({ slide, direction }: GodExistsClimaxSlideProps) =
             transition={{ duration: 0.8 }}
             className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10"
           >
-            <p className="text-lg md:text-xl font-serif text-white/80 italic mb-4">
+            <p className="text-2xl md:text-3xl font-serif text-white/80 italic mb-4">
               «{slide.verse.text}»
             </p>
             <span className="text-amber-400/90 font-sans text-base">
