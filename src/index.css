@@ -109,6 +109,10 @@ All colors MUST be HSL.
 .crawl-content {
   transform: rotateX(12deg) translateY(100%);
   transform-origin: 50% 0%;
+  opacity: 1;
+}
+
+.crawl-content.animate {
   animation: crawl 35s linear forwards;
 }
 
