@@ -5,7 +5,8 @@ import {
   ReflectionSlide as SeminarReflectionSlide, 
   ConclusionSlide as SeminarConclusionSlide, 
   ScriptureDarkSlide, 
-  SeminarIntroductionSlide 
+  SeminarIntroductionSlide,
+  IntroImageSlide as SeminarIntroImageSlide
 } from '@/data/seminar';
 import { 
   HermeneuticsSlide, 
@@ -49,7 +50,8 @@ export type UniversalSlide =
   | SeminarConclusionSlide 
   | ScriptureDarkSlide 
   | SeminarIntroductionSlide
-  | HermeneuticsSlide 
+  | SeminarIntroImageSlide
+  | HermeneuticsSlide
   | IntroHermeneuticsSlide 
   | PracticalExampleSlide 
   | EpistlesIntroductionSlide

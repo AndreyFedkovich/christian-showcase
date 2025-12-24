@@ -29,7 +29,7 @@ import JosephBrothersBow from "@/assets/joseph-brothers-bow.png";
 
 
 export interface Slide {
-  type: 'story' | 'story-image' | 'reflection' | 'conclusion' | 'scripture-dark' | 'introduction';
+  type: 'story' | 'story-image' | 'reflection' | 'conclusion' | 'scripture-dark' | 'introduction' | 'intro-image';
 }
 
 export interface SeminarIntroductionSlide extends Slide {
@@ -38,6 +38,15 @@ export interface SeminarIntroductionSlide extends Slide {
   subtitle: string;
   content: string[];
   image: string;
+}
+
+export interface IntroImageSlide extends Slide {
+  type: 'intro-image';
+  title: string;
+  subtitle?: string;
+  content: string[];
+  image: string;
+  imagePosition?: 'top' | 'top-center' | 'center' | 'bottom';
 }
 
 export interface StorySlide extends Slide {
@@ -88,7 +97,7 @@ export interface StoryImageSlide extends Slide {
   imagePosition?: 'top' | 'top-center' | 'center' | 'bottom';
 }
 
-export type SeminarSlide = StorySlide | StoryImageSlide | ReflectionSlide | ConclusionSlide | ScriptureDarkSlide | SeminarIntroductionSlide;
+export type SeminarSlide = StorySlide | StoryImageSlide | ReflectionSlide | ConclusionSlide | ScriptureDarkSlide | SeminarIntroductionSlide | IntroImageSlide;
 
 // Секция/вкладка презентации
 export interface SeminarSection {
@@ -100,7 +109,7 @@ export interface SeminarSection {
 // Слайды истории Иосифа
 export const josephSlides: SeminarSlide[] = [
   {
-    type: 'introduction',
+    type: 'intro-image',
     title: 'Бог превращает зло в добро',
     subtitle: 'Божий план спасения непоколебим',
     content: [
@@ -109,7 +118,7 @@ export const josephSlides: SeminarSlide[] = [
     image: JosephThumbnail
   },
   {
-    type: 'introduction',
+    type: 'intro-image',
     title: 'История Иосифа',
     subtitle: 'Провидение в истории Иосифа',
     content: [
@@ -372,7 +381,7 @@ export const josephSlides: SeminarSlide[] = [
 // Слайды истории Самсона
 export const samsonSlides: SeminarSlide[] = [
   {
-    type: 'introduction',
+    type: 'intro-image',
     title: 'История Самсона',
     subtitle: 'Бог дал грешному Самсону силу, чтобы избавить Израиль.',
     content: [
@@ -470,10 +479,10 @@ export const samsonSlides: SeminarSlide[] = [
   },
 ];
 
-// Слайды истории Самсона
+// Слайды истории Руфи
 export const ruthSlides: SeminarSlide[] = [
   {
-    type: 'introduction',
+    type: 'intro-image',
     title: 'История Руфи',
     subtitle: 'Бог всевластен благословить Свой народ',
     content: [
