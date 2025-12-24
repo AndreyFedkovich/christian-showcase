@@ -13,13 +13,13 @@ const ScriptureDarkSlide = ({ slide, direction }: ScriptureDarkSlideProps) => {
     const versesCount = slide.verses.length;
     
     if (totalChars < 200 && versesCount <= 2) {
-      return 'text-2xl md:text-3xl lg:text-5xl lg:leading-[4rem] leading-relaxed';
+      return 'text-3xl md:text-4xl lg:text-6xl lg:leading-[4rem] leading-relaxed';
     } else if (totalChars < 400 && versesCount <= 4) {
-      return 'text-xl md:text-2xl lg:text-3xl leading-relaxed';
+      return 'text-2xl md:text-3xl lg:text-4xl leading-relaxed';
     } else if (totalChars < 700) {
-      return 'text-lg md:text-xl lg:text-2xl leading-relaxed';
+      return 'text-xl md:text-2xl lg:text-3xl leading-relaxed';
     } else {
-      return 'text-base md:text-lg lg:text-xl leading-relaxed';
+      return 'text-lg md:text-xl lg:text-2xl leading-relaxed';
     }
   };
 
