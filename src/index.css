@@ -107,9 +107,10 @@ All colors MUST be HSL.
 }
 
 .crawl-content {
-  transform: rotateX(12deg);
+  transform: rotateX(12deg) translateY(150%);
   transform-origin: 50% 0%;
   animation: crawl 35s linear forwards;
+  animation-delay: 0.5s;
 }
 
 .crawl-content:hover {
@@ -118,7 +119,7 @@ All colors MUST be HSL.
 
 @keyframes crawl {
   0% { 
-    transform: rotateX(12deg) translateY(100%); 
+    transform: rotateX(12deg) translateY(150%); 
     opacity: 1;
   }
   80% {

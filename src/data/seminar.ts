@@ -85,7 +85,7 @@ export interface StoryImageSlide extends Slide {
   image: string;
   chapter: string;
   quote?: string;
-  imagePosition?: 'top' | 'center' | 'bottom';
+  imagePosition?: 'top' | 'top-center' | 'center' | 'bottom';
 }
 
 export type SeminarSlide = StorySlide | StoryImageSlide | ReflectionSlide | ConclusionSlide | ScriptureDarkSlide | SeminarIntroductionSlide;
