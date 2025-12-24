@@ -9,6 +9,18 @@ interface StoryImageSlideProps {
 
 const StoryImageSlide = ({ slide, direction }: StoryImageSlideProps) => {
   const [crawlComplete, setCrawlComplete] = useState(false);
+  const [animationStarted, setAnimationStarted] = useState(false);
+
+  // Start animation after mount to ensure initial transform is applied first
+  useEffect(() => {
+    setAnimationStarted(false);
+    const frameId = requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setAnimationStarted(true);
+      });
+    });
+    return () => cancelAnimationFrame(frameId);
+  }, [slide.title]);
 
   // Auto-complete after 25 seconds (when text has mostly passed)
   useEffect(() => {
@@ -16,7 +28,7 @@ const StoryImageSlide = ({ slide, direction }: StoryImageSlideProps) => {
       setCrawlComplete(true);
     }, 25000);
     return () => clearTimeout(timer);
-  }, []);
+  }, [slide.title]);
 
   // Determine image position style
   const getImagePositionStyle = () => {
@@ -102,7 +114,7 @@ const StoryImageSlide = ({ slide, direction }: StoryImageSlideProps) => {
 
                 {/* Star Wars Crawl story content */}
                 <div className="star-wars-crawl crawl-fade w-full overflow-x-hidden">
-                  <div key={slide.title} className="crawl-content px-[20rem]">
+                  <div className={`crawl-content px-[20rem] ${animationStarted ? 'animate' : ''}`}>
                     {slide.story.map((paragraph, index) => (
                       <p 
                         key={index} 
