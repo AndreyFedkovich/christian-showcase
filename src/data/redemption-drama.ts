@@ -125,6 +125,16 @@ export const introSlides: RedemptionDramaSlide[] = [
       explanation: 'Свет пришёл к своим, и свои не приняли. Призыв к покаянию — смене мышления.'
     },
     intensity: 'low'
+  },
+  {
+    type: 'drama-scripture',
+    actNumber: 'Вступление',
+    verses: [
+      { number: '2', text: 'Покайтесь, ибо приблизилось Царство Небесное.' }
+    ],
+    reference: 'Мф. 3:2',
+    context: 'Иоанн Креститель готовит путь Мессии',
+    intensity: 'low'
   }
 ];
 
@@ -158,6 +168,17 @@ export const act1Slides: RedemptionDramaSlide[] = [
     intensity: 'low'
   },
   {
+    type: 'drama-scripture',
+    actNumber: 'Акт I',
+    verses: [
+      { number: '21', text: 'Родит же Сына, и наречёшь Ему имя Иисус, ибо Он спасёт людей Своих от грехов их.' },
+      { number: '29', text: 'Вот Агнец Божий, Который берёт на Себя грех мира.' }
+    ],
+    reference: 'Мф. 1:21; Ин. 1:29',
+    context: 'Имя Иисус означает «Господь спасает»',
+    intensity: 'low'
+  },
+  {
     type: 'drama-scene',
     actNumber: 'Акт I',
     sceneTitle: 'Рождение Иисуса: свет в тьме',
@@ -170,6 +191,17 @@ export const act1Slides: RedemptionDramaSlide[] = [
     focus: {
       references: ['Мф. 1-2', 'Лк. 1-2', 'Лк. 1:68-79', 'Ин. 1:5,9'],
     },
+    intensity: 'low'
+  },
+  {
+    type: 'drama-scripture',
+    actNumber: 'Акт I',
+    verses: [
+      { number: '5', text: 'И свет во тьме светит, и тьма не объяла его.' },
+      { number: '9', text: 'Был Свет истинный, Который просвещает всякого человека, приходящего в мир.' }
+    ],
+    reference: 'Ин. 1:5, 9',
+    context: 'Свет пришёл в мир тьмы',
     intensity: 'low'
   },
   {
@@ -186,6 +218,18 @@ export const act1Slides: RedemptionDramaSlide[] = [
       references: ['Лк. 2:41-52'],
       explanation: '«Мне должно быть в том, что принадлежит Отцу Моему.»'
     },
+    intensity: 'low'
+  },
+  {
+    type: 'drama-scripture',
+    actNumber: 'Акт I',
+    verses: [
+      { number: '49', text: 'Зачем было вам искать Меня? или вы не знали, что Мне должно быть в том, что принадлежит Отцу Моему?' },
+      { number: '51', text: 'И Он пошёл с ними и пришёл в Назарет; и был в повиновении у них.' },
+      { number: '52', text: 'Иисус же преуспевал в премудрости и возрасте и в любви у Бога и человеков.' }
+    ],
+    reference: 'Лк. 2:49, 51-52',
+    context: 'Двенадцатилетний Иисус в Храме',
     intensity: 'low'
   },
   {
@@ -217,6 +261,17 @@ export const act1Slides: RedemptionDramaSlide[] = [
     intensity: 'medium'
   },
   {
+    type: 'drama-scripture',
+    actNumber: 'Акт I',
+    verses: [
+      { number: '21', text: 'Когда же крестился весь народ, и Иисус, крестившись, молился: отверзлось небо,' },
+      { number: '22', text: 'и Дух Святый нисшёл на Него в телесном виде, как голубь, и был глас с небес, глаголющий: Ты Сын Мой Возлюбленный; в Тебе Моё благоволение!' }
+    ],
+    reference: 'Лк. 3:21-22',
+    context: 'Небеса отверзаются. Троица являет единство.',
+    intensity: 'medium'
+  },
+  {
     type: 'drama-scene',
     actNumber: 'Акт I',
     sceneTitle: 'Искушение в пустыне: начало победы над грехом',
@@ -233,6 +288,17 @@ export const act1Slides: RedemptionDramaSlide[] = [
     intensity: 'medium'
   },
   {
+    type: 'drama-scripture',
+    actNumber: 'Акт I',
+    verses: [
+      { number: '12', text: 'Немедленно после того Дух ведёт Его в пустыню.' },
+      { number: '13', text: 'И был Он там в пустыне сорок дней, искушаемый сатаною, и был со зверями; и Ангелы служили Ему.' }
+    ],
+    reference: 'Мк. 1:12-13',
+    context: 'Новый Адам побеждает там, где первый Адам пал',
+    intensity: 'medium'
+  },
+  {
     type: 'drama-scene',
     actNumber: 'Акт I',
     sceneTitle: 'Диагностика: Переопределение греха',
@@ -246,6 +312,17 @@ export const act1Slides: RedemptionDramaSlide[] = [
       references: ['Мф. 5-7', 'Мк. 2:17'],
       explanation: '«Вы слышали... а Я говорю вам...» Гнев = убийство, вожделение = прелюбодеяние. «Я пришёл призвать не праведников, но грешников».'
     },
+    intensity: 'medium'
+  },
+  {
+    type: 'drama-scripture',
+    actNumber: 'Акт I',
+    verses: [
+      { number: '21', text: 'Вы слышали, что сказано древним: не убивай, кто же убьёт, подлежит суду.' },
+      { number: '22', text: 'А Я говорю вам, что всякий, гневающийся на брата своего напрасно, подлежит суду.' }
+    ],
+    reference: 'Мф. 5:21-22',
+    context: 'Нагорная проповедь. Грех начинается в сердце.',
     intensity: 'medium'
   },
   {
@@ -296,6 +373,18 @@ export const act2Slides: RedemptionDramaSlide[] = [
     intensity: 'medium'
   },
   {
+    type: 'drama-scripture',
+    actNumber: 'Акт II',
+    verses: [
+      { number: '18', text: 'Проходя же близ моря Галилейского, Он увидел двух братьев: Симона, называемого Петром, и Андрея, брата его, закидывающих сети в море, ибо они были рыболовы,' },
+      { number: '19', text: 'и говорит им: идите за Мною, и Я сделаю вас ловцами человеков.' },
+      { number: '20', text: 'И они тотчас, оставив сети, последовали за Ним.' }
+    ],
+    reference: 'Мф. 4:18-20',
+    context: 'Призыв первых учеников',
+    intensity: 'medium'
+  },
+  {
     type: 'drama-scene',
     actNumber: 'Акт II',
     sceneTitle: 'Демонстрация: Наступление Царства на последствия греха',
@@ -309,6 +398,18 @@ export const act2Slides: RedemptionDramaSlide[] = [
       references: ['Мк. 2:1-12'],
       explanation: 'Связь духовной причины и физического следствия. Власть прощать грехи.'
     },
+    intensity: 'medium'
+  },
+  {
+    type: 'drama-scripture',
+    actNumber: 'Акт II',
+    verses: [
+      { number: '5', text: 'Иисус, видя веру их, говорит расслабленному: чадо! прощаются тебе грехи твои.' },
+      { number: '10', text: 'Но чтобы вы знали, что Сын Человеческий имеет власть на земле прощать грехи, — говорит расслабленному:' },
+      { number: '11', text: 'тебе говорю: встань, возьми постель твою и иди в дом твой.' }
+    ],
+    reference: 'Мк. 2:5, 10-11',
+    context: 'Исцеление расслабленного. Власть прощать грехи.',
     intensity: 'medium'
   },
   {
@@ -328,6 +429,18 @@ export const act2Slides: RedemptionDramaSlide[] = [
     intensity: 'high'
   },
   {
+    type: 'drama-scripture',
+    actNumber: 'Акт II',
+    verses: [
+      { number: '29', text: 'Он говорит им: а вы за кого почитаете Меня? Пётр сказал Ему в ответ: Ты Христос.' },
+      { number: '31', text: 'И начал учить их, что Сыну Человеческому много должно пострадать, быть отвержену старейшинами, первосвященниками и книжниками, и быть убиту, и в третий день воскреснуть.' },
+      { number: '33', text: 'Он же, обратившись и взглянув на учеников Своих, воспретил Петру, сказав: отойди от Меня, сатана, потому что ты думаешь не о том, что Божие, но что человеческое.' }
+    ],
+    reference: 'Мк. 8:29, 31, 33',
+    context: 'Исповедание Петра и первое предсказание страстей',
+    intensity: 'high'
+  },
+  {
     type: 'drama-scene',
     actNumber: 'Акт II',
     sceneTitle: 'Пик конфликта: Религиозный грех против Божьей Благодати',
@@ -341,6 +454,18 @@ export const act2Slides: RedemptionDramaSlide[] = [
       references: ['Мф. 23', 'Ин. 8:31-59'],
       explanation: '«Горе вам, книжники и фарисеи, лицемеры!» Спор об отцовстве дьявола.'
     },
+    intensity: 'high'
+  },
+  {
+    type: 'drama-scripture',
+    actNumber: 'Акт II',
+    verses: [
+      { number: '1', text: 'Тогда Иисус начал говорить народу и ученикам Своим' },
+      { number: '2', text: 'и сказал: на Моисеевом седалище сели книжники и фарисеи;' },
+      { number: '3', text: 'итак всё, что они велят вам соблюдать, соблюдайте и делайте; по делам же их не поступайте, ибо они говорят, и не делают.' }
+    ],
+    reference: 'Мф. 23:1-3',
+    context: 'Обличение религиозного лицемерия',
     intensity: 'high'
   }
 ];
@@ -411,6 +536,16 @@ export const act3Slides: RedemptionDramaSlide[] = [
       references: ['Ин. 19:30', 'Мф. 27:45-51'],
       significance: 'Tetelestai — долг уплачен. Разрыв завесы — доступ открыт, проблема разделения решена навсегда.'
     }
+  },
+  {
+    type: 'drama-scripture',
+    actNumber: 'Акт III',
+    verses: [
+      { number: '30', text: 'Когда же Иисус вкусил уксуса, сказал: совершилось! И, преклонив главу, предал дух.' }
+    ],
+    reference: 'Ин. 19:30',
+    context: 'Последние слова Христа на кресте. Tetelestai — уплачено полностью.',
+    intensity: 'climax'
   }
 ];
 
@@ -443,6 +578,16 @@ export const finaleSlides: RedemptionDramaSlide[] = [
     }
   },
   {
+    type: 'drama-scripture',
+    actNumber: 'Финал',
+    verses: [
+      { number: '17', text: 'А если Христос не воскрес, то вера ваша тщетна: вы ещё во грехах ваших.' }
+    ],
+    reference: '1 Кор. 15:17',
+    context: 'Без воскресения нет спасения',
+    intensity: 'climax'
+  },
+  {
     type: 'drama-image',
     actNumber: 'Финал',
     title: 'Воскресение Христа',
@@ -455,6 +600,16 @@ export const finaleSlides: RedemptionDramaSlide[] = [
     intensity: 'climax'
   },
   {
+    type: 'drama-scripture',
+    actNumber: 'Финал',
+    verses: [
+      { number: '25', text: 'Иисус сказал ей: Я есмь воскресение и жизнь; верующий в Меня, если и умрёт, оживёт.' }
+    ],
+    reference: 'Ин. 11:25',
+    context: 'Слова Иисуса перед воскрешением Лазаря',
+    intensity: 'climax'
+  },
+  {
     type: 'drama-image',
     actNumber: 'Финал',
     title: 'Пустая гробница',
@@ -464,6 +619,16 @@ export const finaleSlides: RedemptionDramaSlide[] = [
       text: 'Его нет здесь — Он воскрес!',
       reference: 'Мф. 28:6'
     },
+    intensity: 'climax'
+  },
+  {
+    type: 'drama-scripture',
+    actNumber: 'Финал',
+    verses: [
+      { number: '6', text: 'Его нет здесь — Он воскрес, как сказал. Подойдите, посмотрите место, где лежал Господь.' }
+    ],
+    reference: 'Мф. 28:6',
+    context: 'Ангел у пустой гробницы',
     intensity: 'climax'
   },
   {
@@ -480,6 +645,18 @@ export const finaleSlides: RedemptionDramaSlide[] = [
       references: ['Мф. 28:18-20', 'Лк. 24:47', 'Деян. 1:8'],
       explanation: '«Проповедану быть покаянию и прощению грехов во всех народах, начиная с Иерусалима».'
     },
+    intensity: 'medium'
+  },
+  {
+    type: 'drama-scripture',
+    actNumber: 'Финал',
+    verses: [
+      { number: '18', text: 'И приблизившись Иисус сказал им: дана Мне всякая власть на небе и на земле.' },
+      { number: '19', text: 'Итак идите, научите все народы, крестя их во имя Отца и Сына и Святаго Духа,' },
+      { number: '20', text: 'уча их соблюдать всё, что Я повелел вам; и се, Я с вами во все дни до скончания века. Аминь.' }
+    ],
+    reference: 'Мф. 28:18-20',
+    context: 'Великое поручение. Миссия продолжается.',
     intensity: 'medium'
   }
 ];
