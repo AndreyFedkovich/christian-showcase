@@ -115,7 +115,33 @@ export interface DramaSurveySlide {
   intensity: DramaIntensity;
 }
 
-export type RedemptionDramaSlide = DramaSceneSlide | DramaActSlide | DramaClimaxSlide | DramaImageSlide | DramaScriptureSlide | DramaParallelSlide | DramaSurveySlide;
+// Слайд с родословной Иисуса
+export interface DramaGenealogySlide {
+  type: 'drama-genealogy';
+  actNumber: string;
+  title: string;
+  subtitle?: string;
+  introVerse: {
+    text: string;
+    reference: string;
+  };
+  genealogy: {
+    era: string;
+    names: string[];
+    highlight?: string;
+  }[];
+  conclusion: {
+    name: string;
+    title: string;
+    verse: {
+      text: string;
+      reference: string;
+    };
+  };
+  intensity: DramaIntensity;
+}
+
+export type RedemptionDramaSlide = DramaSceneSlide | DramaActSlide | DramaClimaxSlide | DramaImageSlide | DramaScriptureSlide | DramaParallelSlide | DramaSurveySlide | DramaGenealogySlide;
 
 // ============= СЕКЦИЯ: ВСТУПЛЕНИЕ =============
 
@@ -186,6 +212,42 @@ export const act1Slides: RedemptionDramaSlide[] = [
       explanation: 'Мф. 1:21 — спасение от грехов; Ин. 1:29 — Агнец Божий.'
     },
     intensity: 'low'
+  },
+  {
+    type: 'drama-genealogy',
+    actNumber: 'Акт I',
+    title: 'Родословная Иисуса Христа',
+    subtitle: 'От Авраама до Мессии — 42 рода',
+    introVerse: {
+      text: 'В те дни вышло от кесаря Августа повеление сделать перепись по всей земле. Эта перепись была первая в правление Квириния Сириею.',
+      reference: 'Лк. 2:1-2'
+    },
+    genealogy: [
+      {
+        era: 'От Авраама до Давида',
+        names: ['Авраам', 'Исаак', 'Иаков', 'Иуда', 'Фамарь', 'Фарес', 'Есром', 'Арам', 'Аминадав', 'Наассон', 'Салмон', 'Раав', 'Вооз', 'Руфь', 'Овид', 'Иессей', 'Давид'],
+        highlight: 'Давид'
+      },
+      {
+        era: 'От Давида до переселения',
+        names: ['Соломон', 'Вирсавия', 'Ровоам', 'Авия', 'Аса', 'Иосафат', 'Иорам', 'Озия', 'Иоафам', 'Ахаз', 'Езекия', 'Манассия', 'Амон', 'Иосия'],
+        highlight: 'Соломон'
+      },
+      {
+        era: 'От переселения до Христа',
+        names: ['Иехония', 'Салафииль', 'Зоровавель', 'Авиуд', 'Елиаким', 'Азор', 'Садок', 'Ахим', 'Елиуд', 'Елеазар', 'Матфан', 'Иаков', 'Иосиф', 'Иисус'],
+        highlight: 'Иисус'
+      }
+    ],
+    conclusion: {
+      name: 'ИИСУС ХРИСТОС',
+      title: 'Сын Давидов, Сын Авраамов',
+      verse: {
+        text: 'Родословие Иисуса Христа, Сына Давидова, Сына Авраамова.',
+        reference: 'Мф. 1:1'
+      }
+    },
+    intensity: 'medium'
   },
   {
     type: 'drama-scripture',

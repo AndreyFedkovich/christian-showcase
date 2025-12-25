@@ -20,6 +20,7 @@ import DramaImageSlide from '@/components/DramaImageSlide';
 import DramaScriptureSlide from '@/components/DramaScriptureSlide';
 import DramaParallelSlide from '@/components/DramaParallelSlide';
 import DramaSurveySlide from '@/components/DramaSurveySlide';
+import DramaGenealogySlide from '@/components/DramaGenealogySlide';
 import GodExistsClimaxSlide from '@/components/GodExistsClimaxSlide';
 interface SlideRendererProps {
   slide: UniversalSlide;
@@ -77,6 +78,8 @@ const SlideRenderer = ({ slide, direction, slideNumber }: SlideRendererProps) =>
       return <DramaParallelSlide slide={slide as any} direction={direction} />;
     case 'drama-survey':
       return <DramaSurveySlide slide={slide as any} direction={direction} />;
+    case 'drama-genealogy':
+      return <DramaGenealogySlide slide={slide as any} direction={direction} />;
     case 'god-exists-climax':
       return <GodExistsClimaxSlide slide={slide as any} direction={direction} />;
     case 'intro-hermeneutics':
