@@ -197,8 +197,8 @@ export default function ScrollKeeperPlay() {
         
         {/* Keys counter to the right */}
         <div className="flex items-center gap-2 bg-slate-800/80 px-4 py-3 rounded-xl border border-amber-600/30 backdrop-blur-sm">
-          <Key className="w-5 h-5 text-amber-400" />
-          <span className="text-amber-400 font-bold text-xl">{state.memoryKeys}</span>
+          <Key className="w-10 h-10 text-amber-400" />
+          <span className="text-amber-400 font-bold text-3xl">{state.memoryKeys}</span>
         </div>
       </div>
     </div>
