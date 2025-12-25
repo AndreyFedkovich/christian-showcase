@@ -95,7 +95,27 @@ export interface DramaParallelSlide {
   intensity: DramaIntensity;
 }
 
-export type RedemptionDramaSlide = DramaSceneSlide | DramaActSlide | DramaClimaxSlide | DramaImageSlide | DramaScriptureSlide | DramaParallelSlide;
+// Слайд-опрос для выявления греха
+export interface DramaSurveySlide {
+  type: 'drama-survey';
+  actNumber: string;
+  title: string;
+  subtitle?: string;
+  questions: Array<{
+    question: string;
+    bibleRef?: string;
+  }>;
+  conclusion: {
+    text: string;
+    verse: {
+      text: string;
+      reference: string;
+    };
+  };
+  intensity: DramaIntensity;
+}
+
+export type RedemptionDramaSlide = DramaSceneSlide | DramaActSlide | DramaClimaxSlide | DramaImageSlide | DramaScriptureSlide | DramaParallelSlide | DramaSurveySlide;
 
 // ============= СЕКЦИЯ: ВСТУПЛЕНИЕ =============
 
@@ -324,6 +344,28 @@ export const act1Slides: RedemptionDramaSlide[] = [
     reference: 'Мф. 5:21-22',
     context: 'Нагорная проповедь. Грех начинается в сердце.',
     intensity: 'medium'
+  },
+  {
+    type: 'drama-survey',
+    actNumber: 'Акт I',
+    title: 'Испытание сердца',
+    subtitle: 'По стандартам Иисуса',
+    questions: [
+      { question: 'Вы когда-нибудь гневались на другого человека?', bibleRef: 'Мф. 5:22' },
+      { question: 'Вы называли кого-то глупцом, идиотом или дураком?', bibleRef: 'Мф. 5:22' },
+      { question: 'Вы когда-нибудь смотрели на кого-то с вожделением?', bibleRef: 'Мф. 5:28' },
+      { question: 'Вы желали кому-либо зла или несчастья?' },
+      { question: 'Вы когда-нибудь обманывали или преувеличивали правду?', bibleRef: 'Мф. 5:37' },
+      { question: 'Вы завидовали успеху или имуществу других?' }
+    ],
+    conclusion: {
+      text: 'По стандартам Иисуса — каждый из нас виновен.',
+      verse: {
+        text: 'Потому что все согрешили и лишены славы Божией.',
+        reference: 'Рим. 3:23'
+      }
+    },
+    intensity: 'high'
   },
   {
     type: 'drama-parallel',
