@@ -33,7 +33,7 @@ export interface ScrollKeeperState {
 }
 
 const DEFAULT_HALLS_ORDER: HallType[] = ['shadows', 'scriptorium', 'echo', 'gallery', 'treasury', 'voices', 'spiral'];
-const TIME_PER_CHALLENGE = 60;
+const TIME_PER_CHALLENGE = 90;
 
 // Подсчитать общее количество вопросов во всех залах
 export function getTotalQuestionsCount(): number {
