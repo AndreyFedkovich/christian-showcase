@@ -203,6 +203,8 @@ export function useScrollKeeperState() {
 
     const currentHallType = state.hallOrder[state.currentHallIndex];
     const isShadowsHall = currentHallType === 'shadows';
+    const isScriptoriumHall = currentHallType === 'scriptorium';
+    const hallStaysOpen = isShadowsHall || isScriptoriumHall;
 
     // Stop timer and set checking state
     setState(prev => ({ ...prev, isTimerRunning: false, isCheckingAnswer: true }));
@@ -281,8 +283,8 @@ export function useScrollKeeperState() {
       ];
       message = incorrectMessages[Math.floor(Math.random() * incorrectMessages.length)];
       
-      // Если зал закрывается (не Зал Теней)
-      if (!isShadowsHall) {
+      // Если зал закрывается (не Зал Теней и не Скрипторий)
+      if (!hallStaysOpen) {
         message += ' Этот зал закрывается.';
       }
     }
@@ -307,7 +309,7 @@ export function useScrollKeeperState() {
       keeperMessage: message + feedbackText,
       isTimerRunning: false,
       isCheckingAnswer: false,
-      hallClosed: !isCorrect && !isShadowsHall // Закрываем зал если неправильно и не Зал Теней
+      hallClosed: !isCorrect && !hallStaysOpen // Закрываем зал если неправильно и не особый зал
     }));
   }, [state.currentChallenge, state.usedHints, state.hallOrder, state.currentHallIndex]);
 
