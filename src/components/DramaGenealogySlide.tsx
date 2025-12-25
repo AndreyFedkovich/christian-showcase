@@ -17,14 +17,6 @@ interface DramaGenealogySlideProps {
       reference: string;
     };
     genealogy: GenealogyEra[];
-    conclusion: {
-      name: string;
-      title: string;
-      verse: {
-        text: string;
-        reference: string;
-      };
-    };
     intensity: 'low' | 'medium' | 'high' | 'climax';
   };
   direction: 'next' | 'prev';
@@ -128,7 +120,7 @@ const DramaGenealogySlide = ({ slide, direction }: DramaGenealogySlideProps) => 
 
         {/* Genealogy Chart */}
         <div className="flex-1 flex flex-col justify-center">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 max-w-6xl mx-auto w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-7xl mx-auto w-full">
             {slide.genealogy.map((era, eraIndex) => (
               <motion.div
                 key={eraIndex}
@@ -136,19 +128,19 @@ const DramaGenealogySlide = ({ slide, direction }: DramaGenealogySlideProps) => 
                 className="relative"
               >
                 {/* Era container */}
-                <div className="bg-slate-800/50 rounded-xl border border-slate-700/50 p-4 backdrop-blur-sm h-full">
+                <div className="bg-slate-800/50 rounded-2xl border border-slate-700/50 p-6 backdrop-blur-sm h-full">
                   {/* Era header */}
-                  <div className="text-center mb-3 pb-2 border-b border-slate-700/50">
-                    <span className="text-amber-400 text-xs font-semibold tracking-wider uppercase">
+                  <div className="text-center mb-5 pb-4 border-b border-slate-700/50">
+                    <span className="text-amber-400 text-sm md:text-base font-semibold tracking-wider uppercase">
                       Эра {eraIndex + 1}
                     </span>
-                    <h3 className="text-white font-semibold text-sm md:text-base mt-1">
+                    <h3 className="text-white font-bold text-xl md:text-2xl mt-2">
                       {era.era}
                     </h3>
                   </div>
 
                   {/* Names grid */}
-                  <div className="flex flex-wrap gap-1.5 justify-center">
+                  <div className="flex flex-wrap gap-3 justify-center">
                     {era.names.map((name, nameIndex) => (
                       <motion.span
                         key={nameIndex}
@@ -159,33 +151,33 @@ const DramaGenealogySlide = ({ slide, direction }: DramaGenealogySlideProps) => 
                           duration: 0.3
                         }}
                         className={`
-                          text-xs md:text-sm px-2 py-0.5 rounded-md
+                          text-lg md:text-xl px-4 py-2 rounded-lg
                           ${getNameStyle(name)}
-                          ${name === era.highlight ? 'bg-amber-500/20 ring-1 ring-amber-400/50' : 'bg-slate-700/30'}
+                          ${name === era.highlight ? 'bg-amber-500/20 ring-2 ring-amber-400/50' : 'bg-slate-700/30'}
                         `}
                       >
                         {name}
                         {nameIndex < era.names.length - 1 && (
-                          <span className="text-slate-600 ml-1.5">→</span>
+                          <span className="text-slate-600 ml-2">→</span>
                         )}
                       </motion.span>
                     ))}
                   </div>
 
                   {/* 14 generations badge */}
-                  <div className="text-center mt-3 pt-2 border-t border-slate-700/30">
-                    <span className="text-slate-500 text-xs">14 родов</span>
+                  <div className="text-center mt-5 pt-4 border-t border-slate-700/30">
+                    <span className="text-slate-400 text-base font-medium">14 родов</span>
                   </div>
                 </div>
 
                 {/* Connector arrow between eras */}
                 {eraIndex < slide.genealogy.length - 1 && (
-                  <div className="hidden lg:flex absolute -right-4 top-1/2 -translate-y-1/2 z-10">
+                  <div className="hidden lg:flex absolute -right-5 top-1/2 -translate-y-1/2 z-10">
                     <motion.div
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 1 + eraIndex * 0.3 }}
-                      className="text-amber-400/60 text-xl"
+                      className="text-amber-400/60 text-2xl"
                     >
                       ▶
                     </motion.div>
@@ -198,63 +190,19 @@ const DramaGenealogySlide = ({ slide, direction }: DramaGenealogySlideProps) => 
           {/* Legend */}
           <motion.div 
             variants={itemVariants}
-            className="flex flex-wrap justify-center gap-4 mt-4 text-xs"
+            className="flex flex-wrap justify-center gap-6 mt-6 text-sm"
           >
-            <div className="flex items-center gap-1.5">
-              <span className="w-3 h-3 bg-amber-400/30 rounded border border-amber-400/50" />
+            <div className="flex items-center gap-2">
+              <span className="w-4 h-4 bg-amber-400/30 rounded border border-amber-400/50" />
               <span className="text-slate-400">Ключевые фигуры</span>
             </div>
-            <div className="flex items-center gap-1.5">
-              <span className="w-3 h-3 bg-rose-400/20 rounded" />
+            <div className="flex items-center gap-2">
+              <span className="w-4 h-4 bg-rose-400/20 rounded" />
               <span className="text-slate-400">Женщины в родословной</span>
             </div>
           </motion.div>
         </div>
 
-        {/* Conclusion - Jesus Christ */}
-        <motion.div
-          variants={itemVariants}
-          className="mt-6 text-center"
-        >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 2, duration: 0.8, ease: 'easeOut' }}
-            className="inline-block"
-          >
-            <div className="bg-gradient-to-r from-amber-500/20 via-amber-400/30 to-amber-500/20 rounded-2xl p-4 md:p-6 border border-amber-400/40 backdrop-blur-sm">
-              <motion.h2
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 2.3, duration: 0.5 }}
-                className="text-2xl md:text-3xl lg:text-4xl font-bold text-amber-400"
-              >
-                {slide.conclusion.name}
-              </motion.h2>
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 2.6, duration: 0.5 }}
-                className="text-slate-300 text-sm md:text-base mt-1"
-              >
-                {slide.conclusion.title}
-              </motion.p>
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 2.9, duration: 0.5 }}
-                className="mt-3 pt-3 border-t border-amber-400/20"
-              >
-                <p className="text-slate-200 text-sm italic">
-                  "{slide.conclusion.verse.text}"
-                </p>
-                <p className="text-amber-400/70 text-xs mt-1">
-                  — {slide.conclusion.verse.reference}
-                </p>
-              </motion.div>
-            </div>
-          </motion.div>
-        </motion.div>
       </motion.div>
     </div>
   );
