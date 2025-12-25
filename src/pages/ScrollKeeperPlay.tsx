@@ -12,7 +12,7 @@ import { KeeperDialogue } from '@/components/game/scroll-keeper/KeeperDialogue';
 import { VictoryScene } from '@/components/game/scroll-keeper/VictoryScene';
 import { HallOfShadows, Scriptorium, EchoChamber, GalleryOfWitnesses, TreasuryOfRelics, HallOfVoices, TimeSpiral } from '@/components/game/scroll-keeper/halls';
 import { Challenge, ShadowsChallenge, ScriptoriumChallenge, EchoChallenge, GalleryChallenge, TreasuryChallenge, VoicesChallenge, SpiralChallenge, Hall } from '@/data/scroll-keeper';
-import GameScoreboard from '@/components/game/bible-master/GameScoreboard';
+// GameScoreboard removed - using custom inline score display
 
 export default function ScrollKeeperPlay() {
   const navigate = useNavigate();
@@ -180,14 +180,27 @@ export default function ScrollKeeperPlay() {
 
   // Scoreboard + Keys component for game screens
   const GameHeader = () => (
-    <div className="absolute top-0 left-0 right-0 z-10 pt-4 space-y-3">
-      <GameScoreboard
-        teamName={state.teamName}
-        opponentName="Хранитель"
-        teamScore={state.seekerScore}
-        opponentScore={state.keeperScore}
-        maxScore={Math.max(10, Math.ceil(totalQuestions / 2))}
-      />
+    <div className="absolute top-0 left-0 right-0 z-10 pt-4">
+      <div className="flex items-center justify-center gap-4 px-4">
+        {/* Central score panel */}
+        <div className="flex items-center gap-3 md:gap-5 py-4 px-6 md:py-5 md:px-10 bg-gradient-to-br from-slate-800/95 via-slate-800/90 to-slate-900/95 backdrop-blur-md rounded-2xl border border-white/10 shadow-xl">
+          <div className="flex flex-col items-center">
+            <span className="text-xs md:text-sm text-white/60">{state.teamName}</span>
+            <div className="text-3xl md:text-5xl font-bold text-emerald-400">{state.seekerScore}</div>
+          </div>
+          <div className="text-base md:text-xl font-bold text-white/30 px-1">VS</div>
+          <div className="flex flex-col items-center">
+            <span className="text-xs md:text-sm text-white/60">Хранитель</span>
+            <div className="text-3xl md:text-5xl font-bold text-rose-400">{state.keeperScore}</div>
+          </div>
+        </div>
+        
+        {/* Keys counter to the right */}
+        <div className="flex items-center gap-2 bg-slate-800/80 px-4 py-3 rounded-xl border border-amber-600/30 backdrop-blur-sm">
+          <Key className="w-5 h-5 text-amber-400" />
+          <span className="text-amber-400 font-bold text-xl">{state.memoryKeys}</span>
+        </div>
+      </div>
     </div>
   );
 
