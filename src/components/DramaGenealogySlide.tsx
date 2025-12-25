@@ -128,7 +128,7 @@ const DramaGenealogySlide = ({ slide, direction }: DramaGenealogySlideProps) => 
                 <div className="bg-slate-800/50 rounded-2xl border border-slate-700/50 p-8 backdrop-blur-sm h-full">
                   {/* Era header */}
                   <div className="text-center mb-5 pb-4 border-b border-slate-700/50">
-                    <span className="text-amber-400 text-sm md:text-base font-semibold tracking-wider uppercase">
+                    <span className="text-amber-400 text-xl md:text-2xl font-semibold tracking-wider uppercase">
                       Эра {eraIndex + 1}
                     </span>
                     <h3 className="text-white font-bold text-xl md:text-2xl mt-2">
@@ -163,7 +163,7 @@ const DramaGenealogySlide = ({ slide, direction }: DramaGenealogySlideProps) => 
 
                   {/* 14 generations badge */}
                   <div className="text-center mt-5 pt-4 border-t border-slate-700/30">
-                    <span className="text-slate-400 text-base font-medium">14 родов</span>
+                    <span className="text-slate-400 text-xl font-medium">14 родов</span>
                   </div>
                 </div>
 
