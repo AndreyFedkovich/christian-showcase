@@ -93,16 +93,13 @@ const DramaGenealogySlide = ({ slide, direction }: DramaGenealogySlideProps) => 
         animate="visible"
       >
         {/* Header */}
-        <motion.div variants={itemVariants} className="text-center mb-4">
-          <span className="text-amber-400/80 text-sm md:text-base font-medium tracking-widest uppercase">
+        <motion.div variants={itemVariants} className="text-center mb-12 mt-8">
+          <span className="text-amber-400/80 text-sm md:text-xl font-medium tracking-widest uppercase">
             {slide.actNumber}
           </span>
           <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mt-2">
             {slide.title}
           </h1>
-          {slide.subtitle && (
-            <p className="text-slate-400 text-sm md:text-base mt-1">{slide.subtitle}</p>
-          )}
         </motion.div>
 
         {/* Intro Verse */}
@@ -190,7 +187,7 @@ const DramaGenealogySlide = ({ slide, direction }: DramaGenealogySlideProps) => 
           {/* Legend */}
           <motion.div 
             variants={itemVariants}
-            className="flex flex-wrap justify-center gap-6 mt-6 text-sm"
+            className="flex flex-wrap justify-center gap-6 mt-6 text-xl"
           >
             <div className="flex items-center gap-2">
               <span className="w-4 h-4 bg-amber-400/30 rounded border border-amber-400/50" />
