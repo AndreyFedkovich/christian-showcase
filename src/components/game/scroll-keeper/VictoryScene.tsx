@@ -171,65 +171,40 @@ export const VictoryScene: React.FC<VictorySceneProps> = ({
         </div>
       )}
 
-      {/* Keeper's Speech */}
+      {/* Keeper's Speech + Buttons */}
       {(phase === 'speech' || phase === 'finale') && (
         <div className="absolute bottom-0 left-0 right-0 p-8">
-          <div className="max-w-3xl mx-auto">
+          <div className="max-w-3xl mx-auto space-y-6">
             <KeeperDialogue
               message={`${teamName}, вы доказали свою достойность. ${memoryKeys} Ключей Памяти вернулись в Сердце Библиотеки. Знания, которые могли быть утрачены навеки, теперь сохранены благодаря вам. Библиотека Вечности благодарит вас и дарует вам звание: ${rank}.`}
               mood="approving"
             />
+            
+            {/* Action buttons inside dialogue block */}
+            {showButtons && (
+              <div className="flex justify-center gap-4 animate-fade-in pt-4">
+                <Button
+                  onClick={onPlayAgain}
+                  variant="outline"
+                  size="lg"
+                  className="border-amber-500/50 text-amber-400 hover:bg-amber-900/30 px-10 text-lg"
+                >
+                  Играть снова
+                </Button>
+                <Button
+                  onClick={onExit}
+                  size="lg"
+                  className="bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-white px-10 text-lg"
+                >
+                  Выйти
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       )}
 
       {/* Finale - Stats and buttons */}
-      {phase === 'finale' && (
-        <div className="absolute top-8 left-1/2 -translate-x-1/2 animate-fade-in">
-          {/* Victory crown */}
-          <div className="flex flex-col items-center gap-4">
-            <Crown className="w-20 h-20 text-amber-400 animate-float" />
-            <h1 className="text-5xl md:text-6xl font-bold text-amber-400 text-center">
-              Победа!
-            </h1>
-            
-            {/* Stats */}
-            <div className="flex items-center gap-6 mt-4">
-              <div className="flex items-center gap-3 bg-slate-800/60 px-5 py-3 rounded-full border border-amber-500/30">
-                <Key className="w-6 h-6 text-amber-400" />
-                <span className="text-amber-300 font-bold text-xl">{memoryKeys}</span>
-                <span className="text-slate-400 text-lg">/</span>
-                <span className="text-slate-400 text-lg">{maxKeys}</span>
-              </div>
-              
-              <div className="bg-gradient-to-r from-amber-600/80 to-amber-700/80 px-5 py-3 rounded-full border border-amber-400/30">
-                <span className="text-amber-100 font-medium text-lg">{rank}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Action buttons */}
-      {showButtons && (
-        <div className="absolute bottom-32 left-1/2 -translate-x-1/2 flex gap-4 animate-fade-in">
-          <Button
-            onClick={onPlayAgain}
-            variant="outline"
-            size="lg"
-            className="border-amber-500/50 text-amber-400 hover:bg-amber-900/30 px-10 text-lg"
-          >
-            Играть снова
-          </Button>
-          <Button
-            onClick={onExit}
-            size="lg"
-            className="bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-white px-10 text-lg"
-          >
-            Выйти
-          </Button>
-        </div>
-      )}
     </div>
   );
 };
