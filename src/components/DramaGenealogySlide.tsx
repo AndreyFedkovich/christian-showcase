@@ -110,7 +110,7 @@ const DramaGenealogySlide = ({ slide, direction }: DramaGenealogySlideProps) => 
           <p className="text-slate-200 text-lg md:text-xl lg:text-2xl italic leading-relaxed text-center">
             "{slide.introVerse.text}"
           </p>
-          <p className="text-amber-400/80 text-base md:text-lg mt-3 text-center font-medium">
+          <p className="text-amber-400/80 text-xl md:text-2xl mt-3 text-center font-medium">
             — {slide.introVerse.reference}
           </p>
         </motion.div>
