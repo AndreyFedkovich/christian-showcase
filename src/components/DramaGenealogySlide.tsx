@@ -71,7 +71,7 @@ const DramaGenealogySlide = ({ slide, direction }: DramaGenealogySlideProps) => 
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-amber-950/30 flex flex-col relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 flex flex-col relative overflow-hidden">
       {/* Background decorations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl" />
@@ -108,19 +108,19 @@ const DramaGenealogySlide = ({ slide, direction }: DramaGenealogySlideProps) => 
         {/* Intro Verse */}
         <motion.div 
           variants={itemVariants}
-          className="max-w-3xl mx-auto mb-6 p-4 bg-slate-800/40 rounded-xl border border-slate-700/50 backdrop-blur-sm"
+          className="max-w-5xl mx-auto mb-6 p-6 md:p-8 bg-slate-800/40 rounded-xl border border-slate-700/50 backdrop-blur-sm"
         >
-          <p className="text-slate-200 text-sm md:text-base italic leading-relaxed text-center">
+          <p className="text-slate-200 text-lg md:text-xl lg:text-2xl italic leading-relaxed text-center">
             "{slide.introVerse.text}"
           </p>
-          <p className="text-amber-400/80 text-xs md:text-sm mt-2 text-center font-medium">
+          <p className="text-amber-400/80 text-base md:text-lg mt-3 text-center font-medium">
             — {slide.introVerse.reference}
           </p>
         </motion.div>
 
         {/* Genealogy Chart */}
         <div className="flex-1 flex flex-col justify-center">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-7xl mx-auto w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 w-full px-2 md:px-4">
             {slide.genealogy.map((era, eraIndex) => (
               <motion.div
                 key={eraIndex}
@@ -128,7 +128,7 @@ const DramaGenealogySlide = ({ slide, direction }: DramaGenealogySlideProps) => 
                 className="relative"
               >
                 {/* Era container */}
-                <div className="bg-slate-800/50 rounded-2xl border border-slate-700/50 p-6 backdrop-blur-sm h-full">
+                <div className="bg-slate-800/50 rounded-2xl border border-slate-700/50 p-8 backdrop-blur-sm h-full">
                   {/* Era header */}
                   <div className="text-center mb-5 pb-4 border-b border-slate-700/50">
                     <span className="text-amber-400 text-sm md:text-base font-semibold tracking-wider uppercase">
