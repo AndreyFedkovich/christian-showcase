@@ -237,14 +237,7 @@ export const TimeSpiral: React.FC<TimeSpiralProps> = ({ challenge, onAnswer }) =
       </div>
 
       {/* Content */}
-      <div className="relative z-10 min-h-screen flex flex-col items-center justify-center p-8">
-        {/* Hall title */}
-        <div className="absolute top-8 left-1/2 -translate-x-1/2 flex items-center gap-3">
-          <Clock className="w-7 h-7 text-cyan-400 animate-pulse" />
-          <h2 className="text-2xl font-light text-cyan-300/80 tracking-wider">СПИРАЛЬ ВРЕМЕНИ</h2>
-          <Clock className="w-7 h-7 text-cyan-400 animate-pulse" />
-        </div>
-
+      <div className="relative z-10 min-h-screen flex flex-col items-center justify-center p-8 pt-32 md:pt-40">
         {/* Instructions */}
         <div className={`mb-8 text-center transition-all duration-700 ${showSpiral ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}>
           <p className="text-cyan-200/70 text-xl">Расставьте события в хронологическом порядке</p>

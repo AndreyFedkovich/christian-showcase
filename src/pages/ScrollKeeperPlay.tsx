@@ -307,10 +307,8 @@ export default function ScrollKeeperPlay() {
       case 'challenge':
         return (
           <div className="relative min-h-screen">
+            {renderHallChallenge()}
             <GameHeader />
-            <div className="pt-36">
-              {renderHallChallenge()}
-            </div>
           </div>
         );
 
