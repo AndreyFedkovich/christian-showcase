@@ -1,9 +1,9 @@
-import { useScrollKeeperState } from '@/hooks/useScrollKeeperState';
+import { useScrollKeeperState, getTotalQuestionsCount } from '@/hooks/useScrollKeeperState';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { ArrowLeft, Key, BookOpen, Clock, Settings2 } from 'lucide-react';
+import { ArrowLeft, Key, BookOpen, Clock, Settings2, Swords } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { PrologueScene } from '@/components/game/scroll-keeper/PrologueScene';
@@ -11,7 +11,8 @@ import { HallTransition } from '@/components/game/scroll-keeper/HallTransition';
 import { KeeperDialogue } from '@/components/game/scroll-keeper/KeeperDialogue';
 import { VictoryScene } from '@/components/game/scroll-keeper/VictoryScene';
 import { HallOfShadows, Scriptorium, EchoChamber, GalleryOfWitnesses, TreasuryOfRelics, HallOfVoices, TimeSpiral } from '@/components/game/scroll-keeper/halls';
-import { Challenge, ShadowsChallenge, ScriptoriumChallenge, EchoChallenge, GalleryChallenge, TreasuryChallenge, VoicesChallenge, SpiralChallenge } from '@/data/scroll-keeper';
+import { Challenge, ShadowsChallenge, ScriptoriumChallenge, EchoChallenge, GalleryChallenge, TreasuryChallenge, VoicesChallenge, SpiralChallenge, Hall } from '@/data/scroll-keeper';
+import GameScoreboard from '@/components/game/bible-master/GameScoreboard';
 
 export default function ScrollKeeperPlay() {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ export default function ScrollKeeperPlay() {
   const {
     state,
     getCurrentHall,
+    getChallengesForHall,
     setTeamName,
     startGame,
     startHall,
@@ -30,6 +32,8 @@ export default function ScrollKeeperPlay() {
     proceedToNextHall,
     goToSetup
   } = useScrollKeeperState();
+
+  const totalQuestions = getTotalQuestionsCount();
 
   // Handle startHall query param - auto-start game from selected hall
   useEffect(() => {
@@ -174,6 +178,22 @@ export default function ScrollKeeperPlay() {
     }
   };
 
+  // Scoreboard + Keys component for game screens
+  const GameHeader = () => (
+    <div className="absolute top-0 left-0 right-0 z-10 pt-4 space-y-3">
+      <GameScoreboard
+        teamName={state.teamName}
+        opponentName="Хранитель"
+        teamScore={state.seekerScore}
+        opponentScore={state.keeperScore}
+        maxScore={Math.max(10, Math.ceil(totalQuestions / 2))}
+      />
+      <div className="flex justify-center">
+        <MemoryKeyCounter keys={state.memoryKeys} totalQuestions={totalQuestions} />
+      </div>
+    </div>
+  );
+
   // Render based on game phase
   const renderContent = () => {
     switch (state.phase) {
@@ -196,7 +216,7 @@ export default function ScrollKeeperPlay() {
               <div className="text-center space-y-4">
                 <div className="text-6xl mb-4">📚</div>
                 <h1 className="text-4xl font-bold text-amber-400">Хранитель Свитков</h1>
-                <p className="text-slate-300 text-lg">Библиотека Вечности ждёт вас</p>
+                <p className="text-slate-300 text-lg">Искатели против Хранителя</p>
               </div>
               
               <div className="space-y-4 bg-slate-800/50 p-6 rounded-xl border border-slate-700">
@@ -213,16 +233,20 @@ export default function ScrollKeeperPlay() {
                 
                 <div className="pt-4 space-y-3 text-sm text-slate-400">
                   <p className="flex items-center gap-2">
+                    <Swords className="w-4 h-4 text-amber-400" />
+                    Соревнуйтесь с Хранителем — набирайте очки
+                  </p>
+                  <p className="flex items-center gap-2">
                     <Key className="w-4 h-4 text-amber-400" />
-                    Соберите Ключи Памяти, отвечая на вопросы
+                    Правильный ответ = очко вам + Ключ Памяти
                   </p>
                   <p className="flex items-center gap-2">
                     <BookOpen className="w-4 h-4 text-amber-400" />
-                    Пройдите 7 залов Библиотеки Вечности
+                    В Зале Теней ошибка не закрывает зал
                   </p>
                   <p className="flex items-center gap-2">
                     <Clock className="w-4 h-4 text-amber-400" />
-                    Время ограничено — думайте быстро!
+                    В остальных залах ошибка = зал закрыт
                   </p>
                 </div>
               </div>
@@ -257,75 +281,89 @@ export default function ScrollKeeperPlay() {
 
       case 'hall-intro':
         return currentHall ? (
-          <HallTransition
-            hall={currentHall}
-            hallNumber={state.currentHallIndex + 1}
-            totalHalls={state.hallOrder.length}
-            memoryKeys={state.memoryKeys}
-            maxKeys={state.maxMemoryKeys}
-            onStartChallenge={startChallenge}
-          />
+          <div className="relative min-h-screen">
+            <GameHeader />
+            <HallTransition
+              hall={currentHall}
+              hallNumber={state.currentHallIndex + 1}
+              totalHalls={state.hallOrder.length}
+              memoryKeys={state.memoryKeys}
+              maxKeys={totalQuestions}
+              onStartChallenge={startChallenge}
+            />
+          </div>
         ) : null;
 
       case 'challenge':
-        return renderHallChallenge();
+        return (
+          <div className="relative min-h-screen">
+            <GameHeader />
+            <div className="pt-36">
+              {renderHallChallenge()}
+            </div>
+          </div>
+        );
 
       case 'result':
         return (
-          <div className="flex flex-col items-center justify-center min-h-screen p-8 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-center">
-            <div className="max-w-2xl space-y-8 animate-fade-in">
-              <div className={cn(
-                "text-9xl drop-shadow-[0_0_40px_rgba(251,191,36,0.6)]",
-                state.isCorrect ? "" : ""
-              )}>
-                {state.isCorrect ? '✨' : '💨'}
+          <div className="relative min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+            <GameHeader />
+            <div className="flex flex-col items-center justify-center min-h-screen p-8 text-center pt-40">
+              <div className="max-w-2xl space-y-8 animate-fade-in">
+                <div className={cn(
+                  "text-9xl drop-shadow-[0_0_40px_rgba(251,191,36,0.6)]",
+                  state.isCorrect ? "" : ""
+                )}>
+                  {state.isCorrect ? '✨' : '💨'}
+                </div>
+                <h2 className={cn(
+                  "text-4xl md:text-5xl font-bold",
+                  state.isCorrect ? "text-emerald-400" : "text-rose-400"
+                )}>
+                  {state.isCorrect ? 'Верно! +1 Искателям' : 'Неверно! +1 Хранителю'}
+                </h2>
+                
+                <KeeperDialogue
+                  message={state.keeperMessage}
+                  mood={state.keeperMood}
+                />
+                
+                <Button 
+                  onClick={proceedFromResult}
+                  size="lg"
+                  className="mt-8 bg-amber-600 hover:bg-amber-700 text-white px-12 py-6 text-xl"
+                >
+                  Продолжить
+                </Button>
               </div>
-              <h2 className={cn(
-                "text-4xl md:text-5xl font-bold",
-                state.isCorrect ? "text-emerald-400" : "text-rose-400"
-              )}>
-                {state.isCorrect ? 'Верно!' : 'Неверно'}
-              </h2>
-              
-              <KeeperDialogue
-                message={state.keeperMessage}
-                mood={state.keeperMood}
-              />
-              
-              <MemoryKeyCounter keys={state.memoryKeys} maxKeys={state.maxMemoryKeys} />
-              <Button 
-                onClick={proceedFromResult}
-                size="lg"
-                className="mt-8 bg-amber-600 hover:bg-amber-700 text-white px-12 py-6 text-xl"
-              >
-                Продолжить
-              </Button>
             </div>
           </div>
         );
 
       case 'hall-complete':
         return (
-          <div className="flex flex-col items-center justify-center min-h-screen p-8 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-center">
-            <div className="max-w-2xl space-y-8 animate-fade-in">
-              <div className="text-8xl">🚪</div>
-              <h2 className="text-3xl font-bold text-amber-400">
-                Зал пройден!
-              </h2>
-              
-              <KeeperDialogue
-                message={state.keeperMessage}
-                mood="approving"
-              />
-              
-              <MemoryKeyCounter keys={state.memoryKeys} maxKeys={state.maxMemoryKeys} />
-              <Button 
-                onClick={proceedToNextHall}
-                size="lg"
-                className="mt-8 bg-amber-600 hover:bg-amber-700 text-white px-12 py-6 text-xl"
-              >
-                Следующий зал
-              </Button>
+          <div className="relative min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+            <GameHeader />
+            <div className="flex flex-col items-center justify-center min-h-screen p-8 text-center pt-40">
+              <div className="max-w-2xl space-y-8 animate-fade-in">
+                <div className="text-8xl">🚪</div>
+                <h2 className="text-3xl font-bold text-amber-400">
+                  {state.hallClosed ? 'Зал закрыт' : 'Зал пройден!'}
+                </h2>
+                
+                <KeeperDialogue
+                  message={state.keeperMessage}
+                  mood={state.hallClosed ? 'warning' : 'approving'}
+                />
+                
+                <Button 
+                  onClick={proceedToNextHall}
+                  size="lg"
+                  className="mt-8 bg-amber-600 hover:bg-amber-700 text-white px-12 py-6 text-xl"
+                >
+                  Следующий зал
+                </Button>
+              </div>
             </div>
           </div>
         );
@@ -335,7 +373,9 @@ export default function ScrollKeeperPlay() {
           <VictoryScene
             teamName={state.teamName}
             memoryKeys={state.memoryKeys}
-            maxKeys={state.maxMemoryKeys}
+            maxKeys={totalQuestions}
+            seekerScore={state.seekerScore}
+            keeperScore={state.keeperScore}
             onPlayAgain={goToSetup}
             onExit={handleExit}
           />
@@ -343,33 +383,41 @@ export default function ScrollKeeperPlay() {
 
       case 'defeat':
         return (
-          <div className="flex flex-col items-center justify-center min-h-screen p-8 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-center">
-            <div className="max-w-2xl space-y-8 animate-fade-in">
-              <div className="text-8xl">📖</div>
-              <h1 className="text-4xl font-bold text-slate-400">
-                Испытание не пройдено
-              </h1>
-              
-              <KeeperDialogue
-                message={state.keeperMessage}
-                mood="thoughtful"
-              />
-              
-              <MemoryKeyCounter keys={state.memoryKeys} maxKeys={state.maxMemoryKeys} />
-              <div className="flex gap-4 justify-center pt-8">
-                <Button 
-                  onClick={goToSetup}
-                  variant="outline"
-                  className="border-slate-600 text-slate-400 hover:bg-slate-800"
-                >
-                  Попробовать снова
-                </Button>
-                <Button 
-                  onClick={handleExit}
-                  className="bg-slate-700 hover:bg-slate-600 text-white"
-                >
-                  Выйти
-                </Button>
+          <div className="relative min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+            <GameHeader />
+            <div className="flex flex-col items-center justify-center min-h-screen p-8 text-center pt-40">
+              <div className="max-w-2xl space-y-8 animate-fade-in">
+                <div className="text-8xl">📖</div>
+                <h1 className="text-4xl font-bold text-slate-400">
+                  Хранитель победил
+                </h1>
+                
+                <div className="text-2xl text-slate-300">
+                  <span className="text-emerald-400">{state.teamName}: {state.seekerScore}</span>
+                  <span className="text-slate-500 mx-4">vs</span>
+                  <span className="text-rose-400">Хранитель: {state.keeperScore}</span>
+                </div>
+                
+                <KeeperDialogue
+                  message={state.keeperMessage}
+                  mood="thoughtful"
+                />
+                
+                <div className="flex gap-4 justify-center pt-8">
+                  <Button 
+                    onClick={goToSetup}
+                    variant="outline"
+                    className="border-slate-600 text-slate-400 hover:bg-slate-800"
+                  >
+                    Попробовать снова
+                  </Button>
+                  <Button 
+                    onClick={handleExit}
+                    className="bg-slate-700 hover:bg-slate-600 text-white"
+                  >
+                    Выйти
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
@@ -387,21 +435,18 @@ export default function ScrollKeeperPlay() {
   );
 }
 
-// Memory Key Counter component
-function MemoryKeyCounter({ keys, maxKeys }: { keys: number; maxKeys: number }) {
+// Memory Key Counter component (bonus keys)
+function MemoryKeyCounter({ keys, totalQuestions }: { keys: number; totalQuestions: number }) {
   return (
-    <div className="flex items-center gap-3 bg-slate-800/50 px-6 py-3 rounded-full border-2 border-amber-600/30 shadow-lg backdrop-blur-sm">
-      <Key className="w-7 h-7 text-amber-400 drop-shadow-[0_0_10px_rgba(251,191,36,0.4)]" />
-      <span className="text-amber-400 font-bold text-2xl">{keys}</span>
-      <span className="text-slate-500 text-xl">/</span>
-      <span className="text-slate-400 text-xl">{maxKeys}</span>
-      <span className="text-slate-500 text-base">Ключей Памяти</span>
+    <div className="flex items-center gap-3 bg-slate-800/50 px-4 py-2 rounded-full border border-amber-600/30 shadow-lg backdrop-blur-sm">
+      <Key className="w-5 h-5 text-amber-400 drop-shadow-[0_0_10px_rgba(251,191,36,0.4)]" />
+      <span className="text-amber-400 font-bold text-lg">{keys}</span>
+      <span className="text-slate-500 text-sm">Ключей (бонус)</span>
     </div>
   );
 }
 
 // Default Challenge View for halls not yet implemented
-import { Hall } from '@/data/scroll-keeper';
 import { Input as InputField } from '@/components/ui/input';
 import { Send, Lightbulb } from 'lucide-react';
 

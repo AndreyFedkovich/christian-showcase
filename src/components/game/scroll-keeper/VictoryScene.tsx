@@ -7,6 +7,8 @@ interface VictorySceneProps {
   teamName: string;
   memoryKeys: number;
   maxKeys: number;
+  seekerScore: number;
+  keeperScore: number;
   onPlayAgain: () => void;
   onExit: () => void;
 }
@@ -17,6 +19,8 @@ export const VictoryScene: React.FC<VictorySceneProps> = ({
   teamName,
   memoryKeys,
   maxKeys,
+  seekerScore,
+  keeperScore,
   onPlayAgain,
   onExit
 }) => {
@@ -175,8 +179,20 @@ export const VictoryScene: React.FC<VictorySceneProps> = ({
       {(phase === 'speech' || phase === 'finale') && (
         <div className="absolute bottom-0 left-0 right-0 p-8">
           <div className="max-w-3xl mx-auto space-y-6">
+            {/* Score display */}
+            <div className="flex justify-center items-center gap-6 text-2xl">
+              <span className="text-emerald-400 font-bold">{teamName}: {seekerScore}</span>
+              <span className="text-slate-500">vs</span>
+              <span className="text-rose-400 font-bold">Хранитель: {keeperScore}</span>
+            </div>
+            
+            <div className="flex justify-center items-center gap-3 text-amber-400">
+              <Key className="w-6 h-6" />
+              <span className="font-medium">{memoryKeys} Ключей Памяти (бонус)</span>
+            </div>
+            
             <KeeperDialogue
-              message={`${teamName}, вы доказали свою достойность. ${memoryKeys} Ключей Памяти вернулись в Сердце Библиотеки. Знания, которые могли быть утрачены навеки, теперь сохранены благодаря вам. Библиотека Вечности благодарит вас и дарует вам звание: ${rank}.`}
+              message={`${teamName}, вы одержали победу со счётом ${seekerScore}:${keeperScore}! Знания сохранены благодаря вам. Библиотека Вечности дарует вам звание: ${rank}.`}
               mood="approving"
             />
             
