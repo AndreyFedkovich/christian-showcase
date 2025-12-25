@@ -130,14 +130,6 @@ export interface DramaGenealogySlide {
     names: string[];
     highlight?: string;
   }[];
-  conclusion: {
-    name: string;
-    title: string;
-    verse: {
-      text: string;
-      reference: string;
-    };
-  };
   intensity: DramaIntensity;
 }
 
@@ -239,14 +231,6 @@ export const act1Slides: RedemptionDramaSlide[] = [
         highlight: 'Иисус'
       }
     ],
-    conclusion: {
-      name: 'ИИСУС ХРИСТОС',
-      title: 'Сын Давидов, Сын Авраамов',
-      verse: {
-        text: 'Родословие Иисуса Христа, Сына Давидова, Сына Авраамова.',
-        reference: 'Мф. 1:1'
-      }
-    },
     intensity: 'medium'
   },
   {
