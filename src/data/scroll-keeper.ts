@@ -451,7 +451,7 @@ export const sampleChallenges: Challenge[] = [
     quote: 'Господь дал, Господь и взял; да будет имя Господне благословенно!',
     speaker: 'Иов',
     context: 'После потери всего имущества и детей',
-    bookReference: 'Иов 1:21',
+    bookReference: 'Ветхий Завет',
     acceptableKeywords: ['Иов', 'Job']
   },
   {
@@ -469,7 +469,7 @@ export const sampleChallenges: Challenge[] = [
     quote: 'А я и дом мой будем служить Господу.',
     speaker: 'Иисус Навин',
     context: 'Призыв к народу выбрать, кому служить',
-    bookReference: 'Иисус Навин 24:15',
+    bookReference: 'Ветхий Завет',
     acceptableKeywords: ['Навин', 'Joshua', 'Иисус Навин']
   },
   

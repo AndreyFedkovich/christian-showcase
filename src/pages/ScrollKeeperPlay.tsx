@@ -188,9 +188,6 @@ export default function ScrollKeeperPlay() {
         opponentScore={state.keeperScore}
         maxScore={Math.max(10, Math.ceil(totalQuestions / 2))}
       />
-      <div className="flex justify-center">
-        <MemoryKeyCounter keys={state.memoryKeys} totalQuestions={totalQuestions} />
-      </div>
     </div>
   );
 
@@ -438,11 +435,9 @@ export default function ScrollKeeperPlay() {
 // Memory Key Counter component (bonus keys)
 function MemoryKeyCounter({ keys, totalQuestions }: { keys: number; totalQuestions: number }) {
   return (
-    <div className="flex items-center gap-3 bg-slate-800/50 px-4 py-2 rounded-full border border-amber-600/30 shadow-lg backdrop-blur-sm">
-      <Key className="w-5 h-5 text-amber-400 drop-shadow-[0_0_10px_rgba(251,191,36,0.4)]" />
-      <span className="text-amber-400 font-bold text-lg">{keys}</span>
-      <span className="text-slate-500 text-sm">Ключей (бонус)</span>
-    </div>
+      <div className="flex justify-center">
+        <MemoryKeyCounter keys={keys} totalQuestions={totalQuestions} />
+      </div>
   );
 }
 
