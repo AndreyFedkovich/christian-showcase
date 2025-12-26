@@ -89,12 +89,12 @@ const DramaSurveySlide = ({ slide, direction }: DramaSurveySlideProps) => {
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.3 }}
-        className="text-4xl md:text-5xl font-bold text-white mb-2 text-center"
+        className="text-4xl md:text-5xl font-bold text-white mb-10 text-center"
       >
         {slide.title}
       </motion.h1>
       
-      {slide.subtitle && (
+      {/*{slide.subtitle && (
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -103,7 +103,7 @@ const DramaSurveySlide = ({ slide, direction }: DramaSurveySlideProps) => {
         >
           {slide.subtitle}
         </motion.p>
-      )}
+      )}*/}
 
       {/* Questions container */}
       <div className="max-w-3xl w-full space-y-4 mb-8">
@@ -126,7 +126,7 @@ const DramaSurveySlide = ({ slide, direction }: DramaSurveySlideProps) => {
                     {index + 1}
                   </span>
                   <div className="flex-1">
-                    <p className="text-white text-lg md:text-xl font-medium">
+                    <p className="text-white text-2xl md:text-3xl font-medium">
                       {q.question}
                     </p>
                     {q.bibleRef && (
@@ -181,7 +181,7 @@ const DramaSurveySlide = ({ slide, direction }: DramaSurveySlideProps) => {
             </motion.p>
             
             {/* Bible verse */}
-            <motion.div
+            {/*<motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
@@ -193,7 +193,7 @@ const DramaSurveySlide = ({ slide, direction }: DramaSurveySlideProps) => {
               <span className="text-amber-400 font-medium">
                 {slide.conclusion.verse.reference}
               </span>
-            </motion.div>
+            </motion.div>*/}
           </motion.div>
         )}
       </AnimatePresence>
