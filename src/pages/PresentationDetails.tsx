@@ -9,6 +9,7 @@ import { epistlesStructure } from "@/data/epistles-structure";
 import { redemptionDrama, redemptionSections } from "@/data/redemption-drama";
 import { godExists, godExistsSections } from "@/data/god-exists";
 import { eternalTemporal, eternalTemporalSections } from "@/data/eternal-temporal";
+import { homeChurch, homeChurchSections } from "@/data/home-church";
 import { presentations } from "@/data/presentations";
 import { useEffect } from "react";
 import { UniversalSlide } from "@/types/slides";
@@ -44,6 +45,8 @@ const PresentationDetails = () => {
     ? redemptionDrama as UniversalSlide[]
     : presentation.type === 'eternal-temporal'
     ? eternalTemporal as UniversalSlide[]
+    : presentation.type === 'home-church'
+    ? homeChurch as UniversalSlide[]
     : seminar as UniversalSlide[];
   
   // Load sections for tabbed presentations
@@ -53,6 +56,8 @@ const PresentationDetails = () => {
     ? redemptionSections 
     : presentation.type === 'eternal-temporal'
     ? eternalTemporalSections
+    : presentation.type === 'home-church'
+    ? homeChurchSections
     : seminarSections;
   
   const handleSlideClick = (slideIndex: number) => {

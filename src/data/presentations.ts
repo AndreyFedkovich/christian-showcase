@@ -1,4 +1,4 @@
-// Last updated: 2025-12-21
+// Last updated: 2025-12-27
 import peterImg from "@/assets/peter.jpg";
 import josephImg from "@/assets/joseph-thumbnail.png";
 import knowDoImg from "@/assets/know-do.png";
@@ -11,6 +11,7 @@ import { epistlesStructure } from '@/data/epistles-structure';
 import { redemptionDrama } from '@/data/redemption-drama';
 import { godExists } from '@/data/god-exists';
 import { eternalTemporal } from '@/data/eternal-temporal';
+import { homeChurch } from '@/data/home-church';
 
 export interface Presentation {
   id: string;
@@ -19,7 +20,7 @@ export interface Presentation {
   thumbnail: string;
   slideCount: number;
   duration: string;
-  type: 'disciples' | 'seminar' | 'hermeneutics' | 'god-exists' | 'drama' | 'eternal-temporal';
+  type: 'disciples' | 'seminar' | 'hermeneutics' | 'god-exists' | 'drama' | 'eternal-temporal' | 'home-church';
   isHero?: boolean;
 }
 
@@ -41,6 +42,15 @@ export const presentations: Presentation[] = [
     slideCount: eternalTemporal.length,
     duration: "25-30 минут",
     type: 'eternal-temporal'
+  },
+  {
+    id: "home-church",
+    title: "Домашняя церковь",
+    description: "Церковь как тело Христа — тайна, открытая в Новом Завете",
+    thumbnail: eternalCosmosImg,
+    slideCount: homeChurch.length,
+    duration: "30-35 минут",
+    type: 'home-church'
   },
   {
     id: "seminar",
