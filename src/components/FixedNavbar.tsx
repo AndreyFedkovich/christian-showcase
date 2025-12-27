@@ -52,7 +52,7 @@ const FixedNavbar = ({ isScrolled, onNavigate, activeTab, searchQuery, onSearchC
             {/* Santa hat - only Dec 1 - Jan 31 */}
             {(new Date().getMonth() === 11 || new Date().getMonth() === 0) && (
               <svg 
-                className="absolute -top-2 -right-2 w-5 h-5 drop-shadow-sm transform rotate-12" 
+                className="absolute -top-2 -right-2 w-5 h-5 drop-shadow-sm transform rotate-24"
                 viewBox="0 0 24 24"
                 fill="none"
               >
