@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Search, Globe, LogIn, Menu, X, Gamepad2 } from "lucide-react";
+import { Search, Globe, LogIn, Menu, X, Gamepad2, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -10,7 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import FestiveBookIcon from "@/components/FestiveBookIcon";
+
 
 interface FixedNavbarProps {
   isScrolled: boolean;
@@ -42,11 +42,26 @@ const FixedNavbar = ({ isScrolled, onNavigate, activeTab, searchQuery, onSearchC
       <div className="max-w-7xl mx-auto px-4 md:px-6 h-20 flex items-center justify-between">
         {/* Left: Logo + Site name */}
         <div className="flex items-center gap-3">
-          <img 
-            src="/favicon.png" 
-            alt="Logo" 
-            className="w-10 h-10 object-contain"
-          />
+          {/* Logo with conditional Santa hat */}
+          <div className="relative">
+            <img 
+              src="/favicon.png" 
+              alt="Logo" 
+              className="w-10 h-10 object-contain"
+            />
+            {/* Santa hat - only Dec 1 - Jan 31 */}
+            {(new Date().getMonth() === 11 || new Date().getMonth() === 0) && (
+              <svg 
+                className="absolute -top-2 -right-2 w-5 h-5 drop-shadow-sm transform rotate-12" 
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path d="M4 22 L12 2 L20 22 Z" fill="#dc2626" />
+                <rect x="2" y="19" width="20" height="5" rx="2.5" fill="white" />
+                <circle cx="12" cy="3" r="3" fill="white" />
+              </svg>
+            )}
+          </div>
           <span className={cn(
             "font-bold text-xl transition-colors",
             textColor
@@ -66,7 +81,7 @@ const FixedNavbar = ({ isScrolled, onNavigate, activeTab, searchQuery, onSearchC
                 : (isScrolled ? "text-muted-foreground border-transparent hover:text-primary/80" : "text-white/70 border-transparent hover:text-white")
             )}
           >
-            <FestiveBookIcon className="w-5 h-5" />
+            <BookOpen className="w-5 h-5" />
             Презентации
           </button>
           <button
@@ -187,7 +202,7 @@ const FixedNavbar = ({ isScrolled, onNavigate, activeTab, searchQuery, onSearchC
                 hoverBg
               )}
             >
-              <FestiveBookIcon className="w-5 h-5" />
+              <BookOpen className="w-5 h-5" />
               Презентации
             </button>
             <button
