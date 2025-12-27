@@ -1,5 +1,8 @@
-import EternalCosmos from '@/assets/eternal-cosmos.png';
-import EternalGloryHands from '@/assets/eternal-glory-hands.png';
+import HomeChurchThumbnail from '@/assets/home-church-thumbnail.png';
+import HomeChurchLydia from '@/assets/home-church-lydia.png';
+import HomeChurchGathering from '@/assets/home-church-gathering.png';
+import HomeChurchBody from '@/assets/home-church-body.png';
+import HomeChurchGifts from '@/assets/home-church-gifts.png';
 import { UniversalSlide } from '@/types/slides';
 
 // Секции презентации для навигации
@@ -44,7 +47,7 @@ export const homeChurch: UniversalSlide[] = [
     type: 'drama-image',
     actNumber: 'Новый Завет',
     title: 'Домашняя церковь',
-    image: EternalCosmos,
+    image: HomeChurchThumbnail,
     caption: 'Тайна, сокрытая от веков и поколений, ныне открытая святым Его',
     verse: {
       text: 'И Он есть глава тела Церкви; Он — начаток, первенец из мёртвых, дабы иметь Ему во всём первенство.',
@@ -474,7 +477,7 @@ export const homeChurch: UniversalSlide[] = [
     type: 'drama-image',
     actNumber: 'Призыв',
     title: 'Соберёмся вместе',
-    image: EternalGloryHands,
+    image: HomeChurchGathering,
     caption: 'Церковь — это не здание. Церковь — это мы, собранные во имя Христа.',
     verse: {
       text: 'Не будем оставлять собрания своего, как есть у некоторых обычай; но будем увещевать друг друга.',

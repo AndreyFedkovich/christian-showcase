@@ -5,6 +5,7 @@ import knowDoImg from "@/assets/know-do.png";
 import salvationImg from "@/assets/salvation-thumbnail.png";
 import godExistsImg from "@/assets/god-exists-thumbnail.png";
 import eternalCosmosImg from "@/assets/eternal-cosmos.png";
+import homeChurchImg from "@/assets/home-church-thumbnail.png";
 import { seminar } from '@/data/seminar';
 import { disciples } from '@/data/disciples';
 import { epistlesStructure } from '@/data/epistles-structure';
@@ -47,7 +48,7 @@ export const presentations: Presentation[] = [
     id: "home-church",
     title: "Домашняя церковь",
     description: "Церковь как тело Христа — тайна, открытая в Новом Завете",
-    thumbnail: eternalCosmosImg,
+    thumbnail: homeChurchImg,
     slideCount: homeChurch.length,
     duration: "30-35 минут",
     type: 'home-church'
