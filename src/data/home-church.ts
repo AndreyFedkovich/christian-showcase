@@ -192,7 +192,21 @@ export const homeChurch: UniversalSlide[] = [
     intensity: 'high'
   },
 
-  // 12. Уникальность образа тела
+  // 12. Изображение — Тело Христово
+  {
+    type: 'drama-image',
+    actNumber: 'Часть II',
+    title: 'Тело Христово',
+    image: HomeChurchBody,
+    caption: 'Церковь — живой организм, в котором каждый член соединён со Христом и друг с другом',
+    verse: {
+      text: 'И вы — тело Христово, а порознь — члены.',
+      reference: '1 Коринфянам 12:27'
+    },
+    intensity: 'high'
+  },
+
+  // 13. Уникальность образа тела
   {
     type: 'drama-scene',
     actNumber: 'Часть II',
@@ -277,7 +291,21 @@ export const homeChurch: UniversalSlide[] = [
     intensity: 'medium'
   },
 
-  // 17. Дом Лидии
+  // 17. Изображение — Дом Лидии
+  {
+    type: 'drama-image',
+    actNumber: 'Часть III',
+    title: 'Дом Лидии — первая церковь в Европе',
+    image: HomeChurchLydia,
+    caption: 'У реки в Филиппах Бог отверз сердце Лидии, и её дом стал первой церковью на европейской земле',
+    verse: {
+      text: 'Войдите в дом мой и живите у меня.',
+      reference: 'Деяния 16:15'
+    },
+    intensity: 'medium'
+  },
+
+  // 18. Дом Лидии — Писание
   {
     type: 'drama-scripture',
     actNumber: 'Часть III',
@@ -349,7 +377,21 @@ export const homeChurch: UniversalSlide[] = [
     intensity: 'high'
   },
 
-  // 23. Единство тела
+  // 23. Изображение — Дары Духа
+  {
+    type: 'drama-image',
+    actNumber: 'Часть IV',
+    title: 'Дары Духа для созидания тела',
+    image: HomeChurchGifts,
+    caption: 'Каждому даётся проявление Духа на пользу — для созидания тела Христова',
+    verse: {
+      text: 'Дары различны, но Дух один и тот же.',
+      reference: '1 Коринфянам 12:4'
+    },
+    intensity: 'high'
+  },
+
+  // 24. Единство тела
   {
     type: 'drama-scripture',
     actNumber: 'Часть IV',
