@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Search, Globe, LogIn, Menu, X, BookOpen, Gamepad2 } from "lucide-react";
+import { Search, Globe, LogIn, Menu, X, Gamepad2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
+import FestiveBookIcon from "@/components/FestiveBookIcon";
 
 interface FixedNavbarProps {
   isScrolled: boolean;
@@ -65,7 +66,7 @@ const FixedNavbar = ({ isScrolled, onNavigate, activeTab, searchQuery, onSearchC
                 : (isScrolled ? "text-muted-foreground border-transparent hover:text-primary/80" : "text-white/70 border-transparent hover:text-white")
             )}
           >
-            <BookOpen className="w-5 h-5" />
+            <FestiveBookIcon className="w-5 h-5" />
             Презентации
           </button>
           <button
@@ -186,7 +187,7 @@ const FixedNavbar = ({ isScrolled, onNavigate, activeTab, searchQuery, onSearchC
                 hoverBg
               )}
             >
-              <BookOpen className="w-5 h-5" />
+              <FestiveBookIcon className="w-5 h-5" />
               Презентации
             </button>
             <button
