@@ -68,7 +68,7 @@ const StoryImageSlide = ({ slide, direction }: StoryImageSlideProps) => {
       </motion.div>
 
       {/* Warm gradient overlay from bottom */}
-      <div className="absolute inset-0 bg-gradient-to-t from-amber-950/95 via-amber-950/70 to-amber-950/30" />
+      <div className="absolute inset-0 bg-gradient-to-t from-amber-950/65 via-amber-950/30 to-amber-950/10" />
 
       {/* Content container */}
       <div className="absolute inset-0 z-10">
