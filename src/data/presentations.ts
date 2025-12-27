@@ -23,27 +23,10 @@ export interface Presentation {
   duration: string;
   type: 'disciples' | 'seminar' | 'hermeneutics' | 'god-exists' | 'drama' | 'eternal-temporal' | 'home-church';
   isHero?: boolean;
+  createdAt: string;
 }
 
 export const presentations: Presentation[] = [
-  {
-    id: "god-exists",
-    title: "Существует ли Бог?",
-    description: "Философский диалог с искусственным интеллектом о логичности существования Творца",
-    thumbnail: godExistsImg,
-    slideCount: godExists.length,
-    duration: "25-30 минут",
-    type: 'god-exists'
-  },
-  {
-    id: "eternal-temporal",
-    title: "Вечное и временное",
-    description: "Как правильно жить в свете вечности — размышление над Псалмом 89",
-    thumbnail: eternalCosmosImg,
-    slideCount: eternalTemporal.length,
-    duration: "25-30 минут",
-    type: 'eternal-temporal'
-  },
   {
     id: "home-church",
     title: "Домашняя церковь",
@@ -51,16 +34,8 @@ export const presentations: Presentation[] = [
     thumbnail: homeChurchImg,
     slideCount: homeChurch.length,
     duration: "30-35 минут",
-    type: 'home-church'
-  },
-  {
-    id: "seminar",
-    title: "Бог превращает зло в добро",
-    description: "Божий план спасения никогда не может быть сорван",
-    thumbnail: josephImg,
-    slideCount: seminar.length,
-    duration: "25-30 минут",
-    type: 'seminar'
+    type: 'home-church',
+    createdAt: "27.12.2025"
   },
   {
     id: "salvation",
@@ -70,7 +45,38 @@ export const presentations: Presentation[] = [
     slideCount: redemptionDrama.length,
     duration: "35-40 минут",
     type: 'drama',
-    isHero: true
+    isHero: true,
+    createdAt: "18.12.2025"
+  },
+  {
+    id: "god-exists",
+    title: "Существует ли Бог?",
+    description: "Философский диалог с искусственным интеллектом о логичности существования Творца",
+    thumbnail: godExistsImg,
+    slideCount: godExists.length,
+    duration: "25-30 минут",
+    type: 'god-exists',
+    createdAt: "16.12.2025"
+  },
+  {
+    id: "eternal-temporal",
+    title: "Вечное и временное",
+    description: "Как правильно жить в свете вечности — размышление над Псалмом 89",
+    thumbnail: eternalCosmosImg,
+    slideCount: eternalTemporal.length,
+    duration: "25-30 минут",
+    type: 'eternal-temporal',
+    createdAt: "14.12.2025"
+  },
+  {
+    id: "seminar",
+    title: "Бог превращает зло в добро",
+    description: "Божий план спасения никогда не может быть сорван",
+    thumbnail: josephImg,
+    slideCount: seminar.length,
+    duration: "25-30 минут",
+    type: 'seminar',
+    createdAt: "07.12.2025"
   },
   {
     id: "epistles-structure",
@@ -79,7 +85,8 @@ export const presentations: Presentation[] = [
     thumbnail: knowDoImg,
     slideCount: epistlesStructure.length,
     duration: "30-35 минут",
-    type: 'hermeneutics'
+    type: 'hermeneutics',
+    createdAt: "01.12.2025"
   },
   {
     id: "disciples",
@@ -88,6 +95,7 @@ export const presentations: Presentation[] = [
     thumbnail: peterImg,
     slideCount: disciples.length,
     duration: "15-20 минут",
-    type: 'disciples'
+    type: 'disciples',
+    createdAt: "15.11.2025"
   }
 ];

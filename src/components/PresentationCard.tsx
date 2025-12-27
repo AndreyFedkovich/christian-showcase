@@ -1,6 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Play, Clock, Layers } from "lucide-react";
+import { Play, Clock, Layers, Calendar } from "lucide-react";
 import { Presentation } from "@/data/presentations";
 
 interface PresentationCardProps {
@@ -38,6 +38,10 @@ const PresentationCard = ({ presentation, onClick }: PresentationCardProps) => {
 
             {/* Stats */}
             <div className="flex flex-wrap gap-4 pt-2">
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Calendar className="h-4 w-4 text-accent" />
+                <span className="font-sans">{presentation.createdAt}</span>
+              </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Layers className="h-4 w-4 text-accent" />
                 <span className="font-sans">{presentation.slideCount} слайдов</span>

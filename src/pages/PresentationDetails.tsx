@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Play, ArrowLeft } from "lucide-react";
+import { Play, ArrowLeft, Calendar } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import SlideCardRenderer from "@/components/SlideCardRenderer";
 import { disciples } from "@/data/disciples";
@@ -98,6 +98,11 @@ const PresentationDetails = () => {
           <p className="text-xl md:text-2xl text-muted-foreground font-sans max-w-2xl mx-auto">
             {presentation.description}
           </p>
+          
+          <div className="flex items-center justify-center gap-2 text-muted-foreground">
+            <Calendar className="h-5 w-5" />
+            <span className="font-sans text-lg">{presentation.createdAt}</span>
+          </div>
           
           <Button 
             size="lg"
