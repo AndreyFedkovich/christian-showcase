@@ -258,7 +258,7 @@ export const homeChurch: UniversalSlide[] = [
   },
 
   // 16. Духовные дары в теле
-  {
+  /*{
     type: 'drama-scene',
     actNumber: 'Часть II',
     sceneTitle: 'Разнообразие даров — единство тела',
@@ -287,7 +287,7 @@ export const homeChurch: UniversalSlide[] = [
       reference: '1 Петра 4:10'
     },
     intensity: 'high'
-  },
+  },*/
 
   // 18. Параллельный слайд — сравнение образов
   {
