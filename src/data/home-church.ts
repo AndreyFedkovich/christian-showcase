@@ -3,6 +3,7 @@ import HomeChurchLydia from '@/assets/home-church-lydia.png';
 import HomeChurchGathering from '@/assets/home-church-gathering.png';
 import HomeChurchBody from '@/assets/home-church-body.png';
 import HomeChurchGifts from '@/assets/home-church-gifts.png';
+import HomeChurchGrowth from '@/assets/home-church-growth.png';
 import { UniversalSlide } from '@/types/slides';
 
 // Секции презентации для навигации
@@ -224,7 +225,39 @@ export const homeChurch: UniversalSlide[] = [
     intensity: 'high'
   },
 
-  // 13. Параллельный слайд — сравнение образов
+  // 14. Тело Христово возрастает
+  {
+    type: 'drama-scene',
+    actNumber: 'Часть II',
+    sceneTitle: 'Тело Христово возрастает',
+    dynamic: 'Духовный рост',
+    plot: [
+      'Кроме органического единства членов, образ тела раскрывает ещё одно важное свойство Церкви — способность к росту.',
+      'Церковь — не статичная организация, а живой организм, который возрастает в Того, Кто есть глава — Христос.'
+    ],
+    thesis: 'Рост тела происходит через каждого члена: при действии в свою меру каждого члена тело получает приращение.',
+    focus: {
+      references: ['Еф. 4:15-16', 'Кол. 2:19'],
+      explanation: '«Всё тело... при действии в свою меру каждого члена, получает приращение для созидания самого себя в любви.»'
+    },
+    intensity: 'high'
+  },
+
+  // 15. Изображение роста
+  {
+    type: 'drama-image',
+    actNumber: 'Часть II',
+    title: 'Рост в Того, Кто есть глава',
+    image: HomeChurchGrowth,
+    caption: 'Тело Христово возрастает через каждого члена, соединённого с Главой',
+    verse: {
+      text: 'Истинствуя в любви, мы возрастали во всём в Того, Кто есть глава — Христос.',
+      reference: 'Ефесянам 4:15'
+    },
+    intensity: 'high'
+  },
+
+  // 16. Параллельный слайд — сравнение образов
   {
     type: 'drama-parallel',
     actNumber: 'Сравнение',
@@ -532,7 +565,7 @@ export const homeChurch: UniversalSlide[] = [
 // Заполняем секции слайдами
 homeChurchSections[0].slides = homeChurch.slice(0, 3);   // Введение
 homeChurchSections[1].slides = homeChurch.slice(3, 8);   // Часть I
-homeChurchSections[2].slides = homeChurch.slice(8, 13);  // Часть II
-homeChurchSections[3].slides = homeChurch.slice(13, 20); // Часть III
-homeChurchSections[4].slides = homeChurch.slice(20, 27); // Часть IV
-homeChurchSections[5].slides = homeChurch.slice(27);     // Заключение
+homeChurchSections[2].slides = homeChurch.slice(8, 15);  // Часть II (+2 слайда о росте)
+homeChurchSections[3].slides = homeChurch.slice(15, 22); // Часть III
+homeChurchSections[4].slides = homeChurch.slice(22, 29); // Часть IV
+homeChurchSections[5].slides = homeChurch.slice(29);     // Заключение
