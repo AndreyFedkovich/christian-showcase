@@ -257,39 +257,7 @@ export const homeChurch: UniversalSlide[] = [
     intensity: 'high'
   },
 
-  // 16. Духовные дары в теле
-  /*{
-    type: 'drama-scene',
-    actNumber: 'Часть II',
-    sceneTitle: 'Разнообразие даров — единство тела',
-    dynamic: 'Духовные дары',
-    plot: [
-      'В теле каждый член имеет свою функцию. Рука делает то, что не может глаз; ухо слышит то, что не видит рука. Так и в Церкви — каждому дан дар для служения.',
-      'Дары различны, но Дух один. Служения различны, но Господь один. Всё это производит один и тот же Дух, разделяя каждому особо, как Ему угодно.'
-    ],
-    thesis: 'Духовные дары даны не для личного обогащения, а для созидания тела Христова и служения друг другу.',
-    focus: {
-      references: ['1 Кор. 12:4-7', 'Еф. 4:11-12', '1 Пет. 4:10'],
-      explanation: '«Каждому дается проявление Духа на пользу. Служите друг другу каждый тем даром, какой получил.»'
-    },
-    intensity: 'high'
-  },
-
-  // 17. Изображение — служения
-  {
-    type: 'drama-image',
-    actNumber: 'Часть II',
-    title: 'Служите друг другу',
-    image: HomeChurchGifts,
-    caption: 'Каждый член тела имеет свой дар для созидания Церкви',
-    verse: {
-      text: 'Служите друг другу, каждый тем даром, какой получил, как добрые домостроители многоразличной благодати Божией.',
-      reference: '1 Петра 4:10'
-    },
-    intensity: 'high'
-  },*/
-
-  // 18. Параллельный слайд — сравнение образов
+  // 16. Параллельный слайд — сравнение образов
   {
     type: 'drama-parallel',
     actNumber: 'Сравнение',
@@ -549,8 +517,8 @@ export const homeChurch: UniversalSlide[] = [
     actName: 'Церковь — тело Христа',
     subtitle: 'Призыв к живому общению',
     verse: {
-      text: 'да будут все едино, как Ты, Отче, во Мне, и Я в Тебе, так и они да будут в Нас едино, — да уверует мир, что Ты послал Меня.',
-      reference: 'Иоанна 17:21'
+      text: 'Где двое или трое собраны во имя Моё, там Я посреди них.',
+      reference: 'Матфея 18:20'
     }
   },
 
@@ -597,7 +565,7 @@ export const homeChurch: UniversalSlide[] = [
 // Заполняем секции слайдами
 homeChurchSections[0].slides = homeChurch.slice(0, 3);   // Введение
 homeChurchSections[1].slides = homeChurch.slice(3, 8);   // Часть I
-homeChurchSections[2].slides = homeChurch.slice(8, 15);  // Часть II (+2 о росте, +2 о дарах)
+homeChurchSections[2].slides = homeChurch.slice(8, 15);  // Часть II (+2 слайда о росте)
 homeChurchSections[3].slides = homeChurch.slice(15, 22); // Часть III
 homeChurchSections[4].slides = homeChurch.slice(22, 29); // Часть IV
 homeChurchSections[5].slides = homeChurch.slice(29);     // Заключение

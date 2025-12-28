@@ -22,13 +22,6 @@ import DramaParallelSlide from '@/components/DramaParallelSlide';
 import DramaSurveySlide from '@/components/DramaSurveySlide';
 import DramaGenealogySlide from '@/components/DramaGenealogySlide';
 import GodExistsClimaxSlide from '@/components/GodExistsClimaxSlide';
-import TimelineIntroSlide from '@/components/TimelineIntroSlide';
-import TimelineDualSlide from '@/components/TimelineDualSlide';
-import KingProfileSlide from '@/components/KingProfileSlide';
-import ProphetProfileSlide from '@/components/ProphetProfileSlide';
-import TimelineEventSlide from '@/components/TimelineEventSlide';
-import TimelineChartSlide from '@/components/TimelineChartSlide';
-
 interface SlideRendererProps {
   slide: UniversalSlide;
   direction: 'next' | 'prev';
@@ -89,18 +82,6 @@ const SlideRenderer = ({ slide, direction, slideNumber }: SlideRendererProps) =>
       return <DramaGenealogySlide slide={slide as any} direction={direction} />;
     case 'god-exists-climax':
       return <GodExistsClimaxSlide slide={slide as any} direction={direction} />;
-    case 'timeline-intro':
-      return <TimelineIntroSlide slide={slide as any} direction={direction} />;
-    case 'timeline-dual':
-      return <TimelineDualSlide slide={slide as any} direction={direction} />;
-    case 'king-profile':
-      return <KingProfileSlide slide={slide as any} direction={direction} />;
-    case 'prophet-profile':
-      return <ProphetProfileSlide slide={slide as any} direction={direction} />;
-    case 'timeline-event':
-      return <TimelineEventSlide slide={slide as any} direction={direction} />;
-    case 'timeline-chart':
-      return <TimelineChartSlide slide={slide as any} direction={direction} />;
     case 'intro-hermeneutics':
       // Handled separately in IntroSlide
       return null;

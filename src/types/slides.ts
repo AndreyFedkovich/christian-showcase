@@ -37,14 +37,6 @@ import {
   DramaSurveySlide,
   DramaGenealogySlide
 } from '@/data/redemption-drama';
-import {
-  TimelineIntroSlide,
-  TimelineDualSlide,
-  KingProfileSlide,
-  ProphetProfileSlide,
-  TimelineEventSlide,
-  TimelineChartSlide
-} from '@/data/kings-prophets';
 import { Disciple } from '@/data/disciples';
 
 // Profile slide type for disciples
@@ -82,10 +74,4 @@ export type UniversalSlide =
   | DramaParallelSlide
   | DramaSurveySlide
   | DramaGenealogySlide
-  | TimelineIntroSlide
-  | TimelineDualSlide
-  | KingProfileSlide
-  | ProphetProfileSlide
-  | TimelineEventSlide
-  | TimelineChartSlide
   | ProfileSlide;

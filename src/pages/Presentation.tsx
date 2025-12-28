@@ -12,7 +12,6 @@ import { epistlesStructure } from "@/data/epistles-structure";
 import { godExists } from "@/data/god-exists";
 import { eternalTemporal } from "@/data/eternal-temporal";
 import { homeChurch } from "@/data/home-church";
-import { kingsProphets } from "@/data/kings-prophets";
 import { presentations } from "@/data/presentations";
 import { UniversalSlide } from "@/types/slides";
 
@@ -59,8 +58,6 @@ const Presentation = () => {
     ? eternalTemporal as UniversalSlide[]
     : presentation.type === 'home-church'
     ? homeChurch as UniversalSlide[]
-    : presentation.type === 'kings-prophets'
-    ? kingsProphets as UniversalSlide[]
     : seminar as UniversalSlide[];
   const totalSlides = slides.length;
 

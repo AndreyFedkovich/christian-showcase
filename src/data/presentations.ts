@@ -1,4 +1,4 @@
-// Last updated: 2025-12-28
+// Last updated: 2025-12-27
 import peterImg from "@/assets/peter.jpg";
 import josephImg from "@/assets/joseph-thumbnail.png";
 import knowDoImg from "@/assets/know-do.png";
@@ -6,7 +6,6 @@ import salvationImg from "@/assets/salvation-thumbnail.png";
 import godExistsImg from "@/assets/god-exists-thumbnail.png";
 import eternalCosmosImg from "@/assets/eternal-cosmos.png";
 import homeChurchImg from "@/assets/home-church-thumbnail.png";
-import kingsProphetsImg from "@/assets/kings-prophets-thumbnail.png";
 import { seminar } from '@/data/seminar';
 import { disciples } from '@/data/disciples';
 import { epistlesStructure } from '@/data/epistles-structure';
@@ -14,7 +13,6 @@ import { redemptionDrama } from '@/data/redemption-drama';
 import { godExists } from '@/data/god-exists';
 import { eternalTemporal } from '@/data/eternal-temporal';
 import { homeChurch } from '@/data/home-church';
-import { kingsProphets } from '@/data/kings-prophets';
 
 export interface Presentation {
   id: string;
@@ -23,23 +21,12 @@ export interface Presentation {
   thumbnail: string;
   slideCount: number;
   duration: string;
-  type: 'disciples' | 'seminar' | 'hermeneutics' | 'god-exists' | 'drama' | 'eternal-temporal' | 'home-church' | 'kings-prophets';
+  type: 'disciples' | 'seminar' | 'hermeneutics' | 'god-exists' | 'drama' | 'eternal-temporal' | 'home-church';
   isHero?: boolean;
   createdAt: string;
 }
 
 export const presentations: Presentation[] = [
-  {
-    id: "kings-prophets",
-    title: "Цари и Пророки",
-    description: "Хронология царей Израиля и Иудеи от Давида до Вавилонского плена",
-    thumbnail: kingsProphetsImg,
-    slideCount: kingsProphets.length,
-    duration: "40-45 минут",
-    type: 'kings-prophets',
-    isHero: true,
-    createdAt: "28.12.2025"
-  },
   {
     id: "home-church",
     title: "Домашняя церковь",
@@ -58,6 +45,7 @@ export const presentations: Presentation[] = [
     slideCount: redemptionDrama.length,
     duration: "35-40 минут",
     type: 'drama',
+    isHero: true,
     createdAt: "18.12.2025"
   },
   {
