@@ -31,7 +31,8 @@ const calculateLayout = <T extends { startYear: number; endYear: number }>(
     
     // Calculate percentages
     let left = ((periodStart - displayStart) / timelineWidth) * 100;
-    let width = ((displayStart - displayEnd) / timelineWidth) * 100;
+    // +1 to include both start and end years (e.g., 841-841 = 1 year, not 0)
+    let width = ((displayStart - displayEnd + 1) / timelineWidth) * 100;
     
     // Clamp left to valid range
     left = Math.max(0, Math.min(left, 100));
@@ -89,9 +90,9 @@ const TimelineSlideComponent = ({ slide, direction }: TimelineSlideProps) => {
   const israelKings = kings.filter(k => k.kingdom === 'israel');
   
   // Calculate layouts with proper clipping and lane assignment
-  const judahLayout = calculateLayout(judahKings, startYear, endYear, 3);
-  const israelLayout = calculateLayout(israelKings, startYear, endYear, 3);
-  const prophetLayout = calculateLayout(prophets, startYear, endYear, 4);
+  const judahLayout = calculateLayout(judahKings, startYear, endYear, 2);
+  const israelLayout = calculateLayout(israelKings, startYear, endYear, 2);
+  const prophetLayout = calculateLayout(prophets, startYear, endYear, 3);
   
   const maxJudahLanes = judahLayout.length > 0 ? Math.max(...judahLayout.map(k => k.lane)) + 1 : 1;
   const maxIsraelLanes = israelLayout.length > 0 ? Math.max(...israelLayout.map(k => k.lane)) + 1 : 1;
@@ -124,10 +125,11 @@ const TimelineSlideComponent = ({ slide, direction }: TimelineSlideProps) => {
     yearMarkers.push(year);
   }
 
-  const laneHeight = 36; // Height per lane in pixels
-  const prophetSectionHeight = maxProphetLanes * laneHeight + 16;
-  const judahSectionHeight = maxJudahLanes * laneHeight + 16;
-  const israelSectionHeight = maxIsraelLanes * laneHeight + 16;
+  const kingLaneHeight = 44; // Height per lane for kings (more space for duration text)
+  const prophetLaneHeight = 36; // Height per lane for prophets
+  const prophetSectionHeight = maxProphetLanes * prophetLaneHeight + 16;
+  const judahSectionHeight = maxJudahLanes * kingLaneHeight + 16;
+  const israelSectionHeight = maxIsraelLanes * kingLaneHeight + 16;
 
   return (
     <motion.div
@@ -176,7 +178,7 @@ const TimelineSlideComponent = ({ slide, direction }: TimelineSlideProps) => {
                 style={{ 
                   left: `${left}%`, 
                   width: `${width}%`,
-                  top: `${lane * laneHeight + 8}px`
+                  top: `${lane * prophetLaneHeight + 8}px`
                 }}
               >
                 <div className="bg-purple-600/80 border border-purple-400 rounded px-2 py-1 text-[10px] text-purple-100 truncate cursor-pointer hover:brightness-110 hover:z-10 transition-all">
@@ -251,7 +253,7 @@ const TimelineSlideComponent = ({ slide, direction }: TimelineSlideProps) => {
                 style={{ 
                   left: `${left}%`, 
                   width: `${width}%`,
-                  top: `${lane * laneHeight + 8}px`
+                  top: `${lane * kingLaneHeight + 8}px`
                 }}
               >
                 <div className={`${getCharacterColor(king.character)} border rounded px-1.5 py-1 text-[10px] cursor-pointer hover:brightness-110 hover:z-10 hover:ring-2 hover:ring-white/30 transition-all shadow-lg`}>
@@ -304,10 +306,10 @@ const TimelineSlideComponent = ({ slide, direction }: TimelineSlideProps) => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.7 + index * 0.02 }}
                   className="absolute group overflow-visible"
-                  style={{ 
-                    left: `${left}%`, 
-                    width: `${width}%`,
-                    top: `${lane * laneHeight + 8}px`
+                style={{ 
+                  left: `${left}%`, 
+                  width: `${width}%`,
+                  top: `${lane * kingLaneHeight + 8}px`
                   }}
                 >
                   <div className={`${getCharacterColor(king.character)} border rounded px-1.5 py-1 text-[10px] cursor-pointer hover:brightness-110 hover:z-10 hover:ring-2 hover:ring-white/30 transition-all shadow-lg`}>
