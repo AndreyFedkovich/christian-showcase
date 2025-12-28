@@ -13,6 +13,7 @@ import { redemptionDrama } from '@/data/redemption-drama';
 import { godExists } from '@/data/god-exists';
 import { eternalTemporal } from '@/data/eternal-temporal';
 import { homeChurch } from '@/data/home-church';
+import { kingsProphets } from '@/data/kings-prophets';
 
 export interface Presentation {
   id: string;
@@ -21,12 +22,23 @@ export interface Presentation {
   thumbnail: string;
   slideCount: number;
   duration: string;
-  type: 'disciples' | 'seminar' | 'hermeneutics' | 'god-exists' | 'drama' | 'eternal-temporal' | 'home-church';
+  type: 'disciples' | 'seminar' | 'hermeneutics' | 'god-exists' | 'drama' | 'eternal-temporal' | 'home-church' | 'kings-prophets';
   isHero?: boolean;
   createdAt: string;
 }
 
 export const presentations: Presentation[] = [
+  {
+    id: "kings-prophets",
+    title: "Цари и пророки",
+    description: "Хронология царей Израиля и Иуды с пророками (1010–586 до н.э.)",
+    thumbnail: "/placeholder.svg",
+    slideCount: kingsProphets.length,
+    duration: "40-50 минут",
+    type: 'kings-prophets',
+    isHero: true,
+    createdAt: "28.12.2025"
+  },
   {
     id: "home-church",
     title: "Домашняя церковь",
