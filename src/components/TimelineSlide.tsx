@@ -15,7 +15,8 @@ const TimelineSlideComponent = ({ slide, direction }: TimelineSlideProps) => {
   const israelKings = kings.filter(k => k.kingdom === 'israel').sort((a, b) => a.startYear - b.startYear);
   const sortedProphets = [...prophets].sort((a, b) => a.startYear - b.startYear);
   
-  const timelineWidth = endYear - startYear;
+  // For BC dates: larger number = earlier year
+  const timelineWidth = startYear - endYear;
   const yearToPercent = (year: number) => ((startYear - year) / timelineWidth) * 100;
   const durationToPercent = (start: number, end: number) => ((start - end) / timelineWidth) * 100;
 
