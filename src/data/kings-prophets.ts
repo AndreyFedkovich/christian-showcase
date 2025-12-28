@@ -550,7 +550,7 @@ export const kingsOfIsrael: King[] = [
 
 export const prophets: Prophet[] = [
   {
-    name: 'Ахия Силомлянин',
+    name: 'Ахия',
     startYear: 934,
     endYear: 909,
     keyMessage: 'Пророчество о разделении царства',

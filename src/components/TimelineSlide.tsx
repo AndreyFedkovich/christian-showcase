@@ -112,8 +112,8 @@ const TimelineSlideComponent = ({ slide, direction }: TimelineSlideProps) => {
 
   const getCharacterBadge = (character: King['character']) => {
     switch (character) {
-      case 'good': return 'Добрый';
-      case 'evil': return 'Злой';
+      case 'good': return 'Благочестивый';
+      case 'evil': return 'Нечестивый';
       case 'mixed': return 'Смешанный';
     }
   };
@@ -125,8 +125,8 @@ const TimelineSlideComponent = ({ slide, direction }: TimelineSlideProps) => {
     yearMarkers.push(year);
   }
 
-  const kingLaneHeight = 44; // Height per lane for kings (more space for duration text)
-  const prophetLaneHeight = 36; // Height per lane for prophets
+  const kingLaneHeight = 70; // Height per lane for kings (more space for duration text)
+  const prophetLaneHeight = 50; // Height per lane for prophets
   const prophetSectionHeight = maxProphetLanes * prophetLaneHeight + 16;
   const judahSectionHeight = maxJudahLanes * kingLaneHeight + 16;
   const israelSectionHeight = maxIsraelLanes * kingLaneHeight + 16;
@@ -146,7 +146,7 @@ const TimelineSlideComponent = ({ slide, direction }: TimelineSlideProps) => {
         transition={{ delay: 0.2 }}
         className="text-center mb-4 shrink-0"
       >
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs mb-2">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-2xl mb-2">
           <Calendar className="w-3 h-3" />
           <span>{startYear}–{endYear} до н.э.</span>
         </div>
@@ -154,7 +154,7 @@ const TimelineSlideComponent = ({ slide, direction }: TimelineSlideProps) => {
       </motion.div>
 
       {/* Timeline Container - fills remaining space */}
-      <div className="flex-1 flex flex-col min-h-0 overflow-visible">
+      <div className="flex-1 flex flex-col min-h-0 overflow-visible justify-center">
         {/* Prophets Row */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -163,11 +163,11 @@ const TimelineSlideComponent = ({ slide, direction }: TimelineSlideProps) => {
           className="relative shrink-0 overflow-visible"
           style={{ height: `${prophetSectionHeight}px` }}
         >
-          <div className="absolute left-0 top-1/2 -translate-y-1/2 text-purple-400 text-xs font-medium flex items-center gap-1 w-20">
-            <BookOpen className="w-3 h-3" />
+          <div className="absolute left-2 top-1/2 -translate-y-1/2 text-purple-400 text-2xl font-medium flex items-center gap-1 w-30">
+            <BookOpen className="w-5 h-5" />
             Пророки
           </div>
-          <div className="ml-20 relative h-full overflow-visible">
+          <div className="ml-40 relative h-full overflow-visible">
             {prophetLayout.map(({ item: prophet, left, width, lane }, index) => (
               <motion.div
                 key={prophet.name}
@@ -181,17 +181,17 @@ const TimelineSlideComponent = ({ slide, direction }: TimelineSlideProps) => {
                   top: `${lane * prophetLaneHeight + 8}px`
                 }}
               >
-                <div className="bg-purple-600/80 border border-purple-400 rounded px-2 py-1 text-[10px] text-purple-100 truncate cursor-pointer hover:brightness-110 hover:z-10 transition-all">
+                <div className="bg-purple-600/80 border border-purple-400 rounded px-2 py-1 text-[16px] text-purple-100 truncate cursor-pointer hover:brightness-110 hover:z-10 transition-all">
                   {prophet.name}
                 </div>
                 {/* Tooltip - position below to avoid top clipping */}
                 <div className="absolute top-full left-0 mt-1 opacity-0 group-hover:opacity-100 transition-opacity z-50 pointer-events-none">
-                  <div className="bg-slate-800 border border-purple-400/50 rounded-lg p-2 w-48 shadow-xl">
-                    <p className="text-purple-300 font-medium text-xs">{prophet.name}</p>
-                    <p className="text-slate-400 text-[10px]">{prophet.startYear}–{prophet.endYear} до н.э.</p>
-                    <p className="text-slate-300 text-[10px] mt-1">{prophet.keyMessage}</p>
+                  <div className="bg-slate-800 border border-purple-400/50 rounded-lg p-2 w-64 shadow-xl">
+                    <p className="text-purple-300 font-medium text-2xl">{prophet.name}</p>
+                    <p className="text-slate-400 text-[16px]">{prophet.startYear}–{prophet.endYear} до н.э.</p>
+                    <p className="text-slate-300 text-[16px] mt-1">{prophet.keyMessage}</p>
                     {prophet.book && (
-                      <p className="text-purple-400 text-[10px] mt-1">📖 {prophet.book}</p>
+                      <p className="text-purple-400 text-[16px] mt-1">📖 {prophet.book}</p>
                     )}
                   </div>
                 </div>
@@ -205,12 +205,9 @@ const TimelineSlideComponent = ({ slide, direction }: TimelineSlideProps) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
-          className="relative h-8 border-y border-slate-600 bg-slate-800/50 shrink-0"
+          className="relative h-14 border-y border-slate-600 bg-slate-800/50 shrink-0"
         >
-          <div className="absolute left-0 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-medium w-20">
-            Годы
-          </div>
-          <div className="ml-20 relative h-full">
+          <div className="ml-40 relative h-full">
             {yearMarkers.map((year) => {
               const left = yearToPercent(year);
               return (
@@ -220,7 +217,7 @@ const TimelineSlideComponent = ({ slide, direction }: TimelineSlideProps) => {
                   style={{ left: `${left}%` }}
                 >
                   <div className="w-px h-2 bg-slate-500" />
-                  <span className="text-slate-400 text-[10px] mt-0.5">{year}</span>
+                  <span className="text-slate-400 text-[16px] mt-0.5">{year}</span>
                 </div>
               );
             })}
@@ -238,11 +235,11 @@ const TimelineSlideComponent = ({ slide, direction }: TimelineSlideProps) => {
           className="relative bg-blue-950/30 border-b border-slate-700 shrink-0 overflow-visible"
           style={{ height: `${judahSectionHeight}px` }}
         >
-          <div className="absolute left-0 top-1/2 -translate-y-1/2 text-blue-400 text-xs font-medium flex items-center gap-1 w-20">
-            <Crown className="w-3 h-3" />
+          <div className="absolute left-2 top-1/2 -translate-y-1/2 text-blue-400 text-2xl font-medium flex items-center gap-1 w-30">
+            <Crown className="w-5 h-5" />
             Иуда
           </div>
-          <div className="ml-20 relative h-full overflow-visible">
+          <div className="ml-40 relative h-full overflow-visible">
             {judahLayout.map(({ item: king, left, width, lane }, index) => (
               <motion.div
                 key={king.name}
@@ -256,16 +253,16 @@ const TimelineSlideComponent = ({ slide, direction }: TimelineSlideProps) => {
                   top: `${lane * kingLaneHeight + 8}px`
                 }}
               >
-                <div className={`${getCharacterColor(king.character)} border rounded px-1.5 py-1 text-[10px] cursor-pointer hover:brightness-110 hover:z-10 hover:ring-2 hover:ring-white/30 transition-all shadow-lg`}>
+                <div className={`${getCharacterColor(king.character)} border rounded px-1.5 py-1 text-[16px] cursor-pointer hover:brightness-110 hover:z-10 hover:ring-2 hover:ring-white/30 transition-all shadow-lg`}>
                   <p className="text-slate-100 font-medium truncate">{king.name}</p>
-                  <p className="text-slate-200/70 text-[8px]">{king.duration}</p>
+                  <p className="text-slate-200/80 text-[14px] whitespace-nowrap truncate">{king.duration}</p>
                 </div>
                 {/* Tooltip */}
                 <div className="absolute top-full left-0 mt-1 opacity-0 group-hover:opacity-100 transition-opacity z-50 pointer-events-none">
-                  <div className="bg-slate-800 border border-blue-400/50 rounded-lg p-2 w-52 shadow-xl">
+                  <div className="bg-slate-800 border border-blue-400/50 rounded-lg p-2 w-64 shadow-xl">
                     <div className="flex items-center justify-between mb-1">
-                      <p className="text-blue-300 font-medium text-xs">{king.name}</p>
-                      <span className={`px-1.5 py-0.5 rounded text-[9px] ${
+                      <p className="text-blue-300 font-medium text-2xl">{king.name}</p>
+                      <span className={`px-1.5 py-0.5 rounded text-[14px] ${
                         king.character === 'good' ? 'bg-emerald-500/30 text-emerald-300' :
                         king.character === 'evil' ? 'bg-red-500/30 text-red-300' :
                         'bg-amber-500/30 text-amber-300'
@@ -273,10 +270,10 @@ const TimelineSlideComponent = ({ slide, direction }: TimelineSlideProps) => {
                         {getCharacterBadge(king.character)}
                       </span>
                     </div>
-                    <p className="text-slate-400 text-[10px]">{king.startYear}–{king.endYear} до н.э. ({king.duration})</p>
-                    <p className="text-slate-300 text-[10px] mt-1">{king.characteristic}</p>
+                    <p className="text-slate-400 text-[16px]">{king.startYear}–{king.endYear} до н.э. ({king.duration})</p>
+                    <p className="text-slate-300 text-[16px] mt-1">{king.characteristic}</p>
                     {king.keyEvent && (
-                      <p className="text-slate-400 text-[10px] mt-1 italic">{king.keyEvent}</p>
+                      <p className="text-slate-400 text-[16px] mt-1 italic">{king.keyEvent}</p>
                     )}
                   </div>
                 </div>
@@ -294,11 +291,11 @@ const TimelineSlideComponent = ({ slide, direction }: TimelineSlideProps) => {
             className="relative bg-orange-950/30 shrink-0 overflow-visible"
             style={{ height: `${israelSectionHeight}px` }}
           >
-            <div className="absolute left-0 top-1/2 -translate-y-1/2 text-orange-400 text-xs font-medium flex items-center gap-1 w-20">
-              <Crown className="w-3 h-3" />
+            <div className="absolute left-2 top-1/2 -translate-y-1/2 text-orange-400 text-2xl font-medium flex items-center gap-1 w-30">
+              <Crown className="w-5 h-5" />
               Израиль
             </div>
-            <div className="ml-20 relative h-full overflow-visible">
+            <div className="ml-40 relative h-full overflow-visible">
               {israelLayout.map(({ item: king, left, width, lane }, index) => (
                 <motion.div
                   key={king.name}
@@ -312,16 +309,16 @@ const TimelineSlideComponent = ({ slide, direction }: TimelineSlideProps) => {
                   top: `${lane * kingLaneHeight + 8}px`
                   }}
                 >
-                  <div className={`${getCharacterColor(king.character)} border rounded px-1.5 py-1 text-[10px] cursor-pointer hover:brightness-110 hover:z-10 hover:ring-2 hover:ring-white/30 transition-all shadow-lg`}>
+                  <div className={`${getCharacterColor(king.character)} border rounded px-1.5 py-1 text-[16px] cursor-pointer hover:brightness-110 hover:z-10 hover:ring-2 hover:ring-white/30 transition-all shadow-lg`}>
                     <p className="text-slate-100 font-medium truncate">{king.name}</p>
-                    <p className="text-slate-200/70 text-[8px]">{king.duration}</p>
+                    <p className="text-slate-200/80 text-[14px] whitespace-nowrap truncate">{king.duration}</p>
                   </div>
                   {/* Tooltip */}
                   <div className="absolute top-full left-0 mt-1 opacity-0 group-hover:opacity-100 transition-opacity z-50 pointer-events-none">
-                    <div className="bg-slate-800 border border-orange-400/50 rounded-lg p-2 w-52 shadow-xl">
+                    <div className="bg-slate-800 border border-orange-400/50 rounded-lg p-2 w-64 shadow-xl">
                       <div className="flex items-center justify-between mb-1">
-                        <p className="text-orange-300 font-medium text-xs">{king.name}</p>
-                        <span className={`px-1.5 py-0.5 rounded text-[9px] ${
+                        <p className="text-orange-300 font-medium text-2xl">{king.name}</p>
+                        <span className={`px-1.5 py-0.5 rounded text-[14px] ${
                           king.character === 'good' ? 'bg-emerald-500/30 text-emerald-300' :
                           king.character === 'evil' ? 'bg-red-500/30 text-red-300' :
                           'bg-amber-500/30 text-amber-300'
@@ -329,10 +326,10 @@ const TimelineSlideComponent = ({ slide, direction }: TimelineSlideProps) => {
                           {getCharacterBadge(king.character)}
                         </span>
                       </div>
-                      <p className="text-slate-400 text-[10px]">{king.startYear}–{king.endYear} до н.э. ({king.duration})</p>
-                      <p className="text-slate-300 text-[10px] mt-1">{king.characteristic}</p>
+                      <p className="text-slate-400 text-[16px]">{king.startYear}–{king.endYear} до н.э. ({king.duration})</p>
+                      <p className="text-slate-300 text-[16px] mt-1">{king.characteristic}</p>
                       {king.keyEvent && (
-                        <p className="text-slate-400 text-[10px] mt-1 italic">{king.keyEvent}</p>
+                        <p className="text-slate-400 text-[16px] mt-1 italic">{king.keyEvent}</p>
                       )}
                     </div>
                   </div>
@@ -348,15 +345,15 @@ const TimelineSlideComponent = ({ slide, direction }: TimelineSlideProps) => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.8 }}
-        className="flex flex-wrap justify-center gap-3 mt-3 text-[10px] shrink-0"
+        className="flex flex-wrap justify-center gap-3 mt-3 text-[22px] shrink-0"
       >
         <div className="flex items-center gap-1">
           <div className="w-2.5 h-2.5 rounded bg-emerald-500" />
-          <span className="text-slate-400">Добрый</span>
+          <span className="text-slate-400">Благочестивый</span>
         </div>
         <div className="flex items-center gap-1">
           <div className="w-2.5 h-2.5 rounded bg-red-500" />
-          <span className="text-slate-400">Злой</span>
+          <span className="text-slate-400">Нечестивый</span>
         </div>
         <div className="flex items-center gap-1">
           <div className="w-2.5 h-2.5 rounded bg-amber-500" />
