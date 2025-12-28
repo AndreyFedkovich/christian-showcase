@@ -16,7 +16,11 @@ import {
   Sunrise,
   Image,
   Quote,
-  Columns
+  Columns,
+  Crown,
+  Scroll,
+  Calendar,
+  BarChart3
 } from "lucide-react";
 import storyDefault from "@/assets/story-default-generic.jpg";
 
@@ -65,6 +69,18 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
         return <Quote className="w-5 h-5" />;
       case 'drama-parallel':
         return <Columns className="w-5 h-5" />;
+      case 'timeline-intro':
+        return <BarChart3 className="w-5 h-5" />;
+      case 'timeline-dual':
+        return <BarChart3 className="w-5 h-5" />;
+      case 'timeline-event':
+        return <Calendar className="w-5 h-5" />;
+      case 'timeline-chart':
+        return <BarChart3 className="w-5 h-5" />;
+      case 'king-profile':
+        return <Crown className="w-5 h-5" />;
+      case 'prophet-profile':
+        return <Scroll className="w-5 h-5" />;
       default:
         return <FileText className="w-5 h-5" />;
     }
@@ -108,6 +124,18 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
         return 'Писание';
       case 'drama-parallel':
         return 'Контраст';
+      case 'timeline-intro':
+        return 'Обзор';
+      case 'timeline-dual':
+        return 'Хронология';
+      case 'timeline-event':
+        return 'Событие';
+      case 'timeline-chart':
+        return 'Диаграмма';
+      case 'king-profile':
+        return 'Царь';
+      case 'prophet-profile':
+        return 'Пророк';
       default:
         return 'Слайд';
     }
@@ -151,6 +179,18 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
         return slide.reference;
       case 'drama-parallel':
         return slide.title;
+      case 'timeline-intro':
+        return slide.title;
+      case 'timeline-dual':
+        return slide.period;
+      case 'timeline-event':
+        return slide.event;
+      case 'timeline-chart':
+        return slide.title;
+      case 'king-profile':
+        return slide.name;
+      case 'prophet-profile':
+        return slide.name;
       default:
         return 'Слайд';
     }
@@ -167,6 +207,7 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
     if (slide.type === 'story-image') return slide.image;
     if (slide.type === 'drama-image') return slide.image;
     if (slide.type === 'dialogue-answer-image') return slide.image;
+    if (slide.type === 'timeline-chart') return slide.image;
     return undefined;
   };
 
@@ -208,6 +249,18 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
         return 'from-slate-950 via-violet-950 to-slate-900';
       case 'drama-parallel':
         return 'from-slate-800 via-purple-900 to-amber-900';
+      case 'timeline-intro':
+        return 'from-amber-950 via-stone-900 to-stone-950';
+      case 'timeline-dual':
+        return 'from-stone-950 via-stone-900 to-stone-950';
+      case 'timeline-event':
+        return 'from-amber-950 via-stone-900 to-stone-950';
+      case 'timeline-chart':
+        return 'from-stone-900 via-stone-800 to-stone-900';
+      case 'king-profile':
+        return 'from-amber-900 via-stone-800 to-stone-900';
+      case 'prophet-profile':
+        return 'from-indigo-950 via-stone-900 to-stone-950';
       default:
         return 'from-primary via-primary/90 to-primary/80';
     }
@@ -446,6 +499,43 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
                 <Bot className="w-4 h-4" />
                 <span className="text-xs font-sans font-medium uppercase tracking-wider">
                   Ответ ИИ
+                </span>
+              </div>
+            </div>
+            <h3 className="text-xl font-bold text-white line-clamp-2">
+              {getTitle()}
+            </h3>
+          </div>
+        </div>
+      </Card>
+    );
+  }
+
+  // Timeline-chart slides - image with overlay
+  if (slide.type === 'timeline-chart') {
+    return (
+      <Card 
+        className="group relative overflow-hidden cursor-pointer transition-smooth hover:-translate-y-2 shadow-card hover:shadow-premium"
+        onClick={onClick}
+      >
+        <div className="aspect-[3/4] relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-900/50 to-transparent z-10 opacity-80 group-hover:opacity-90 transition-smooth" />
+          <img 
+            src={getSlideImage()} 
+            alt={getTitle()}
+            className="w-full h-full object-cover transition-smooth group-hover:scale-110"
+          />
+          
+          <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-amber-500/80 backdrop-blur-sm flex items-center justify-center z-20">
+            <span className="text-lg font-bold text-white">{slideNumber}</span>
+          </div>
+
+          <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
+            <div className="inline-block px-3 py-1 bg-amber-500/80 backdrop-blur-sm rounded-full mb-3">
+              <div className="flex items-center gap-2 text-white">
+                <BarChart3 className="w-4 h-4" />
+                <span className="text-xs font-sans font-medium uppercase tracking-wider">
+                  Диаграмма
                 </span>
               </div>
             </div>
