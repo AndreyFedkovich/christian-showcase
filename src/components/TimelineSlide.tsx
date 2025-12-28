@@ -7,29 +7,79 @@ interface TimelineSlideProps {
   direction: 'next' | 'prev';
 }
 
-// Assign lanes to items to prevent overlap
-const assignLanes = <T extends { startYear: number; endYear: number }>(items: T[]): (T & { lane: number })[] => {
-  // Sort by start year (descending for BC - larger number = earlier)
-  // For ties, put longer durations first
-  const sorted = [...items].sort((a, b) => {
-    if (b.startYear !== a.startYear) return b.startYear - a.startYear;
-    return (b.startYear - b.endYear) - (a.startYear - a.endYear);
-  });
-  const lanes: number[] = []; // Tracks the endYear of the last item in each lane
+interface LayoutItem<T> {
+  item: T;
+  left: number;
+  width: number;
+  lane: number;
+}
+
+// Calculate layout with proper clipping to visible period and lane assignment
+const calculateLayout = <T extends { startYear: number; endYear: number }>(
+  items: T[],
+  periodStart: number,
+  periodEnd: number,
+  minWidthPercent: number = 3
+): LayoutItem<T>[] => {
+  const timelineWidth = periodStart - periodEnd;
   
-  return sorted.map(item => {
-    // Find a free lane (where previous item ended before this one starts)
-    for (let i = 0; i < lanes.length; i++) {
-      // For BC dates: lanes[i] > item.startYear means "previous ended before current starts"
-      if (lanes[i] > item.startYear) {
-        lanes[i] = item.endYear;
-        return { ...item, lane: i };
+  // Calculate visual positions for each item, clipped to visible period
+  const itemsWithPositions = items.map(item => {
+    // Clip to visible period (for BC: larger number = earlier)
+    const displayStart = Math.min(item.startYear, periodStart); // Can't start before period
+    const displayEnd = Math.max(item.endYear, periodEnd); // Can't end after period
+    
+    // Calculate percentages
+    let left = ((periodStart - displayStart) / timelineWidth) * 100;
+    let width = ((displayStart - displayEnd) / timelineWidth) * 100;
+    
+    // Clamp left to valid range
+    left = Math.max(0, Math.min(left, 100));
+    
+    // Apply minimum width and clamp to not exceed bounds
+    width = Math.max(minWidthPercent, width);
+    width = Math.min(width, 100 - left);
+    
+    return {
+      item,
+      left,
+      width,
+      right: left + width,
+      lane: 0
+    };
+  });
+  
+  // Sort by left position (ascending), then by width (descending for longer first)
+  const sorted = [...itemsWithPositions].sort((a, b) => {
+    if (a.left !== b.left) return a.left - b.left;
+    return b.width - a.width;
+  });
+  
+  // Assign lanes based on visual positions with small gap
+  const gap = 0.5; // Small gap to prevent touching
+  const laneEnds: number[] = []; // Tracks the right edge of the last item in each lane
+  
+  for (const entry of sorted) {
+    let assigned = false;
+    
+    // Try to find an existing lane where this item fits
+    for (let i = 0; i < laneEnds.length; i++) {
+      if (laneEnds[i] + gap <= entry.left) {
+        entry.lane = i;
+        laneEnds[i] = entry.right;
+        assigned = true;
+        break;
       }
     }
-    // Create new lane
-    lanes.push(item.endYear);
-    return { ...item, lane: lanes.length - 1 };
-  });
+    
+    // If no lane found, create a new one
+    if (!assigned) {
+      entry.lane = laneEnds.length;
+      laneEnds.push(entry.right);
+    }
+  }
+  
+  return sorted.map(({ item, left, width, lane }) => ({ item, left, width, lane }));
 };
 
 const TimelineSlideComponent = ({ slide, direction }: TimelineSlideProps) => {
@@ -38,19 +88,18 @@ const TimelineSlideComponent = ({ slide, direction }: TimelineSlideProps) => {
   const judahKings = kings.filter(k => k.kingdom === 'judah');
   const israelKings = kings.filter(k => k.kingdom === 'israel');
   
-  // Assign lanes to prevent overlap
-  const judahWithLanes = assignLanes(judahKings);
-  const israelWithLanes = assignLanes(israelKings);
-  const prophetsWithLanes = assignLanes(prophets);
+  // Calculate layouts with proper clipping and lane assignment
+  const judahLayout = calculateLayout(judahKings, startYear, endYear, 3);
+  const israelLayout = calculateLayout(israelKings, startYear, endYear, 3);
+  const prophetLayout = calculateLayout(prophets, startYear, endYear, 4);
   
-  const maxJudahLanes = judahWithLanes.length > 0 ? Math.max(...judahWithLanes.map(k => k.lane)) + 1 : 1;
-  const maxIsraelLanes = israelWithLanes.length > 0 ? Math.max(...israelWithLanes.map(k => k.lane)) + 1 : 1;
-  const maxProphetLanes = prophetsWithLanes.length > 0 ? Math.max(...prophetsWithLanes.map(k => k.lane)) + 1 : 1;
+  const maxJudahLanes = judahLayout.length > 0 ? Math.max(...judahLayout.map(k => k.lane)) + 1 : 1;
+  const maxIsraelLanes = israelLayout.length > 0 ? Math.max(...israelLayout.map(k => k.lane)) + 1 : 1;
+  const maxProphetLanes = prophetLayout.length > 0 ? Math.max(...prophetLayout.map(k => k.lane)) + 1 : 1;
   
   // For BC dates: larger number = earlier year
   const timelineWidth = startYear - endYear;
   const yearToPercent = (year: number) => ((startYear - year) / timelineWidth) * 100;
-  const durationToPercent = (start: number, end: number) => ((start - end) / timelineWidth) * 100;
 
   const getCharacterColor = (character: King['character']) => {
     switch (character) {
@@ -117,42 +166,35 @@ const TimelineSlideComponent = ({ slide, direction }: TimelineSlideProps) => {
             Пророки
           </div>
           <div className="ml-20 relative h-full overflow-visible">
-            {prophetsWithLanes.map((prophet, index) => {
-              const left = yearToPercent(prophet.startYear);
-              const width = durationToPercent(prophet.startYear, prophet.endYear);
-              const clampedLeft = Math.max(0, Math.min(left, 100));
-              const clampedWidth = Math.max(3, Math.min(width, 100 - clampedLeft));
-              
-              return (
-                <motion.div
-                  key={prophet.name}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.4 + index * 0.03 }}
-                  className="absolute group overflow-visible"
-                  style={{ 
-                    left: `${clampedLeft}%`, 
-                    width: `${clampedWidth}%`,
-                    top: `${prophet.lane * laneHeight + 8}px`
-                  }}
-                >
-                  <div className="bg-purple-600/80 border border-purple-400 rounded px-2 py-1 text-[10px] text-purple-100 truncate cursor-pointer hover:bg-purple-500 transition-colors">
-                    {prophet.name}
+            {prophetLayout.map(({ item: prophet, left, width, lane }, index) => (
+              <motion.div
+                key={prophet.name}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.4 + index * 0.03 }}
+                className="absolute group overflow-visible"
+                style={{ 
+                  left: `${left}%`, 
+                  width: `${width}%`,
+                  top: `${lane * laneHeight + 8}px`
+                }}
+              >
+                <div className="bg-purple-600/80 border border-purple-400 rounded px-2 py-1 text-[10px] text-purple-100 truncate cursor-pointer hover:brightness-110 hover:z-10 transition-all">
+                  {prophet.name}
+                </div>
+                {/* Tooltip - position below to avoid top clipping */}
+                <div className="absolute top-full left-0 mt-1 opacity-0 group-hover:opacity-100 transition-opacity z-50 pointer-events-none">
+                  <div className="bg-slate-800 border border-purple-400/50 rounded-lg p-2 w-48 shadow-xl">
+                    <p className="text-purple-300 font-medium text-xs">{prophet.name}</p>
+                    <p className="text-slate-400 text-[10px]">{prophet.startYear}–{prophet.endYear} до н.э.</p>
+                    <p className="text-slate-300 text-[10px] mt-1">{prophet.keyMessage}</p>
+                    {prophet.book && (
+                      <p className="text-purple-400 text-[10px] mt-1">📖 {prophet.book}</p>
+                    )}
                   </div>
-                  {/* Tooltip - position below to avoid top clipping */}
-                  <div className="absolute top-full left-0 mt-1 opacity-0 group-hover:opacity-100 transition-opacity z-50 pointer-events-none">
-                    <div className="bg-slate-800 border border-purple-400/50 rounded-lg p-2 w-48 shadow-xl">
-                      <p className="text-purple-300 font-medium text-xs">{prophet.name}</p>
-                      <p className="text-slate-400 text-[10px]">{prophet.startYear}–{prophet.endYear} до н.э.</p>
-                      <p className="text-slate-300 text-[10px] mt-1">{prophet.keyMessage}</p>
-                      {prophet.book && (
-                        <p className="text-purple-400 text-[10px] mt-1">📖 {prophet.book}</p>
-                      )}
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })}
+                </div>
+              </motion.div>
+            ))}
           </div>
         </motion.div>
 
@@ -199,34 +241,84 @@ const TimelineSlideComponent = ({ slide, direction }: TimelineSlideProps) => {
             Иуда
           </div>
           <div className="ml-20 relative h-full overflow-visible">
-            {judahWithLanes.map((king, index) => {
-              const left = yearToPercent(king.startYear);
-              const width = durationToPercent(king.startYear, king.endYear);
-              const clampedLeft = Math.max(0, Math.min(left, 100));
-              const clampedWidth = Math.max(2, Math.min(width, 100 - clampedLeft));
-              
-              return (
+            {judahLayout.map(({ item: king, left, width, lane }, index) => (
+              <motion.div
+                key={king.name}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 + index * 0.02 }}
+                className="absolute group overflow-visible"
+                style={{ 
+                  left: `${left}%`, 
+                  width: `${width}%`,
+                  top: `${lane * laneHeight + 8}px`
+                }}
+              >
+                <div className={`${getCharacterColor(king.character)} border rounded px-1.5 py-1 text-[10px] cursor-pointer hover:brightness-110 hover:z-10 hover:ring-2 hover:ring-white/30 transition-all shadow-lg`}>
+                  <p className="text-slate-100 font-medium truncate">{king.name}</p>
+                  <p className="text-slate-200/70 text-[8px]">{king.duration}</p>
+                </div>
+                {/* Tooltip */}
+                <div className="absolute top-full left-0 mt-1 opacity-0 group-hover:opacity-100 transition-opacity z-50 pointer-events-none">
+                  <div className="bg-slate-800 border border-blue-400/50 rounded-lg p-2 w-52 shadow-xl">
+                    <div className="flex items-center justify-between mb-1">
+                      <p className="text-blue-300 font-medium text-xs">{king.name}</p>
+                      <span className={`px-1.5 py-0.5 rounded text-[9px] ${
+                        king.character === 'good' ? 'bg-emerald-500/30 text-emerald-300' :
+                        king.character === 'evil' ? 'bg-red-500/30 text-red-300' :
+                        'bg-amber-500/30 text-amber-300'
+                      }`}>
+                        {getCharacterBadge(king.character)}
+                      </span>
+                    </div>
+                    <p className="text-slate-400 text-[10px]">{king.startYear}–{king.endYear} до н.э. ({king.duration})</p>
+                    <p className="text-slate-300 text-[10px] mt-1">{king.characteristic}</p>
+                    {king.keyEvent && (
+                      <p className="text-slate-400 text-[10px] mt-1 italic">{king.keyEvent}</p>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Israel Row */}
+        {israelLayout.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6 }}
+            className="relative bg-orange-950/30 shrink-0 overflow-visible"
+            style={{ height: `${israelSectionHeight}px` }}
+          >
+            <div className="absolute left-0 top-1/2 -translate-y-1/2 text-orange-400 text-xs font-medium flex items-center gap-1 w-20">
+              <Crown className="w-3 h-3" />
+              Израиль
+            </div>
+            <div className="ml-20 relative h-full overflow-visible">
+              {israelLayout.map(({ item: king, left, width, lane }, index) => (
                 <motion.div
                   key={king.name}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6 + index * 0.02 }}
+                  transition={{ delay: 0.7 + index * 0.02 }}
                   className="absolute group overflow-visible"
                   style={{ 
-                    left: `${clampedLeft}%`, 
-                    width: `${clampedWidth}%`,
-                    top: `${king.lane * laneHeight + 8}px`
+                    left: `${left}%`, 
+                    width: `${width}%`,
+                    top: `${lane * laneHeight + 8}px`
                   }}
                 >
-                  <div className={`${getCharacterColor(king.character)} border rounded px-1.5 py-1 text-[10px] cursor-pointer hover:scale-105 transition-transform shadow-lg`}>
+                  <div className={`${getCharacterColor(king.character)} border rounded px-1.5 py-1 text-[10px] cursor-pointer hover:brightness-110 hover:z-10 hover:ring-2 hover:ring-white/30 transition-all shadow-lg`}>
                     <p className="text-slate-100 font-medium truncate">{king.name}</p>
                     <p className="text-slate-200/70 text-[8px]">{king.duration}</p>
                   </div>
                   {/* Tooltip */}
                   <div className="absolute top-full left-0 mt-1 opacity-0 group-hover:opacity-100 transition-opacity z-50 pointer-events-none">
-                    <div className="bg-slate-800 border border-blue-400/50 rounded-lg p-2 w-52 shadow-xl">
+                    <div className="bg-slate-800 border border-orange-400/50 rounded-lg p-2 w-52 shadow-xl">
                       <div className="flex items-center justify-between mb-1">
-                        <p className="text-blue-300 font-medium text-xs">{king.name}</p>
+                        <p className="text-orange-300 font-medium text-xs">{king.name}</p>
                         <span className={`px-1.5 py-0.5 rounded text-[9px] ${
                           king.character === 'good' ? 'bg-emerald-500/30 text-emerald-300' :
                           king.character === 'evil' ? 'bg-red-500/30 text-red-300' :
@@ -243,71 +335,7 @@ const TimelineSlideComponent = ({ slide, direction }: TimelineSlideProps) => {
                     </div>
                   </div>
                 </motion.div>
-              );
-            })}
-          </div>
-        </motion.div>
-
-        {/* Israel Row */}
-        {israelWithLanes.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
-            className="relative bg-orange-950/30 shrink-0 overflow-visible"
-            style={{ height: `${israelSectionHeight}px` }}
-          >
-            <div className="absolute left-0 top-1/2 -translate-y-1/2 text-orange-400 text-xs font-medium flex items-center gap-1 w-20">
-              <Crown className="w-3 h-3" />
-              Израиль
-            </div>
-            <div className="ml-20 relative h-full overflow-visible">
-              {israelWithLanes.map((king, index) => {
-                const left = yearToPercent(king.startYear);
-                const width = durationToPercent(king.startYear, king.endYear);
-                const clampedLeft = Math.max(0, Math.min(left, 100));
-                const clampedWidth = Math.max(2, Math.min(width, 100 - clampedLeft));
-                
-                return (
-                  <motion.div
-                    key={king.name}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.7 + index * 0.02 }}
-                    className="absolute group overflow-visible"
-                    style={{ 
-                      left: `${clampedLeft}%`, 
-                      width: `${clampedWidth}%`,
-                      top: `${king.lane * laneHeight + 8}px`
-                    }}
-                  >
-                    <div className={`${getCharacterColor(king.character)} border rounded px-1.5 py-1 text-[10px] cursor-pointer hover:scale-105 transition-transform shadow-lg`}>
-                      <p className="text-slate-100 font-medium truncate">{king.name}</p>
-                      <p className="text-slate-200/70 text-[8px]">{king.duration}</p>
-                    </div>
-                    {/* Tooltip */}
-                    <div className="absolute top-full left-0 mt-1 opacity-0 group-hover:opacity-100 transition-opacity z-50 pointer-events-none">
-                      <div className="bg-slate-800 border border-orange-400/50 rounded-lg p-2 w-52 shadow-xl">
-                        <div className="flex items-center justify-between mb-1">
-                          <p className="text-orange-300 font-medium text-xs">{king.name}</p>
-                          <span className={`px-1.5 py-0.5 rounded text-[9px] ${
-                            king.character === 'good' ? 'bg-emerald-500/30 text-emerald-300' :
-                            king.character === 'evil' ? 'bg-red-500/30 text-red-300' :
-                            'bg-amber-500/30 text-amber-300'
-                          }`}>
-                            {getCharacterBadge(king.character)}
-                          </span>
-                        </div>
-                        <p className="text-slate-400 text-[10px]">{king.startYear}–{king.endYear} до н.э. ({king.duration})</p>
-                        <p className="text-slate-300 text-[10px] mt-1">{king.characteristic}</p>
-                        {king.keyEvent && (
-                          <p className="text-slate-400 text-[10px] mt-1 italic">{king.keyEvent}</p>
-                        )}
-                      </div>
-                    </div>
-                  </motion.div>
-                );
-              })}
+              ))}
             </div>
           </motion.div>
         )}
