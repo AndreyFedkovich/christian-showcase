@@ -788,17 +788,17 @@ export const kingsProphets: KingsProphetsSlide[] = [
     ]
   },
 
-  // Timeline: 930-850
+  // Timeline: 930-850 (filter: overlap with period)
   {
     type: 'timeline',
     title: 'Разделённое царство (930–850 до н.э.)',
     startYear: 930,
     endYear: 850,
     kings: [
-      ...kingsOfJudah.filter(k => k.startYear >= 930 && k.startYear < 850),
-      ...kingsOfIsrael.filter(k => k.startYear >= 930 && k.startYear < 850)
+      ...kingsOfJudah.filter(k => k.startYear <= 930 && k.endYear >= 850 || (k.startYear >= 850 && k.startYear <= 930)),
+      ...kingsOfIsrael.filter(k => k.startYear <= 930 && k.endYear >= 850 || (k.startYear >= 850 && k.startYear <= 930))
     ],
-    prophets: prophets.filter(p => p.startYear >= 930 && p.startYear < 850)
+    prophets: prophets.filter(p => (p.startYear <= 930 && p.endYear >= 850) || (p.startYear >= 850 && p.startYear <= 930))
   },
 
   // Илия
@@ -818,20 +818,17 @@ export const kingsProphets: KingsProphetsSlide[] = [
     }
   },
 
-  // Timeline: 850-750
+  // Timeline: 850-750 (filter: overlap with period)
   {
     type: 'timeline',
     title: 'Эпоха пророков (850–750 до н.э.)',
     startYear: 850,
     endYear: 750,
     kings: [
-      ...kingsOfJudah.filter(k => k.startYear >= 850 && k.startYear < 750),
-      ...kingsOfIsrael.filter(k => k.startYear >= 850 && k.startYear < 750)
+      ...kingsOfJudah.filter(k => k.startYear <= 850 && k.endYear >= 750 || (k.startYear >= 750 && k.startYear <= 850)),
+      ...kingsOfIsrael.filter(k => k.startYear <= 850 && k.endYear >= 750 || (k.startYear >= 750 && k.startYear <= 850))
     ],
-    prophets: prophets.filter(p => 
-      (p.startYear >= 850 && p.startYear < 750) || 
-      (p.endYear >= 850 && p.startYear < 750)
-    )
+    prophets: prophets.filter(p => (p.startYear <= 850 && p.endYear >= 750) || (p.startYear >= 750 && p.startYear <= 850))
   },
 
   // Елисей
@@ -851,20 +848,17 @@ export const kingsProphets: KingsProphetsSlide[] = [
     }
   },
 
-  // Timeline: 750-722
+  // Timeline: 750-722 (filter: overlap with period)
   {
     type: 'timeline',
     title: 'Закат Израиля (750–722 до н.э.)',
     startYear: 750,
     endYear: 722,
     kings: [
-      ...kingsOfJudah.filter(k => k.startYear >= 750 && k.startYear <= 722),
-      ...kingsOfIsrael.filter(k => k.startYear >= 750)
+      ...kingsOfJudah.filter(k => k.startYear <= 750 && k.endYear >= 722 || (k.startYear >= 722 && k.startYear <= 750)),
+      ...kingsOfIsrael.filter(k => k.startYear <= 750 && k.endYear >= 722 || (k.startYear >= 722 && k.startYear <= 750))
     ],
-    prophets: prophets.filter(p => 
-      (p.startYear >= 750 && p.startYear <= 722) || 
-      (p.endYear >= 750 && p.startYear <= 750)
-    )
+    prophets: prophets.filter(p => (p.startYear <= 750 && p.endYear >= 722) || (p.startYear >= 722 && p.startYear <= 750))
   },
 
   // Эпоха: Падение Самарии
