@@ -10,20 +10,24 @@ interface TimelineSlideProps {
 // Assign lanes to items to prevent overlap
 const assignLanes = <T extends { startYear: number; endYear: number }>(items: T[]): (T & { lane: number })[] => {
   // Sort by start year (descending for BC - larger number = earlier)
-  const sorted = [...items].sort((a, b) => b.startYear - a.startYear);
-  const lanes: number[] = []; // Tracks the endYear for each lane
+  // For ties, put longer durations first
+  const sorted = [...items].sort((a, b) => {
+    if (b.startYear !== a.startYear) return b.startYear - a.startYear;
+    return (b.startYear - b.endYear) - (a.startYear - a.endYear);
+  });
+  const lanes: number[] = []; // Tracks the endYear of the last item in each lane
   
   return sorted.map(item => {
     // Find a free lane (where previous item ended before this one starts)
     for (let i = 0; i < lanes.length; i++) {
-      // For BC dates: lanes[i] >= item.endYear means "ended before or at the same time"
-      if (lanes[i] >= item.endYear) {
-        lanes[i] = item.startYear;
+      // For BC dates: lanes[i] > item.startYear means "previous ended before current starts"
+      if (lanes[i] > item.startYear) {
+        lanes[i] = item.endYear;
         return { ...item, lane: i };
       }
     }
     // Create new lane
-    lanes.push(item.startYear);
+    lanes.push(item.endYear);
     return { ...item, lane: lanes.length - 1 };
   });
 };
