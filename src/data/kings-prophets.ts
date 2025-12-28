@@ -413,7 +413,7 @@ export const kingsOfIsrael: King[] = [
     scriptures: ['3 Цар. 16-22']
   },
   {
-    name: 'Охозия Израильский',
+    name: 'Охозия',
     startYear: 853,
     endYear: 852,
     duration: '2 года',
@@ -424,7 +424,7 @@ export const kingsOfIsrael: King[] = [
     scriptures: ['3 Цар. 22', '4 Цар. 1']
   },
   {
-    name: 'Иорам Израильский',
+    name: 'Иорам',
     startYear: 852,
     endYear: 841,
     duration: '12 лет',
@@ -446,7 +446,7 @@ export const kingsOfIsrael: King[] = [
     scriptures: ['4 Цар. 9-10']
   },
   {
-    name: 'Иоахаз Израильский',
+    name: 'Иоахаз',
     startYear: 814,
     endYear: 798,
     duration: '17 лет',
@@ -457,7 +457,7 @@ export const kingsOfIsrael: King[] = [
     scriptures: ['4 Цар. 13']
   },
   {
-    name: 'Иоас Израильский',
+    name: 'Иоас',
     startYear: 798,
     endYear: 782,
     duration: '16 лет',
@@ -561,14 +561,14 @@ export const prophets: Prophet[] = [
     startYear: 875,
     endYear: 848,
     keyMessage: 'Противостояние Ваалу, «Господь — Бог!»',
-    relatedKings: ['Ахав', 'Охозия Израильский']
+    relatedKings: ['Ахав', 'Охозия']
   },
   {
     name: 'Елисей',
     startYear: 848,
     endYear: 797,
     keyMessage: 'Чудеса милости, преемник Илии',
-    relatedKings: ['Иорам Израильский', 'Ииуй', 'Иоас Израильский']
+    relatedKings: ['Иорам', 'Ииуй', 'Иоас']
   },
   {
     name: 'Авдий',

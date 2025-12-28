@@ -186,7 +186,7 @@ const TimelineSlideComponent = ({ slide, direction }: TimelineSlideProps) => {
                 </div>
                 {/* Tooltip - position below to avoid top clipping */}
                 <div className={`absolute top-full mt-1 opacity-0 group-hover:opacity-100 transition-opacity z-50 pointer-events-none ${left > 50 ? 'right-0' : 'left-0'}`}>
-                  <div className="bg-slate-800 border border-purple-400/50 rounded-lg p-2 w-64 shadow-xl">
+                  <div className="bg-slate-800 border border-purple-400/50 rounded-lg p-4 w-72 shadow-xl">
                     <p className="text-purple-300 font-medium text-2xl">{prophet.name}</p>
                     <p className="text-slate-400 text-[16px]">{prophet.startYear}–{prophet.endYear} до н.э.</p>
                     <p className="text-slate-300 text-[16px] mt-1">{prophet.keyMessage}</p>
@@ -259,7 +259,7 @@ const TimelineSlideComponent = ({ slide, direction }: TimelineSlideProps) => {
                 </div>
                 {/* Tooltip */}
                 <div className={`absolute top-full mt-1 opacity-0 group-hover:opacity-100 transition-opacity z-50 pointer-events-none ${left > 50 ? 'right-0' : 'left-0'}`}>
-                  <div className="bg-slate-800 border border-blue-400/50 rounded-lg p-2 w-64 shadow-xl">
+                  <div className="bg-slate-800 border border-blue-400/50 rounded-lg p-4 w-72 shadow-xl">
                     <div className="flex items-center justify-between mb-1">
                       <p className="text-blue-300 font-medium text-2xl">{king.name}</p>
                       <span className={`px-1.5 py-0.5 rounded text-[14px] ${
@@ -315,7 +315,7 @@ const TimelineSlideComponent = ({ slide, direction }: TimelineSlideProps) => {
                   </div>
                   {/* Tooltip */}
                   <div className={`absolute top-full mt-1 opacity-0 group-hover:opacity-100 transition-opacity z-50 pointer-events-none ${left > 50 ? 'right-0' : 'left-0'}`}>
-                    <div className="bg-slate-800 border border-orange-400/50 rounded-lg p-2 w-64 shadow-xl">
+                    <div className="bg-slate-800 border border-orange-400/50 rounded-lg p-4 w-72 shadow-xl">
                       <div className="flex items-center justify-between mb-1">
                         <p className="text-orange-300 font-medium text-2xl">{king.name}</p>
                         <span className={`px-1.5 py-0.5 rounded text-[14px] ${
