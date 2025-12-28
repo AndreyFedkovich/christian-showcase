@@ -5,15 +5,7 @@ import { Button } from "@/components/ui/button";
 import SlideRenderer from "@/components/SlideRenderer";
 import IntroSlide from "@/components/IntroSlide";
 import IntroHermeneuticsSlide from "@/components/IntroHermeneuticsSlide";
-import { disciples } from "@/data/disciples";
-import { seminar } from "@/data/seminar";
-import { redemptionDrama } from "@/data/redemption-drama";
-import { epistlesStructure } from "@/data/epistles-structure";
-import { godExists } from "@/data/god-exists";
-import { eternalTemporal } from "@/data/eternal-temporal";
-import { homeChurch } from "@/data/home-church";
 import { presentations } from "@/data/presentations";
-import { UniversalSlide } from "@/types/slides";
 
 const Presentation = () => {
   const { presentationId } = useParams();
@@ -45,21 +37,10 @@ const Presentation = () => {
   
   if (!presentation) return null;
 
-  // Load slides based on presentation type
-  const slides: UniversalSlide[] = presentation.type === 'disciples' 
-    ? disciples 
-    : presentation.type === 'hermeneutics'
-    ? epistlesStructure as UniversalSlide[]
-    : presentation.type === 'god-exists'
-    ? godExists as UniversalSlide[]
-    : presentation.type === 'drama'
-    ? redemptionDrama as UniversalSlide[]
-    : presentation.type === 'eternal-temporal'
-    ? eternalTemporal as UniversalSlide[]
-    : presentation.type === 'home-church'
-    ? homeChurch as UniversalSlide[]
-    : seminar as UniversalSlide[];
+  // Load slides directly from presentation
+  const slides = presentation.slides;
   const totalSlides = slides.length;
+  const isHermeneutics = presentation.id === 'epistles-structure';
 
   // Wake Lock API to prevent screen from turning off
   useEffect(() => {
@@ -135,8 +116,8 @@ const Presentation = () => {
   const startPresentation = useCallback(() => {
     setShowIntro(false);
     // For hermeneutics presentations, skip the intro slide at index 0
-    setCurrentSlide(presentation?.type === 'hermeneutics' ? 1 : 0);
-  }, [presentation?.type]);
+    setCurrentSlide(isHermeneutics ? 1 : 0);
+  }, [isHermeneutics]);
 
   const nextSlide = useCallback(() => {
     if (isAnimatingRef.current) return;
@@ -147,7 +128,7 @@ const Presentation = () => {
     
     setDirection('next');
     setCurrentSlide((prev) => {
-      if (presentation?.type === 'hermeneutics') {
+      if (isHermeneutics) {
         const lastIndex = totalSlides - 1;
         return prev >= lastIndex ? lastIndex : prev + 1;
       }
@@ -158,11 +139,11 @@ const Presentation = () => {
     setTimeout(() => {
       isAnimatingRef.current = false;
     }, 300);
-  }, [showIntro, startPresentation, presentation?.type, totalSlides]);
+  }, [showIntro, startPresentation, isHermeneutics, totalSlides]);
 
   const prevSlide = useCallback(() => {
     if (isAnimatingRef.current || showIntro) return;
-    const firstSlideIndex = presentation?.type === 'hermeneutics' ? 1 : 0;
+    const firstSlideIndex = isHermeneutics ? 1 : 0;
     if (currentSlide === firstSlideIndex) {
       setShowIntro(true);
       setCurrentSlide(-1);
@@ -176,7 +157,7 @@ const Presentation = () => {
     setTimeout(() => {
       isAnimatingRef.current = false;
     }, 300);
-  }, [showIntro, presentation?.type, currentSlide, totalSlides]);
+  }, [showIntro, isHermeneutics, currentSlide, totalSlides]);
 
   const exitPresentation = useCallback(() => {
     if (document.fullscreenElement) {
@@ -234,7 +215,7 @@ const Presentation = () => {
         <div className="flex items-center gap-3 pointer-events-auto">
           {!showIntro && (
             <div className="px-4 py-2 bg-secondary/80 backdrop-blur-sm rounded-full font-sans font-medium text-sm">
-              {presentation.type === 'hermeneutics' ? currentSlide : currentSlide + 1} / {presentation.type === 'hermeneutics' ? totalSlides - 1 : totalSlides}
+              {isHermeneutics ? currentSlide : currentSlide + 1} / {isHermeneutics ? totalSlides - 1 : totalSlides}
             </div>
           )}
           <div className="px-4 py-2 bg-secondary/80 backdrop-blur-sm rounded-full font-sans text-sm hidden md:block">
@@ -253,7 +234,7 @@ const Presentation = () => {
               e.stopPropagation();
               prevSlide();
             }}
-            disabled={currentSlide === (presentation.type === 'hermeneutics' ? 1 : 0)}
+            disabled={currentSlide === (isHermeneutics ? 1 : 0)}
             className="rounded-full shadow-card hover:shadow-premium transition-smooth pointer-events-auto"
           >
             <ChevronLeft className="h-5 w-5" />
@@ -276,9 +257,9 @@ const Presentation = () => {
 
       {/* Slide Content */}
       {showIntro ? (
-        presentation.type === 'hermeneutics' && epistlesStructure[0].type === 'intro-hermeneutics' ? (
+        isHermeneutics && slides[0]?.type === 'intro-hermeneutics' ? (
           <IntroHermeneuticsSlide 
-            slide={epistlesStructure[0] as any}
+            slide={slides[0] as any}
             onStart={startPresentation}
           />
         ) : (
@@ -304,7 +285,7 @@ const Presentation = () => {
           <div 
             className="h-full gradient-gold transition-all duration-300"
             style={{ 
-              width: presentation.type === 'hermeneutics' 
+              width: isHermeneutics 
                 ? `${(currentSlide / (totalSlides - 1)) * 100}%` 
                 : `${((currentSlide + 1) / totalSlides) * 100}%` 
             }}

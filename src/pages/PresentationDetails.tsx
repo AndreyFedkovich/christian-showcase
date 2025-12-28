@@ -3,13 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Play, ArrowLeft, Calendar } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import SlideCardRenderer from "@/components/SlideCardRenderer";
-import { disciples } from "@/data/disciples";
-import { seminar, seminarSections } from "@/data/seminar";
-import { epistlesStructure } from "@/data/epistles-structure";
-import { redemptionDrama, redemptionSections } from "@/data/redemption-drama";
-import { godExists, godExistsSections } from "@/data/god-exists";
-import { eternalTemporal, eternalTemporalSections } from "@/data/eternal-temporal";
-import { homeChurch, homeChurchSections } from "@/data/home-church";
+import { seminarSections } from "@/data/seminar";
+import { redemptionSections } from "@/data/redemption-drama";
+import { godExistsSections } from "@/data/god-exists";
+import { eternalTemporalSections } from "@/data/eternal-temporal";
+import { homeChurchSections } from "@/data/home-church";
 import { presentations } from "@/data/presentations";
 import { useEffect } from "react";
 import { UniversalSlide } from "@/types/slides";
@@ -34,31 +32,25 @@ const PresentationDetails = () => {
 
   if (!presentation) return null;
 
-  // Load slides based on presentation type
-  const slides: UniversalSlide[] = presentation.type === 'disciples' 
-    ? disciples 
-    : presentation.type === 'hermeneutics'
-    ? epistlesStructure as UniversalSlide[]
-    : presentation.type === 'god-exists'
-    ? godExists as UniversalSlide[]
-    : presentation.type === 'drama'
-    ? redemptionDrama as UniversalSlide[]
-    : presentation.type === 'eternal-temporal'
-    ? eternalTemporal as UniversalSlide[]
-    : presentation.type === 'home-church'
-    ? homeChurch as UniversalSlide[]
-    : seminar as UniversalSlide[];
+  // Get slides directly from presentation
+  const slides = presentation.slides;
+  
+  // Determine presentation layout type based on id
+  const isDisciples = presentation.id === 'disciples';
+  const isHermeneutics = presentation.id === 'epistles-structure';
+  const isGodExists = presentation.id === 'god-exists';
   
   // Load sections for tabbed presentations
-  const sections = presentation.type === 'god-exists'
-    ? godExistsSections
-    : presentation.type === 'drama' 
-    ? redemptionSections 
-    : presentation.type === 'eternal-temporal'
-    ? eternalTemporalSections
-    : presentation.type === 'home-church'
-    ? homeChurchSections
-    : seminarSections;
+  const getSections = () => {
+    switch (presentation.id) {
+      case 'god-exists': return godExistsSections;
+      case 'salvation': return redemptionSections;
+      case 'eternal-temporal': return eternalTemporalSections;
+      case 'home-church': return homeChurchSections;
+      default: return seminarSections;
+    }
+  };
+  const sections = getSections();
   
   const handleSlideClick = (slideIndex: number) => {
     navigate(`/presentation/${presentationId}/view?slide=${slideIndex}`);
@@ -117,20 +109,20 @@ const PresentationDetails = () => {
 
       {/* Slides Grid */}
       <main className="max-w-7xl mx-auto px-6 pb-20">
-        {presentation.type === 'disciples' ? (
+        {isDisciples ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-[30px]">
-            {disciples.map((disciple, index) => (
+            {slides.map((slide, index) => (
               <SlideCardRenderer
                 key={`disciple-${index}`} 
-                slide={disciple}
+                slide={slide}
                 slideNumber={index + 1}
                 onClick={() => handleSlideClick(index)}
               />
             ))}
           </div>
-        ) : presentation.type === 'hermeneutics' ? (
+        ) : isHermeneutics ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-[30px]">
-            {epistlesStructure.slice(1).map((slide, index) => (
+            {slides.slice(1).map((slide, index) => (
           <SlideCardRenderer 
             key={`hermeneutics-${index}`} 
             slide={slide as UniversalSlide}
@@ -139,7 +131,7 @@ const PresentationDetails = () => {
               />
             ))}
           </div>
-        ) : presentation.type === 'god-exists' ? (
+        ) : isGodExists ? (
           <Tabs defaultValue={godExistsSections[0]?.id} className="w-full mt-[30px]">
             <TabsList className="mb-6 flex-wrap h-auto gap-2 bg-muted/50 p-2">
               {godExistsSections.map(section => (
