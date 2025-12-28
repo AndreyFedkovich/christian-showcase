@@ -3,12 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Play, ArrowLeft, Calendar } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import SlideCardRenderer from "@/components/SlideCardRenderer";
-import { seminarSections } from "@/data/seminar";
-import { redemptionSections } from "@/data/redemption-drama";
-import { godExistsSections } from "@/data/god-exists";
-import { eternalTemporalSections } from "@/data/eternal-temporal";
-import { homeChurchSections } from "@/data/home-church";
-import { presentations } from "@/data/presentations";
+import { presentations, Section } from "@/data/presentations";
 import { useEffect } from "react";
 import { UniversalSlide } from "@/types/slides";
 
@@ -18,12 +13,10 @@ const PresentationDetails = () => {
   
   const presentation = presentations.find(p => p.id === presentationId);
   
-  // Scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // If presentation not found, redirect to home
   useEffect(() => {
     if (!presentation) {
       navigate("/");
@@ -32,25 +25,8 @@ const PresentationDetails = () => {
 
   if (!presentation) return null;
 
-  // Get slides directly from presentation
-  const slides = presentation.slides;
-  
-  // Determine presentation layout type based on id
-  const isDisciples = presentation.id === 'disciples';
+  const { slides, sections, layout } = presentation;
   const isHermeneutics = presentation.id === 'epistles-structure';
-  const isGodExists = presentation.id === 'god-exists';
-  
-  // Load sections for tabbed presentations
-  const getSections = () => {
-    switch (presentation.id) {
-      case 'god-exists': return godExistsSections;
-      case 'salvation': return redemptionSections;
-      case 'eternal-temporal': return eternalTemporalSections;
-      case 'home-church': return homeChurchSections;
-      default: return seminarSections;
-    }
-  };
-  const sections = getSections();
   
   const handleSlideClick = (slideIndex: number) => {
     navigate(`/presentation/${presentationId}/view?slide=${slideIndex}`);
@@ -60,8 +36,8 @@ const PresentationDetails = () => {
     navigate(`/presentation/${presentationId}/view`);
   };
 
-  // Calculate global index for tabbed slides
   const getGlobalIndex = (sectionIndex: number, slideIndex: number) => {
+    if (!sections) return slideIndex;
     let globalIndex = 0;
     for (let i = 0; i < sectionIndex; i++) {
       globalIndex += sections[i].slides.length;
@@ -107,66 +83,24 @@ const PresentationDetails = () => {
         </div>
       </header>
 
-      {/* Slides Grid */}
+      {/* Slides */}
       <main className="max-w-7xl mx-auto px-6 pb-20">
-        {isDisciples ? (
+        {layout === 'grid' ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-[30px]">
-            {slides.map((slide, index) => (
-              <SlideCardRenderer
-                key={`disciple-${index}`} 
-                slide={slide}
-                slideNumber={index + 1}
-                onClick={() => handleSlideClick(index)}
-              />
-            ))}
+            {(isHermeneutics ? slides.slice(1) : slides).map((slide, index) => {
+              const actualIndex = isHermeneutics ? index + 1 : index;
+              return (
+                <SlideCardRenderer
+                  key={`slide-${actualIndex}`} 
+                  slide={slide as UniversalSlide}
+                  slideNumber={actualIndex + 1}
+                  onClick={() => handleSlideClick(actualIndex)}
+                />
+              );
+            })}
           </div>
-        ) : isHermeneutics ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-[30px]">
-            {slides.slice(1).map((slide, index) => (
-          <SlideCardRenderer 
-            key={`hermeneutics-${index}`} 
-            slide={slide as UniversalSlide}
-            slideNumber={index + 1}
-            onClick={() => handleSlideClick(index + 1)}
-              />
-            ))}
-          </div>
-        ) : isGodExists ? (
-          <Tabs defaultValue={godExistsSections[0]?.id} className="w-full mt-[30px]">
-            <TabsList className="mb-6 flex-wrap h-auto gap-2 bg-muted/50 p-2">
-              {godExistsSections.map(section => (
-                <TabsTrigger 
-                  key={section.id} 
-                  value={section.id}
-                  className="px-6 py-3 text-base font-medium"
-                >
-                  {section.name}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-            
-            {godExistsSections.map((section, sectionIndex) => (
-              <TabsContent key={section.id} value={section.id}>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                  {section.slides.map((slide, slideIndex) => {
-                    const globalIndex = getGlobalIndex(sectionIndex, slideIndex);
-                    const slideNumber = globalIndex + 1;
-                    
-                    return (
-                      <SlideCardRenderer
-                        key={`slide-${globalIndex}`}
-                        slide={slide as UniversalSlide}
-                        slideNumber={slideNumber}
-                        onClick={() => handleSlideClick(globalIndex)}
-                      />
-                    );
-                  })}
-                </div>
-              </TabsContent>
-            ))}
-          </Tabs>
-        ) : (
-          <Tabs defaultValue={sections[0]?.id} className="w-full mt-[30px]">
+        ) : sections && sections.length > 0 ? (
+          <Tabs defaultValue={sections[0].id} className="w-full mt-[30px]">
             <TabsList className="mb-6 flex-wrap h-auto gap-2 bg-muted/50 p-2">
               {sections.map(section => (
                 <TabsTrigger 
@@ -184,13 +118,11 @@ const PresentationDetails = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                   {section.slides.map((slide, slideIndex) => {
                     const globalIndex = getGlobalIndex(sectionIndex, slideIndex);
-                    const slideNumber = globalIndex + 1;
-                    
                     return (
                       <SlideCardRenderer
                         key={`slide-${globalIndex}`}
                         slide={slide as UniversalSlide}
-                        slideNumber={slideNumber}
+                        slideNumber={globalIndex + 1}
                         onClick={() => handleSlideClick(globalIndex)}
                       />
                     );
@@ -199,10 +131,20 @@ const PresentationDetails = () => {
               </TabsContent>
             ))}
           </Tabs>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-[30px]">
+            {slides.map((slide, index) => (
+              <SlideCardRenderer
+                key={`slide-${index}`} 
+                slide={slide as UniversalSlide}
+                slideNumber={index + 1}
+                onClick={() => handleSlideClick(index)}
+              />
+            ))}
+          </div>
         )}
       </main>
 
-      {/* Footer */}
       <footer className="py-8 text-center text-muted-foreground font-sans text-sm">
         <p>Интерактивная Библия • 2025</p>
       </footer>
