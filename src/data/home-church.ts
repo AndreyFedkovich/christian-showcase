@@ -597,7 +597,7 @@ export const homeChurch: UniversalSlide[] = [
 // Заполняем секции слайдами
 homeChurchSections[0].slides = homeChurch.slice(0, 3);   // Введение
 homeChurchSections[1].slides = homeChurch.slice(3, 8);   // Часть I
-homeChurchSections[2].slides = homeChurch.slice(8, 17);  // Часть II (+2 о росте, +2 о дарах)
-homeChurchSections[3].slides = homeChurch.slice(17, 24); // Часть III
-homeChurchSections[4].slides = homeChurch.slice(24, 31); // Часть IV
-homeChurchSections[5].slides = homeChurch.slice(31);     // Заключение
+homeChurchSections[2].slides = homeChurch.slice(8, 15);  // Часть II (+2 о росте, +2 о дарах)
+homeChurchSections[3].slides = homeChurch.slice(15, 22); // Часть III
+homeChurchSections[4].slides = homeChurch.slice(22, 29); // Часть IV
+homeChurchSections[5].slides = homeChurch.slice(29);     // Заключение
