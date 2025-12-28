@@ -6,6 +6,7 @@ import salvationImg from "@/assets/salvation-thumbnail.png";
 import godExistsImg from "@/assets/god-exists-thumbnail.png";
 import eternalCosmosImg from "@/assets/eternal-cosmos.png";
 import homeChurchImg from "@/assets/home-church-thumbnail.png";
+import kingsProphetsImg from "@/assets/kings-prophets-thumbnail.png";
 import { seminar } from '@/data/seminar';
 import { disciples } from '@/data/disciples';
 import { epistlesStructure } from '@/data/epistles-structure';
@@ -32,11 +33,10 @@ export const presentations: Presentation[] = [
     id: "kings-prophets",
     title: "Цари и пророки",
     description: "Хронология царей Израиля и Иуды с пророками (1010–586 до н.э.)",
-    thumbnail: "/placeholder.svg",
+    thumbnail: kingsProphetsImg,
     slideCount: kingsProphets.length,
     duration: "40-50 минут",
     type: 'kings-prophets',
-    isHero: true,
     createdAt: "28.12.2025"
   },
   {
