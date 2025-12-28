@@ -1,4 +1,4 @@
-// Last updated: 2025-12-27
+// Last updated: 2025-12-28
 import peterImg from "@/assets/peter.jpg";
 import josephImg from "@/assets/joseph-thumbnail.png";
 import knowDoImg from "@/assets/know-do.png";
@@ -15,6 +15,7 @@ import { godExists } from '@/data/god-exists';
 import { eternalTemporal } from '@/data/eternal-temporal';
 import { homeChurch } from '@/data/home-church';
 import { kingsProphets } from '@/data/kings-prophets';
+import { UniversalSlide } from '@/types/slides';
 
 export interface Presentation {
   id: string;
@@ -23,9 +24,9 @@ export interface Presentation {
   thumbnail: string;
   slideCount: number;
   duration: string;
-  type: 'disciples' | 'seminar' | 'hermeneutics' | 'god-exists' | 'drama' | 'eternal-temporal' | 'home-church' | 'kings-prophets';
   isHero?: boolean;
   createdAt: string;
+  slides: UniversalSlide[];
 }
 
 export const presentations: Presentation[] = [
@@ -36,8 +37,8 @@ export const presentations: Presentation[] = [
     thumbnail: kingsProphetsImg,
     slideCount: kingsProphets.length,
     duration: "40-50 минут",
-    type: 'kings-prophets',
-    createdAt: "28.12.2025"
+    createdAt: "28.12.2025",
+    slides: kingsProphets as UniversalSlide[],
   },
   {
     id: "home-church",
@@ -46,8 +47,8 @@ export const presentations: Presentation[] = [
     thumbnail: homeChurchImg,
     slideCount: homeChurch.length,
     duration: "30-35 минут",
-    type: 'home-church',
-    createdAt: "27.12.2025"
+    createdAt: "27.12.2025",
+    slides: homeChurch as UniversalSlide[],
   },
   {
     id: "salvation",
@@ -56,9 +57,9 @@ export const presentations: Presentation[] = [
     thumbnail: salvationImg,
     slideCount: redemptionDrama.length,
     duration: "35-40 минут",
-    type: 'drama',
     isHero: true,
-    createdAt: "18.12.2025"
+    createdAt: "18.12.2025",
+    slides: redemptionDrama as UniversalSlide[],
   },
   {
     id: "god-exists",
@@ -67,8 +68,8 @@ export const presentations: Presentation[] = [
     thumbnail: godExistsImg,
     slideCount: godExists.length,
     duration: "25-30 минут",
-    type: 'god-exists',
-    createdAt: "16.12.2025"
+    createdAt: "16.12.2025",
+    slides: godExists as UniversalSlide[],
   },
   {
     id: "eternal-temporal",
@@ -77,8 +78,8 @@ export const presentations: Presentation[] = [
     thumbnail: eternalCosmosImg,
     slideCount: eternalTemporal.length,
     duration: "25-30 минут",
-    type: 'eternal-temporal',
-    createdAt: "14.12.2025"
+    createdAt: "14.12.2025",
+    slides: eternalTemporal as UniversalSlide[],
   },
   {
     id: "seminar",
@@ -87,8 +88,8 @@ export const presentations: Presentation[] = [
     thumbnail: josephImg,
     slideCount: seminar.length,
     duration: "25-30 минут",
-    type: 'seminar',
-    createdAt: "07.12.2025"
+    createdAt: "07.12.2025",
+    slides: seminar as UniversalSlide[],
   },
   {
     id: "epistles-structure",
@@ -97,8 +98,8 @@ export const presentations: Presentation[] = [
     thumbnail: knowDoImg,
     slideCount: epistlesStructure.length,
     duration: "30-35 минут",
-    type: 'hermeneutics',
-    createdAt: "01.12.2025"
+    createdAt: "01.12.2025",
+    slides: epistlesStructure as UniversalSlide[],
   },
   {
     id: "disciples",
@@ -107,7 +108,7 @@ export const presentations: Presentation[] = [
     thumbnail: peterImg,
     slideCount: disciples.length,
     duration: "15-20 минут",
-    type: 'disciples',
-    createdAt: "15.11.2025"
+    createdAt: "15.11.2025",
+    slides: disciples as UniversalSlide[],
   }
 ];

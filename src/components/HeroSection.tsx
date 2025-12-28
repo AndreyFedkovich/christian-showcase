@@ -5,29 +5,18 @@ import { Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Presentation } from "@/data/presentations";
 import SlideRenderer from "@/components/SlideRenderer";
-import { redemptionDrama } from "@/data/redemption-drama";
-import { UniversalSlide } from "@/types/slides";
 
 interface HeroSectionProps {
   presentation: Presentation;
 }
-
-// Map presentation id to slides data
-const getSlidesForPresentation = (presentationId: string): UniversalSlide[] => {
-  switch (presentationId) {
-    case 'salvation':
-      return redemptionDrama as UniversalSlide[];
-    default:
-      return [];
-  }
-};
 
 const HeroSection = ({ presentation }: HeroSectionProps) => {
   const navigate = useNavigate();
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [direction, setDirection] = useState<'next' | 'prev'>('next');
   
-  const slides = getSlidesForPresentation(presentation.id);
+  // Get slides directly from presentation
+  const slides = presentation.slides;
   const currentSlide = slides[currentSlideIndex];
 
   // Auto-advance slides
