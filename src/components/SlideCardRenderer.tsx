@@ -16,7 +16,12 @@ import {
   Sunrise,
   Image,
   Quote,
-  Columns
+  Columns,
+  Crown,
+  Map,
+  CalendarDays,
+  Milestone,
+  Scroll
 } from "lucide-react";
 import storyDefault from "@/assets/story-default-generic.jpg";
 
@@ -65,6 +70,18 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
         return <Quote className="w-5 h-5" />;
       case 'drama-parallel':
         return <Columns className="w-5 h-5" />;
+      case 'timeline-intro':
+        return <Crown className="w-5 h-5" />;
+      case 'timeline-overview':
+        return <Map className="w-5 h-5" />;
+      case 'timeline-vertical':
+        return <CalendarDays className="w-5 h-5" />;
+      case 'timeline-era':
+        return <Milestone className="w-5 h-5" />;
+      case 'king-profile':
+        return <Crown className="w-5 h-5" />;
+      case 'prophet-profile':
+        return <Scroll className="w-5 h-5" />;
       default:
         return <FileText className="w-5 h-5" />;
     }
@@ -108,6 +125,18 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
         return 'Писание';
       case 'drama-parallel':
         return 'Контраст';
+      case 'timeline-intro':
+        return 'Введение';
+      case 'timeline-overview':
+        return 'Легенда';
+      case 'timeline-vertical':
+        return 'Хронология';
+      case 'timeline-era':
+        return 'Эпоха';
+      case 'king-profile':
+        return 'Царь';
+      case 'prophet-profile':
+        return 'Пророк';
       default:
         return 'Слайд';
     }
@@ -152,6 +181,18 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
         return s.reference;
       case 'drama-parallel':
         return s.title;
+      case 'timeline-intro':
+        return s.title;
+      case 'timeline-overview':
+        return s.title;
+      case 'timeline-vertical':
+        return s.title;
+      case 'timeline-era':
+        return s.era?.title;
+      case 'king-profile':
+        return s.king?.name;
+      case 'prophet-profile':
+        return s.prophet?.name;
       default:
         return 'Слайд';
     }
@@ -210,6 +251,23 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
         return 'from-slate-950 via-violet-950 to-slate-900';
       case 'drama-parallel':
         return 'from-slate-800 via-purple-900 to-amber-900';
+      case 'timeline-intro':
+        return 'from-amber-700 via-amber-600 to-yellow-700';
+      case 'timeline-overview':
+        return 'from-slate-700 via-slate-600 to-slate-500';
+      case 'timeline-vertical':
+        return 'from-indigo-800 via-indigo-700 to-blue-800';
+      case 'timeline-era':
+        return 'from-red-900 via-red-800 to-rose-900';
+      case 'king-profile': {
+        const king = (slide as any).king;
+        if (king?.kingdom === 'Иуда') {
+          return 'from-blue-800 via-blue-700 to-indigo-800';
+        }
+        return 'from-orange-700 via-orange-600 to-amber-700';
+      }
+      case 'prophet-profile':
+        return 'from-purple-800 via-purple-700 to-violet-800';
       default:
         return 'from-primary via-primary/90 to-primary/80';
     }
@@ -241,6 +299,18 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
         return (slide as any).argumentType === 'pro' 
           ? 'bg-emerald-500/80 text-white'
           : 'bg-rose-500/80 text-white';
+      case 'timeline-intro':
+        return 'bg-amber-500/80 text-white';
+      case 'timeline-overview':
+        return 'bg-slate-500/80 text-white';
+      case 'timeline-vertical':
+        return 'bg-indigo-500/80 text-white';
+      case 'timeline-era':
+        return 'bg-red-500/80 text-white';
+      case 'king-profile':
+        return 'bg-amber-500/80 text-white';
+      case 'prophet-profile':
+        return 'bg-purple-500/80 text-white';
       default:
         return 'bg-accent/80 text-[#FFF5E6]';
     }
@@ -306,6 +376,51 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
         ) : (
           <div className="w-20 h-20 rounded-full bg-rose-500/30 flex items-center justify-center -mt-8">
             <ThumbsDown className="w-10 h-10 text-rose-300" />
+          </div>
+        );
+      case 'timeline-intro':
+        return (
+          <div className="w-24 h-24 rounded-full bg-amber-500/30 flex items-center justify-center -mt-8">
+            <Crown className="w-12 h-12 text-amber-300" />
+          </div>
+        );
+      case 'timeline-overview':
+        return (
+          <div className="w-24 h-24 rounded-full bg-slate-500/30 flex items-center justify-center -mt-8">
+            <Map className="w-12 h-12 text-slate-300" />
+          </div>
+        );
+      case 'timeline-vertical':
+        return (
+          <div className="flex flex-col items-center gap-2 -mt-8">
+            <div className="w-3 h-3 rounded-full bg-indigo-400" />
+            <div className="w-0.5 h-12 bg-indigo-400/50" />
+            <div className="w-3 h-3 rounded-full bg-indigo-400" />
+            <div className="w-0.5 h-12 bg-indigo-400/50" />
+            <div className="w-3 h-3 rounded-full bg-indigo-400" />
+          </div>
+        );
+      case 'timeline-era':
+        return (
+          <div className="w-24 h-24 rounded-full bg-red-500/30 flex items-center justify-center -mt-8">
+            <Milestone className="w-12 h-12 text-red-300" />
+          </div>
+        );
+      case 'king-profile': {
+        const king = (slide as any).king;
+        const colorClass = king?.character === 'evil' ? 'bg-red-500/30 text-red-300' 
+          : king?.character === 'good' ? 'bg-emerald-500/30 text-emerald-300'
+          : 'bg-amber-500/30 text-amber-300';
+        return (
+          <div className={`w-24 h-24 rounded-full ${colorClass} flex items-center justify-center -mt-8`}>
+            <Crown className="w-12 h-12" />
+          </div>
+        );
+      }
+      case 'prophet-profile':
+        return (
+          <div className="w-24 h-24 rounded-full bg-purple-500/30 flex items-center justify-center -mt-8">
+            <Scroll className="w-12 h-12 text-purple-300" />
           </div>
         );
       default:
