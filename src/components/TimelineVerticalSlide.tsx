@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Crown, BookOpen, Calendar, ArrowDown } from 'lucide-react';
 import { TimelineSlide as TimelineSlideType, King, Prophet } from '@/data/kings-prophets';
@@ -143,9 +143,97 @@ const getCharacterBadge = (character: King['character']) => {
   }
 };
 
+// --- TOOLTIP DATA ---
+interface TooltipData {
+  x: number;
+  y: number;
+  type: 'king' | 'prophet';
+  item: King | Prophet;
+}
+
+// --- FLOATING TOOLTIP ---
+const FloatingTooltip = ({ tooltip }: { tooltip: TooltipData | null }) => {
+  if (!tooltip) return null;
+
+  const { x, y, type, item } = tooltip;
+  const tooltipWidth = 288;
+  const tooltipHeight = 200;
+  const offset = 16;
+
+  const viewportWidth = typeof window !== 'undefined' ? window.innerWidth : 1920;
+  const viewportHeight = typeof window !== 'undefined' ? window.innerHeight : 1080;
+
+  // Horizontal positioning
+  let left = x + offset;
+  if (x + tooltipWidth + offset > viewportWidth) {
+    left = x - tooltipWidth - offset;
+  }
+  left = Math.max(8, left);
+
+  // Vertical positioning
+  let top = y + offset;
+  if (y + tooltipHeight + offset > viewportHeight) {
+    top = y - tooltipHeight - offset;
+  }
+  top = Math.max(8, top);
+
+  const isKing = type === 'king';
+  const king = isKing ? (item as King) : null;
+  const prophet = !isKing ? (item as Prophet) : null;
+
+  return (
+    <div
+      className="fixed z-[200] pointer-events-none w-72 p-4 rounded-xl bg-slate-800 border border-slate-600 shadow-2xl"
+      style={{ left, top }}
+    >
+      <div className="flex flex-col gap-1">
+        <div className="flex justify-between items-start">
+          <h3 className={`text-lg font-bold ${isKing ? (king?.kingdom === 'judah' ? 'text-amber-400' : 'text-blue-400') : 'text-purple-400'}`}>
+            {item.name}
+          </h3>
+          {isKing && king && (
+            <span className={`text-[10px] px-1.5 py-0.5 rounded uppercase tracking-wide ${
+              king.character === 'good' ? 'bg-emerald-500/20 text-emerald-400' :
+              king.character === 'evil' ? 'bg-red-500/20 text-red-400' :
+              'bg-amber-500/20 text-amber-400'
+            }`}>
+              {getCharacterBadge(king.character)}
+            </span>
+          )}
+        </div>
+        <div className="text-sm text-slate-400 font-mono">
+          {item.startYear} – {item.endYear} до н.э.
+          {isKing && king && <span className="ml-1 text-slate-500">({king.duration})</span>}
+        </div>
+        {isKing && king && (
+          <>
+            <p className="text-sm text-slate-200 mt-1 leading-snug">{king.characteristic}</p>
+            {king.keyEvent && <p className="text-xs text-slate-400 mt-2 italic border-l-2 border-slate-600 pl-2">{king.keyEvent}</p>}
+          </>
+        )}
+        {!isKing && prophet && (
+          <>
+            <p className="text-sm text-slate-200 mt-1">{prophet.keyMessage}</p>
+            {prophet.book && <p className="text-xs text-purple-400 mt-2 flex items-center gap-1"><BookOpen className="w-3 h-3"/> Книга: {prophet.book}</p>}
+          </>
+        )}
+      </div>
+    </div>
+  );
+};
+
 // --- COMPONENT ---
 const TimelineVerticalSlideComponent = ({ slide }: TimelineSlideProps) => {
   const { title, startYear, endYear, kings, prophets } = slide;
+  const [tooltip, setTooltip] = useState<TooltipData | null>(null);
+
+  const handleMouseMove = (e: React.MouseEvent, type: 'king' | 'prophet', item: King | Prophet) => {
+    setTooltip({ x: e.clientX, y: e.clientY, type, item });
+  };
+
+  const handleMouseLeave = () => {
+    setTooltip(null);
+  };
 
   const judahKings = kings.filter(k => k.kingdom === 'judah');
   const israelKings = kings.filter(k => k.kingdom === 'israel');
@@ -240,6 +328,8 @@ const TimelineVerticalSlideComponent = ({ slide }: TimelineSlideProps) => {
                       layout={layout}
                       offset={layout.lane * (LANE_WIDTH + LANE_GAP)}
                       align="right"
+                      onMouseMove={handleMouseMove}
+                      onMouseLeave={handleMouseLeave}
                   />
               ))}
             </div>
@@ -257,6 +347,8 @@ const TimelineVerticalSlideComponent = ({ slide }: TimelineSlideProps) => {
                       layout={layout}
                       offset={layout.lane * 120}
                       align="right"
+                      onMouseMove={handleMouseMove}
+                      onMouseLeave={handleMouseLeave}
                   />
               ))}
             </div>
@@ -292,6 +384,8 @@ const TimelineVerticalSlideComponent = ({ slide }: TimelineSlideProps) => {
                       layout={layout}
                       offset={layout.lane * (LANE_WIDTH + LANE_GAP)}
                       align="left"
+                      onMouseMove={handleMouseMove}
+                      onMouseLeave={handleMouseLeave}
                   />
               ))}
             </div>
@@ -309,17 +403,37 @@ const TimelineVerticalSlideComponent = ({ slide }: TimelineSlideProps) => {
                       layout={layout}
                       offset={layout.lane * 120}
                       align="left"
+                      onMouseMove={handleMouseMove}
+                      onMouseLeave={handleMouseLeave}
                   />
               ))}
             </div>
 
           </div>
         </div>
+        
+        <FloatingTooltip tooltip={tooltip} />
       </motion.div>
   );
 };
 
-const KingCard = ({ layout, offset, align }: { layout: LayoutItem<King>, offset: number, align: 'left' | 'right' }) => {
+interface CardProps {
+  layout: LayoutItem<King>;
+  offset: number;
+  align: 'left' | 'right';
+  onMouseMove: (e: React.MouseEvent, type: 'king' | 'prophet', item: King | Prophet) => void;
+  onMouseLeave: () => void;
+}
+
+interface ProphetCardProps {
+  layout: LayoutItem<Prophet>;
+  offset: number;
+  align: 'left' | 'right';
+  onMouseMove: (e: React.MouseEvent, type: 'king' | 'prophet', item: King | Prophet) => void;
+  onMouseLeave: () => void;
+}
+
+const KingCard = ({ layout, offset, align, onMouseMove, onMouseLeave }: CardProps) => {
   const { item: king, renderTop, height, isCallout } = layout;
 
   return (
@@ -327,7 +441,9 @@ const KingCard = ({ layout, offset, align }: { layout: LayoutItem<King>, offset:
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className={`absolute flex flex-col justify-center px-3 rounded-lg border shadow-lg cursor-pointer group transition-all hover:!z-[100] hover:scale-[1.02] hover:brightness-110 ${getCharacterColor(king.character)}`}
+          onMouseMove={(e) => onMouseMove(e, 'king', king)}
+          onMouseLeave={onMouseLeave}
+          className={`absolute flex flex-col justify-center px-3 rounded-lg border shadow-lg cursor-pointer transition-all hover:!z-[100] hover:scale-[1.02] hover:brightness-110 ${getCharacterColor(king.character)}`}
           style={{
             top: `${renderTop}px`,
             height: `${height}px`,
@@ -337,22 +453,20 @@ const KingCard = ({ layout, offset, align }: { layout: LayoutItem<King>, offset:
           }}
       >
         <div className="flex flex-col h-full justify-center w-full relative z-10">
-        <span className="font-bold text-white text-[15px] leading-tight mb-1 line-clamp-2">
-          {king.name}
-        </span>
+          <span className="font-bold text-white text-[15px] leading-tight mb-1 line-clamp-2">
+            {king.name}
+          </span>
           <div className="flex items-center text-[11px] text-white/80 font-mono leading-none">
             <span className="whitespace-nowrap">{king.duration}</span>
             <span className="mx-1.5 opacity-40">|</span>
             <span className="whitespace-nowrap">{king.startYear}–{king.endYear}</span>
           </div>
         </div>
-
-        <Tooltip item={king} type="king" align={align} />
       </motion.div>
   );
 };
 
-const ProphetCard = ({ layout, offset, align }: { layout: LayoutItem<Prophet>, offset: number, align: 'left' | 'right' }) => {
+const ProphetCard = ({ layout, offset, align, onMouseMove, onMouseLeave }: ProphetCardProps) => {
   const { item: prophet, renderTop, height } = layout;
 
   return (
@@ -360,7 +474,9 @@ const ProphetCard = ({ layout, offset, align }: { layout: LayoutItem<Prophet>, o
           initial={{ opacity: 0, x: align === 'right' ? -20 : 20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          className="absolute flex items-center justify-center rounded border border-purple-400 bg-purple-600/90 shadow-lg shadow-purple-900/30 cursor-pointer group hover:z-50 transition-transform hover:scale-105"
+          onMouseMove={(e) => onMouseMove(e, 'prophet', prophet)}
+          onMouseLeave={onMouseLeave}
+          className="absolute flex items-center justify-center rounded border border-purple-400 bg-purple-600/90 shadow-lg shadow-purple-900/30 cursor-pointer hover:z-50 transition-transform hover:scale-105"
           style={{
             top: `${renderTop}px`,
             height: `${height}px`,
@@ -369,48 +485,7 @@ const ProphetCard = ({ layout, offset, align }: { layout: LayoutItem<Prophet>, o
           }}
       >
         <span className="text-sm font-medium text-white text-center px-1 truncate w-full">{prophet.name}</span>
-        <Tooltip item={prophet} type="prophet" align={align} />
       </motion.div>
-  );
-};
-
-const Tooltip = ({ item, type, align }: { item: any, type: 'king' | 'prophet', align: 'left' | 'right' }) => {
-  const positionClass = align === 'right' ? 'right-[105%]' : 'left-[105%]';
-  return (
-      <div className={`absolute top-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-[60] w-72 p-4 rounded-xl bg-slate-800 border border-slate-600 shadow-2xl ${positionClass}`}>
-        <div className="flex flex-col gap-1">
-          <div className="flex justify-between items-start">
-            <h3 className={`text-lg font-bold ${type === 'king' ? (item.kingdom === 'judah' ? 'text-amber-400' : 'text-blue-400') : 'text-purple-400'}`}>
-              {item.name}
-            </h3>
-            {type === 'king' && (
-                <span className={`text-[10px] px-1.5 py-0.5 rounded uppercase tracking-wide ${
-                    item.character === 'good' ? 'bg-emerald-500/20 text-emerald-400' :
-                        item.character === 'evil' ? 'bg-red-500/20 text-red-400' :
-                            'bg-amber-500/20 text-amber-400'
-                }`}>
-               {getCharacterBadge(item.character)}
-             </span>
-            )}
-          </div>
-          <div className="text-sm text-slate-400 font-mono">
-            {item.startYear} – {item.endYear} до н.э.
-            {type === 'king' && <span className="ml-1 text-slate-500">({item.duration})</span>}
-          </div>
-          {type === 'king' && (
-              <>
-                <p className="text-sm text-slate-200 mt-1 leading-snug">{item.characteristic}</p>
-                {item.keyEvent && <p className="text-xs text-slate-400 mt-2 italic border-l-2 border-slate-600 pl-2">{item.keyEvent}</p>}
-              </>
-          )}
-          {type === 'prophet' && (
-              <>
-                <p className="text-sm text-slate-200 mt-1">{item.keyMessage}</p>
-                {item.book && <p className="text-xs text-purple-400 mt-2 flex items-center gap-1"><BookOpen className="w-3 h-3"/> Книга: {item.book}</p>}
-              </>
-          )}
-        </div>
-      </div>
   );
 };
 
