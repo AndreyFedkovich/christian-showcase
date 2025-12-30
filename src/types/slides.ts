@@ -42,11 +42,11 @@ import {
   TimelineIntroSlide,
   TimelineOverviewSlide,
   TimelineSlide,
+  TimelineVerticalSlide,
   KingProfileSlide,
   ProphetProfileSlide,
   TimelineEraSlide
 } from '@/data/kings-prophets';
-import TimelineVerticalSlide from '@/components/TimelineVerticalSlide';
 
 // Profile slide type for disciples
 export interface ProfileSlide extends Disciple {

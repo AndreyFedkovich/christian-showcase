@@ -203,6 +203,19 @@ const TimelineVerticalSlideComponent = ({ slide }: TimelineSlideProps) => {
 
         {/* SCROLL AREA */}
         <div className="flex-1 overflow-y-auto overflow-x-hidden relative custom-scrollbar bg-[#0f172a]">
+          {/* Grid pattern background */}
+          <svg className="absolute inset-0 w-full opacity-5 pointer-events-none" style={{ height: contentHeight }}>
+            <pattern id="timeline-grid" patternUnits="userSpaceOnUse" width="100" height="100">
+              <line x1="50" y1="0" x2="50" y2="100" stroke="currentColor" strokeWidth="1" className="text-slate-400" />
+              <line x1="0" y1="50" x2="100" y2="50" stroke="currentColor" strokeWidth="1" className="text-slate-400" />
+            </pattern>
+            <rect width="100%" height="100%" fill="url(#timeline-grid)" />
+          </svg>
+          
+          {/* Blurred decorative circles */}
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
+          
           <div className="absolute inset-0 w-full pointer-events-none flex justify-center" style={{ height: contentHeight }}>
             <div className="w-[50%] h-full bg-gradient-to-r from-transparent via-amber-900/5 to-amber-900/10 border-r border-slate-800/50" />
             <div className="w-[50%] h-full bg-gradient-to-l from-transparent via-blue-900/5 to-blue-900/10 border-l border-slate-800/50" />
