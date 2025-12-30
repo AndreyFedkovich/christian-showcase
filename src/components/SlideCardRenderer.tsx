@@ -52,13 +52,13 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
       case 'dialogue-answer-image':
         return <Bot className="w-5 h-5" />;
       case 'argument':
-        return slide.argumentType === 'pro' ? <ThumbsUp className="w-5 h-5" /> : <ThumbsDown className="w-5 h-5" />;
+        return (slide as any).argumentType === 'pro' ? <ThumbsUp className="w-5 h-5" /> : <ThumbsDown className="w-5 h-5" />;
       case 'drama-act':
         return <Theater className="w-5 h-5" />;
       case 'drama-scene':
         return <BookOpen className="w-5 h-5" />;
       case 'drama-climax':
-        return slide.moment === 'darkness' ? <Flame className="w-5 h-5" /> : <Sunrise className="w-5 h-5" />;
+        return (slide as any).moment === 'darkness' ? <Flame className="w-5 h-5" /> : <Sunrise className="w-5 h-5" />;
       case 'drama-image':
         return <Image className="w-5 h-5" />;
       case 'drama-scripture':
@@ -95,13 +95,13 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
       case 'dialogue-answer-image':
         return 'Ответ ИИ';
       case 'argument':
-        return slide.argumentType === 'pro' ? 'ЗА' : 'ПРОТИВ';
+        return (slide as any).argumentType === 'pro' ? 'ЗА' : 'ПРОТИВ';
       case 'drama-act':
         return 'Акт';
       case 'drama-scene':
         return 'Сцена';
       case 'drama-climax':
-        return slide.moment === 'darkness' ? 'Тьма' : 'Свет';
+        return (slide as any).moment === 'darkness' ? 'Тьма' : 'Свет';
       case 'drama-image':
         return 'Образ';
       case 'drama-scripture':
@@ -114,59 +114,61 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
   };
 
   const getTitle = () => {
+    const s = slide as any;
     switch (slide.type) {
       case 'profile':
-        return slide.name;
+        return s.name;
       case 'story':
       case 'story-image':
-        return slide.title;
+        return s.title;
       case 'reflection':
-        return slide.subtitle || 'Вопрос для размышления';
+        return s.subtitle || 'Вопрос для размышления';
       case 'conclusion':
-        return slide.title;
+        return s.title;
       case 'scripture-dark':
-        return slide.reference;
+        return s.reference;
       case 'introduction':
-        return slide.title;
+        return s.title;
       case 'hermeneutics':
-        return slide.bookName;
+        return s.bookName;
       case 'practical-example':
-        return slide.title;
+        return s.title;
       case 'dialogue-question':
-        return slide.question;
+        return s.question;
       case 'dialogue-answer':
       case 'dialogue-answer-image':
-        return slide.title;
+        return s.title;
       case 'argument':
-        return slide.name;
+        return s.name;
       case 'drama-act':
-        return slide.actName;
+        return s.actName;
       case 'drama-scene':
-        return slide.sceneTitle;
+        return s.sceneTitle;
       case 'drama-climax':
-        return slide.title;
+        return s.title;
       case 'drama-image':
-        return slide.title;
+        return s.title;
       case 'drama-scripture':
-        return slide.reference;
+        return s.reference;
       case 'drama-parallel':
-        return slide.title;
+        return s.title;
       default:
         return 'Слайд';
     }
   };
 
   const getSubtitle = () => {
-    if (slide.type === 'profile') return slide.subtitle;
+    if (slide.type === 'profile') return (slide as any).subtitle;
     return undefined;
   };
 
   const getSlideImage = () => {
-    if (slide.type === 'profile') return slide.image;
-    if (slide.type === 'story') return slide.image || storyDefault;
-    if (slide.type === 'story-image') return slide.image;
-    if (slide.type === 'drama-image') return slide.image;
-    if (slide.type === 'dialogue-answer-image') return slide.image;
+    const s = slide as any;
+    if (slide.type === 'profile') return s.image;
+    if (slide.type === 'story') return s.image || storyDefault;
+    if (slide.type === 'story-image') return s.image;
+    if (slide.type === 'drama-image') return s.image;
+    if (slide.type === 'dialogue-answer-image') return s.image;
     return undefined;
   };
 
@@ -191,7 +193,7 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
       case 'dialogue-answer-image':
         return 'from-emerald-900 via-emerald-800 to-teal-900';
       case 'argument':
-        return slide.argumentType === 'pro' 
+        return (slide as any).argumentType === 'pro' 
           ? 'from-emerald-800 via-emerald-700 to-teal-800'
           : 'from-rose-800 via-rose-700 to-red-800';
       case 'drama-act':
@@ -199,7 +201,7 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
       case 'drama-scene':
         return 'from-slate-950 via-purple-950 to-violet-950';
       case 'drama-climax':
-        return slide.moment === 'darkness' 
+        return (slide as any).moment === 'darkness' 
           ? 'from-black via-red-950 to-black'
           : 'from-amber-950 via-yellow-900 to-amber-950';
       case 'drama-image':
@@ -236,7 +238,7 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
       case 'dialogue-answer':
         return 'bg-emerald-500/80 text-white';
       case 'argument':
-        return slide.argumentType === 'pro' 
+        return (slide as any).argumentType === 'pro' 
           ? 'bg-emerald-500/80 text-white'
           : 'bg-rose-500/80 text-white';
       default:
@@ -297,7 +299,7 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
           </div>
         );
       case 'argument':
-        return slide.argumentType === 'pro' ? (
+        return (slide as any).argumentType === 'pro' ? (
           <div className="w-20 h-20 rounded-full bg-emerald-500/30 flex items-center justify-center -mt-8">
             <ThumbsUp className="w-10 h-10 text-emerald-300" />
           </div>

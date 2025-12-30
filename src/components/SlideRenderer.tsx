@@ -28,7 +28,6 @@ import ProphetProfileSlideComponent from '@/components/ProphetProfileSlide';
 import TimelineEraSlideComponent from '@/components/TimelineEraSlide';
 import TimelineIntroSlideComponent from '@/components/TimelineIntroSlide';
 import TimelineOverviewSlideComponent from '@/components/TimelineOverviewSlide';
-import TimelineVerticalSlide from '@/components/TimelineVerticalSlide';
 import TimelineVerticalSlideComponent from '@/components/TimelineVerticalSlide';
 
 interface SlideRendererProps {
@@ -42,7 +41,7 @@ const SlideRenderer = ({ slide, direction, slideNumber }: SlideRendererProps) =>
     case 'profile':
       return (
         <ProfileSlide 
-          disciple={slide} 
+          disciple={slide as any} 
           slideNumber={slideNumber || 1} 
           direction={direction} 
         />
