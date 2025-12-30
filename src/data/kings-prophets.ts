@@ -21,6 +21,7 @@ export interface Prophet {
   keyMessage: string;
   book?: string;
   relatedKings?: string[];
+  kingdom?;
 }
 
 export interface TimelineEra {
@@ -47,13 +48,17 @@ export interface TimelineOverviewSlide {
 }
 
 export interface TimelineSlide {
-  type: 'timeline';
+  type: 'timeline' | any;
   title: string;
   startYear: number;
   endYear: number;
   kings: King[];
   prophets: Prophet[];
   era?: TimelineEra;
+}
+
+export interface TimelineVerticalSlide extends TimelineSlide {
+  type: 'timeline-vertical';
 }
 
 export interface KingProfileSlide {
@@ -80,7 +85,8 @@ export interface TimelineEraSlide {
 export type KingsProphetsSlide = 
   | TimelineIntroSlide 
   | TimelineOverviewSlide 
-  | TimelineSlide 
+  | TimelineSlide
+  | TimelineVerticalSlide
   | KingProfileSlide 
   | ProphetProfileSlide 
   | TimelineEraSlide;
@@ -392,7 +398,7 @@ export const kingsOfIsrael: King[] = [
   },
   {
     name: 'Амврий',
-    startYear: 885,
+    startYear: 884,
     endYear: 874,
     duration: '12 лет',
     kingdom: 'israel',
@@ -722,6 +728,15 @@ export const kingsProphets: KingsProphetsSlide[] = [
     note: 'Все даты приблизительные. Некоторые цари правили совместно (соправление).'
   },
 
+  {
+    type: 'timeline-vertical',
+    title: 'Полная хронология (1010–586 до н.э.)',
+    startYear: 1010,
+    endYear: 586,
+    kings: [...kingsOfJudah, ...kingsOfIsrael],
+    prophets: prophets
+  },
+
   // Эпоха: Объединённое царство
   {
     type: 'timeline-era',
@@ -791,15 +806,15 @@ export const kingsProphets: KingsProphetsSlide[] = [
   // Timeline: 930-850
   // For BC dates: include if endYear <= periodStart AND startYear >= periodEnd
   {
-    type: 'timeline',
+    type: 'timeline-vertical',
     title: 'Разделённое царство (930–850 до н.э.)',
-    startYear: 930,
-    endYear: 850,
+    startYear: 1010,
+    endYear: 842,
     kings: [
-      ...kingsOfJudah.filter(k => k.endYear <= 930 && k.startYear >= 850),
-      ...kingsOfIsrael.filter(k => k.endYear <= 930 && k.startYear >= 850)
+      ...kingsOfJudah.filter(k => k.endYear <= 1010 && k.startYear >= 842),
+      ...kingsOfIsrael.filter(k => k.endYear <= 1010 && k.startYear >= 842)
     ],
-    prophets: prophets.filter(p => p.endYear <= 930 && p.startYear >= 850)
+    prophets: prophets.filter(p => p.endYear <= 1010 && p.startYear >= 842)
   },
 
   // Илия
@@ -822,15 +837,15 @@ export const kingsProphets: KingsProphetsSlide[] = [
   // Timeline: 850-750
   // For BC dates: include if endYear <= periodStart AND startYear >= periodEnd
   {
-    type: 'timeline',
+    type: 'timeline-vertical',
     title: 'Эпоха пророков (850–750 до н.э.)',
     startYear: 850,
-    endYear: 750,
+    endYear: 754,
     kings: [
-      ...kingsOfJudah.filter(k => k.endYear <= 850 && k.startYear >= 750),
-      ...kingsOfIsrael.filter(k => k.endYear <= 850 && k.startYear >= 750)
+      ...kingsOfJudah.filter(k => k.endYear <= 850 && k.startYear >= 754),
+      ...kingsOfIsrael.filter(k => k.endYear <= 850 && k.startYear >= 754)
     ],
-    prophets: prophets.filter(p => p.endYear <= 850 && p.startYear >= 750)
+    prophets: prophets.filter(p => p.endYear <= 850 && p.startYear >= 754)
   },
 
   // Елисей
@@ -853,15 +868,15 @@ export const kingsProphets: KingsProphetsSlide[] = [
   // Timeline: 750-722
   // For BC dates: include if endYear <= periodStart AND startYear >= periodEnd
   {
-    type: 'timeline',
+    type: 'timeline-vertical',
     title: 'Закат Израиля (750–722 до н.э.)',
-    startYear: 750,
-    endYear: 722,
+    startYear: 760,
+    endYear: 715,
     kings: [
-      ...kingsOfJudah.filter(k => k.endYear <= 750 && k.startYear >= 722),
-      ...kingsOfIsrael.filter(k => k.endYear <= 750 && k.startYear >= 722)
+      ...kingsOfJudah.filter(k => k.endYear <= 760 && k.startYear >= 715),
+      ...kingsOfIsrael.filter(k => k.endYear <= 760 && k.startYear >= 715)
     ],
-    prophets: prophets.filter(p => p.endYear <= 750 && p.startYear >= 722)
+    prophets: prophets.filter(p => p.endYear <= 760 && p.startYear >= 715)
   },
 
   // Эпоха: Падение Самарии
@@ -917,12 +932,12 @@ export const kingsProphets: KingsProphetsSlide[] = [
   // Timeline: 722-640
   // For BC dates: include if endYear <= periodStart AND startYear >= periodEnd
   {
-    type: 'timeline',
+    type: 'timeline-vertical',
     title: 'Иуда один (722–640 до н.э.)',
     startYear: 722,
-    endYear: 640,
-    kings: kingsOfJudah.filter(k => k.endYear <= 722 && k.startYear >= 640),
-    prophets: prophets.filter(p => p.endYear <= 722 && p.startYear >= 640)
+    endYear: 643,
+    kings: kingsOfJudah.filter(k => k.endYear <= 722 && k.startYear >= 643),
+    prophets: prophets.filter(p => p.endYear <= 722 && p.startYear >= 643)
   },
 
   // Иосия
@@ -962,7 +977,7 @@ export const kingsProphets: KingsProphetsSlide[] = [
   // For BC dates: startYear >= endYear (e.g., 640 >= 586)
   // Include if: endYear <= periodStart (ended not before period start) AND startYear >= periodEnd (started not after period end)
   {
-    type: 'timeline',
+    type: 'timeline-vertical',
     title: 'Последние годы Иуды (640–586 до н.э.)',
     startYear: 640,
     endYear: 586,
@@ -985,16 +1000,6 @@ export const kingsProphets: KingsProphetsSlide[] = [
       'Но Бог обещал восстановление (Иер. 29:10)'
     ]
   },
-
-  // Заключение — полная временная шкала
-  {
-    type: 'timeline',
-    title: 'Полная хронология (1010–586 до н.э.)',
-    startYear: 1010,
-    endYear: 586,
-    kings: [...kingsOfJudah, ...kingsOfIsrael],
-    prophets: prophets
-  }
 ];
 
 // Экспорт количества слайдов

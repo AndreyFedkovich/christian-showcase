@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Crown, BookOpen, Calendar, ChevronRight } from 'lucide-react';
-import { TimelineSlide as TimelineSlideType, King, Prophet } from '@/data/kings-prophets';
+import { TimelineSlide as TimelineSlideType, King } from '@/data/kings-prophets';
 
 interface TimelineSlideProps {
   slide: TimelineSlideType;
