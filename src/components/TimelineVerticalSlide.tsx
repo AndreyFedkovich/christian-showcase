@@ -157,7 +157,7 @@ const FloatingTooltip = ({ tooltip }: { tooltip: TooltipData | null }) => {
 
   const { x, y, type, item } = tooltip;
   const tooltipWidth = 288;
-  const tooltipHeight = 200;
+  const tooltipHeight = 150;
   const offset = 16;
 
   const viewportWidth = typeof window !== 'undefined' ? window.innerWidth : 1920;

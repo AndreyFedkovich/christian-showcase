@@ -201,7 +201,7 @@ export const kingsOfJudah: King[] = [
     kingdom: 'judah',
     character: 'mixed',
     characteristic: 'Восстановил храм',
-    keyEvent: 'Добрый при Иодае, отступил после его смерти',
+    keyEvent: 'Благчестивый при Иодае, отступил после его смерти',
     scriptures: ['2 Пар. 24']
   },
   {
@@ -211,7 +211,7 @@ export const kingsOfJudah: King[] = [
     duration: '29 лет',
     kingdom: 'judah',
     character: 'mixed',
-    characteristic: 'Добрый, но не полностью',
+    characteristic: 'Благчестивый, но не полностью',
     keyEvent: 'Победил Едом, но поклонился их богам',
     scriptures: ['2 Пар. 25']
   },
@@ -277,7 +277,7 @@ export const kingsOfJudah: King[] = [
     duration: '2 года',
     kingdom: 'judah',
     character: 'evil',
-    characteristic: 'Злой царь',
+    characteristic: 'Нечестивый царь',
     keyEvent: 'Убит своими слугами',
     scriptures: ['2 Пар. 33']
   },
@@ -436,7 +436,7 @@ export const kingsOfIsrael: King[] = [
     duration: '12 лет',
     kingdom: 'israel',
     character: 'evil',
-    characteristic: 'Менее злой, чем родители',
+    characteristic: 'Менее нечестивый, чем родители',
     keyEvent: 'Убит Ииуем',
     scriptures: ['4 Цар. 3-9']
   },
@@ -458,7 +458,7 @@ export const kingsOfIsrael: King[] = [
     duration: '17 лет',
     kingdom: 'israel',
     character: 'evil',
-    characteristic: 'Злой, но признал Елисея',
+    characteristic: 'Нечестивый, но признал Елисея',
     keyEvent: 'Ослаблен Сирией',
     scriptures: ['4 Цар. 13']
   },
@@ -721,8 +721,8 @@ export const kingsProphets: KingsProphetsSlide[] = [
     legends: [
       { label: 'Иуда', color: 'blue', description: 'Южное царство, 2 колена, столица — Иерусалим' },
       { label: 'Израиль', color: 'orange', description: 'Северное царство, 10 колен, столица — Самария' },
-      { label: 'Добрый царь', color: 'green', description: 'Делал угодное в очах Господа' },
-      { label: 'Злой царь', color: 'red', description: 'Делал неугодное в очах Господа' },
+      { label: 'Благчестивый царь', color: 'green', description: 'Делал угодное в очах Господа' },
+      { label: 'Нечестивый царь', color: 'red', description: 'Делал неугодное в очах Господа' },
       { label: 'Пророк', color: 'purple', description: 'Служитель Божий, возвещающий волю Господа' }
     ],
     note: 'Все даты приблизительные. Некоторые цари правили совместно (соправление).'

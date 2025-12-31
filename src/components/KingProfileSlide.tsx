@@ -15,7 +15,7 @@ const KingProfileSlideComponent = ({ slide, direction }: KingProfileSlideProps) 
       case 'good':
         return {
           icon: Star,
-          label: 'Добрый царь',
+          label: 'Благчестивый царь',
           bgColor: 'bg-emerald-500/20',
           textColor: 'text-emerald-400',
           borderColor: 'border-emerald-500/50',
@@ -24,7 +24,7 @@ const KingProfileSlideComponent = ({ slide, direction }: KingProfileSlideProps) 
       case 'evil':
         return {
           icon: AlertTriangle,
-          label: 'Злой царь',
+          label: 'Нечестивый царь',
           bgColor: 'bg-red-500/20',
           textColor: 'text-red-400',
           borderColor: 'border-red-500/50',

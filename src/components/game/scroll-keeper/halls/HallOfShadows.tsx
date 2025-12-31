@@ -151,7 +151,7 @@ export function HallOfShadows({
                 onClick={skipTyping}
                 title={isTyping ? "Нажмите, чтобы пропустить" : ""}
               >
-                <p className="text-slate-200 text-xl md:text-2xl leading-relaxed">
+                <p className="text-slate-200 text-3xl md:text-4xl leading-relaxed">
                   {displayedText}
                   {isTyping && (
                     <span 

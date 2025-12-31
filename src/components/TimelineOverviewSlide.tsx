@@ -17,9 +17,9 @@ const TimelineOverviewSlideComponent = ({ slide, direction }: TimelineOverviewSl
         return Crown;
       case 'Пророк':
         return BookOpen;
-      case 'Добрый царь':
+      case 'Благчестивый царь':
         return CheckCircle;
-      case 'Злой царь':
+      case 'Нечестивый царь':
         return XCircle;
       default:
         return MinusCircle;

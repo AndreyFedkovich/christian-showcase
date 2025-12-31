@@ -118,7 +118,7 @@ All colors MUST be HSL.
 }
 
 .crawl-content:hover {
-  animation-play-state: paused;
+  animation-play-state: running;
 }
 
 @keyframes crawl {

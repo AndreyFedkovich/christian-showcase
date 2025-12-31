@@ -38,7 +38,7 @@ export function HallCard({ hall, hallNumber, onClick }: HallCardProps) {
       
       {/* Large icon in center */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <span className="text-8xl opacity-80 group-hover:scale-110 transition-transform duration-300">
+        <span className="text-7xl opacity-80 group-hover:scale-110 transition-transform duration-300">
           {hall.icon}
         </span>
       </div>
@@ -46,17 +46,17 @@ export function HallCard({ hall, hallNumber, onClick }: HallCardProps) {
       {/* Content at bottom */}
       <div className="absolute bottom-0 left-0 right-0 p-5 space-y-2">
         {/* Hall number badge */}
-        <div className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-accent/80 text-white text-sm font-medium">
+        <div className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-accent/80 text-white text-lg font-medium">
           Зал {hallNumber}
         </div>
         
         {/* Title */}
-        <h3 className="text-xl font-bold text-white leading-tight">
+        <h3 className="text-2xl font-bold text-white leading-tight">
           {hall.name}
         </h3>
         
         {/* Description */}
-        <p className="text-white/70 text-sm line-clamp-2">
+        <p className="text-white/70 text-lg line-clamp-2">
           {hall.description}
         </p>
       </div>
