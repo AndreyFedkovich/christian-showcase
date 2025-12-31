@@ -35,10 +35,27 @@ export interface ScrollKeeperState {
 const DEFAULT_HALLS_ORDER: HallType[] = ['shadows', 'scriptorium', 'echo', 'gallery', 'treasury', 'voices', 'spiral'];
 const TIME_PER_CHALLENGE = 90;
 
+// Лимиты вопросов по залам
+const HALL_QUESTION_LIMITS: Partial<Record<HallType, number>> = {
+  shadows: 5,      // Зал Теней — 5 вопросов
+  scriptorium: 10, // Скрипторий — 10 вопросов
+  spiral: 10       // Спираль Времени — 10 вопросов
+};
+
+// Получить ограниченный список вопросов для зала
+function getLimitedChallengesForHall(hallType: HallType): Challenge[] {
+  const allChallenges = sampleChallenges.filter(c => c.hallType === hallType);
+  const limit = HALL_QUESTION_LIMITS[hallType];
+  if (limit) {
+    return allChallenges.slice(0, limit);
+  }
+  return allChallenges;
+}
+
 // Подсчитать общее количество вопросов во всех залах
 export function getTotalQuestionsCount(): number {
   return DEFAULT_HALLS_ORDER.reduce((total, hallType) => {
-    return total + sampleChallenges.filter(c => c.hallType === hallType).length;
+    return total + getLimitedChallengesForHall(hallType).length;
   }, 0);
 }
 
@@ -85,9 +102,6 @@ export function useScrollKeeperState() {
   }, [state.isTimerRunning, state.timer]);
 
   const handleTimeUp = useCallback(() => {
-    const currentHallType = state.hallOrder[state.currentHallIndex];
-    const isShadowsHall = currentHallType === 'shadows';
-    
     // Хранитель получает очко за неправильный ответ
     const keeperMessages = [
       'Время истекло. Ещё одно очко в мою пользу.',
@@ -104,9 +118,9 @@ export function useScrollKeeperState() {
       keeperMood: 'warning',
       keeperMessage: randomMessage,
       isTimerRunning: false,
-      hallClosed: !isShadowsHall // Закрываем зал если это не Зал Теней
+      hallClosed: false // Зал никогда не закрывается
     }));
-  }, [state.hallOrder, state.currentHallIndex]);
+  }, []);
 
   const getCurrentHall = useCallback((): Hall | null => {
     const hallType = state.hallOrder[state.currentHallIndex];
@@ -114,7 +128,7 @@ export function useScrollKeeperState() {
   }, [state.hallOrder, state.currentHallIndex]);
 
   const getChallengesForHall = useCallback((hallType: HallType): Challenge[] => {
-    return sampleChallenges.filter(c => c.hallType === hallType);
+    return getLimitedChallengesForHall(hallType);
   }, []);
 
   const setTeamName = useCallback((name: string) => {
@@ -134,7 +148,7 @@ export function useScrollKeeperState() {
     const targetHallIndex = Math.min(hallIndex, DEFAULT_HALLS_ORDER.length - 1);
     const targetHallType = DEFAULT_HALLS_ORDER[targetHallIndex];
     const targetHall = halls.find(h => h.type === targetHallType);
-    const hallChallenges = sampleChallenges.filter(c => c.hallType === targetHallType);
+    const hallChallenges = getLimitedChallengesForHall(targetHallType);
     
     setState(prev => ({
       ...prev,
@@ -200,11 +214,6 @@ export function useScrollKeeperState() {
 
   const submitAnswer = useCallback(async (answer: string) => {
     if (!state.currentChallenge) return;
-
-    const currentHallType = state.hallOrder[state.currentHallIndex];
-    const isShadowsHall = currentHallType === 'shadows';
-    const isScriptoriumHall = currentHallType === 'scriptorium';
-    const hallStaysOpen = isShadowsHall || isScriptoriumHall;
 
     // Stop timer and set checking state
     setState(prev => ({ ...prev, isTimerRunning: false, isCheckingAnswer: true }));
@@ -282,11 +291,6 @@ export function useScrollKeeperState() {
         'Увы, знания ускользают от вас. Моя победа.'
       ];
       message = incorrectMessages[Math.floor(Math.random() * incorrectMessages.length)];
-      
-      // Если зал закрывается (не Зал Теней и не Скрипторий)
-      if (!hallStaysOpen) {
-        message += ' Этот зал закрывается.';
-      }
     }
     
     const feedbackText = feedback ? `\n\n💡 ${feedback}` : '';
@@ -309,9 +313,9 @@ export function useScrollKeeperState() {
       keeperMessage: message + feedbackText,
       isTimerRunning: false,
       isCheckingAnswer: false,
-      hallClosed: !isCorrect && !hallStaysOpen // Закрываем зал если неправильно и не особый зал
+      hallClosed: false // Зал никогда не закрывается
     }));
-  }, [state.currentChallenge, state.usedHints, state.hallOrder, state.currentHallIndex]);
+  }, [state.currentChallenge, state.usedHints]);
 
   const useHint = useCallback(() => {
     setState(prev => ({ ...prev, usedHints: prev.usedHints + 1 }));
@@ -353,7 +357,7 @@ export function useScrollKeeperState() {
       }
 
       const nextHallType = prev.hallOrder[nextHallIndex];
-      const nextHallChallenges = sampleChallenges.filter(c => c.hallType === nextHallType);
+      const nextHallChallenges = getLimitedChallengesForHall(nextHallType);
       const nextHall = halls.find(h => h.type === nextHallType);
 
       return {
@@ -371,19 +375,9 @@ export function useScrollKeeperState() {
 
   const proceedFromResult = useCallback(() => {
     setState(prev => {
-      // Если зал закрыт (неправильный ответ не в Зале Теней) — переход к следующему залу
-      if (prev.hallClosed) {
-        return {
-          ...prev,
-          phase: 'hall-complete',
-          keeperMood: 'warning',
-          keeperMessage: 'Зал закрыт. Двигаемся дальше.'
-        };
-      }
-      
       const nextChallengeIndex = prev.challengeIndex + 1;
       const hallType = prev.hallOrder[prev.currentHallIndex];
-      const hallChallenges = sampleChallenges.filter(c => c.hallType === hallType);
+      const hallChallenges = getLimitedChallengesForHall(hallType);
       
       // Check if current hall is complete (all questions answered)
       if (nextChallengeIndex >= hallChallenges.length) {
