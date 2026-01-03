@@ -14,6 +14,7 @@ import { redemptionDrama, redemptionSections } from '@/data/redemption-drama';
 import { godExists, godExistsSections } from '@/data/god-exists';
 import { eternalTemporal, eternalTemporalSections } from '@/data/eternal-temporal';
 import { homeChurch, homeChurchSections } from '@/data/home-church';
+import { church, churchSections } from '@/data/church';
 import { kingsProphets } from '@/data/kings-prophets';
 import { UniversalSlide } from '@/types/slides';
 
@@ -51,13 +52,25 @@ export const presentations: Presentation[] = [
     layout: 'grid',
   },
   {
-    id: "home-church",
-    title: "Домашняя церковь",
+    id: "church",
+    title: "Церковь",
     description: "Церковь как тело Христа — тайна, открытая в Новом Завете",
     thumbnail: homeChurchImg,
+    slideCount: church.length,
+    duration: "25-30 минут",
+    createdAt: "03.01.2026",
+    slides: church as UniversalSlide[],
+    layout: 'tabs',
+    sections: churchSections as Section[],
+  },
+  {
+    id: "home-church",
+    title: "Домашняя церковь",
+    description: "Практика первых христиан: как собирались церкви по домам",
+    thumbnail: homeChurchImg,
     slideCount: homeChurch.length,
-    duration: "30-35 минут",
-    createdAt: "27.12.2025",
+    duration: "15-20 минут",
+    createdAt: "03.01.2026",
     slides: homeChurch as UniversalSlide[],
     layout: 'tabs',
     sections: homeChurchSections as Section[],
