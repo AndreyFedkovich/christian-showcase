@@ -6,7 +6,7 @@ import salvationImg from "@/assets/salvation-thumbnail.png";
 import godExistsImg from "@/assets/god-exists-thumbnail.png";
 import eternalCosmosImg from "@/assets/eternal-cosmos.png";
 import homeChurchImg from "@/assets/home-church-thumbnail.png";
-import churchImg from "@/assets/home-church-body.png";
+import churchImg from "@/assets/home-church-growth.png";
 import kingsProphetsImg from "@/assets/kings-prophets-thumbnail.png";
 import { seminar, seminarSections } from '@/data/seminar';
 import { disciples } from '@/data/disciples';
