@@ -1,173 +1,148 @@
 
-## План: Тёмная тема, Netflix-стиль с сохранением Hero-секции и мультиязычность
 
-### Обзор изменений
-Сохранение hero-секции вверху страницы, добавление тёмной темы по умолчанию, горизонтальных прокручиваемых групп контента ниже hero и поддержка русского/английского языков.
+## Plan: Improve Main Page Layout, Card Sizes, and Game Images
+
+### Overview
+This plan addresses four issues:
+1. Main content section needs max-width matching the navbar (max-w-7xl)
+2. Presentation cards need to be larger with more spacing
+3. Card borders are being clipped on hover due to overflow:hidden on parent
+4. Games need thumbnail images
 
 ---
 
-### 1. Добавить тёмную тему по умолчанию
+### 1. Add max-width container to main content
 
-**Файл: `src/index.css`**
-- Переписать CSS-переменные в `:root` на тёмную палитру:
-```css
-:root {
-  --background: 0 0% 8%;      /* Почти чёрный #141414 */
-  --foreground: 0 0% 95%;     /* Белый текст */
-  --card: 0 0% 12%;           /* Тёмно-серые карточки */
-  --muted: 0 0% 18%;          /* Серый для второстепенных элементов */
-  ...
-}
+**File: `src/pages/Index.tsx`**
+
+Wrap the content rows in a container with `max-w-7xl mx-auto` to match the navbar width:
+
+```tsx
+// Current:
+<main className="min-h-screen gradient-warm pt-8 pb-16">
+  <ContentRow ...>
+
+// Updated:
+<main className="min-h-screen gradient-warm pt-8 pb-16">
+  <div className="max-w-7xl mx-auto">
+    <ContentRow ...>
 ```
 
 ---
 
-### 2. Создать систему интернационализации (i18n)
+### 2. Increase card size and spacing
 
-**Новый файл: `src/lib/i18n.ts`**
-- Словарь переводов для UI-элементов (seminars, bibleStudy, games, etc.)
+**File: `src/components/CompactCard.tsx`**
 
-**Новый файл: `src/contexts/LanguageContext.tsx`**
-- React Context для глобального состояния языка (ru/en)
-- Хук `useLanguage()` для доступа к текущему языку и функции перевода
-- Сохранение выбора в localStorage
+Increase card width from 160px/200px to 200px/260px:
 
----
+```tsx
+// Current:
+"flex-shrink-0 w-[160px] md:w-[200px] cursor-pointer group"
 
-### 3. Переработать главную страницу
-
-**Файл: `src/pages/Index.tsx`**
-- **Сохранить HeroSection** вверху страницы (100vh hero с автопрокруткой слайдов)
-- Убрать Tabs компонент
-- Добавить ниже hero горизонтальные секции с карточками
-
-Структура:
-```text
-┌─────────────────────────────────────────────────────┐
-│  [Navbar - фиксированный]                           │
-├─────────────────────────────────────────────────────┤
-│                                                      │
-│           [HeroSection - 100vh]                      │
-│     Автопрокрутка слайдов презентации                │
-│                                                      │
-├─────────────────────────────────────────────────────┤
-│  Градиент: чёрный → тёмно-серый                      │
-│                                                      │
-│  Семинары                                            │
-│  ┌────┐ ┌────┐ ┌────┐ ┌────┐  → прокрутка           │
-│  │    │ │    │ │    │ │    │                        │
-│  └────┘ └────┘ └────┘ └────┘                        │
-│                                                      │
-│  Изучение Библии                                     │
-│  ┌────┐ ┌────┐ ┌────┐ ┌────┐ ┌────┐  → прокрутка   │
-│  │    │ │    │ │    │ │    │ │    │                │
-│  └────┘ └────┘ └────┘ └────┘ └────┘                │
-│                                                      │
-│  Игры                                                │
-│  ┌────┐ ┌────┐  → прокрутка                         │
-│  │    │ │    │                                      │
-│  └────┘ └────┘                                      │
-└─────────────────────────────────────────────────────┘
+// Updated:
+"flex-shrink-0 w-[200px] md:w-[260px] cursor-pointer group"
 ```
 
-**Группировка контента:**
+**File: `src/components/ContentRow.tsx`**
 
-| Группа | ID презентаций/игр |
-|--------|-------------------|
-| Семинары | `god-exists`, `seminar`, `eternal-temporal`, `salvation` |
-| Изучение Библии | `disciples`, `epistles-structure`, `home-church`, `church`, `kings-prophets` |
-| Игры | `bible-master`, `scroll-keeper` |
+Increase gap between cards from 3/4 to 4/6:
 
----
+```tsx
+// Current:
+className="flex gap-3 md:gap-4 overflow-x-auto ..."
 
-### 4. Создать компонент горизонтальной карусели
-
-**Новый файл: `src/components/ContentRow.tsx`**
-- Заголовок секции слева
-- Горизонтальный контейнер с `overflow-x: auto` и `scroll-snap`
-- Скрытый скроллбар на десктопе (стилизация через CSS)
-- Отступы для плавного перехода к краям
-
----
-
-### 5. Создать компактные карточки (Netflix-стиль)
-
-**Новый файл: `src/components/CompactCard.tsx`**
-- Вертикальная карточка с изображением
-- Название отображается при hover или снизу
-- Размер: ~180-220px ширина
-- Hover-эффект: увеличение (scale), тень, показ описания
-
-```text
-┌─────────────────┐
-│                 │
-│   [Thumbnail]   │
-│                 │
-├─────────────────┤
-│  Название       │  ← опционально, или при hover
-└─────────────────┘
+// Updated:
+className="flex gap-4 md:gap-6 overflow-x-auto ..."
 ```
 
 ---
 
-### 6. Обновить навбар
+### 3. Fix border clipping on hover
 
-**Файл: `src/components/FixedNavbar.tsx`**
-- Убрать навигацию "Презентации | Игры" (контент теперь в горизонтальных группах)
-- Добавить переключатель языка RU/EN (флаги или текст)
-- Сохранить: логотип, поиск, иконку пользователя
-- Навбар всегда тёмный, прозрачный поверх hero → сплошной при скролле
+The issue is that the parent container has `overflow-hidden` which clips the card when it scales on hover. 
+
+**File: `src/components/CompactCard.tsx`**
+
+Move `overflow-hidden` inside the image container only, and add padding to allow space for scale:
+
+```tsx
+// Current:
+<motion.div
+  className="flex-shrink-0 w-[200px] md:w-[260px] cursor-pointer group"
+  whileHover={{ scale: 1.05 }}
+>
+  <div className="relative rounded-lg overflow-hidden bg-card shadow-lg ...">
+
+// Updated:
+<motion.div
+  className="flex-shrink-0 w-[200px] md:w-[260px] cursor-pointer group p-2"
+  whileHover={{ scale: 1.05 }}
+>
+  <div className="relative rounded-xl overflow-hidden bg-card shadow-lg ...">
+```
+
+This adds padding around the card so it has room to scale without clipping, and uses `rounded-xl` for more pronounced rounded corners.
 
 ---
 
-### 7. Добавить английские переводы в данные
+### 4. Generate images for game cards
 
-**Файл: `src/data/presentations.ts`**
+**Action: Generate AI images for games**
+
+Create two game thumbnail images:
+
+| Game | Image Prompt |
+|------|--------------|
+| Bible Master | "A dramatic quiz show stage with glowing golden Bible on a podium, two teams facing each other, dramatic spotlights, competition atmosphere. Rich blue and gold colors. Premium game thumbnail style. Ultra high resolution." |
+| Scroll Keeper | "Ancient mysterious library with infinite bookshelves, glowing ancient scrolls, magical keys floating in golden light, mystical atmosphere. Deep purple and gold colors. Fantasy game thumbnail style. Ultra high resolution." |
+
+Save as:
+- `src/assets/bible-master-thumbnail.png`
+- `src/assets/scroll-keeper-thumbnail.png`
+
+**File: `src/data/games.ts`**
+
+Import and assign thumbnails:
+
 ```typescript
-{
-  id: "god-exists",
-  title: "Существует ли Бог?",
-  titleEn: "Does God Exist?",
-  description: "Философский диалог...",
-  descriptionEn: "A philosophical dialogue...",
-  ...
-}
+import bibleMasterImg from "@/assets/bible-master-thumbnail.png";
+import scrollKeeperImg from "@/assets/scroll-keeper-thumbnail.png";
+
+export const games: Game[] = [
+  {
+    id: "bible-master",
+    thumbnail: bibleMasterImg,
+    ...
+  },
+  {
+    id: "scroll-keeper",
+    thumbnail: scrollKeeperImg,
+    ...
+  }
+];
 ```
 
-**Файл: `src/data/games.ts`**
-- Аналогично добавить `titleEn`, `descriptionEn` для каждой игры
+---
+
+### Files Summary
+
+| File | Action |
+|------|--------|
+| `src/pages/Index.tsx` | Add max-w-7xl container |
+| `src/components/CompactCard.tsx` | Increase size, add padding for hover, improve rounding |
+| `src/components/ContentRow.tsx` | Increase gap between cards |
+| `src/assets/bible-master-thumbnail.png` | Generate AI image |
+| `src/assets/scroll-keeper-thumbnail.png` | Generate AI image |
+| `src/data/games.ts` | Import and assign game thumbnails |
 
 ---
 
-### 8. Обновить App.tsx
+### Visual Result
 
-**Файл: `src/App.tsx`**
-- Обернуть приложение в `LanguageProvider` для глобального доступа к языку
+- Content rows align with navbar (max-w-7xl)
+- Cards are larger (260px on desktop vs 200px before)
+- More spacing between cards (24px on desktop vs 16px before)
+- Card borders visible on hover (padding creates space for scale)
+- Games have attractive AI-generated thumbnails
 
----
-
-### Файлы для изменения
-
-| Файл | Действие |
-|------|----------|
-| `src/index.css` | Изменить — CSS-переменные на тёмную тему |
-| `src/lib/i18n.ts` | Создать — словарь переводов UI |
-| `src/contexts/LanguageContext.tsx` | Создать — контекст языка |
-| `src/components/ContentRow.tsx` | Создать — горизонтальная карусель |
-| `src/components/CompactCard.tsx` | Создать — компактная карточка |
-| `src/pages/Index.tsx` | Изменить — добавить горизонтальные секции под hero |
-| `src/components/FixedNavbar.tsx` | Изменить — переключатель языка, убрать табы |
-| `src/data/presentations.ts` | Изменить — добавить английские переводы |
-| `src/data/games.ts` | Изменить — добавить английские переводы |
-| `src/App.tsx` | Изменить — обернуть в LanguageProvider |
-
----
-
-### Визуальный результат
-
-- Hero-секция сохранена вверху (100vh, автопрокрутка слайдов)
-- Тёмный фон с градиентом ниже hero
-- Горизонтальные ряды карточек по категориям (Семинары, Изучение Библии, Игры)
-- Компактные карточки с hover-эффектами
-- Переключатель RU/EN в навбаре
-- Адаптивный дизайн для мобильных устройств
