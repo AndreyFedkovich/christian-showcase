@@ -8,6 +8,51 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
+    /* Dark theme as default */
+    --background: 0 0% 8%;
+    --foreground: 0 0% 95%;
+
+    --card: 0 0% 12%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 0 0% 12%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 42 88% 55%;
+    --primary-foreground: 0 0% 8%;
+
+    --secondary: 0 0% 18%;
+    --secondary-foreground: 0 0% 95%;
+
+    --muted: 0 0% 18%;
+    --muted-foreground: 0 0% 65%;
+
+    --accent: 42 88% 55%;
+    --accent-foreground: 0 0% 8%;
+
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 0 0% 95%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 42 88% 55%;
+
+    --radius: 0.75rem;
+
+    /* Premium gradients */
+    --gradient-gold: linear-gradient(135deg, hsl(42 88% 65%) 0%, hsl(35 75% 50%) 100%);
+    --gradient-warm: linear-gradient(180deg, hsl(0 0% 8%) 0%, hsl(0 0% 6%) 100%);
+    --gradient-overlay: linear-gradient(135deg, hsl(0 0% 8% / 0.85) 0%, hsl(0 0% 12% / 0.9) 100%);
+    
+    /* Shadows */
+    --shadow-premium: 0 10px 40px -15px hsl(42 88% 35% / 0.3);
+    --shadow-card: 0 4px 20px -5px hsl(0 0% 0% / 0.5);
+    
+    /* Transitions */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .light {
     --background: 36 39% 96%;
     --foreground: 30 25% 15%;
 
@@ -34,50 +79,6 @@ All colors MUST be HSL.
 
     --border: 40 25% 85%;
     --input: 40 25% 85%;
-    --ring: 42 88% 55%;
-
-    --radius: 0.75rem;
-
-    /* Premium gradients */
-    --gradient-gold: linear-gradient(135deg, hsl(42 88% 65%) 0%, hsl(35 75% 50%) 100%);
-    --gradient-warm: linear-gradient(180deg, hsl(36 39% 96%) 0%, hsl(40 35% 92%) 100%);
-    --gradient-overlay: linear-gradient(135deg, hsl(30 25% 15% / 0.85) 0%, hsl(35 40% 25% / 0.9) 100%);
-    
-    /* Shadows */
-    --shadow-premium: 0 10px 40px -15px hsl(42 88% 35% / 0.3);
-    --shadow-card: 0 4px 20px -5px hsl(30 25% 15% / 0.15);
-    
-    /* Transitions */
-    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .dark {
-    --background: 30 25% 15%;
-    --foreground: 36 39% 96%;
-
-    --card: 30 30% 18%;
-    --card-foreground: 36 39% 96%;
-
-    --popover: 30 30% 18%;
-    --popover-foreground: 36 39% 96%;
-
-    --primary: 42 88% 55%;
-    --primary-foreground: 30 25% 15%;
-
-    --secondary: 35 25% 25%;
-    --secondary-foreground: 36 39% 96%;
-
-    --muted: 35 20% 22%;
-    --muted-foreground: 40 15% 65%;
-
-    --accent: 42 88% 55%;
-    --accent-foreground: 30 25% 15%;
-
-    --destructive: 0 62.8% 50%;
-    --destructive-foreground: 36 39% 96%;
-
-    --border: 35 20% 28%;
-    --input: 35 20% 28%;
     --ring: 42 88% 55%;
   }
 }
@@ -190,5 +191,15 @@ All colors MUST be HSL.
   
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background: hsl(var(--accent) / 0.8);
+  }
+
+  /* Hide scrollbar for horizontal scroll */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
