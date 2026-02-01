@@ -14,7 +14,7 @@ const CompactCard = ({ title, thumbnail, subtitle, onClick, className }: Compact
   return (
     <motion.div
       className={cn(
-        "flex-shrink-0 w-[200px] md:w-[260px] cursor-pointer group p-2",
+        "flex-shrink-0 w-[200px] md:w-[260px] cursor-pointer group/card p-2",
         className
       )}
       whileHover={{ scale: 1.05 }}
@@ -22,13 +22,13 @@ const CompactCard = ({ title, thumbnail, subtitle, onClick, className }: Compact
       onClick={onClick}
     >
       {/* Card Container */}
-      <div className="relative rounded-xl overflow-hidden bg-card shadow-lg transition-shadow group-hover:shadow-xl group-hover:shadow-primary/10">
+      <div className="relative rounded-xl overflow-hidden bg-card shadow-lg transition-shadow group-hover/card:shadow-xl group-hover/card:shadow-primary/10">
         <AspectRatio ratio={2/3}>
           {thumbnail ? (
             <img
               src={thumbnail}
               alt={title}
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              className="w-full h-full object-cover transition-transform duration-300 group-hover/card:scale-105"
             />
           ) : (
             <div className="w-full h-full bg-muted flex items-center justify-center">
@@ -37,7 +37,7 @@ const CompactCard = ({ title, thumbnail, subtitle, onClick, className }: Compact
           )}
           
           {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-70 group-hover:opacity-90 transition-opacity" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-70 group-hover/card:opacity-90 transition-opacity" />
           
           {/* Title at bottom */}
           <div className="absolute bottom-0 left-0 right-0 p-3">

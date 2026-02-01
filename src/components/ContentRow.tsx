@@ -23,7 +23,7 @@ const ContentRow = ({ title, children, className }: ContentRowProps) => {
   };
 
   return (
-    <div className={cn("relative group py-6", className)}>
+    <div className={cn("relative group/row py-6", className)}>
       {/* Section Title */}
       <h2 className="text-xl md:text-2xl font-bold text-foreground mb-4 px-6 md:px-12">
         {title}
@@ -33,7 +33,7 @@ const ContentRow = ({ title, children, className }: ContentRowProps) => {
       <Button
         variant="ghost"
         size="icon"
-        className="absolute left-0 top-1/2 translate-y-2 z-10 hidden md:flex opacity-0 group-hover:opacity-100 transition-opacity bg-background/80 hover:bg-background/90 rounded-full shadow-lg"
+        className="absolute left-0 top-1/2 translate-y-2 z-10 hidden md:flex opacity-0 group-hover/row:opacity-100 transition-opacity bg-background/80 hover:bg-background/90 rounded-full shadow-lg"
         onClick={() => scroll('left')}
       >
         <ChevronLeft className="w-6 h-6" />
@@ -41,7 +41,7 @@ const ContentRow = ({ title, children, className }: ContentRowProps) => {
       <Button
         variant="ghost"
         size="icon"
-        className="absolute right-0 top-1/2 translate-y-2 z-10 hidden md:flex opacity-0 group-hover:opacity-100 transition-opacity bg-background/80 hover:bg-background/90 rounded-full shadow-lg"
+        className="absolute right-0 top-1/2 translate-y-2 z-10 hidden md:flex opacity-0 group-hover/row:opacity-100 transition-opacity bg-background/80 hover:bg-background/90 rounded-full shadow-lg"
         onClick={() => scroll('right')}
       >
         <ChevronRight className="w-6 h-6" />
