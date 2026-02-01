@@ -36,6 +36,11 @@ export const translations = {
     backToList: "К списку",
     startPresentation: "Начать просмотр",
     sections: "разделов",
+    
+    // Game details
+    startQuest: "Начать квест",
+    libraryHalls: "Залы Библиотеки",
+    hall: "Зал",
   },
   en: {
     // Navigation
@@ -72,6 +77,11 @@ export const translations = {
     backToList: "Back to list",
     startPresentation: "Start watching",
     sections: "sections",
+    
+    // Game details
+    startQuest: "Start quest",
+    libraryHalls: "Library Halls",
+    hall: "Hall",
   }
 } as const;
 

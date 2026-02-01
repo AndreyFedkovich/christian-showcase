@@ -1,5 +1,6 @@
 import { Hall, HallType } from '@/data/scroll-keeper';
 import { cn } from '@/lib/utils';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface HallCardProps {
   hall: Hall;
@@ -18,6 +19,12 @@ const hallGradients: Record<HallType, string> = {
 };
 
 export function HallCard({ hall, hallNumber, onClick }: HallCardProps) {
+  const { language, t } = useLanguage();
+  
+  const name = language === 'en' ? (hall.nameEn || hall.name) : hall.name;
+  const description = language === 'en' ? (hall.descriptionEn || hall.description) : hall.description;
+  const hallLabel = t('hall');
+  
   return (
     <div
       onClick={onClick}
@@ -47,17 +54,17 @@ export function HallCard({ hall, hallNumber, onClick }: HallCardProps) {
       <div className="absolute bottom-0 left-0 right-0 p-5 space-y-2">
         {/* Hall number badge */}
         <div className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-accent/80 text-white text-lg font-medium">
-          Зал {hallNumber}
+          {hallLabel} {hallNumber}
         </div>
         
         {/* Title */}
         <h3 className="text-2xl font-bold text-white leading-tight">
-          {hall.name}
+          {name}
         </h3>
         
         {/* Description */}
         <p className="text-white/70 text-lg line-clamp-2">
-          {hall.description}
+          {description}
         </p>
       </div>
       
