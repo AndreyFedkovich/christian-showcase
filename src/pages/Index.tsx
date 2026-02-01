@@ -98,6 +98,7 @@ const Index = () => {
 
       {/* Content Section with horizontal rows */}
       <main className="min-h-screen gradient-warm pt-8 pb-16">
+        <div className="max-w-7xl mx-auto">
         {/* Seminars Row */}
         {seminarPresentations.length > 0 && (
           <ContentRow title={t('seminars')}>
@@ -152,6 +153,7 @@ const Index = () => {
         <footer className="py-8 text-center text-muted-foreground font-sans text-sm border-t border-border/50 mt-12 mx-6">
           <p>{t('footer')}</p>
         </footer>
+        </div>
       </main>
     </div>
   );
