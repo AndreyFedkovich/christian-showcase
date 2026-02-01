@@ -1,127 +1,122 @@
 
-
-## Plan: Improve Main Page Layout, Card Sizes, and Game Images
+## Plan: Redesign Hero Section Layout (Netflix-Style)
 
 ### Overview
-This plan addresses four issues:
-1. Main content section needs max-width matching the navbar (max-w-7xl)
-2. Presentation cards need to be larger with more spacing
-3. Card borders are being clipped on hover due to overflow:hidden on parent
-4. Games need thumbnail images
+Redesigning only the hero section of the presentation details page to match the reference image with a split layout - content on left, featured thumbnail on right.
 
 ---
 
-### 1. Add max-width container to main content
+### 1. Update Hero Section Layout
 
-**File: `src/pages/Index.tsx`**
+**File: `src/pages/PresentationDetails.tsx`**
 
-Wrap the content rows in a container with `max-w-7xl mx-auto` to match the navbar width:
+Transform the centered hero into a split-layout design:
 
+**Current Structure (centered):**
+```text
+┌─────────────────────────────────────────────┐
+│         [← Back button]                     │
+│            Title (centered)                 │
+│          Description (centered)             │
+│             Date                            │
+│         [▶ Start button]                    │
+└─────────────────────────────────────────────┘
+```
+
+**New Structure (split layout):**
+```text
+┌────────────────────────────────────────────────────────────────┐
+│  [← Back]                                                       │
+├────────────────────────────────────────────────────────────────┤
+│                                                                │
+│  ┌──────────────────────────┐    ┌──────────────────────────┐  │
+│  │                          │    │                          │  │
+│  │  Title (large, bold)     │    │   [Featured Thumbnail]   │  │
+│  │  X разделов • Y мин      │    │      aspect 16:9         │  │
+│  │                          │    │      rounded-xl          │  │
+│  │  Description text...     │    │      shadow-2xl          │  │
+│  │                          │    │                          │  │
+│  │  [▶ Начать просмотр]     │    │                          │  │
+│  │                          │    │                          │  │
+│  └──────────────────────────┘    └──────────────────────────┘  │
+│                                                                │
+└────────────────────────────────────────────────────────────────┘
+```
+
+**Key Changes:**
+- Use `flex flex-col lg:flex-row` for responsive split layout
+- Left side (~60%): Title, metadata subtitle, description, CTA button
+- Right side (~40%): Large thumbnail with 16:9 aspect ratio
+- Left-align text content
+- Add metadata line: "X разделов • Y мин" (or "X slides • Y min" for grid layouts)
+- Remove `Calendar` icon and `createdAt` date
+- Use language-aware title/description from presentation data
+- Dark gradient background maintained
+
+**Code structure:**
 ```tsx
-// Current:
-<main className="min-h-screen gradient-warm pt-8 pb-16">
-  <ContentRow ...>
-
-// Updated:
-<main className="min-h-screen gradient-warm pt-8 pb-16">
-  <div className="max-w-7xl mx-auto">
-    <ContentRow ...>
+<header className="relative py-12 px-6">
+  <div className="relative max-w-7xl mx-auto">
+    {/* Back button */}
+    <Button onClick={() => navigate("/")} className="mb-8">
+      <ArrowLeft /> {t('backToList')}
+    </Button>
+    
+    {/* Split layout container */}
+    <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
+      {/* Left: Content */}
+      <div className="flex-1 text-left space-y-4">
+        <h1>{title}</h1>
+        <p className="text-primary/80">
+          {sectionsCount} {t('sections')} • {duration} {t('minutes')}
+        </p>
+        <p className="text-muted-foreground">{description}</p>
+        <Button onClick={handleStartPresentation}>
+          <Play /> {t('startPresentation')}
+        </Button>
+      </div>
+      
+      {/* Right: Thumbnail */}
+      <div className="w-full lg:w-[45%] aspect-video rounded-xl overflow-hidden shadow-2xl">
+        <img src={presentation.thumbnail} />
+      </div>
+    </div>
+  </div>
+</header>
 ```
 
 ---
 
-### 2. Increase card size and spacing
+### 2. Add i18n Translations
 
-**File: `src/components/CompactCard.tsx`**
+**File: `src/lib/i18n.ts`**
 
-Increase card width from 160px/200px to 200px/260px:
-
-```tsx
-// Current:
-"flex-shrink-0 w-[160px] md:w-[200px] cursor-pointer group"
-
-// Updated:
-"flex-shrink-0 w-[200px] md:w-[260px] cursor-pointer group"
-```
-
-**File: `src/components/ContentRow.tsx`**
-
-Increase gap between cards from 3/4 to 4/6:
-
-```tsx
-// Current:
-className="flex gap-3 md:gap-4 overflow-x-auto ..."
-
-// Updated:
-className="flex gap-4 md:gap-6 overflow-x-auto ..."
-```
-
----
-
-### 3. Fix border clipping on hover
-
-The issue is that the parent container has `overflow-hidden` which clips the card when it scales on hover. 
-
-**File: `src/components/CompactCard.tsx`**
-
-Move `overflow-hidden` inside the image container only, and add padding to allow space for scale:
-
-```tsx
-// Current:
-<motion.div
-  className="flex-shrink-0 w-[200px] md:w-[260px] cursor-pointer group"
-  whileHover={{ scale: 1.05 }}
->
-  <div className="relative rounded-lg overflow-hidden bg-card shadow-lg ...">
-
-// Updated:
-<motion.div
-  className="flex-shrink-0 w-[200px] md:w-[260px] cursor-pointer group p-2"
-  whileHover={{ scale: 1.05 }}
->
-  <div className="relative rounded-xl overflow-hidden bg-card shadow-lg ...">
-```
-
-This adds padding around the card so it has room to scale without clipping, and uses `rounded-xl` for more pronounced rounded corners.
-
----
-
-### 4. Generate images for game cards
-
-**Action: Generate AI images for games**
-
-Create two game thumbnail images:
-
-| Game | Image Prompt |
-|------|--------------|
-| Bible Master | "A dramatic quiz show stage with glowing golden Bible on a podium, two teams facing each other, dramatic spotlights, competition atmosphere. Rich blue and gold colors. Premium game thumbnail style. Ultra high resolution." |
-| Scroll Keeper | "Ancient mysterious library with infinite bookshelves, glowing ancient scrolls, magical keys floating in golden light, mystical atmosphere. Deep purple and gold colors. Fantasy game thumbnail style. Ultra high resolution." |
-
-Save as:
-- `src/assets/bible-master-thumbnail.png`
-- `src/assets/scroll-keeper-thumbnail.png`
-
-**File: `src/data/games.ts`**
-
-Import and assign thumbnails:
+Add new translation strings for the hero section:
 
 ```typescript
-import bibleMasterImg from "@/assets/bible-master-thumbnail.png";
-import scrollKeeperImg from "@/assets/scroll-keeper-thumbnail.png";
+// Russian
+backToList: "К списку",
+startPresentation: "Начать просмотр",
+sections: "разделов",
 
-export const games: Game[] = [
-  {
-    id: "bible-master",
-    thumbnail: bibleMasterImg,
-    ...
-  },
-  {
-    id: "scroll-keeper",
-    thumbnail: scrollKeeperImg,
-    ...
-  }
-];
+// English
+backToList: "Back to list",
+startPresentation: "Start watching",
+sections: "sections",
 ```
+
+Note: `minutes` already exists in translations.
+
+---
+
+### 3. Import Language Context
+
+**File: `src/pages/PresentationDetails.tsx`**
+
+- Import `useLanguage` hook from context
+- Get `language` and `t` function
+- Use `language === 'en' ? presentation.titleEn : presentation.title` for localized content
+- Same pattern for description
 
 ---
 
@@ -129,20 +124,16 @@ export const games: Game[] = [
 
 | File | Action |
 |------|--------|
-| `src/pages/Index.tsx` | Add max-w-7xl container |
-| `src/components/CompactCard.tsx` | Increase size, add padding for hover, improve rounding |
-| `src/components/ContentRow.tsx` | Increase gap between cards |
-| `src/assets/bible-master-thumbnail.png` | Generate AI image |
-| `src/assets/scroll-keeper-thumbnail.png` | Generate AI image |
-| `src/data/games.ts` | Import and assign game thumbnails |
+| `src/pages/PresentationDetails.tsx` | Redesign hero section with split layout |
+| `src/lib/i18n.ts` | Add 3 new translation strings |
 
 ---
 
 ### Visual Result
 
-- Content rows align with navbar (max-w-7xl)
-- Cards are larger (260px on desktop vs 200px before)
-- More spacing between cards (24px on desktop vs 16px before)
-- Card borders visible on hover (padding creates space for scale)
-- Games have attractive AI-generated thumbnails
-
+- Split hero: content left, featured 16:9 image right
+- Metadata line showing sections count and duration
+- Left-aligned title and description
+- Localized content (RU/EN)
+- Responsive: stacks vertically on mobile
+- Slides section below remains unchanged
