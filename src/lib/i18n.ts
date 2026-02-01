@@ -31,6 +31,11 @@ export const translations = {
     // User menu
     guest: "Гость",
     logout: "Выйти",
+    
+    // Presentation details
+    backToList: "К списку",
+    startPresentation: "Начать просмотр",
+    sections: "разделов",
   },
   en: {
     // Navigation
@@ -62,6 +67,11 @@ export const translations = {
     // User menu
     guest: "Guest",
     logout: "Logout",
+    
+    // Presentation details
+    backToList: "Back to list",
+    startPresentation: "Start watching",
+    sections: "sections",
   }
 } as const;
 
