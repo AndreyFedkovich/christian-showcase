@@ -39,7 +39,7 @@ const Index = () => {
   };
 
   const handleGameClick = (gameId: string) => {
-    navigate(`/game/${gameId}/play`);
+    navigate(`/game/${gameId}`);
   };
 
   // Group presentations by category
