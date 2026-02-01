@@ -14,7 +14,7 @@ const CompactCard = ({ title, thumbnail, subtitle, onClick, className }: Compact
   return (
     <motion.div
       className={cn(
-        "flex-shrink-0 w-[160px] md:w-[200px] cursor-pointer group",
+        "flex-shrink-0 w-[200px] md:w-[260px] cursor-pointer group p-2",
         className
       )}
       whileHover={{ scale: 1.05 }}
@@ -22,7 +22,7 @@ const CompactCard = ({ title, thumbnail, subtitle, onClick, className }: Compact
       onClick={onClick}
     >
       {/* Card Container */}
-      <div className="relative rounded-lg overflow-hidden bg-card shadow-lg transition-shadow group-hover:shadow-xl group-hover:shadow-primary/10">
+      <div className="relative rounded-xl overflow-hidden bg-card shadow-lg transition-shadow group-hover:shadow-xl group-hover:shadow-primary/10">
         <AspectRatio ratio={2/3}>
           {thumbnail ? (
             <img

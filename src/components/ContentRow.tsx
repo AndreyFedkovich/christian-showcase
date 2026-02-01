@@ -50,7 +50,7 @@ const ContentRow = ({ title, children, className }: ContentRowProps) => {
       {/* Scrollable Container */}
       <div
         ref={scrollContainerRef}
-        className="flex gap-3 md:gap-4 overflow-x-auto scroll-smooth px-6 md:px-12 pb-4 scrollbar-hide"
+        className="flex gap-4 md:gap-6 overflow-x-auto scroll-smooth px-6 md:px-12 pb-4 scrollbar-hide"
         style={{
           scrollbarWidth: 'none',
           msOverflowStyle: 'none',
