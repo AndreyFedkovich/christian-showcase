@@ -1,15 +1,17 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Play, ArrowLeft, Calendar } from "lucide-react";
+import { Play, ArrowLeft } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import SlideCardRenderer from "@/components/SlideCardRenderer";
 import { presentations, Section } from "@/data/presentations";
 import { useEffect } from "react";
 import { UniversalSlide } from "@/types/slides";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const PresentationDetails = () => {
   const { presentationId } = useParams();
   const navigate = useNavigate();
+  const { language, t } = useLanguage();
   
   const presentation = presentations.find(p => p.id === presentationId);
   
@@ -27,6 +29,14 @@ const PresentationDetails = () => {
 
   const { slides, sections, layout } = presentation;
   const isHermeneutics = presentation.id === 'epistles-structure';
+  
+  // Localized content
+  const title = language === 'en' && presentation.titleEn ? presentation.titleEn : presentation.title;
+  const description = language === 'en' && presentation.descriptionEn ? presentation.descriptionEn : presentation.description;
+  
+  // Calculate metadata
+  const sectionsCount = sections ? sections.length : slides.length;
+  const metadataLabel = sections ? t('sections') : t('slides');
   
   const handleSlideClick = (slideIndex: number) => {
     navigate(`/presentation/${presentationId}/view?slide=${slideIndex}`);
@@ -48,38 +58,50 @@ const PresentationDetails = () => {
   return (
     <div className="min-h-screen gradient-warm">
       {/* Hero Section */}
-      <header className="relative py-16 px-6 text-center">
+      <header className="relative py-12 px-6">
         <div className="absolute inset-0 gradient-overlay opacity-5" />
-        <div className="relative max-w-5xl mx-auto space-y-6">
+        <div className="relative max-w-7xl mx-auto">
           <Button
-            variant="secondary"
+            variant="ghost"
             onClick={() => navigate("/")}
-            className="mb-4 gap-2 font-sans"
+            className="mb-8 gap-2 font-sans text-muted-foreground hover:text-foreground"
           >
             <ArrowLeft className="h-4 w-4" />
-            К списку презентаций
+            {t('backToList')}
           </Button>
           
-          <h1 className="text-5xl md:text-6xl font-bold text-foreground tracking-tight">
-            {presentation.title}
-          </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground font-sans max-w-2xl mx-auto">
-            {presentation.description}
-          </p>
-          
-          <div className="flex items-center justify-center gap-2 text-muted-foreground">
-            <Calendar className="h-5 w-5" />
-            <span className="font-sans text-lg">{presentation.createdAt}</span>
+          {/* Split layout container */}
+          <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
+            {/* Left: Content */}
+            <div className="flex-1 text-left space-y-4">
+              <h1 className="text-4xl lg:text-5xl font-bold text-foreground tracking-tight">
+                {title}
+              </h1>
+              <p className="text-primary/80 font-medium text-lg">
+                {sectionsCount} {metadataLabel} • {presentation.duration} {t('minutes')}
+              </p>
+              <p className="text-lg text-muted-foreground font-sans leading-relaxed max-w-xl">
+                {description}
+              </p>
+              <Button 
+                size="lg"
+                onClick={handleStartPresentation}
+                className="gradient-gold hover:opacity-90 text-lg px-8 py-6 rounded-full shadow-premium transition-smooth hover:scale-105 font-sans font-semibold mt-4"
+              >
+                <Play className="mr-2 h-5 w-5 fill-current" />
+                {t('startPresentation')}
+              </Button>
+            </div>
+            
+            {/* Right: Thumbnail */}
+            <div className="w-full lg:w-[45%] aspect-video rounded-xl overflow-hidden shadow-2xl ring-1 ring-white/10">
+              <img 
+                src={presentation.thumbnail} 
+                alt={title}
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
-          
-          <Button 
-            size="lg"
-            onClick={handleStartPresentation}
-            className="gradient-gold hover:opacity-90 text-lg px-8 py-6 rounded-full shadow-premium transition-smooth hover:scale-105 font-sans font-semibold mt-6"
-          >
-            <Play className="mr-2 h-6 w-6" />
-            Начать презентацию
-          </Button>
         </div>
       </header>
 
