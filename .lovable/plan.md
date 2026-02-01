@@ -1,122 +1,155 @@
 
-## Plan: Redesign Hero Section Layout (Netflix-Style)
+## Plan: Netflix-Style Redesign for Game Pages
 
 ### Overview
-Redesigning only the hero section of the presentation details page to match the reference image with a split layout - content on left, featured thumbnail on right.
+Apply the same split-layout hero design (content left, featured thumbnail right) to game pages, matching the presentation details page style.
 
 ---
 
-### 1. Update Hero Section Layout
+### Current Structure
 
-**File: `src/pages/PresentationDetails.tsx`**
+| Game | Route | Current Design |
+|------|-------|----------------|
+| Bible Master | `/game/bible-master/play` | Goes directly to TeamSetup |
+| Scroll Keeper | `/game/scroll-keeper/halls` | Centered hero with emoji, hall grid below |
 
-Transform the centered hero into a split-layout design:
+---
 
-**Current Structure (centered):**
-```text
-┌─────────────────────────────────────────────┐
-│         [← Back button]                     │
-│            Title (centered)                 │
-│          Description (centered)             │
-│             Date                            │
-│         [▶ Start button]                    │
-└─────────────────────────────────────────────┘
-```
+### New Structure
 
-**New Structure (split layout):**
+Both games will have a dedicated details page with:
+1. Split hero layout (matching PresentationDetails)
+2. Content-specific sections below
+
+---
+
+### 1. Create Unified GameDetails Page
+
+**New file: `src/pages/GameDetails.tsx`**
+
+A new details page for games using the same Netflix-style split layout:
+
 ```text
 ┌────────────────────────────────────────────────────────────────┐
-│  [← Back]                                                       │
+│  [← К списку]                                                  │
 ├────────────────────────────────────────────────────────────────┤
 │                                                                │
 │  ┌──────────────────────────┐    ┌──────────────────────────┐  │
 │  │                          │    │                          │  │
-│  │  Title (large, bold)     │    │   [Featured Thumbnail]   │  │
-│  │  X разделов • Y мин      │    │      aspect 16:9         │  │
+│  │  Title (large, bold)     │    │   [Game Thumbnail]       │  │
+│  │  2 команды • 15-30 мин   │    │      aspect 16:9         │  │
 │  │                          │    │      rounded-xl          │  │
 │  │  Description text...     │    │      shadow-2xl          │  │
 │  │                          │    │                          │  │
-│  │  [▶ Начать просмотр]     │    │                          │  │
+│  │  [▶ Start Game]          │    │                          │  │
 │  │                          │    │                          │  │
 │  └──────────────────────────┘    └──────────────────────────┘  │
 │                                                                │
 └────────────────────────────────────────────────────────────────┘
+│  [Game-specific content below - halls for Scroll Keeper]       │
+└────────────────────────────────────────────────────────────────┘
 ```
 
-**Key Changes:**
-- Use `flex flex-col lg:flex-row` for responsive split layout
-- Left side (~60%): Title, metadata subtitle, description, CTA button
-- Right side (~40%): Large thumbnail with 16:9 aspect ratio
-- Left-align text content
-- Add metadata line: "X разделов • Y мин" (or "X slides • Y min" for grid layouts)
-- Remove `Calendar` icon and `createdAt` date
-- Use language-aware title/description from presentation data
-- Dark gradient background maintained
+**Key features:**
+- Uses `useParams` to get game ID
+- Finds game from `games` array
+- Split layout: text left, thumbnail right
+- Metadata: player count • duration
+- Localized content via `useLanguage`
+- For `scroll-keeper`: renders hall cards below hero
+- For `bible-master`: simpler layout, CTA goes to play
 
-**Code structure:**
+---
+
+### 2. Update Routes
+
+**File: `src/App.tsx`**
+
+Add new route for game details:
+
 ```tsx
-<header className="relative py-12 px-6">
-  <div className="relative max-w-7xl mx-auto">
-    {/* Back button */}
-    <Button onClick={() => navigate("/")} className="mb-8">
-      <ArrowLeft /> {t('backToList')}
-    </Button>
-    
-    {/* Split layout container */}
-    <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
-      {/* Left: Content */}
-      <div className="flex-1 text-left space-y-4">
-        <h1>{title}</h1>
-        <p className="text-primary/80">
-          {sectionsCount} {t('sections')} • {duration} {t('minutes')}
-        </p>
-        <p className="text-muted-foreground">{description}</p>
-        <Button onClick={handleStartPresentation}>
-          <Play /> {t('startPresentation')}
-        </Button>
-      </div>
-      
-      {/* Right: Thumbnail */}
-      <div className="w-full lg:w-[45%] aspect-video rounded-xl overflow-hidden shadow-2xl">
-        <img src={presentation.thumbnail} />
-      </div>
-    </div>
-  </div>
-</header>
+// Current:
+<Route path="/game/:gameId/play" element={<GamePlay />} />
+<Route path="/game/scroll-keeper/halls" element={<ScrollKeeperDetails />} />
+
+// Updated:
+<Route path="/game/:gameId" element={<GameDetails />} />
+<Route path="/game/:gameId/play" element={<GamePlay />} />
 ```
 
 ---
 
-### 2. Add i18n Translations
+### 3. Update Index Navigation
+
+**File: `src/pages/Index.tsx`**
+
+Change game card navigation to go to details page first:
+
+```tsx
+// Current:
+const handleGameClick = (gameId: string) => {
+  navigate(`/game/${gameId}/play`);
+};
+
+// Updated:
+const handleGameClick = (gameId: string) => {
+  navigate(`/game/${gameId}`);
+};
+```
+
+---
+
+### 4. Update ScrollKeeperDetails to Pure Halls View
+
+**File: `src/pages/ScrollKeeperDetails.tsx`**
+
+This file can be repurposed or removed since GameDetails will handle it. The hall grid can be moved into the GameDetails page as conditional content for scroll-keeper.
+
+**Option chosen:** Integrate hall grid into GameDetails for scroll-keeper game.
+
+---
+
+### 5. Add i18n Translations
 
 **File: `src/lib/i18n.ts`**
 
-Add new translation strings for the hero section:
+Add new translation strings:
 
 ```typescript
 // Russian
-backToList: "К списку",
-startPresentation: "Начать просмотр",
-sections: "разделов",
+startGame: "Начать игру",
+startQuest: "Начать квест",
+libraryHalls: "Залы Библиотеки",
+gameRules: "Правила игры",
+hall: "Зал",
 
-// English
-backToList: "Back to list",
-startPresentation: "Start watching",
-sections: "sections",
+// English  
+startGame: "Start game",
+startQuest: "Start quest",
+libraryHalls: "Library Halls",
+gameRules: "Game rules",
+hall: "Hall",
 ```
-
-Note: `minutes` already exists in translations.
 
 ---
 
-### 3. Import Language Context
+### 6. Add English Translations to Hall Data
 
-**File: `src/pages/PresentationDetails.tsx`**
+**File: `src/data/scroll-keeper.ts`**
 
-- Import `useLanguage` hook from context
-- Get `language` and `t` function
-- Use `language === 'en' ? presentation.titleEn : presentation.title` for localized content
-- Same pattern for description
+Add English translations to halls:
+
+```typescript
+export interface Hall {
+  type: HallType;
+  name: string;
+  nameEn: string;
+  description: string;
+  descriptionEn: string;
+  keeperIntro: string;
+  icon: string;
+}
+```
 
 ---
 
@@ -124,16 +157,84 @@ Note: `minutes` already exists in translations.
 
 | File | Action |
 |------|--------|
-| `src/pages/PresentationDetails.tsx` | Redesign hero section with split layout |
-| `src/lib/i18n.ts` | Add 3 new translation strings |
+| `src/pages/GameDetails.tsx` | Create - new unified game details page |
+| `src/App.tsx` | Update - add `/game/:gameId` route |
+| `src/pages/Index.tsx` | Update - change game navigation to details page |
+| `src/pages/ScrollKeeperDetails.tsx` | Delete - replaced by GameDetails |
+| `src/lib/i18n.ts` | Update - add game-specific translations |
+| `src/data/scroll-keeper.ts` | Update - add English hall translations |
+| `src/components/game/scroll-keeper/HallCard.tsx` | Update - support localized hall names |
 
 ---
 
 ### Visual Result
 
-- Split hero: content left, featured 16:9 image right
-- Metadata line showing sections count and duration
-- Left-aligned title and description
-- Localized content (RU/EN)
-- Responsive: stacks vertically on mobile
-- Slides section below remains unchanged
+**Bible Master Details:**
+- Split hero with quiz show thumbnail on right
+- Player count and duration metadata
+- "Start game" CTA button
+- Clean dark background
+
+**Scroll Keeper Details:**
+- Split hero with library thumbnail on right  
+- Player count and duration metadata
+- "Start quest" CTA button
+- Hall cards grid below (matching reference image)
+- Each hall card shows localized name and description
+
+---
+
+### Technical Implementation Details
+
+**GameDetails component structure:**
+
+```tsx
+export default function GameDetails() {
+  const { gameId } = useParams();
+  const navigate = useNavigate();
+  const { language, t } = useLanguage();
+  
+  const game = games.find(g => g.id === gameId);
+  
+  const title = language === 'en' ? game.titleEn : game.title;
+  const description = language === 'en' ? game.descriptionEn : game.description;
+  const playerCount = language === 'en' ? game.playerCountEn : game.playerCount;
+  
+  const handleStartGame = () => {
+    navigate(`/game/${gameId}/play`);
+  };
+
+  return (
+    <div className="min-h-screen bg-background">
+      {/* Hero Section - Split Layout */}
+      <header className="relative py-12 px-6">
+        <div className="max-w-7xl mx-auto">
+          {/* Back button */}
+          {/* Split flex container */}
+          {/* Left: Title, metadata, description, CTA */}
+          {/* Right: Thumbnail 16:9 */}
+        </div>
+      </header>
+      
+      {/* Game-specific content */}
+      {gameId === 'scroll-keeper' && (
+        <ScrollKeeperHalls />
+      )}
+    </div>
+  );
+}
+```
+
+**HallCard localization:**
+
+```tsx
+export function HallCard({ hall, hallNumber, onClick }: HallCardProps) {
+  const { language, t } = useLanguage();
+  const name = language === 'en' ? hall.nameEn : hall.name;
+  const description = language === 'en' ? hall.descriptionEn : hall.description;
+  
+  return (
+    // ... existing card structure with localized text
+  );
+}
+```
