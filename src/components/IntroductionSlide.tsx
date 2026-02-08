@@ -59,39 +59,7 @@ const IntroductionSlide = ({ slide, direction }: IntroductionSlideProps) => {
       exit="exit"
     >
       <div className="max-w-[100rem] w-full grid grid-cols-1 lg:grid-cols-7 gap-12 items-center">
-        {/* Левая часть - текст (3 колонки из 7) */}
-        <div className="lg:col-span-3 space-y-9">
-          <div className="space-y-9">
-            <motion.h1 
-              className="text-5xl md:text-6xl font-bold text-foreground tracking-tight"
-              variants={itemVariants}
-            >
-              {slide.title}
-            </motion.h1>
-            {slide.subtitle && (
-              <motion.p 
-                className="text-4xl text-accent font-sans font-semibold leading-[3rem]"
-                variants={itemVariants}
-              >
-                {slide.subtitle}
-              </motion.p>
-            )}
-          </div>
-          
-          <div className="space-y-7">
-            {slide.content.map((paragraph, index) => (
-              <motion.p 
-                key={index} 
-                className="text-2xl md:text-4xl text-muted-foreground font-sans md:leading-[2.7rem]"
-                variants={itemVariants}
-              >
-                {paragraph}
-              </motion.p>
-            ))}
-          </div>
-        </div>
-
-        {/* Правая часть - изображение (4 колонки из 7) */}
+        {/* Левая часть - изображение (4 колонки из 7) */}
         <motion.div 
           className="lg:col-span-4"
           variants={imageVariants}
@@ -104,6 +72,38 @@ const IntroductionSlide = ({ slide, direction }: IntroductionSlideProps) => {
             />
           </div>
         </motion.div>
+
+        {/* Правая часть - текст (3 колонки из 7) */}
+        <div className="lg:col-span-3 space-y-9">
+          <div className="space-y-9">
+            <motion.h1
+                className="text-5xl md:text-6xl font-bold text-foreground tracking-tight"
+                variants={itemVariants}
+            >
+              {slide.title}
+            </motion.h1>
+            {slide.subtitle && (
+                <motion.p
+                    className="text-4xl text-accent font-sans font-semibold leading-[3rem]"
+                    variants={itemVariants}
+                >
+                  {slide.subtitle}
+                </motion.p>
+            )}
+          </div>
+
+          <div className="space-y-7">
+            {slide.content.map((paragraph, index) => (
+                <motion.p
+                    key={index}
+                    className="text-2xl md:text-4xl text-muted-foreground font-sans md:leading-[2.7rem]"
+                    variants={itemVariants}
+                >
+                  {paragraph}
+                </motion.p>
+            ))}
+          </div>
+        </div>
       </div>
     </motion.div>
   );

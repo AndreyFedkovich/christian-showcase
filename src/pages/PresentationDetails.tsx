@@ -212,7 +212,7 @@ const PresentationDetails = () => {
       </main>
 
       <footer className="py-8 text-center text-muted-foreground font-sans text-sm">
-        <p>Интерактивная Библия • 2025</p>
+        <p>Интерактивная Библия • 2025 - 2026</p>
       </footer>
     </div>
   );

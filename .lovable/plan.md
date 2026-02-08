@@ -180,12 +180,12 @@ Add new route:
 
 New translation keys:
 
-| Key (RU) | Key (EN) |
-|----------|----------|
-| `presentations` = "презентации" | `presentations` = "presentations" |
+| Key (RU)                             | Key (EN)                              |
+|--------------------------------------|---------------------------------------|
+| `presentations` = "Презентации"      | `presentations` = "Presentations"     |
 | `startFromFirst` = "Начать с первой" | `startFromFirst` = "Start from first" |
-| `open` = "Открыть" | `open` = "Open" |
-| `home` = "Главная" | `home` = "Home" |
+| `open` = "Открыть"                   | `open` = "Open"                       |
+| `home` = "Главная"                   | `home` = "Home"                       |
 
 ---
 

@@ -26,7 +26,7 @@ export const translations = {
     tryDifferentSearch: "Попробуйте изменить поисковый запрос",
     
     // Footer
-    footer: "Интерактивная Библия • 2025",
+    footer: "Интерактивная Библия • 2025 - 2026",
     
     // User menu
     guest: "Гость",
@@ -43,7 +43,7 @@ export const translations = {
     hall: "Зал",
 
     // Collections
-    presentations: "презентации",
+    presentations: "Презентации",
     startFromFirst: "Начать с первой",
     open: "Открыть",
     home: "Главная",
@@ -73,7 +73,7 @@ export const translations = {
     tryDifferentSearch: "Try a different search query",
     
     // Footer
-    footer: "Interactive Bible • 2025",
+    footer: "Interactive Bible • 2025 - 2026",
     
     // User menu
     guest: "Guest",
@@ -90,7 +90,7 @@ export const translations = {
     hall: "Hall",
 
     // Collections
-    presentations: "presentations",
+    presentations: "Presentations",
     startFromFirst: "Start from first",
     open: "Open",
     home: "Home",
