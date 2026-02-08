@@ -41,6 +41,12 @@ export const translations = {
     startQuest: "Начать квест",
     libraryHalls: "Залы Библиотеки",
     hall: "Зал",
+
+    // Collections
+    presentations: "презентации",
+    startFromFirst: "Начать с первой",
+    open: "Открыть",
+    home: "Главная",
   },
   en: {
     // Navigation
@@ -82,6 +88,12 @@ export const translations = {
     startQuest: "Start quest",
     libraryHalls: "Library Halls",
     hall: "Hall",
+
+    // Collections
+    presentations: "presentations",
+    startFromFirst: "Start from first",
+    open: "Open",
+    home: "Home",
   }
 } as const;
 
