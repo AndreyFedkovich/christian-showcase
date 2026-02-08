@@ -5,6 +5,7 @@ import HeroSection from "@/components/HeroSection";
 import ContentRow from "@/components/ContentRow";
 import CompactCard from "@/components/CompactCard";
 import { presentations } from "@/data/presentations";
+import { collections } from "@/data/collections";
 import { games } from "@/data/games";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Sparkles } from "lucide-react";
@@ -38,21 +39,54 @@ const Index = () => {
     navigate(`/presentation/${presentationId}`);
   };
 
+  const handleCollectionClick = (collectionId: string) => {
+    navigate(`/collection/${collectionId}`);
+  };
+
   const handleGameClick = (gameId: string) => {
     navigate(`/game/${gameId}`);
   };
 
   // Group presentations by category
-  const seminarPresentations = useMemo(() => {
-    const seminars = presentations.filter(p => p.category === 'seminar');
-    if (!searchQuery.trim()) return seminars;
-    const query = searchQuery.toLowerCase();
-    return seminars.filter(p => 
-      p.title.toLowerCase().includes(query) || 
-      p.titleEn.toLowerCase().includes(query) ||
-      p.description.toLowerCase().includes(query)
+  // IDs of presentations that belong to a collection
+  const collectedIds = useMemo(() => 
+    new Set(collections.flatMap(c => c.presentationIds)),
+    []
+  );
+
+  const seminarItems = useMemo(() => {
+    const standaloneSeminars = presentations.filter(
+      p => p.category === 'seminar' && !collectedIds.has(p.id)
     );
-  }, [searchQuery]);
+    const seminarCollections = collections.filter(c => c.category === 'seminar');
+    
+    // Build a combined list: collections first, then standalone
+    const items = [
+      ...seminarCollections.map(c => ({
+        id: c.id,
+        type: 'collection' as const,
+        title: c.title,
+        titleEn: c.titleEn,
+        thumbnail: c.thumbnail,
+        duration: c.duration,
+      })),
+      ...standaloneSeminars.map(p => ({
+        id: p.id,
+        type: 'presentation' as const,
+        title: p.title,
+        titleEn: p.titleEn,
+        thumbnail: p.thumbnail,
+        duration: p.duration,
+      })),
+    ];
+
+    if (!searchQuery.trim()) return items;
+    const query = searchQuery.toLowerCase();
+    return items.filter(item => 
+      item.title.toLowerCase().includes(query) || 
+      item.titleEn.toLowerCase().includes(query)
+    );
+  }, [searchQuery, collectedIds]);
 
   const bibleStudyPresentations = useMemo(() => {
     const bibleStudy = presentations.filter(p => p.category === 'bible-study');
@@ -100,15 +134,18 @@ const Index = () => {
       <main className="min-h-screen gradient-warm pt-8 pb-16">
         <div className="max-w-7xl mx-auto">
         {/* Seminars Row */}
-        {seminarPresentations.length > 0 && (
+        {seminarItems.length > 0 && (
           <ContentRow title={t('seminars')}>
-            {seminarPresentations.map((presentation) => (
+            {seminarItems.map((item) => (
               <CompactCard
-                key={presentation.id}
-                title={getTitle(presentation)}
-                thumbnail={presentation.thumbnail}
-                subtitle={getSubtitle(presentation.duration)}
-                onClick={() => handlePresentationClick(presentation.id)}
+                key={item.id}
+                title={getTitle(item)}
+                thumbnail={item.thumbnail}
+                subtitle={getSubtitle(item.duration)}
+                onClick={() => item.type === 'collection' 
+                  ? handleCollectionClick(item.id) 
+                  : handlePresentationClick(item.id)
+                }
               />
             ))}
           </ContentRow>
@@ -145,7 +182,7 @@ const Index = () => {
         )}
 
         {/* Empty state when no results */}
-        {seminarPresentations.length === 0 && bibleStudyPresentations.length === 0 && filteredGames.length === 0 && (
+        {seminarItems.length === 0 && bibleStudyPresentations.length === 0 && filteredGames.length === 0 && (
           <EmptyState />
         )}
 

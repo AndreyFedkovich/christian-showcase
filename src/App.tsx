@@ -11,6 +11,7 @@ import GamePlay from "./pages/GamePlay";
 import QuestionManager from "./pages/QuestionManager";
 import ScrollKeeperPlay from "./pages/ScrollKeeperPlay";
 import GameDetails from "./pages/GameDetails";
+import CollectionDetails from "./pages/CollectionDetails";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/presentation/:presentationId" element={<PresentationDetails />} />
             <Route path="/presentation/:presentationId/view" element={<Presentation />} />
+            <Route path="/collection/:collectionId" element={<CollectionDetails />} />
             <Route path="/game/:gameId" element={<GameDetails />} />
             <Route path="/game/:gameId/play" element={<GamePlay />} />
             <Route path="/game/:gameId/questions" element={<QuestionManager />} />

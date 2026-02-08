@@ -1,17 +1,32 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Play, ArrowLeft } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import SlideCardRenderer from "@/components/SlideCardRenderer";
 import { presentations, Section } from "@/data/presentations";
+import { collections } from "@/data/collections";
 import { useEffect } from "react";
 import { UniversalSlide } from "@/types/slides";
 import { useLanguage } from "@/contexts/LanguageContext";
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbSeparator,
+  BreadcrumbPage,
+} from "@/components/ui/breadcrumb";
 
 const PresentationDetails = () => {
   const { presentationId } = useParams();
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { language, t } = useLanguage();
+  
+  const fromCollectionId = searchParams.get("from");
+  const fromCollection = fromCollectionId 
+    ? collections.find(c => c.id === fromCollectionId) 
+    : null;
   
   const presentation = presentations.find(p => p.id === presentationId);
   
@@ -61,14 +76,43 @@ const PresentationDetails = () => {
       <header className="relative py-12 px-6">
         <div className="absolute inset-0 gradient-overlay opacity-5" />
         <div className="relative max-w-7xl mx-auto">
-          <Button
-            variant="ghost"
-            onClick={() => navigate("/")}
-            className="mb-8 gap-2 font-sans text-muted-foreground hover:text-foreground"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            {t('backToList')}
-          </Button>
+          {fromCollection ? (
+            <Breadcrumb className="mb-8">
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link to="/" className="text-muted-foreground hover:text-foreground transition-colors">
+                      {t('home')}
+                    </Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link 
+                      to={`/collection/${fromCollection.id}`} 
+                      className="text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      {language === 'en' && fromCollection.titleEn ? fromCollection.titleEn : fromCollection.title}
+                    </Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbPage>{title}</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+          ) : (
+            <Button
+              variant="ghost"
+              onClick={() => navigate("/")}
+              className="mb-8 gap-2 font-sans text-muted-foreground hover:text-foreground"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              {t('backToList')}
+            </Button>
+          )}
           
           {/* Split layout container */}
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
