@@ -132,7 +132,7 @@ const Index = () => {
       )}
 
       {/* Content Section with horizontal rows */}
-      <main className="min-h-screen gradient-warm pt-8 pb-16">
+      <main className="flex-1 flex-shrink-0 min-h-screen gradient-warm pt-8 pb-16">
         <div className="max-w-7xl mx-auto">
         {/* Seminars Row */}
         {seminarItems.length > 0 && (
