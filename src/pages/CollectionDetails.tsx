@@ -6,6 +6,7 @@ import { presentations } from "@/data/presentations";
 import { useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
+import Footer from "@/components/Footer";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import {
   Breadcrumb,
@@ -70,7 +71,7 @@ const CollectionDetails = () => {
   };
 
   return (
-    <div className="min-h-screen gradient-warm">
+    <div className="min-h-screen flex flex-col gradient-warm">
       {/* Hero Section */}
       <header className="relative py-12 px-6">
         <div className="absolute inset-0 gradient-overlay opacity-5" />
@@ -207,9 +208,7 @@ const CollectionDetails = () => {
         </motion.div>
       </main>
 
-      <footer className="py-8 text-center text-muted-foreground font-sans text-sm">
-        <p>{t("footer")}</p>
-      </footer>
+      <Footer />
     </div>
   );
 };
