@@ -1,60 +1,65 @@
 
 
-## Plan: Sticky Footer on All Pages
+## Plan: Fix Card Sizing and Missing Slide Cards
 
 ### Problem
-When page content is shorter than the viewport, the footer floats in the middle of the screen instead of staying at the bottom (visible on GameDetails "Bible Master" page and potentially others).
+After adding `flex flex-col` to page wrappers for the sticky footer, content areas became flex items that can shrink. At certain viewport widths (especially in the Lovable preview panel), this causes:
+1. Cards to appear minimized/tiny across all pages
+2. Slide cards to disappear on grid-layout presentation pages (Kings & Prophets, Know & Do)
+
+### Root Cause
+When a container has `display: flex; flex-direction: column`, its children become flex items with `flex-shrink: 1` by default. This means content can be compressed when there's not enough space, causing cards to collapse to minimal sizes.
 
 ### Solution
-Use a simple flexbox pattern (`min-h-screen flex flex-col` on the wrapper, `mt-auto` on the footer) to push the footer to the bottom on all pages. Extract the footer into a shared component to avoid duplication.
+Add `flex-shrink-0` to prevent content sections from being compressed, and `flex-1` to main content areas so they fill available space properly.
 
----
+### File Changes
 
-### 1. Create Shared Footer Component
+**1. `src/pages/Index.tsx`** (line 135)
 
-**New file: `src/components/Footer.tsx`**
-
-A simple reusable footer:
-
-```tsx
-import { useLanguage } from "@/contexts/LanguageContext";
-
-const Footer = () => {
-  const { t } = useLanguage();
-  return (
-    <footer className="mt-auto py-8 text-center text-muted-foreground font-sans text-sm border-t border-border/50">
-      <p>{t('footer')}</p>
-    </footer>
-  );
-};
-
-export default Footer;
+Add `flex-1` to main content area:
+```
+Before: <main className="min-h-screen gradient-warm pt-8 pb-16">
+After:  <main className="flex-1 flex-shrink-0 min-h-screen gradient-warm pt-8 pb-16">
 ```
 
-The key class is `mt-auto` which pushes the footer to the bottom when used inside a flex-col container.
+**2. `src/pages/PresentationDetails.tsx`**
 
----
+Add `flex-shrink-0` to header (line 77) and `flex-1` to main (line 154):
+```
+Before: <header className="relative py-12 px-6">
+After:  <header className="relative py-12 px-6 flex-shrink-0">
 
-### 2. Update Pages to Use Flex Layout + Shared Footer
+Before: <main className="max-w-7xl mx-auto px-6 pb-20">
+After:  <main className="flex-1 flex-shrink-0 max-w-7xl mx-auto px-6 pb-20">
+```
 
-Each page's root `div` needs `min-h-screen flex flex-col`, and the inline footer replaced with the shared `<Footer />` component.
+**3. `src/pages/GameDetails.tsx`**
 
-| Page | Root div change | Footer change |
-|------|----------------|---------------|
-| `src/pages/Index.tsx` | Already has `min-h-screen`, add `flex flex-col` | Replace inline footer with `<Footer />`, move outside `<main>` |
-| `src/pages/GameDetails.tsx` | Already has `min-h-screen`, add `flex flex-col` | Replace inline footer with `<Footer />` |
-| `src/pages/PresentationDetails.tsx` | Already has `min-h-screen`, add `flex flex-col` | Replace hardcoded footer with `<Footer />` |
-| `src/pages/CollectionDetails.tsx` | Already has `min-h-screen`, add `flex flex-col` | Replace inline footer with `<Footer />` |
+Add `flex-shrink-0` to header (line 45) and halls section (line 102):
+```
+Before: <header className="relative py-12 px-6">
+After:  <header className="relative py-12 px-6 flex-shrink-0">
 
----
+Before: <section className="max-w-7xl mx-auto px-6 pb-16">
+After:  <section className="flex-1 flex-shrink-0 max-w-7xl mx-auto px-6 pb-16">
+```
+
+**4. `src/pages/CollectionDetails.tsx`**
+
+Add `flex-shrink-0` to header and `flex-1` to main content.
 
 ### Files Summary
 
 | File | Action |
 |------|--------|
-| `src/components/Footer.tsx` | **Create** - shared footer component with `mt-auto` |
-| `src/pages/Index.tsx` | **Update** - flex-col layout, use shared Footer |
-| `src/pages/GameDetails.tsx` | **Update** - flex-col layout, use shared Footer |
-| `src/pages/PresentationDetails.tsx` | **Update** - flex-col layout, use shared Footer (fixes hardcoded text) |
-| `src/pages/CollectionDetails.tsx` | **Update** - flex-col layout, use shared Footer |
+| `src/pages/Index.tsx` | Add `flex-1 flex-shrink-0` to main |
+| `src/pages/PresentationDetails.tsx` | Add `flex-shrink-0` to header, `flex-1 flex-shrink-0` to main |
+| `src/pages/GameDetails.tsx` | Add `flex-shrink-0` to header, `flex-1 flex-shrink-0` to section |
+| `src/pages/CollectionDetails.tsx` | Add `flex-shrink-0` to header, `flex-1 flex-shrink-0` to main |
+
+### Why This Fixes It
+- `flex-shrink-0` prevents content from being compressed below its natural size
+- `flex-1` ensures the main content area expands to fill available space
+- Together they maintain the sticky footer behavior while preventing card collapse
 
