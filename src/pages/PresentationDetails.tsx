@@ -8,7 +8,6 @@ import { collections } from "@/data/collections";
 import { useEffect } from "react";
 import { UniversalSlide } from "@/types/slides";
 import { useLanguage } from "@/contexts/LanguageContext";
-import Footer from "@/components/Footer";
 import {
   Breadcrumb,
   BreadcrumbList,
@@ -72,9 +71,9 @@ const PresentationDetails = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col gradient-warm">
+    <div className="min-h-screen gradient-warm">
       {/* Hero Section */}
-      <header className="relative py-12 px-6 flex-shrink-0">
+      <header className="relative py-12 px-6">
         <div className="absolute inset-0 gradient-overlay opacity-5" />
         <div className="relative max-w-7xl mx-auto">
           {fromCollection ? (
@@ -151,7 +150,7 @@ const PresentationDetails = () => {
       </header>
 
       {/* Slides */}
-      <main className="flex-1 flex-shrink-0 max-w-7xl mx-auto px-6 pb-20">
+      <main className="max-w-7xl mx-auto px-6 pb-20">
         {layout === 'grid' ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-[30px]">
             {(isHermeneutics ? slides.slice(1) : slides).map((slide, index) => {
@@ -212,7 +211,9 @@ const PresentationDetails = () => {
         )}
       </main>
 
-      <Footer />
+      <footer className="py-8 text-center text-muted-foreground font-sans text-sm">
+        <p>Интерактивная Библия • 2025 - 2026</p>
+      </footer>
     </div>
   );
 };

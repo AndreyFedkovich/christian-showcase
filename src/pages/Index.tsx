@@ -10,7 +10,6 @@ import { games } from "@/data/games";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
-import Footer from "@/components/Footer";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -118,7 +117,7 @@ const Index = () => {
     `${duration} ${t('minutes')}`;
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen bg-background">
       {/* Fixed Navbar */}
       <FixedNavbar 
         isScrolled={isScrolled} 
@@ -132,7 +131,7 @@ const Index = () => {
       )}
 
       {/* Content Section with horizontal rows */}
-      <main className="flex-1 flex-shrink-0 min-h-screen gradient-warm pt-8 pb-16">
+      <main className="min-h-screen gradient-warm pt-8 pb-16">
         <div className="max-w-7xl mx-auto">
         {/* Seminars Row */}
         {seminarItems.length > 0 && (
@@ -187,9 +186,12 @@ const Index = () => {
           <EmptyState />
         )}
 
+        {/* Footer */}
+        <footer className="py-8 text-center text-muted-foreground font-sans text-sm border-t border-border/50 mt-12 mx-6">
+          <p>{t('footer')}</p>
+        </footer>
         </div>
       </main>
-      <Footer />
     </div>
   );
 };
