@@ -6,6 +6,7 @@ import { halls } from '@/data/scroll-keeper';
 import { HallCard } from '@/components/game/scroll-keeper/HallCard';
 import { useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import Footer from '@/components/Footer';
 
 export default function GameDetails() {
   const { gameId } = useParams();
@@ -39,7 +40,7 @@ export default function GameDetails() {
   const ctaText = isScrollKeeper ? t('startQuest') : t('startGame');
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen flex flex-col bg-background">
       {/* Hero Section - Split Layout */}
       <header className="relative py-12 px-6">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-muted/50" />
@@ -115,10 +116,7 @@ export default function GameDetails() {
         </section>
       )}
 
-      {/* Footer */}
-      <footer className="py-8 text-center text-muted-foreground text-sm border-t border-border/50">
-        <p>{t('footer')}</p>
-      </footer>
+      <Footer />
     </div>
   );
 }
