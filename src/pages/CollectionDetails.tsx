@@ -73,7 +73,7 @@ const CollectionDetails = () => {
   return (
     <div className="min-h-screen flex flex-col gradient-warm">
       {/* Hero Section */}
-      <header className="relative py-12 px-6">
+      <header className="relative py-12 px-6 flex-shrink-0">
         <div className="absolute inset-0 gradient-overlay opacity-5" />
         <div className="relative max-w-7xl mx-auto">
           {/* Breadcrumb */}
@@ -133,7 +133,7 @@ const CollectionDetails = () => {
       </header>
 
       {/* Presentations List */}
-      <main className="max-w-7xl mx-auto px-6 pb-20">
+      <main className="flex-1 flex-shrink-0 max-w-7xl mx-auto px-6 pb-20">
         <h2 className="text-2xl font-bold text-foreground mb-6 mt-4">
           {t("presentations")}
         </h2>
