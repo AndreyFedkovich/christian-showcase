@@ -398,7 +398,7 @@ export const kingsOfIsrael: King[] = [
   },
   {
     name: 'Амврий',
-    startYear: 884,
+    startYear: 885,
     endYear: 874,
     duration: '12 лет',
     kingdom: 'israel',
