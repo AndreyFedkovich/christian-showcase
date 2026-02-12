@@ -6,6 +6,7 @@ import { halls } from '@/data/scroll-keeper';
 import { HallCard } from '@/components/game/scroll-keeper/HallCard';
 import { useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import Footer from '@/components/Footer';
 
 export default function GameDetails() {
   const { gameId } = useParams();
@@ -39,86 +40,86 @@ export default function GameDetails() {
   const ctaText = isScrollKeeper ? t('startQuest') : t('startGame');
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Hero Section - Split Layout */}
-      <header className="relative py-12 px-6">
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-muted/50" />
-        
-        <div className="relative max-w-7xl mx-auto">
-          {/* Back button */}
-          <Button
-            variant="ghost"
-            onClick={() => navigate('/')}
-            className="mb-8 text-muted-foreground hover:text-foreground hover:bg-muted"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            {t('backToList')}
-          </Button>
+    <div className="min-h-screen flex flex-col bg-background">
+      <div className="flex-1">
+        {/* Hero Section - Split Layout */}
+        <header className="relative py-12 px-6">
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-muted/50" />
+          
+          <div className="relative max-w-7xl mx-auto">
+            {/* Back button */}
+            <Button
+              variant="ghost"
+              onClick={() => navigate('/')}
+              className="mb-8 text-muted-foreground hover:text-foreground hover:bg-muted"
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              {t('backToList')}
+            </Button>
 
-          {/* Split layout container */}
-          <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
-            {/* Left: Content */}
-            <div className="flex-1 text-left space-y-4">
-              <h1 className="text-4xl lg:text-5xl font-bold text-foreground leading-tight">
-                {title}
-              </h1>
-              
-              {/* Metadata */}
-              <p className="text-primary/80 font-medium">
-                {playerCount} • {game.duration} {t('minutes')}
-              </p>
-              
-              {/* Description */}
-              <p className="text-lg text-muted-foreground leading-relaxed max-w-xl">
-                {description}
-              </p>
-              
-              {/* CTA Button */}
-              <Button
-                onClick={handleStartGame}
-                size="lg"
-                className="gradient-gold text-primary-foreground px-8 py-6 text-lg shadow-lg hover:shadow-xl transition-all"
-              >
-                <Play className="mr-2 h-5 w-5 fill-current" />
-                {ctaText}
-              </Button>
-            </div>
+            {/* Split layout container */}
+            <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
+              {/* Left: Content */}
+              <div className="flex-1 text-left space-y-4">
+                <h1 className="text-4xl lg:text-5xl font-bold text-foreground leading-tight">
+                  {title}
+                </h1>
+                
+                {/* Metadata */}
+                <p className="text-primary/80 font-medium">
+                  {playerCount} • {game.duration} {t('minutes')}
+                </p>
+                
+                {/* Description */}
+                <p className="text-lg text-muted-foreground leading-relaxed max-w-xl">
+                  {description}
+                </p>
+                
+                {/* CTA Button */}
+                <Button
+                  onClick={handleStartGame}
+                  size="lg"
+                  className="gradient-gold text-primary-foreground px-8 py-6 text-lg shadow-lg hover:shadow-xl transition-all"
+                >
+                  <Play className="mr-2 h-5 w-5 fill-current" />
+                  {ctaText}
+                </Button>
+              </div>
 
-            {/* Right: Thumbnail */}
-            <div className="w-full lg:w-[45%] aspect-video rounded-xl overflow-hidden shadow-2xl ring-1 ring-white/10">
-              <img
-                src={game.thumbnail}
-                alt={title}
-                className="w-full h-full object-cover"
-              />
+              {/* Right: Thumbnail */}
+              <div className="w-full lg:w-[45%] aspect-video rounded-xl overflow-hidden shadow-2xl ring-1 ring-white/10">
+                <img
+                  src={game.thumbnail}
+                  alt={title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
           </div>
-        </div>
-      </header>
+        </header>
 
-      {/* Scroll Keeper: Halls Grid */}
-      {isScrollKeeper && (
-        <section className="max-w-7xl mx-auto px-6 pb-16">
-          <h2 className="text-2xl font-bold text-foreground mb-8">
-            {t('libraryHalls')}
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {halls.map((hall, index) => (
-              <HallCard
-                key={hall.type}
-                hall={hall}
-                hallNumber={index + 1}
-                onClick={() => handleHallClick(index)}
-              />
-            ))}
-          </div>
-        </section>
-      )}
+        {/* Scroll Keeper: Halls Grid */}
+        {isScrollKeeper && (
+          <section className="max-w-7xl mx-auto px-6 pb-16">
+            <h2 className="text-2xl font-bold text-foreground mb-8 mt-8">
+              {t('libraryHalls')}
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {halls.map((hall, index) => (
+                <HallCard
+                  key={hall.type}
+                  hall={hall}
+                  hallNumber={index + 1}
+                  onClick={() => handleHallClick(index)}
+                />
+              ))}
+            </div>
+          </section>
+        )}
+      </div>
 
       {/* Footer */}
-      <footer className="py-8 text-center text-muted-foreground text-sm border-t border-border/50">
-        <p>{t('footer')}</p>
-      </footer>
+      <Footer />
     </div>
   );
 }

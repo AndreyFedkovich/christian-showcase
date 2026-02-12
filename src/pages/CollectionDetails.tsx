@@ -15,6 +15,7 @@ import {
   BreadcrumbSeparator,
   BreadcrumbPage,
 } from "@/components/ui/breadcrumb";
+import Footer from "@/components/Footer";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -70,7 +71,7 @@ const CollectionDetails = () => {
   };
 
   return (
-    <div className="min-h-screen gradient-warm">
+    <div className="min-h-screen flex flex-col gradient-warm">
       {/* Hero Section */}
       <header className="relative py-12 px-6">
         <div className="absolute inset-0 gradient-overlay opacity-5" />
@@ -138,7 +139,7 @@ const CollectionDetails = () => {
         </h2>
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-5"
+          className="grid grid-cols-1 md:grid-cols-2 gap-5 auto-rows-fr"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -158,28 +159,26 @@ const CollectionDetails = () => {
               <motion.div
                 key={presentation.id}
                 variants={itemVariants}
-                className="group/pcard cursor-pointer"
+                className="group/pcard cursor-pointer h-full"
                 onClick={() =>
                   navigate(
                     `/presentation/${presentation.id}?from=${collection.id}`
                   )
                 }
               >
-                <div className="flex gap-4 p-4 rounded-xl bg-card/50 border border-border/50 hover:bg-card/80 hover:border-primary/20 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300">
+                <div className="flex gap-4 p-4 rounded-xl bg-card/50 border border-border/50 hover:bg-card/80 hover:border-primary/20 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 h-full">
                   {/* Number Badge */}
                   <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-sm mt-1">
                     {index + 1}
                   </div>
 
                   {/* Thumbnail */}
-                  <div className="flex-shrink-0 w-28 md:w-36 rounded-lg overflow-hidden ring-1 ring-white/10">
-                    <AspectRatio ratio={16 / 9}>
-                      <img
-                        src={presentation.thumbnail}
-                        alt={presTitle}
-                        className="w-full h-full object-cover group-hover/pcard:scale-105 transition-transform duration-300"
-                      />
-                    </AspectRatio>
+                  <div className="flex-shrink-0 w-28 md:w-36 rounded-lg overflow-hidden ring-1 ring-white/10 aspect-[16/9]">
+                    <img
+                      src={presentation.thumbnail}
+                      alt={presTitle}
+                      className="w-full h-full object-cover group-hover/pcard:scale-105 transition-transform duration-300"
+                    />
                   </div>
 
                   {/* Info */}
@@ -207,9 +206,7 @@ const CollectionDetails = () => {
         </motion.div>
       </main>
 
-      <footer className="py-8 text-center text-muted-foreground font-sans text-sm">
-        <p>{t("footer")}</p>
-      </footer>
+      <Footer />
     </div>
   );
 };
