@@ -50,7 +50,7 @@ export const translations = {
   },
   en: {
     // Navigation
-    siteName: "Interactive Bible",
+    siteName: "Christian Showcase",
     
     // Categories
     seminars: "Seminars",
