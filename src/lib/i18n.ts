@@ -73,7 +73,7 @@ export const translations = {
     tryDifferentSearch: "Try a different search query",
     
     // Footer
-    footer: "Interactive Bible • 2025 - 2026",
+    footer: "Christian Showcase • 2025 - 2026",
     
     // User menu
     guest: "Guest",
