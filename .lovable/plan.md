@@ -1,50 +1,76 @@
 
 
-## Plan: Sticky Footer on All Pages
+## Plan: Add Summer Seminar 2026 Collection with 3 Presentations
 
-### Problem
-When page content is shorter than the viewport, the footer floats in the middle of the screen instead of staying at the bottom (visible on GameDetails "Bible Master" page and potentially others).
-
-### Solution
-Use a simple flexbox pattern (`min-h-screen flex flex-col` on the wrapper, `mt-auto` on the footer) to push the footer to the bottom on all pages. Extract the footer into a shared component to avoid duplication.
+### Overview
+Create a new collection "Летний семинар 2026 — Бог должен быть принят верой" containing 3 new presentations, each with only a title/introduction slide for now. Add the collection to the homepage.
 
 ---
 
-### 1. Create Shared Footer Component
+### 1. Create 3 New Presentation Data Files
 
-**New file: `src/components/Footer.tsx`**
+**New file: `src/data/fine-tuned-universe.ts`**
 
-A simple reusable footer:
+Single `introduction` slide for "Вселенная точно настроена":
+- Title: "Вселенная точно настроена"
+- Subtitle: "Факты тонкой настройки Вселенной"
+- Content: description about fine-tuning evidence (moon tides, 400x size/distance coincidence, etc.)
+- Uses `salvation-thumbnail.png` as placeholder image
 
-```tsx
-import { useLanguage } from "@/contexts/LanguageContext";
+**New file: `src/data/sin.ts`**
 
-const Footer = () => {
-  const { t } = useLanguage();
-  return (
-    <footer className="mt-auto py-8 text-center text-muted-foreground font-sans text-sm border-t border-border/50">
-      <p>{t('footer')}</p>
-    </footer>
-  );
-};
+Single `introduction` slide for "Грех":
+- Title: "Грех"
+- Subtitle: "Главная проблема человека"
+- Content: emphasis on understanding and realizing the gravity of sin
 
-export default Footer;
+**New file: `src/data/salvation-new.ts`**
+
+Single `introduction` slide for "Спасение":
+- Title: "Спасение"
+- Subtitle: "Христос — Спаситель и Царь"
+- Content: exaltation of Christ as Savior and King
+
+All three files follow the same pattern as `src/data/salvation.ts` — export slides array and sections array, using `SeminarSlide` / `SeminarSection` types from `seminar.ts`.
+
+---
+
+### 2. Register 3 New Presentations
+
+**Edit: `src/data/presentations.ts`**
+
+Add 3 new entries to the `presentations` array:
+
+| id | title | category | slideCount | layout |
+|----|-------|----------|------------|--------|
+| `fine-tuned-universe` | Вселенная точно настроена | seminar | 1 | grid |
+| `sin` | Грех | seminar | 1 | grid |
+| `salvation-way` | Спасение | seminar | 1 | grid |
+
+All use `salvation-thumbnail.png` as placeholder thumbnail, duration "25-30", createdAt "28.02.2026".
+
+---
+
+### 3. Add New Collection
+
+**Edit: `src/data/collections.ts`**
+
+Add second collection entry:
+
+```typescript
+{
+  id: "summer-seminar-2026",
+  title: "Летний семинар 2026 — Бог должен быть принят верой",
+  titleEn: "Summer Seminar 2026 — God Must Be Accepted by Faith",
+  description: "Три темы о вере: от тонкой настройки Вселенной через осознание греха к славе спасения во Христе",
+  descriptionEn: "Three topics on faith: from fine-tuning of the Universe through awareness of sin to the glory of salvation in Christ",
+  thumbnail: salvationImg,
+  presentationIds: ["fine-tuned-universe", "sin", "salvation-way"],
+  duration: "90",
+  createdAt: "28.02.2026",
+  category: 'seminar',
+}
 ```
-
-The key class is `mt-auto` which pushes the footer to the bottom when used inside a flex-col container.
-
----
-
-### 2. Update Pages to Use Flex Layout + Shared Footer
-
-Each page's root `div` needs `min-h-screen flex flex-col`, and the inline footer replaced with the shared `<Footer />` component.
-
-| Page | Root div change | Footer change |
-|------|----------------|---------------|
-| `src/pages/Index.tsx` | Already has `min-h-screen`, add `flex flex-col` | Replace inline footer with `<Footer />`, move outside `<main>` |
-| `src/pages/GameDetails.tsx` | Already has `min-h-screen`, add `flex flex-col` | Replace inline footer with `<Footer />` |
-| `src/pages/PresentationDetails.tsx` | Already has `min-h-screen`, add `flex flex-col` | Replace hardcoded footer with `<Footer />` |
-| `src/pages/CollectionDetails.tsx` | Already has `min-h-screen`, add `flex flex-col` | Replace inline footer with `<Footer />` |
 
 ---
 
@@ -52,9 +78,11 @@ Each page's root `div` needs `min-h-screen flex flex-col`, and the inline footer
 
 | File | Action |
 |------|--------|
-| `src/components/Footer.tsx` | **Create** - shared footer component with `mt-auto` |
-| `src/pages/Index.tsx` | **Update** - flex-col layout, use shared Footer |
-| `src/pages/GameDetails.tsx` | **Update** - flex-col layout, use shared Footer |
-| `src/pages/PresentationDetails.tsx` | **Update** - flex-col layout, use shared Footer (fixes hardcoded text) |
-| `src/pages/CollectionDetails.tsx` | **Update** - flex-col layout, use shared Footer |
+| `src/data/fine-tuned-universe.ts` | **Create** — introduction slide for "Вселенная точно настроена" |
+| `src/data/sin.ts` | **Create** — introduction slide for "Грех" |
+| `src/data/salvation-new.ts` | **Create** — introduction slide for "Спасение" |
+| `src/data/presentations.ts` | **Edit** — register 3 new presentations |
+| `src/data/collections.ts` | **Edit** — add summer seminar collection |
+
+No changes to Index.tsx, routing, or any other pages — the existing collection logic on the homepage will automatically pick up the new collection and display it.
 
