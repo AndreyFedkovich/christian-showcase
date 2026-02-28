@@ -26,4 +26,16 @@ export const collections: Collection[] = [
     createdAt: "22.12.2025",
     category: 'seminar',
   },
+  {
+    id: "summer-seminar-2026",
+    title: "Летний семинар 2026 — Бог должен быть принят верой",
+    titleEn: "Summer Seminar 2026 — God Must Be Accepted by Faith",
+    description: "Три темы о вере: от тонкой настройки Вселенной через осознание греха к славе спасения во Христе",
+    descriptionEn: "Three topics on faith: from fine-tuning of the Universe through awareness of sin to the glory of salvation in Christ",
+    thumbnail: salvationImg,
+    presentationIds: ["fine-tuned-universe", "sin", "salvation-way"],
+    duration: "90",
+    createdAt: "28.02.2026",
+    category: 'seminar',
+  },
 ];
