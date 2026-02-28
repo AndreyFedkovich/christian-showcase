@@ -17,6 +17,9 @@ import { eternalTemporal, eternalTemporalSections } from '@/data/eternal-tempora
 import { homeChurch, homeChurchSections } from '@/data/home-church';
 import { church, churchSections } from '@/data/church';
 import { kingsProphets } from '@/data/kings-prophets';
+import { fineTunedUniverseSlides, fineTunedUniverseSections } from '@/data/fine-tuned-universe';
+import { sinPresentationSlides, sinPresentationSections } from '@/data/sin';
+import { salvationWaySlides, salvationWaySections } from '@/data/salvation-new';
 import { UniversalSlide } from '@/types/slides';
 
 // Section interface for tabbed presentations
@@ -44,6 +47,51 @@ export interface Presentation {
 }
 
 export const presentations: Presentation[] = [
+  {
+    id: "fine-tuned-universe",
+    title: "Вселенная точно настроена",
+    titleEn: "The Universe Is Fine-Tuned",
+    description: "Факты тонкой настройки Вселенной, указывающие на разумный замысел",
+    descriptionEn: "Facts of fine-tuning of the Universe pointing to intelligent design",
+    thumbnail: salvationImg,
+    slideCount: fineTunedUniverseSlides.length,
+    duration: "25-30",
+    createdAt: "28.02.2026",
+    slides: fineTunedUniverseSlides as UniversalSlide[],
+    layout: 'tabs',
+    sections: fineTunedUniverseSections as Section[],
+    category: 'seminar',
+  },
+  {
+    id: "sin",
+    title: "Грех",
+    titleEn: "Sin",
+    description: "Главная проблема человека — необходимость глубокого осознания греха",
+    descriptionEn: "Man's greatest problem — the necessity of deeply realizing sin",
+    thumbnail: salvationImg,
+    slideCount: sinPresentationSlides.length,
+    duration: "25-30",
+    createdAt: "28.02.2026",
+    slides: sinPresentationSlides as UniversalSlide[],
+    layout: 'tabs',
+    sections: sinPresentationSections as Section[],
+    category: 'seminar',
+  },
+  {
+    id: "salvation-way",
+    title: "Спасение",
+    titleEn: "Salvation",
+    description: "Абсолютное превознесение Христа как Спасителя и Царя нашей жизни",
+    descriptionEn: "The absolute exaltation of Christ as Savior and King of our life",
+    thumbnail: salvationImg,
+    slideCount: salvationWaySlides.length,
+    duration: "25-30",
+    createdAt: "28.02.2026",
+    slides: salvationWaySlides as UniversalSlide[],
+    layout: 'tabs',
+    sections: salvationWaySections as Section[],
+    category: 'seminar',
+  },
   {
     id: "kings-prophets",
     title: "Цари и пророки",
