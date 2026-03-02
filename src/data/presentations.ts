@@ -3,6 +3,9 @@ import peterImg from "@/assets/peter.jpg";
 import josephImg from "@/assets/joseph-thumbnail.png";
 import knowDoImg from "@/assets/know-do.png";
 import salvationImg from "@/assets/salvation-thumbnail.png";
+import fineTunedUniverseImg from "@/assets/fine-tuned-universe-thumbnail.png";
+import sinImg from "@/assets/sin-thumbnail.png";
+import salvationWayImg from "@/assets/salvation-way-thumbnail.png";
 import godExistsImg from "@/assets/god-exists-thumbnail.png";
 import eternalCosmosImg from "@/assets/eternal-cosmos.png";
 import homeChurchImg from "@/assets/home-church-thumbnail.png";
@@ -53,7 +56,7 @@ export const presentations: Presentation[] = [
     titleEn: "The Universe Is Fine-Tuned",
     description: "Факты тонкой настройки Вселенной, указывающие на разумный замысел",
     descriptionEn: "Facts of fine-tuning of the Universe pointing to intelligent design",
-    thumbnail: salvationImg,
+    thumbnail: fineTunedUniverseImg,
     slideCount: fineTunedUniverseSlides.length,
     duration: "25-30",
     createdAt: "28.02.2026",
@@ -68,7 +71,7 @@ export const presentations: Presentation[] = [
     titleEn: "Sin",
     description: "Главная проблема человека — необходимость глубокого осознания греха",
     descriptionEn: "Man's greatest problem — the necessity of deeply realizing sin",
-    thumbnail: salvationImg,
+    thumbnail: sinImg,
     slideCount: sinPresentationSlides.length,
     duration: "25-30",
     createdAt: "28.02.2026",
@@ -83,7 +86,7 @@ export const presentations: Presentation[] = [
     titleEn: "Salvation",
     description: "Абсолютное превознесение Христа как Спасителя и Царя нашей жизни",
     descriptionEn: "The absolute exaltation of Christ as Savior and King of our life",
-    thumbnail: salvationImg,
+    thumbnail: salvationWayImg,
     slideCount: salvationWaySlides.length,
     duration: "25-30",
     createdAt: "28.02.2026",

@@ -1,4 +1,4 @@
-import SalvationThumbnail from "@/assets/salvation-thumbnail.png";
+import SinThumbnail from "@/assets/sin-thumbnail.png";
 import { SeminarSlide, SeminarSection } from './seminar';
 
 export const sinPresentationSlides: SeminarSlide[] = [
@@ -11,7 +11,7 @@ export const sinPresentationSlides: SeminarSlide[] = [
       'Пока человек не осознает всю тяжесть своего греха, он не сможет оценить величие спасения.',
       'Этот раздел посвящён необходимости глубокого понимания и осознания главной проблемы человечества.'
     ],
-    image: SalvationThumbnail
+    image: SinThumbnail
   }
 ];
 

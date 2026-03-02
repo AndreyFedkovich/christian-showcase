@@ -1,4 +1,4 @@
-import SalvationThumbnail from "@/assets/salvation-thumbnail.png";
+import SalvationWayThumbnail from "@/assets/salvation-way-thumbnail.png";
 import { SeminarSlide, SeminarSection } from './seminar';
 
 export const salvationWaySlides: SeminarSlide[] = [
@@ -11,7 +11,7 @@ export const salvationWaySlides: SeminarSlide[] = [
       'Он не просто Спаситель — Он Царь, Которому принадлежит вся власть на небе и на земле.',
       'Принять Его — значит отдать Ему всю свою жизнь и преклониться перед Его величием.'
     ],
-    image: SalvationThumbnail
+    image: SalvationWayThumbnail
   }
 ];
 
