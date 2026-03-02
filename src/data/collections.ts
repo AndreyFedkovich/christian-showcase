@@ -1,4 +1,5 @@
 import salvationImg from "@/assets/salvation-thumbnail.png";
+import summerSeminarImg from "@/assets/summer-seminar-thumbnail.png";
 
 export interface Collection {
   id: string;
@@ -32,7 +33,7 @@ export const collections: Collection[] = [
     titleEn: "Summer Seminar 2026 — God Must Be Accepted by Faith",
     description: "Три темы о вере: от тонкой настройки Вселенной через осознание греха к славе спасения во Христе",
     descriptionEn: "Three topics on faith: from fine-tuning of the Universe through awareness of sin to the glory of salvation in Christ",
-    thumbnail: salvationImg,
+    thumbnail: summerSeminarImg,
     presentationIds: ["fine-tuned-universe", "sin", "salvation-way"],
     duration: "90",
     createdAt: "28.02.2026",
