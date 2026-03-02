@@ -1,16 +1,13 @@
 
 
-## Plan: Regenerate fine-tuned-universe-thumbnail.png
+## Plan: Regenerate sin and salvation-way thumbnails
 
-Regenerate the image with a refined, more specific prompt to avoid the "bagel" result.
+### Changes
 
-### New prompt
-"A photorealistic view of planet Earth from outer space, with the Moon visible nearby and the Sun glowing in the distant background. Ocean tides are visible on Earth's surface. Deep space filled with countless stars surrounds the scene. Scientific and awe-inspiring atmosphere. 16:9 aspect ratio, no text, no abstract shapes."
+| File | New Prompt |
+|------|-----------|
+| `src/assets/sin-thumbnail.png` | "A dramatic scene of a person walking away from a bright open door into a dim, foggy landscape. The person's silhouette is clearly visible against muted grays and soft amber light from the door behind. Atmosphere of separation and loss, but with enough contrast to see all details clearly. Painterly, cinematic, 16:9, no text." |
+| `src/assets/salvation-way-thumbnail.png` | "A narrow ancient stone path through a rugged mountain pass, leading toward a towering wooden cross silhouetted against a brilliant sunrise breaking through clouds. The path is lit with warm golden light. Wildflowers grow along the edges. Feeling of hope, sacrifice, and redemption. Photorealistic, cinematic, 16:9, no text." |
 
-### Files
-| File | Action |
-|------|--------|
-| `src/assets/fine-tuned-universe-thumbnail.png` | **Overwrite** with newly generated image |
-
-No code changes needed — the import in `src/data/fine-tuned-universe.ts` already references this file.
+No code changes needed — both files are already imported in their respective data files.
 
