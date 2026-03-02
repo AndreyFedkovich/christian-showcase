@@ -1,88 +1,57 @@
 
 
-## Plan: Add Summer Seminar 2026 Collection with 3 Presentations
+## Plan: Generate 4 Images as Static Assets
 
-### Overview
-Create a new collection "Летний семинар 2026 — Бог должен быть принят верой" containing 3 new presentations, each with only a title/introduction slide for now. Add the collection to the homepage.
+### Approach
+Use the `google/gemini-3-pro-image-preview` model via an edge function to generate 4 images, then save them directly as static files in `src/assets/`, exactly like all existing images in the project.
 
----
+### Steps
 
-### 1. Create 3 New Presentation Data Files
+#### 1. Create edge function `generate-seminar-images`
+A one-time edge function that generates 4 images using Lovable AI and returns them as base64.
 
-**New file: `src/data/fine-tuned-universe.ts`**
+**Prompts:**
 
-Single `introduction` slide for "Вселенная точно настроена":
-- Title: "Вселенная точно настроена"
-- Subtitle: "Факты тонкой настройки Вселенной"
-- Content: description about fine-tuning evidence (moon tides, 400x size/distance coincidence, etc.)
-- Uses `salvation-thumbnail.png` as placeholder image
+| Filename | Prompt |
+|----------|--------|
+| `summer-seminar-thumbnail.png` | "A dramatic cosmic scene: a path of golden light leading through stars and galaxies toward a radiant cross, symbolizing faith as the bridge between creation and God. Rich deep blues, golds, warm light. Cinematic, photorealistic, 16:9, no text." |
+| `fine-tuned-universe-thumbnail.png` | "Earth from space with the Moon perfectly aligned between Earth and the Sun showing precise cosmic proportions. Ocean tides visible on Earth. Deep space background with stars. Scientific, awe-inspiring, photorealistic, 16:9, no text." |
+| `sin-thumbnail.png` | "A person standing alone in a vast dark abyss, heavy broken chains on the ground, atmosphere of isolation and weight. Dark reds and blacks with faint distant light above. Painterly, cinematic, 16:9, no text." |
+| `salvation-way-thumbnail.png` | "A majestic figure of Christ on a throne of brilliant golden light, arms open wide, rays of light piercing through storm clouds. Overwhelming glory and power. Golds, whites, royal purples. Cinematic, photorealistic, 16:9, no text." |
 
-**New file: `src/data/sin.ts`**
+#### 2. Create temporary page to trigger generation and save images
+A `/generate-images` page that:
+- Calls the edge function to generate all 4 images
+- Receives base64 data
+- Saves each as a static file in `src/assets/`
 
-Single `introduction` slide for "Грех":
-- Title: "Грех"
-- Subtitle: "Главная проблема человека"
-- Content: emphasis on understanding and realizing the gravity of sin
+#### 3. Save 4 image files to `src/assets/`
+Write the generated images directly as PNG files.
 
-**New file: `src/data/salvation-new.ts`**
+#### 4. Update data files with new imports
+- `src/data/fine-tuned-universe.ts` — import `fine-tuned-universe-thumbnail.png`
+- `src/data/sin.ts` — import `sin-thumbnail.png`
+- `src/data/salvation-new.ts` — import `salvation-way-thumbnail.png`
+- `src/data/collections.ts` — import `summer-seminar-thumbnail.png`
+- `src/data/presentations.ts` — update thumbnail references
 
-Single `introduction` slide for "Спасение":
-- Title: "Спасение"
-- Subtitle: "Христос — Спаситель и Царь"
-- Content: exaltation of Christ as Savior and King
+#### 5. Clean up
+Remove the temporary `/generate-images` route and page after images are saved.
 
-All three files follow the same pattern as `src/data/salvation.ts` — export slides array and sections array, using `SeminarSlide` / `SeminarSection` types from `seminar.ts`.
-
----
-
-### 2. Register 3 New Presentations
-
-**Edit: `src/data/presentations.ts`**
-
-Add 3 new entries to the `presentations` array:
-
-| id | title | category | slideCount | layout |
-|----|-------|----------|------------|--------|
-| `fine-tuned-universe` | Вселенная точно настроена | seminar | 1 | grid |
-| `sin` | Грех | seminar | 1 | grid |
-| `salvation-way` | Спасение | seminar | 1 | grid |
-
-All use `salvation-thumbnail.png` as placeholder thumbnail, duration "25-30", createdAt "28.02.2026".
-
----
-
-### 3. Add New Collection
-
-**Edit: `src/data/collections.ts`**
-
-Add second collection entry:
-
-```typescript
-{
-  id: "summer-seminar-2026",
-  title: "Летний семинар 2026 — Бог должен быть принят верой",
-  titleEn: "Summer Seminar 2026 — God Must Be Accepted by Faith",
-  description: "Три темы о вере: от тонкой настройки Вселенной через осознание греха к славе спасения во Христе",
-  descriptionEn: "Three topics on faith: from fine-tuning of the Universe through awareness of sin to the glory of salvation in Christ",
-  thumbnail: salvationImg,
-  presentationIds: ["fine-tuned-universe", "sin", "salvation-way"],
-  duration: "90",
-  createdAt: "28.02.2026",
-  category: 'seminar',
-}
-```
-
----
-
-### Files Summary
+### Files
 
 | File | Action |
 |------|--------|
-| `src/data/fine-tuned-universe.ts` | **Create** — introduction slide for "Вселенная точно настроена" |
-| `src/data/sin.ts` | **Create** — introduction slide for "Грех" |
-| `src/data/salvation-new.ts` | **Create** — introduction slide for "Спасение" |
-| `src/data/presentations.ts` | **Edit** — register 3 new presentations |
-| `src/data/collections.ts` | **Edit** — add summer seminar collection |
-
-No changes to Index.tsx, routing, or any other pages — the existing collection logic on the homepage will automatically pick up the new collection and display it.
+| `supabase/functions/generate-seminar-images/index.ts` | **Create** — AI image generation |
+| `src/pages/GenerateImages.tsx` | **Create** (temporary) |
+| `src/App.tsx` | **Edit** — add temp route |
+| `src/assets/summer-seminar-thumbnail.png` | **Create** — generated image |
+| `src/assets/fine-tuned-universe-thumbnail.png` | **Create** — generated image |
+| `src/assets/sin-thumbnail.png` | **Create** — generated image |
+| `src/assets/salvation-way-thumbnail.png` | **Create** — generated image |
+| `src/data/fine-tuned-universe.ts` | **Edit** — new import |
+| `src/data/sin.ts` | **Edit** — new import |
+| `src/data/salvation-new.ts` | **Edit** — new import |
+| `src/data/presentations.ts` | **Edit** — thumbnail refs |
+| `src/data/collections.ts` | **Edit** — collection thumbnail |
 
