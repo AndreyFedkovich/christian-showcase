@@ -23,6 +23,8 @@ import { kingsProphets } from '@/data/kings-prophets';
 import { fineTunedUniverseSlides, fineTunedUniverseSections } from '@/data/fine-tuned-universe';
 import { sinPresentationSlides, sinPresentationSections } from '@/data/sin';
 import { salvationWaySlides, salvationWaySections } from '@/data/salvation-new';
+import { creationSlides, creationSections } from '@/data/creation';
+import creationThumbnail from '@/assets/creation-thumbnail.png';
 import { UniversalSlide } from '@/types/slides';
 
 // Section interface for tabbed presentations
