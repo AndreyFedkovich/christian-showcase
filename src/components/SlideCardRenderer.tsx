@@ -85,6 +85,12 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
         return <Crown className="w-5 h-5" />;
       case 'prophet-profile':
         return <Scroll className="w-5 h-5" />;
+      case 'creation-day':
+        return <Sun className="w-5 h-5" />;
+      case 'creation-crawl':
+        return <Star className="w-5 h-5" />;
+      case 'creation-diagram':
+        return <BarChart3 className="w-5 h-5" />;
       default:
         return <FileText className="w-5 h-5" />;
     }
