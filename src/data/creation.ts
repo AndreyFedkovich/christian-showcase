@@ -451,6 +451,7 @@ export const creationSlides: CreationSlide[] = [
     dayTitle: 'Рыбы и птицы',
     subtitle: 'Да произведёт вода пресмыкающихся, и птицы да полетят над землёю.',
     gradient: 'from-teal-950 via-sky-900 to-teal-800',
+    image: creationDay5Sea,
   },
 
   // 24. Day 6 title
