@@ -423,6 +423,7 @@ export const creationSlides: CreationSlide[] = [
     dayTitle: 'Солнце, луна и звёзды',
     subtitle: 'И создал Бог два светила великие: светило большее и светило меньшее, и звёзды.',
     gradient: 'from-indigo-950 via-purple-900 to-indigo-800',
+    image: creationDay4Stars,
   },
 
   // 22. Day 4 scene — Light from Day 1, luminaries from Day 4
