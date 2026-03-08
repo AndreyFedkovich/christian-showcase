@@ -289,6 +289,12 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
       }
       case 'prophet-profile':
         return 'from-purple-800 via-purple-700 to-violet-800';
+      case 'creation-day':
+        return (slide as any).gradient || 'from-slate-950 via-indigo-950 to-slate-900';
+      case 'creation-crawl':
+        return 'from-black via-slate-950 to-black';
+      case 'creation-diagram':
+        return 'from-slate-900 via-slate-800 to-slate-700';
       default:
         return 'from-primary via-primary/90 to-primary/80';
     }
