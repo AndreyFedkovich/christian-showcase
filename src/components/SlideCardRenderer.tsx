@@ -607,6 +607,153 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
     );
   }
 
+  // Creation-day slides — full-bleed image with giant day number
+  if (slide.type === 'creation-day') {
+    const s = slide as any;
+    const image = getSlideImage();
+    return (
+      <Card
+        className="group relative overflow-hidden cursor-pointer transition-smooth hover:-translate-y-2 shadow-card hover:shadow-premium"
+        onClick={onClick}
+      >
+        <div className="aspect-[3/4] relative overflow-hidden">
+          {image ? (
+            <img
+              src={image}
+              alt={getTitle()}
+              className="absolute inset-0 w-full h-full object-cover transition-smooth group-hover:scale-110"
+            />
+          ) : (
+            <div className={`absolute inset-0 bg-gradient-to-br ${getCardStyle()}`} />
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20 z-10" />
+
+          {/* Giant translucent day number */}
+          <div className="absolute inset-0 flex items-center justify-center z-10">
+            <span className="text-[8rem] font-black text-white/15 leading-none select-none group-hover:text-white/25 transition-smooth">
+              {s.dayNumber}
+            </span>
+          </div>
+
+          <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-amber-500/80 backdrop-blur-sm flex items-center justify-center z-20">
+            <span className="text-lg font-bold text-white">{slideNumber}</span>
+          </div>
+
+          <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
+            <div className="inline-block px-3 py-1 bg-amber-500/80 backdrop-blur-sm rounded-full mb-3">
+              <div className="flex items-center gap-2 text-white">
+                <Sun className="w-4 h-4" />
+                <span className="text-xs font-sans font-medium uppercase tracking-wider">День</span>
+              </div>
+            </div>
+            <h3 className="text-xl font-bold text-white line-clamp-2">{getTitle()}</h3>
+          </div>
+        </div>
+      </Card>
+    );
+  }
+
+  // Creation-crawl slides — starfield with perspective text
+  if (slide.type === 'creation-crawl') {
+    const s = slide as any;
+    const lines: string[] = s.lines || [];
+    return (
+      <Card
+        className="group relative overflow-hidden cursor-pointer transition-smooth hover:-translate-y-2 shadow-card hover:shadow-premium"
+        onClick={onClick}
+      >
+        <div className="aspect-[3/4] relative overflow-hidden bg-black">
+          {/* Starfield dots */}
+          <div className="absolute inset-0 z-0">
+            {Array.from({ length: 40 }).map((_, i) => (
+              <div
+                key={i}
+                className="absolute rounded-full bg-white"
+                style={{
+                  width: Math.random() > 0.7 ? 2 : 1,
+                  height: Math.random() > 0.7 ? 2 : 1,
+                  top: `${Math.random() * 100}%`,
+                  left: `${Math.random() * 100}%`,
+                  opacity: 0.3 + Math.random() * 0.5,
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Perspective text preview */}
+          <div className="absolute inset-0 flex items-center justify-center z-10 px-4" style={{ perspective: '300px' }}>
+            <div
+              className="text-center text-amber-300/30 text-[0.6rem] leading-relaxed font-serif max-w-[80%] line-clamp-6 group-hover:text-amber-300/40 transition-smooth"
+              style={{ transform: 'rotateX(35deg)', transformOrigin: 'bottom center' }}
+            >
+              {lines.slice(0, 4).join(' ')}
+            </div>
+          </div>
+
+          <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-amber-500/80 backdrop-blur-sm flex items-center justify-center z-20">
+            <span className="text-lg font-bold text-white">{slideNumber}</span>
+          </div>
+
+          <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
+            <div className="inline-block px-3 py-1 bg-amber-500/80 backdrop-blur-sm rounded-full mb-3">
+              <div className="flex items-center gap-2 text-white">
+                <Star className="w-4 h-4" />
+                <span className="text-xs font-sans font-medium uppercase tracking-wider">Пролог</span>
+              </div>
+            </div>
+            <h3 className="text-xl font-bold text-amber-200 line-clamp-2">{getTitle()}</h3>
+          </div>
+        </div>
+      </Card>
+    );
+  }
+
+  // Creation-diagram slides — mini chart preview
+  if (slide.type === 'creation-diagram') {
+    return (
+      <Card
+        className="group relative overflow-hidden cursor-pointer transition-smooth hover:-translate-y-2 shadow-card hover:shadow-premium"
+        onClick={onClick}
+      >
+        <div className="aspect-[3/4] relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent z-10" />
+
+          {/* Mini bar chart preview */}
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 px-8 z-10">
+            {[
+              { w: '85%', color: 'bg-emerald-500/50' },
+              { w: '60%', color: 'bg-emerald-500/40' },
+              { w: '45%', color: 'bg-amber-500/50' },
+              { w: '30%', color: 'bg-amber-500/40' },
+            ].map((bar, i) => (
+              <div key={i} className="w-full flex items-center gap-2">
+                <div className="w-8 h-1.5 rounded bg-white/10" />
+                <div
+                  className={`h-3 rounded ${bar.color} group-hover:opacity-90 transition-smooth`}
+                  style={{ width: bar.w }}
+                />
+              </div>
+            ))}
+          </div>
+
+          <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-amber-500/80 backdrop-blur-sm flex items-center justify-center z-20">
+            <span className="text-lg font-bold text-white">{slideNumber}</span>
+          </div>
+
+          <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
+            <div className="inline-block px-3 py-1 bg-amber-500/80 backdrop-blur-sm rounded-full mb-3">
+              <div className="flex items-center gap-2 text-white">
+                <BarChart3 className="w-4 h-4" />
+                <span className="text-xs font-sans font-medium uppercase tracking-wider">Диаграмма</span>
+              </div>
+            </div>
+            <h3 className="text-xl font-bold text-white line-clamp-2">{getTitle()}</h3>
+          </div>
+        </div>
+      </Card>
+    );
+  }
+
   // All other slides - gradient with center icon
   return (
     <Card 
