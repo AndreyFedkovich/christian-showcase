@@ -231,6 +231,7 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
     if (slide.type === 'story-image') return s.image;
     if (slide.type === 'drama-image') return s.image;
     if (slide.type === 'dialogue-answer-image') return s.image;
+    if (slide.type === 'creation-day') return s.image;
     return undefined;
   };
 
