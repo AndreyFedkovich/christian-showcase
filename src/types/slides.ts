@@ -95,4 +95,7 @@ export type UniversalSlide =
   | TimelineVerticalSlide
   | KingProfileSlide
   | ProphetProfileSlide
-  | TimelineEraSlide;
+  | TimelineEraSlide
+  | CreationDaySlide
+  | CreationCrawlSlide
+  | CreationDiagramSlide;

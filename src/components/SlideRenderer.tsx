@@ -110,6 +110,12 @@ const SlideRenderer = ({ slide, direction, slideNumber }: SlideRendererProps) =>
       return <KingProfileSlideComponent slide={slide as any} direction={direction} />;
     case 'prophet-profile':
       return <ProphetProfileSlideComponent slide={slide as any} direction={direction} />;
+    case 'creation-day':
+      return <CreationDaySlide slide={slide as any} direction={direction} />;
+    case 'creation-crawl':
+      return <CreationCrawlSlide slide={slide as any} direction={direction} />;
+    case 'creation-diagram':
+      return <CreationDiagramSlide slide={slide as any} direction={direction} />;
     default:
       return null;
   }
