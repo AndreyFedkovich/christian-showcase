@@ -461,6 +461,7 @@ export const creationSlides: CreationSlide[] = [
     dayTitle: 'Животные и человек',
     subtitle: 'Сотворим человека по образу Нашему и по подобию Нашему.',
     gradient: 'from-amber-950 via-orange-900 to-red-900',
+    image: creationAdamEve,
   },
 
   // 25. Image of God

@@ -11,6 +11,25 @@ const CreationDaySlide = ({ slide, direction }: CreationDaySlideProps) => {
 
   return (
     <div className={`min-h-screen w-full flex items-center justify-center bg-gradient-to-br ${slide.gradient} relative overflow-hidden`}>
+      {/* Background image with Ken Burns effect */}
+      {slide.image && (
+        <motion.div
+          className="absolute inset-0"
+          initial={{ scale: 1.15 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 20, ease: "linear" }}
+        >
+          <img
+            src={slide.image}
+            alt={slide.dayTitle}
+            className="w-full h-full object-cover"
+          />
+        </motion.div>
+      )}
+
+      {/* Gradient overlay for text legibility */}
+      <div className={`absolute inset-0 bg-gradient-to-br ${slide.gradient} ${slide.image ? 'opacity-60' : 'opacity-100'}`} />
+
       {/* Star field background */}
       <div className="absolute inset-0">
         {Array.from({ length: 80 }).map((_, i) => (
