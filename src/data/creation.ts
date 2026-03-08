@@ -348,6 +348,7 @@ export const creationSlides: CreationSlide[] = [
     dayTitle: 'Твердь',
     subtitle: 'И создал Бог твердь, и отделил воду, которая под твердью, от воды, которая над твердью.',
     gradient: 'from-blue-950 via-cyan-900 to-blue-800',
+    image: creationDay2Firmament,
   },
 
   // 17. Water canopy
