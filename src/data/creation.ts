@@ -17,6 +17,7 @@ export interface CreationDaySlide {
   dayTitle: string;
   subtitle: string;
   gradient: string; // tailwind gradient classes
+  image?: string;
 }
 
 export interface CreationCrawlSlide {
@@ -279,6 +280,7 @@ export const creationSlides: CreationSlide[] = [
     dayTitle: 'Свет',
     subtitle: 'И сказал Бог: да будет свет. И стал свет.',
     gradient: 'from-black via-amber-950 to-yellow-900',
+    image: creationDay1Light,
   },
 
   // 13. Light before the sun
@@ -346,6 +348,7 @@ export const creationSlides: CreationSlide[] = [
     dayTitle: 'Твердь',
     subtitle: 'И создал Бог твердь, и отделил воду, которая под твердью, от воды, которая над твердью.',
     gradient: 'from-blue-950 via-cyan-900 to-blue-800',
+    image: creationDay2Firmament,
   },
 
   // 17. Water canopy
@@ -410,6 +413,7 @@ export const creationSlides: CreationSlide[] = [
     dayTitle: 'Суша и растения',
     subtitle: 'Да произрастит земля зелень, траву, сеющую семя, дерево плодовитое.',
     gradient: 'from-green-950 via-emerald-900 to-green-800',
+    image: creationDay3Land,
   },
 
   // 21. Day 4 title
@@ -419,6 +423,7 @@ export const creationSlides: CreationSlide[] = [
     dayTitle: 'Солнце, луна и звёзды',
     subtitle: 'И создал Бог два светила великие: светило большее и светило меньшее, и звёзды.',
     gradient: 'from-indigo-950 via-purple-900 to-indigo-800',
+    image: creationDay4Stars,
   },
 
   // 22. Day 4 scene — Light from Day 1, luminaries from Day 4
@@ -446,6 +451,7 @@ export const creationSlides: CreationSlide[] = [
     dayTitle: 'Рыбы и птицы',
     subtitle: 'Да произведёт вода пресмыкающихся, и птицы да полетят над землёю.',
     gradient: 'from-teal-950 via-sky-900 to-teal-800',
+    image: creationDay5Sea,
   },
 
   // 24. Day 6 title
@@ -455,6 +461,7 @@ export const creationSlides: CreationSlide[] = [
     dayTitle: 'Животные и человек',
     subtitle: 'Сотворим человека по образу Нашему и по подобию Нашему.',
     gradient: 'from-amber-950 via-orange-900 to-red-900',
+    image: creationAdamEve,
   },
 
   // 25. Image of God
