@@ -29,6 +29,9 @@ import TimelineEraSlideComponent from '@/components/TimelineEraSlide';
 import TimelineIntroSlideComponent from '@/components/TimelineIntroSlide';
 import TimelineOverviewSlideComponent from '@/components/TimelineOverviewSlide';
 import TimelineVerticalSlideComponent from '@/components/TimelineVerticalSlide';
+import CreationDaySlide from '@/components/CreationDaySlide';
+import CreationCrawlSlide from '@/components/CreationCrawlSlide';
+import CreationDiagramSlide from '@/components/CreationDiagramSlide';
 
 interface SlideRendererProps {
   slide: UniversalSlide;
