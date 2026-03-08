@@ -413,6 +413,7 @@ export const creationSlides: CreationSlide[] = [
     dayTitle: 'Суша и растения',
     subtitle: 'Да произрастит земля зелень, траву, сеющую семя, дерево плодовитое.',
     gradient: 'from-green-950 via-emerald-900 to-green-800',
+    image: creationDay3Land,
   },
 
   // 21. Day 4 title
