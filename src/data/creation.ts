@@ -280,6 +280,7 @@ export const creationSlides: CreationSlide[] = [
     dayTitle: 'Свет',
     subtitle: 'И сказал Бог: да будет свет. И стал свет.',
     gradient: 'from-black via-amber-950 to-yellow-900',
+    image: creationDay1Light,
   },
 
   // 13. Light before the sun
