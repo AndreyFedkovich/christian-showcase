@@ -146,6 +146,12 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
         return 'Царь';
       case 'prophet-profile':
         return 'Пророк';
+      case 'creation-day':
+        return 'День';
+      case 'creation-crawl':
+        return 'Пролог';
+      case 'creation-diagram':
+        return 'Диаграмма';
       default:
         return 'Слайд';
     }
