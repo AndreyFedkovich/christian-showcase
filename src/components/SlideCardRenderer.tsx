@@ -338,6 +338,10 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
         return 'bg-amber-500/80 text-white';
       case 'prophet-profile':
         return 'bg-purple-500/80 text-white';
+      case 'creation-day':
+      case 'creation-crawl':
+      case 'creation-diagram':
+        return 'bg-amber-500/80 text-white';
       default:
         return 'bg-accent/80 text-[#FFF5E6]';
     }
