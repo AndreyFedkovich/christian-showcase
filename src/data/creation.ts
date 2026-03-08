@@ -17,6 +17,7 @@ export interface CreationDaySlide {
   dayTitle: string;
   subtitle: string;
   gradient: string; // tailwind gradient classes
+  image?: string;
 }
 
 export interface CreationCrawlSlide {
