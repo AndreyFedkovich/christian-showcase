@@ -35,7 +35,7 @@ export const collections: Collection[] = [
     descriptionEn: "Four topics on faith: from creation through fine-tuning of the Universe and awareness of sin to the glory of salvation in Christ",
     thumbnail: summerSeminarImg,
     presentationIds: ["creation", "fine-tuned-universe", "sin", "salvation-way"],
-    duration: "90",
+    duration: "130",
     createdAt: "28.02.2026",
     category: 'seminar',
   },
