@@ -47,6 +47,11 @@ import {
   ProphetProfileSlide,
   TimelineEraSlide
 } from '@/data/kings-prophets';
+import {
+  CreationDaySlide,
+  CreationCrawlSlide,
+  CreationDiagramSlide,
+} from '@/data/creation';
 
 // Profile slide type for disciples
 export interface ProfileSlide extends Disciple {
