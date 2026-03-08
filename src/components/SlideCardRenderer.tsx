@@ -21,7 +21,10 @@ import {
   Map,
   CalendarDays,
   Milestone,
-  Scroll
+  Scroll,
+  Sun,
+  Star,
+  BarChart3
 } from "lucide-react";
 import storyDefault from "@/assets/story-default-generic.jpg";
 
