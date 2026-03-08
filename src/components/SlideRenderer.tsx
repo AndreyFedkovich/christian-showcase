@@ -29,6 +29,9 @@ import TimelineEraSlideComponent from '@/components/TimelineEraSlide';
 import TimelineIntroSlideComponent from '@/components/TimelineIntroSlide';
 import TimelineOverviewSlideComponent from '@/components/TimelineOverviewSlide';
 import TimelineVerticalSlideComponent from '@/components/TimelineVerticalSlide';
+import CreationDaySlide from '@/components/CreationDaySlide';
+import CreationCrawlSlide from '@/components/CreationCrawlSlide';
+import CreationDiagramSlide from '@/components/CreationDiagramSlide';
 
 interface SlideRendererProps {
   slide: UniversalSlide;
@@ -107,6 +110,12 @@ const SlideRenderer = ({ slide, direction, slideNumber }: SlideRendererProps) =>
       return <KingProfileSlideComponent slide={slide as any} direction={direction} />;
     case 'prophet-profile':
       return <ProphetProfileSlideComponent slide={slide as any} direction={direction} />;
+    case 'creation-day':
+      return <CreationDaySlide slide={slide as any} direction={direction} />;
+    case 'creation-crawl':
+      return <CreationCrawlSlide slide={slide as any} direction={direction} />;
+    case 'creation-diagram':
+      return <CreationDiagramSlide slide={slide as any} direction={direction} />;
     default:
       return null;
   }

@@ -21,7 +21,10 @@ import {
   Map,
   CalendarDays,
   Milestone,
-  Scroll
+  Scroll,
+  Sun,
+  Star,
+  BarChart3
 } from "lucide-react";
 import storyDefault from "@/assets/story-default-generic.jpg";
 
@@ -82,6 +85,12 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
         return <Crown className="w-5 h-5" />;
       case 'prophet-profile':
         return <Scroll className="w-5 h-5" />;
+      case 'creation-day':
+        return <Sun className="w-5 h-5" />;
+      case 'creation-crawl':
+        return <Star className="w-5 h-5" />;
+      case 'creation-diagram':
+        return <BarChart3 className="w-5 h-5" />;
       default:
         return <FileText className="w-5 h-5" />;
     }
@@ -137,6 +146,12 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
         return 'Царь';
       case 'prophet-profile':
         return 'Пророк';
+      case 'creation-day':
+        return 'День';
+      case 'creation-crawl':
+        return 'Пролог';
+      case 'creation-diagram':
+        return 'Диаграмма';
       default:
         return 'Слайд';
     }
@@ -193,6 +208,12 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
         return s.king?.name;
       case 'prophet-profile':
         return s.prophet?.name;
+      case 'creation-day':
+        return `День ${s.dayNumber}: ${s.dayTitle}`;
+      case 'creation-crawl':
+        return s.reference || 'Пролог';
+      case 'creation-diagram':
+        return s.title;
       default:
         return 'Слайд';
     }
@@ -268,6 +289,12 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
       }
       case 'prophet-profile':
         return 'from-purple-800 via-purple-700 to-violet-800';
+      case 'creation-day':
+        return (slide as any).gradient || 'from-slate-950 via-indigo-950 to-slate-900';
+      case 'creation-crawl':
+        return 'from-black via-slate-950 to-black';
+      case 'creation-diagram':
+        return 'from-slate-900 via-slate-800 to-slate-700';
       default:
         return 'from-primary via-primary/90 to-primary/80';
     }
@@ -311,6 +338,10 @@ const SlideCardRenderer = ({ slide, slideNumber, onClick }: SlideCardRendererPro
         return 'bg-amber-500/80 text-white';
       case 'prophet-profile':
         return 'bg-purple-500/80 text-white';
+      case 'creation-day':
+      case 'creation-crawl':
+      case 'creation-diagram':
+        return 'bg-amber-500/80 text-white';
       default:
         return 'bg-accent/80 text-[#FFF5E6]';
     }

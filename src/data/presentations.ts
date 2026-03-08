@@ -23,6 +23,8 @@ import { kingsProphets } from '@/data/kings-prophets';
 import { fineTunedUniverseSlides, fineTunedUniverseSections } from '@/data/fine-tuned-universe';
 import { sinPresentationSlides, sinPresentationSections } from '@/data/sin';
 import { salvationWaySlides, salvationWaySections } from '@/data/salvation-new';
+import { creationSlides, creationSections } from '@/data/creation';
+import creationThumbnail from '@/assets/creation-thumbnail.png';
 import { UniversalSlide } from '@/types/slides';
 
 // Section interface for tabbed presentations
@@ -50,6 +52,21 @@ export interface Presentation {
 }
 
 export const presentations: Presentation[] = [
+  {
+    id: "creation",
+    title: "Сотворение мира",
+    titleEn: "Creation of the World",
+    description: "Шесть дней, изменивших вечность — как Бог создал всё из ничего",
+    descriptionEn: "Six days that changed eternity — how God created everything from nothing",
+    thumbnail: creationThumbnail,
+    slideCount: creationSlides.length,
+    duration: "40-50",
+    createdAt: "08.03.2026",
+    slides: creationSlides as UniversalSlide[],
+    layout: 'tabs',
+    sections: creationSections as Section[],
+    category: 'seminar',
+  },
   {
     id: "fine-tuned-universe",
     title: "Вселенная точно настроена",
