@@ -57,7 +57,7 @@ const CreationCrawlSlide = ({ slide, direction }: CreationCrawlSlideProps) => {
           className={`crawl-plane ${animating ? 'crawl-plane-animate' : ''}`}
           style={{
             position: 'absolute',
-            top: '100%',
+            top: '85%',
             left: '50%',
             width: '90%',
             maxWidth: '1100px',
@@ -106,7 +106,7 @@ const CreationCrawlSlide = ({ slide, direction }: CreationCrawlSlideProps) => {
         <div
           className="absolute inset-x-0 top-0 z-10 pointer-events-none"
           style={{
-            height: '30%',
+            height: '45%',
             background:
               'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.4) 75%, rgba(0,0,0,0) 100%)',
           }}
@@ -128,14 +128,14 @@ const CreationCrawlSlide = ({ slide, direction }: CreationCrawlSlideProps) => {
           will-change: transform;
         }
         .crawl-plane-animate {
-          animation: creationCrawl 75s linear forwards;
+          animation: creationCrawl 90s linear forwards;
         }
         @keyframes creationCrawl {
           0% {
             transform: translateX(-50%) rotateX(25deg) translateY(0);
           }
           100% {
-            transform: translateX(-50%) rotateX(25deg) translateY(-400%);
+            transform: translateX(-50%) rotateX(25deg) translateY(-550%);
           }
         }
       `}</style>
