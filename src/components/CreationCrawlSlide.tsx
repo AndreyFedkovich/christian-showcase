@@ -106,9 +106,9 @@ const CreationCrawlSlide = ({ slide, direction }: CreationCrawlSlideProps) => {
         <div
           className="absolute inset-x-0 top-0 z-10 pointer-events-none"
           style={{
-            height: '55%',
+            height: '30%',
             background:
-              'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.95) 25%, rgba(0,0,0,0.7) 55%, rgba(0,0,0,0) 100%)',
+              'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.4) 75%, rgba(0,0,0,0) 100%)',
           }}
         />
         {/* Bottom subtle fade so text emerges smoothly */}
@@ -128,14 +128,14 @@ const CreationCrawlSlide = ({ slide, direction }: CreationCrawlSlideProps) => {
           will-change: transform;
         }
         .crawl-plane-animate {
-          animation: creationCrawl 60s linear forwards;
+          animation: creationCrawl 75s linear forwards;
         }
         @keyframes creationCrawl {
           0% {
             transform: translateX(-50%) rotateX(25deg) translateY(0);
           }
           100% {
-            transform: translateX(-50%) rotateX(25deg) translateY(-260%);
+            transform: translateX(-50%) rotateX(25deg) translateY(-400%);
           }
         }
       `}</style>
