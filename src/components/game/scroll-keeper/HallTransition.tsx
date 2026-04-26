@@ -48,7 +48,7 @@ export function HallTransition({
   const [showButton, setShowButton] = useState(false);
 
   useEffect(() => {
-    const timers: NodeJS.Timeout[] = [];
+    const timers: ReturnType<typeof setTimeout>[] = [];
 
     if (stage === 'door') {
       timers.push(setTimeout(() => setStage('corridor'), 1500));

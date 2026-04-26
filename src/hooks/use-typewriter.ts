@@ -10,8 +10,8 @@ interface UseTypewriterOptions {
 export function useTypewriter({ text, speed = 30, delay = 0, enabled = true }: UseTypewriterOptions) {
   const [displayedText, setDisplayedText] = useState(enabled ? '' : text);
   const [isComplete, setIsComplete] = useState(!enabled);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     if (!enabled) {

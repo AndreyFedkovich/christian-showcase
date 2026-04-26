@@ -29,7 +29,7 @@ export const VictoryScene: React.FC<VictorySceneProps> = ({
   const [showButtons, setShowButtons] = useState(false);
 
   useEffect(() => {
-    const timers: NodeJS.Timeout[] = [];
+    const timers: ReturnType<typeof setTimeout>[] = [];
 
     // Phase transitions
     timers.push(setTimeout(() => setPhase('heart-reveal'), 1500));

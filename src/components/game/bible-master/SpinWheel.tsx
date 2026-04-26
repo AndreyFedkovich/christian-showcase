@@ -24,7 +24,7 @@ function SpinWheel<T>({
   className
 }: SpinWheelProps<T>) {
   const [rotation, setRotation] = useState(0);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const SPIN_DURATION = 8000;
 
