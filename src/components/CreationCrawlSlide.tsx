@@ -45,8 +45,8 @@ const CreationCrawlSlide = ({ slide, direction }: CreationCrawlSlideProps) => {
       <div
         className="absolute inset-0"
         style={{
-          perspective: '300px',
-          perspectiveOrigin: '50% 100%',
+          perspective: '560px',
+          perspectiveOrigin: '50% 92%',
           overflow: 'hidden',
         }}
       >
@@ -57,11 +57,11 @@ const CreationCrawlSlide = ({ slide, direction }: CreationCrawlSlideProps) => {
           className={`crawl-plane ${animating ? 'crawl-plane-animate' : ''}`}
           style={{
             position: 'absolute',
-            top: '85%',
+            top: '88%',
             left: '50%',
             width: '90%',
             maxWidth: '1100px',
-            transform: 'translateX(-50%) rotateX(25deg)',
+            transform: 'translateX(-50%) rotateX(16deg)',
             transformOrigin: '50% 0%',
             color: 'rgb(253 224 71 / 0.95)',
             fontFamily: 'Georgia, serif',
@@ -106,7 +106,7 @@ const CreationCrawlSlide = ({ slide, direction }: CreationCrawlSlideProps) => {
         <div
           className="absolute inset-x-0 top-0 z-10 pointer-events-none"
           style={{
-            height: '45%',
+            height: '20%',
             background:
               'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.4) 75%, rgba(0,0,0,0) 100%)',
           }}
@@ -128,14 +128,14 @@ const CreationCrawlSlide = ({ slide, direction }: CreationCrawlSlideProps) => {
           will-change: transform;
         }
         .crawl-plane-animate {
-          animation: creationCrawl 90s linear forwards;
+          animation: creationCrawl 120s linear forwards;
         }
         @keyframes creationCrawl {
           0% {
-            transform: translateX(-50%) rotateX(25deg) translateY(0);
+            transform: translateX(-50%) rotateX(16deg) translateY(0);
           }
           100% {
-            transform: translateX(-50%) rotateX(25deg) translateY(-550%);
+            transform: translateX(-50%) rotateX(16deg) translateY(-640%);
           }
         }
       `}</style>
