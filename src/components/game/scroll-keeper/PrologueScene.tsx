@@ -18,7 +18,7 @@ export function PrologueScene({ teamName, onEnterLibrary }: PrologueSceneProps) 
 
   // Stage progression
   useEffect(() => {
-    const timers: NodeJS.Timeout[] = [];
+    const timers: ReturnType<typeof setTimeout>[] = [];
 
     if (stage === 'cosmos') {
       timers.push(setTimeout(() => setStage('portal'), 2000));

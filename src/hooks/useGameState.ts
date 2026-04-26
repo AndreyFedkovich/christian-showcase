@@ -67,7 +67,7 @@ const initialState: GameState = {
 
 export const useGameState = () => {
   const [state, setState] = useState<GameState>(initialState);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Clear timer on unmount
   useEffect(() => {
