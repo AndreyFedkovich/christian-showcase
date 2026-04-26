@@ -1,5 +1,4 @@
-import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { CreationCrawlSlide as CreationCrawlSlideType } from "@/data/creation";
 
 interface CreationCrawlSlideProps {
@@ -8,24 +7,26 @@ interface CreationCrawlSlideProps {
 }
 
 const CreationCrawlSlide = ({ slide, direction }: CreationCrawlSlideProps) => {
-  const crawlRef = useRef<HTMLDivElement>(null);
   const [animating, setAnimating] = useState(false);
 
   useEffect(() => {
+    setAnimating(false);
     // Double rAF to ensure animation restarts on slide change
-    requestAnimationFrame(() => {
+    const id = requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         setAnimating(true);
       });
     });
-    return () => setAnimating(false);
+    return () => {
+      cancelAnimationFrame(id);
+    };
   }, [slide]);
 
   return (
     <div className="min-h-screen w-full bg-black relative overflow-hidden flex items-center justify-center">
       {/* Star field */}
       <div className="absolute inset-0">
-        {Array.from({ length: 120 }).map((_, i) => (
+        {Array.from({ length: 160 }).map((_, i) => (
           <div
             key={i}
             className="absolute rounded-full bg-white"
@@ -34,69 +35,107 @@ const CreationCrawlSlide = ({ slide, direction }: CreationCrawlSlideProps) => {
               height: Math.random() * 2 + 0.5,
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              opacity: Math.random() * 0.6 + 0.1,
+              opacity: Math.random() * 0.7 + 0.15,
             }}
           />
         ))}
       </div>
 
-      {/* Perspective container */}
-      <div 
-        className="relative w-full max-w-4xl mx-auto"
+      {/* Perspective viewport — full screen, viewer sits at the bottom */}
+      <div
+        className="absolute inset-0"
         style={{
-          perspective: '400px',
+          perspective: '300px',
           perspectiveOrigin: '50% 100%',
-          height: '80vh',
           overflow: 'hidden',
         }}
       >
-        {/* Gradient masks - top and bottom */}
-        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black to-transparent z-10 pointer-events-none" />
-        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black to-transparent z-10 pointer-events-none" />
-
-        {/* Crawling text */}
+        {/* The crawling plane: tilted away from viewer.
+            Animation translates the plane upward along its OWN axis,
+            so text genuinely recedes into the distance. */}
         <div
-          ref={crawlRef}
-          className={animating ? 'creation-crawl-animate' : ''}
+          className={`crawl-plane ${animating ? 'crawl-plane-animate' : ''}`}
           style={{
-            transformOrigin: '50% 100%',
-            transform: 'rotateX(20deg)',
             position: 'absolute',
-            left: '10%',
-            right: '10%',
-            bottom: animating ? undefined : '-100%',
+            top: '100%',
+            left: '50%',
+            width: '90%',
+            maxWidth: '1100px',
+            transform: 'translateX(-50%) rotateX(25deg)',
+            transformOrigin: '50% 0%',
+            color: 'rgb(253 224 71 / 0.95)',
+            fontFamily: 'Georgia, serif',
+            textAlign: 'center',
+            fontWeight: 700,
           }}
         >
           {slide.lines.map((line, index) => (
             <p
               key={index}
-              className={`text-3xl md:text-4xl font-serif leading-relaxed text-center ${
-                line === '' ? 'h-10' : 'text-amber-300/90'
-              }`}
+              className="leading-[1.4]"
+              style={{
+                fontSize: 'clamp(2.5rem, 5vw, 5rem)',
+                margin: line === '' ? '2.5rem 0' : '0 0 1.2rem 0',
+                minHeight: line === '' ? '1rem' : undefined,
+                textShadow: '0 0 20px rgba(253, 224, 71, 0.25)',
+              }}
             >
               {line}
             </p>
           ))}
-          
+
           {slide.reference && (
-            <p className="text-2xl text-amber-400/70 font-sans uppercase tracking-widest text-center mt-16">
+            <p
+              style={{
+                fontSize: 'clamp(1.5rem, 2.5vw, 2.5rem)',
+                color: 'rgb(251 191 36 / 0.8)',
+                fontFamily: 'system-ui, sans-serif',
+                fontWeight: 500,
+                textTransform: 'uppercase',
+                letterSpacing: '0.25em',
+                marginTop: '5rem',
+                marginBottom: '4rem',
+              }}
+            >
               — {slide.reference}
             </p>
           )}
         </div>
+
+        {/* Top fade — simulates text dissolving into the distance */}
+        <div
+          className="absolute inset-x-0 top-0 z-10 pointer-events-none"
+          style={{
+            height: '55%',
+            background:
+              'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.95) 25%, rgba(0,0,0,0.7) 55%, rgba(0,0,0,0) 100%)',
+          }}
+        />
+        {/* Bottom subtle fade so text emerges smoothly */}
+        <div
+          className="absolute inset-x-0 bottom-0 z-10 pointer-events-none"
+          style={{
+            height: '12%',
+            background:
+              'linear-gradient(to top, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 100%)',
+          }}
+        />
       </div>
 
-      {/* Inline animation keyframes */}
+      {/* Animation keyframes */}
       <style>{`
-        .creation-crawl-animate {
-          animation: creationCrawl 35s linear forwards;
+        .crawl-plane {
+          will-change: transform;
+        }
+        .crawl-plane-animate {
+          animation: creationCrawl 60s linear forwards;
         }
         @keyframes creationCrawl {
-          0% { 
-            bottom: -80%;
+          0% {
+            transform: translateX(-50%) rotateX(25deg) translateY(0);
           }
-          100% { 
-            bottom: 120%;
+          100% {
+            transform: translateX(-50%) rotateX(25deg) translateY(-260%);
           }
         }
       `}</style>
