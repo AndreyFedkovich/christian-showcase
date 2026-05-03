@@ -29,7 +29,7 @@ export const sinIntroSlides: SinIntroSlide[] = [
   {
     type: 'conclusion',
     title: 'Первый шаг',
-    content: [
+    points: [
       'Осознать грех — первый шаг к спасению.'
     ]
   }
