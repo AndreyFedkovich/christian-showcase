@@ -13,8 +13,9 @@ export const sinIntroSlides: SinIntroSlide[] = [
   },
   {
     type: 'scripture-dark',
-    reference: 'Римлянам 3:23',
-    text: 'Потому что все согрешили и лишены славы Божией.'
+    verses: [
+      { reference: 'Римлянам 3:23', text: 'Потому что все согрешили и лишены славы Божией.' }
+    ]
   },
   {
     type: 'reflection',
