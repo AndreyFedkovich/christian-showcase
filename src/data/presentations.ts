@@ -22,6 +22,8 @@ import { church, churchSections } from '@/data/church';
 import { kingsProphets } from '@/data/kings-prophets';
 import { fineTunedUniverseSlides, fineTunedUniverseSections } from '@/data/fine-tuned-universe';
 import { sinPresentationSlides, sinPresentationSections } from '@/data/sin';
+import { sinIntroSlides } from '@/data/sin-intro';
+import sinnersAngryGodImg from "@/assets/sinners-angry-god-thumbnail.jpg";
 import { salvationWaySlides, salvationWaySections } from '@/data/salvation-new';
 import { creationSlides, creationSections } from '@/data/creation';
 import creationThumbnail from '@/assets/creation-thumbnail.png';
@@ -86,9 +88,23 @@ export const presentations: Presentation[] = [
     id: "sin",
     title: "Грех",
     titleEn: "Sin",
-    description: "Грешники в руках разгневанного Бога — спокойное и глубокое размышление о святости, гневе и милости Бога",
-    descriptionEn: "Sinners in the hands of an angry God — a calm and deep reflection on God's holiness, wrath, and mercy",
+    description: "Главная проблема человека — необходимость глубокого осознания греха",
+    descriptionEn: "Humanity's main problem — the need for deep awareness of sin",
     thumbnail: sinImg,
+    slideCount: sinIntroSlides.length,
+    duration: "10-15",
+    createdAt: "28.02.2026",
+    slides: sinIntroSlides as UniversalSlide[],
+    layout: 'grid',
+    category: 'seminar',
+  },
+  {
+    id: "sinners-angry-god",
+    title: "Грешники в руках разгневанного Бога",
+    titleEn: "Sinners in the Hands of an Angry God",
+    description: "Спокойное и глубокое размышление о святости, гневе и милости Бога",
+    descriptionEn: "A calm and deep reflection on God's holiness, wrath, and mercy",
+    thumbnail: sinnersAngryGodImg,
     slideCount: sinPresentationSlides.length,
     duration: "25-30",
     createdAt: "28.02.2026",

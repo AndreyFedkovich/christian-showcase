@@ -34,7 +34,7 @@ export const collections: Collection[] = [
     description: "Четыре темы о вере: от сотворения мира через тонкую настройку Вселенной и осознание греха к славе спасения во Христе",
     descriptionEn: "Four topics on faith: from creation through fine-tuning of the Universe and awareness of sin to the glory of salvation in Christ",
     thumbnail: summerSeminarImg,
-    presentationIds: ["creation", "fine-tuned-universe", "sin", "salvation-way"],
+    presentationIds: ["creation", "fine-tuned-universe", "sin", "sinners-angry-god", "salvation-way"],
     duration: "130",
     createdAt: "28.02.2026",
     category: 'seminar',
